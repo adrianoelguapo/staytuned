@@ -72,6 +72,7 @@ body.login-body .login-box {
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
+  transition: max-width 0.3s ease;
 }
 
 body.login-body .login-box h1 {
@@ -89,8 +90,6 @@ body.login-body .form-label {
   font-weight: 500;
   color: #f0f0f0;
 }
-
-/* inputs sin esquinas redondeadas y solo borde inferior */
 body.login-body .form-control {
   background: transparent !important;
   border: none !important;
@@ -100,13 +99,10 @@ body.login-body .form-control {
   padding: 0.3rem 0.2rem !important;
   font-size: 1rem !important;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  height: auto !important;
 }
-
-/* efecto focus más visual */
 body.login-body .form-control:focus {
   border-bottom-color: #a78bfa !important;
-  box-shadow: 0 0 0 #a78bfa !important;
+  box-shadow: 0 2px 0 #a78bfa !important;
   outline: none !important;
   background: transparent !important;
 }
@@ -125,25 +121,9 @@ body.login-body .submit-btn {
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
 }
-
 body.login-body .submit-btn:hover {
   color: #5b21b6 !important;
   border-color: rgba(255,255,255,0.5) !important;
-}
-
-/* Responsive Login/Register */
-@media (max-width: 991px) {
-  body.login-body .login-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  body.login-body .login-left {
-    width: 100%;
-    padding: 2rem 1.5rem;
-  }
-  body.login-body .login-right {
-    display: none;
-  }
 }
 
 /* =========================================================================
@@ -160,23 +140,21 @@ body.twofactor-body .twofactor-container {
 body.twofactor-body .twofactor-box {
   width: 100%;
   max-width: 420px;
+  margin: 0 auto;
+  transition: max-width 0.3s ease;
 }
 
 body.twofactor-body .twofactor-box h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
-
 body.twofactor-body .twofactor-box .text-white-50 {
   margin-bottom: 1rem;
 }
-
 body.twofactor-body .twofactor-box .form-label {
   font-weight: 500;
   color: #f0f0f0;
 }
-
-/* inputs sin esquinas redondeadas y solo borde inferior en twofactor */
 body.twofactor-body .twofactor-box .form-control {
   background: transparent !important;
   border: none !important;
@@ -186,31 +164,47 @@ body.twofactor-body .twofactor-box .form-control {
   padding: 0.3rem 0.2rem !important;
   font-size: 1rem !important;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  height: auto !important;
 }
-
 body.twofactor-body .twofactor-box .form-control:focus {
   border-bottom-color: #a78bfa !important;
-  box-shadow: 0 0 0 #a78bfa !important;
+  box-shadow: 0 2px 0 #a78bfa !important;
   outline: none !important;
   background: transparent !important;
 }
-
 body.twofactor-body .twofactor-box .submit-btn {
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
 }
-
 body.twofactor-body .twofactor-box .submit-btn:hover {
   color: #5b21b6 !important;
   border-color: rgba(255,255,255,0.5) !important;
 }
 
-/* Responsive Two-Factor */
+/* === RESPONSIVE LOGIN/REGISTER & TWO-FACTOR === */
 @media (max-width: 991px) {
+  body.login-body .login-container,
   body.twofactor-body .twofactor-container {
-    padding: 0 0.5rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  body.login-body .login-left,
+  body.twofactor-body .twofactor-box {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  body.login-body .login-right {
+    display: none;
+  }
+}
+
+/* === FORMULARIO MÁS GRANDE EN PANTALLAS ANCHAS === */
+@media (min-width: 1440px) {
+  body.login-body .login-box {
+    max-width: 600px;
+  }
+  body.twofactor-body .twofactor-box {
+    max-width: 600px;
   }
 }
