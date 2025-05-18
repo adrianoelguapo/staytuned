@@ -101,8 +101,8 @@ body.login-body .form-control {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 body.login-body .form-control:focus {
-  border-bottom-color: #a78bfa !important;
-  box-shadow: 0 2px 0 #a78bfa !important;
+  border-bottom-color: #c1aff8 !important;
+  box-shadow: 0 0 0 #a78bfa !important;
   outline: none !important;
   background: transparent !important;
 }
@@ -166,8 +166,8 @@ body.twofactor-body .twofactor-box .form-control {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 body.twofactor-body .twofactor-box .form-control:focus {
-  border-bottom-color: #a78bfa !important;
-  box-shadow: 0 2px 0 #a78bfa !important;
+  border-bottom-color: #c1aff8 !important;
+  box-shadow: 0 0 0 #a78bfa !important;
   outline: none !important;
   background: transparent !important;
 }
