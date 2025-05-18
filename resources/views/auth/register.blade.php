@@ -30,7 +30,6 @@
 
                         <a href = "{{ route('login') }}" class = "btn btn-outline-light small-button">Inicia Sesión</a>
 
-                        
                         @if (Route::has('register'))
 
                             <a href = "{{ route('register') }}" class = "btn btn-light small-button">Regístrate</a>
@@ -52,9 +51,21 @@
                 <div class = "login-box w-100">
 
                     <h1 class = "fw-bold text-white mb-2">Crea una cuenta</h1>
-                    <p class = "mb-4">Regístrate para comenzar a explorar StayTuned.</p>
+                    <p class = "mb-4 text-white-50">Regístrate para comenzar a explorar StayTuned.</p>
 
-                    <x-validation-errors class = "mb-3 text-danger" />
+                    @if($errors->any())
+
+                        <div class = "validation-errors mb-3">
+
+                            @foreach($errors->all() as $error)
+
+                                <p class = "text-white mb-1">{{ $error }}</p>
+
+                            @endforeach
+
+                        </div>
+
+                    @endif
 
                     <form method = "POST" action = "{{ route('register') }}">
 
@@ -105,11 +116,11 @@
             <div class = "login-right d-none d-lg-flex justify-content-center align-items-center p-4">
 
                 <img src = "{{ asset('img/login7.png') }}" alt = "Ilustración de registro" class = "img-fluid me-5">
-
+            
             </div>
 
         </div>
 
     </body>
-    
+
 </html>

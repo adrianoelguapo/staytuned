@@ -16,7 +16,7 @@
 
         <nav class = "navbar navbar-expand-lg px-5 py-3">
 
-            <a class = "navbar-brand text-white fw-bold" href = "{{ url('/') }}">StayTuned</a>
+            <a class = "navbar-brand text-white fw-bold" href = "{{ url('/') }}"> StayTuned</a>
 
             @if (Route::has('login'))
 
@@ -45,18 +45,31 @@
         </nav>
 
         <div class = "login-container d-flex flex-column flex-lg-row align-items-stretch pb-4">
-            
+
             <div class = "login-left d-flex flex-column justify-content-center px-5 py-4">
 
                 <div class = "login-box w-100">
 
                     <h1 class = "fw-bold text-white mb-2">Bienvenido de nuevo</h1>
-                    <p class = "mb-4">Ingresa con tu cuenta para continuar.</p>
 
-                    <x-validation-errors class = "mb-3 text-danger" />
+                    <p class = "mb-4 text-white-50">Ingresa con tu cuenta para continuar.</p>
+
+                    @if($errors->any())
+
+                        <div class = "validation-errors mb-3">
+
+                            @foreach($errors->all() as $error)
+
+                                <p class = "text-white mb-1">{{ $error }}</p>
+
+                            @endforeach
+
+                        </div>
+
+                    @endif
 
                     <form method = "POST" action = "{{ route('login') }}">
-                        
+
                         @csrf
 
                         <div class = "mb-3">
@@ -79,7 +92,7 @@
 
                                 <input type = "checkbox" class = "form-check-input" id = "remember_me" name = "remember">
                                 <label class = "form-check-label text-white" for = "remember_me">Recordarme</label>
-
+                            
                             </div>
 
                             <a href = "{{ route('password.request') }}" class = "text-decoration-underline text-white-50 small">¿Olvidaste tu contraseña?</a>
@@ -89,7 +102,7 @@
                         <button type = "submit" class = "btn submit-btn btn-outline-light rounded-5 py-3 w-100">Entrar</button>
 
                         <div class = "text-center mt-4 text-white-50 small">
-
+                            
                             ¿No tienes una cuenta? <a href = "{{ route('register') }}" class = "text-decoration-underline text-white">Regístrate</a>
                         
                         </div>
