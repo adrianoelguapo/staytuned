@@ -1,151 +1,216 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-body {
-    font-family: "Instrument Sans", sans-serif;
-    font-weight: 500;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 35%, #8b5cf6 60%, #6366f1 100%);
-    color: white;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+/* === RESET GLOBAL === */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-/* === NAVBAR === */
+/* === BASE PARA LOGIN/REGISTER Y TWO-FACTOR === */
+body.login-body,
+body.twofactor-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 35%, #8b5cf6 60%, #6366f1 100%);
+  color: white;
+}
+
+/* === NAVBAR COMÚN === */
 .navbar {
-    background: transparent;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    height: 10vh;
+  background: transparent;
+  flex: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
+/* === BOTONES PEQUEÑOS DEL NAVBAR === */
 .small-button {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.95rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
-
 .btn-outline-light.small-button {
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    color: white;
-    background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.7);
+  color: white;
+  background: transparent;
 }
-
 .btn-outline-light.small-button:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+  background: rgba(255,255,255,0.15);
 }
-
 .btn-light.small-button {
-    background: #ffffff;
-    color: #5b21b6;
-    border: none;
+  background: #ffffff;
+  color: #5b21b6;
 }
-
 .btn-light.small-button:hover {
-    background: #ede9fe;
-    color: #5b21b6;
+  background: #ede9fe;
 }
 
-/* === CONTENEDOR GENERAL === */
-.login-container {
-    display: flex;
-    min-height: 90vh;
-    width: 100%;
+/* =========================================================================
+   LOGIN & REGISTER (TODO BAJO body.login-body)
+   ========================================================================= */
+body.login-body .login-container {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* === FORMULARIO (columna izquierda) === */
-.login-left {
-    flex: 1;
-    padding: 4rem 2rem;
-    background-color: transparent;
-    display: flex;
+body.login-body .login-left {
+  flex: 1;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
 }
 
-.login-box {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 420px;
+body.login-body .login-box {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-.login-box h1 {
-    font-size: 2rem;
+body.login-body .login-box h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
-.login-box p {
-    font-size: 1rem;
+body.login-body .login-box p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.5rem;
 }
 
-/* === CAMPOS DE FORMULARIO MODERNOS === */
-.form-control {
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 0;
-    color: #fff;
-    padding: 0.3rem 0.2rem;
-    font-size: 0.95rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    height: auto;
-    font-family: "Instrument Sans", sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
+body.login-body .form-label {
+  font-weight: 500;
+  color: #f0f0f0;
 }
 
-.form-control:focus {
-    border-bottom: 2px solid #a78bfa;
-    background-color: transparent;
-    box-shadow: none;
-    outline: none;
-    color: white;
-}
-.form-label {
-    font-weight: 500;
-    color: #f0f0f0;
-}
-
-/* === IMAGEN (columna derecha) === */
-.login-right {
-    flex: 1;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+/* inputs sin esquinas redondeadas y solo borde inferior */
+body.login-body .form-control {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(255,255,255,0.3) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  padding: 0.3rem 0.2rem !important;
+  font-size: 1rem !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  height: auto !important;
 }
 
-/* === BOTÓN SUBMIT PERSONALIZADO === */
-.submit-btn {
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+/* efecto focus más visual */
+body.login-body .form-control:focus {
+  border-bottom-color: #a78bfa !important;
+  box-shadow: 0 0 0 #a78bfa !important;
+  outline: none !important;
+  background: transparent !important;
 }
 
-.submit-btn:hover {
-    color: #5b21b6;
-    border-color: rgba(255, 255, 255, 0.5);
+body.login-body .login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
+body.login-body .submit-btn {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
 
-/* === RESPONSIVE === */
+body.login-body .submit-btn:hover {
+  color: #5b21b6 !important;
+  border-color: rgba(255,255,255,0.5) !important;
+}
+
+/* Responsive Login/Register */
 @media (max-width: 991px) {
-    .login-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  body.login-body .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  body.login-body .login-left {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  body.login-body .login-right {
+    display: none;
+  }
+}
 
-    .login-left {
-        width: 100%;
-        padding: 2rem 1.5rem;
-    }
+/* =========================================================================
+   TWO-FACTOR CHALLENGE (TODO BAJO body.twofactor-body)
+   ========================================================================= */
+body.twofactor-body .twofactor-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
 
-    .login-right {
-        display: none;
-    }
+body.twofactor-body .twofactor-box {
+  width: 100%;
+  max-width: 420px;
+}
 
-    .login-box {
-        padding: 0;
-    }
+body.twofactor-body .twofactor-box h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+body.twofactor-body .twofactor-box .text-white-50 {
+  margin-bottom: 1rem;
+}
+
+body.twofactor-body .twofactor-box .form-label {
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+/* inputs sin esquinas redondeadas y solo borde inferior en twofactor */
+body.twofactor-body .twofactor-box .form-control {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(255,255,255,0.3) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  padding: 0.3rem 0.2rem !important;
+  font-size: 1rem !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  height: auto !important;
+}
+
+body.twofactor-body .twofactor-box .form-control:focus {
+  border-bottom-color: #a78bfa !important;
+  box-shadow: 0 0 0 #a78bfa !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+body.twofactor-body .twofactor-box .submit-btn {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+body.twofactor-body .twofactor-box .submit-btn:hover {
+  color: #5b21b6 !important;
+  border-color: rgba(255,255,255,0.5) !important;
+}
+
+/* Responsive Two-Factor */
+@media (max-width: 991px) {
+  body.twofactor-body .twofactor-container {
+    padding: 0 0.5rem;
+  }
 }

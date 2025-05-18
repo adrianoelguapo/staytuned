@@ -16,33 +16,33 @@
 
         <nav class = "navbar navbar-expand-lg px-5 py-3">
 
-                <a class = "navbar-brand text-white fw-bold" href = "{{ url('/') }}">StayTuned</a>
+            <a class = "navbar-brand text-white fw-bold" href = "{{ url('/') }}">StayTuned</a>
 
-                @if (Route::has('login'))
+            @if (Route::has('login'))
 
-                    <div class = "ms-auto d-flex align-items-center gap-2">
+                <div class = "ms-auto d-flex align-items-center gap-2">
 
-                        @auth
+                    @auth
 
-                            <a href = "{{ url('/dashboard') }}" class = "btn btn-outline-light small-button">Dashboard</a>
+                        <a href = "{{ url('/dashboard') }}" class = "btn btn-outline-light small-button">Dashboard</a>
 
-                        @else
+                    @else
 
-                            <a href = "{{ route('login') }}" class = "btn btn-outline-light small-button">Inicia Sesión</a>
+                        <a href = "{{ route('login') }}" class = "btn btn-outline-light small-button">Inicia Sesión</a>
 
-                            @if (Route::has('register'))
+                        @if (Route::has('register'))
 
-                                <a href = "{{ route('register') }}" class = "btn btn-light small-button">Regístrate</a>
+                            <a href = "{{ route('register') }}" class = "btn btn-light small-button">Regístrate</a>
 
-                            @endif
+                        @endif
 
-                        @endauth
+                    @endauth
 
-                    </div>
+                </div>
 
-                @endif
+            @endif
 
-            </nav>
+        </nav>
 
         <div class = "login-container d-flex flex-column flex-lg-row align-items-stretch pb-4">
             
