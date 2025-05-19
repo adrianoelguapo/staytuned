@@ -213,9 +213,9 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
 /* === FORMULARIO MÁS GRANDE EN PANTALLAS ANCHAS === */
 @media (min-width: 1440px) {
   body.login-body .login-box {
-    max-width: 600px;
+    max-width: 700px;
   }
   body.twofactor-body .twofactor-box {
-    max-width: 600px;
+    max-width: 700px;
   }
 }
