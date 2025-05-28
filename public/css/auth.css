@@ -27,6 +27,10 @@ body.twofactor-body {
   padding-bottom: 1rem;
 }
 
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+}
+
 /* === BOTONES PEQUEÑOS DEL NAVBAR === */
 .small-button {
   padding: 0.4rem 1.2rem;

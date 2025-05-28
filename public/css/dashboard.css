@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* === GLOBAL === */
+body.dashboard-body {
+  margin: 0; padding: 0;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 35%, #8b5cf6 60%, #6366f1 100%);
+  color: #1f1f1f;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background: transparent;
+}
+
+/* Offcanvas toggle button */
+.btn-offcanvas {
+  border: none; background: transparent;
+}
+
+/* Branding */
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+}
+
+/* Nav-link inline (≥lg) */
+.nav-link-inline {
+  position: relative;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.3s ease;
+}
+.nav-link-inline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link-inline:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+/* === USER PHOTO === */
+.user-photo {
+  width: 2rem; height: 2rem; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.6);
+}
+
+/* === DROPDOWN ITEMS (lg+) === */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: none; border-radius: .75rem;
+}
+.dropdown-item {
+  width: 100%;
+  padding: .75rem 1rem;
+  display: flex; align-items: center;
+  transition: background .2s ease;
+}
+.dropdown-item:hover {
+  background: rgba(124,58,237,0.1);
+}
+
+/* === OFFCANVAS STYLES (≤lg) === */
+.offcanvas {
+  width: 280px !important;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 8px 0 24px rgba(0,0,0,0.15);
+}
+.offcanvas-header {
+  padding: 1rem .75rem .5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.offcanvas-title {
+  font-weight: 600; color: #333;
+}
+.offcanvas-body {
+  padding: 0; display: flex; flex-direction: column; height: 100%;
+}
+.offcanvas .nav-link {
+  display: block; width: 100%;
+  color: #444; font-weight: 500;
+  padding: .75rem 1rem;
+  transition: background .2s ease;
+}
+.offcanvas .nav-link.active,
+.offcanvas .nav-link:hover {
+  background: rgba(124,58,237,0.1);
+}
+
+/* Logout link inside offcanvas */
+.offcanvas .btn-link {
+  display: block; width: 100%;
+  padding: .75rem 1rem;
+  color: #b91c1c;
+  text-align: left;
+  transition: background .2s ease;
+}
+.offcanvas .btn-link:hover {
+  background: rgba(124,58,237,0.1);
+}
+
+/* === MAIN CONTENT === */
+.dashboard-container {
+  flex: 1;
+}
+
+/* Dashboard card */
+.dashboard-card {
+  background: rgba(255,255,255,0.85);
+  border: none; border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.dashboard-card .card-body {
+  padding: 2rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+  .offcanvas {
+    width: 65% !important;
+  }
+}

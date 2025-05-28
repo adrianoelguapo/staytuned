@@ -24,6 +24,10 @@ body {
     padding-bottom: 1rem;
 }
 
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+}
+
 /* === HERO SECTION === */
 .hero {
     position: relative;
