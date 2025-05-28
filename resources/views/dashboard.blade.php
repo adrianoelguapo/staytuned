@@ -41,7 +41,7 @@
                              class="rounded-circle me-2 user-photo"
                              alt="{{ Auth::user()->name }}" />
                     @endif
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->username }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>

@@ -13,12 +13,25 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
+            // Nuevo username único
+            $table->string('username')->unique();
+
+            // name ahora será el nombre completo
             $table->string('name');
+
+            // bio opcional, puede empezar null (en el modelo lo inicializamos a '')
+            $table->text('bio')->nullable();
+
+            // El resto de campos estándar
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
+
+            // current_team_id sin constraint para evitar errores si no existe tabla teams
+            $table->foreignId('current_team_id')->nullable()->index();
+
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
@@ -44,8 +57,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };
