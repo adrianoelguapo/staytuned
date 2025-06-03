@@ -40,15 +40,28 @@ body.dashboard-body {
   color: #fff;
 }
 .nav-link-inline {
-  font-size: 1rem;
+  position: relative;
+  font-size: 1.15rem;
   font-weight: 500;
   color: #fff;
   text-decoration: none;
+  padding: 0.25rem 0;
   transition: color 0.3s ease;
 }
-.nav-link-inline:hover {
-  color: #ede9fe;
-  text-decoration: underline;
+.nav-link-inline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link-inline:hover::before {
+  width: 100%;
+  left: 0;
 }
 .user-photo {
   width: 2rem;

@@ -42,8 +42,9 @@
 
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="#" class="nav-link-inline">Explorar</a>
-            <a href="#" class="nav-link-inline">Mi música</a>
+            <a href="#" class="nav-link-inline">Explorar usuarios</a>
+            <a href="#" class="nav-link-inline">Mis playlists</a>
+            <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a
@@ -56,7 +57,7 @@
                 >
                     @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <img
-                          src="/public/storage/{{ Auth::user()->profile_photo_path }}"
+                          src="{{ Auth::user()->profile_photo_url }}"
                           class="rounded-circle me-2 user-photo"
                           alt="{{ Auth::user()->username }}"
                         />
@@ -108,11 +109,12 @@
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
                 <a class="nav-link active" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="#">Explorar</a>
-                <a class="nav-link" href="#">Mi música</a>
+                <a class="nav-link" href="#">Explorar usuarios</a>
+                <a class="nav-link" href="#">Mis playlists</a>
+                <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0" />
-            <nav class="nav flex-column px-3">
+            <nav class="nav flex-column">
                 <a class="nav-link" href="{{ route('profile.show') }}">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
@@ -120,7 +122,7 @@
                     @csrf
                     <button
                       type="submit"
-                      class="nav-link btn btn-link text-start text-danger ps-0"
+                      class="nav-link btn btn-link text-start text-danger"
                     >
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
                     </button>

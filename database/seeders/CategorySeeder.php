@@ -25,6 +25,10 @@ class CategorySeeder extends Seeder
                 'type' => 'artista',
                 'text' => 'Este artista me ha sorprendido últimamente. ¡Échale un vistazo!',
             ],
+            [
+                'type' => 'playlist',
+                'text' => 'He creado una nueva lista de reproducción que creo que te gustará.',
+            ]
         ];
 
         foreach ($categories as $catData) {

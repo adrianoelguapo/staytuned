@@ -26,8 +26,9 @@
         <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="#" class="nav-link-inline">Explorar</a>
-            <a href="#" class="nav-link-inline">Mi música</a>
+            <a href="#" class="nav-link-inline">Explorar usuarios</a>
+            <a href="#" class="nav-link-inline">Mis playlists</a>
+            <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -74,8 +75,9 @@
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
                 <a class="nav-link active" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="#">Explorar</a>
-                <a class="nav-link" href="#">Mi música</a>
+                <a class="nav-link" href="#">Explorar usuarios</a>
+                <a class="nav-link" href="#">Mis playlists</a>
+                <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
