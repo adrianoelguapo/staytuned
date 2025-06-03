@@ -56,7 +56,7 @@
                 >
                     @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <img
-                          src="{{ Auth::user()->profile_photo_url }}"
+                          src="/public/storage/{{ Auth::user()->profile_photo_path }}"
                           class="rounded-circle me-2 user-photo"
                           alt="{{ Auth::user()->username }}"
                         />
@@ -67,7 +67,7 @@
                     <li>
                         <a
                           class="dropdown-item d-flex align-items-center"
-                          href="{{ route('profile.show') }}"
+                          href="{{ route('profile.settings') }}"
                         >
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
@@ -137,7 +137,7 @@
             {{-- Foto de perfil redonda grande --}}
             @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <img
-                  src="{{ Auth::user()->profile_photo_path }}"
+                  src="{{ Auth::user()->profile_photo_url }}"
                   class="profile-header-img mb-3"
                   alt="{{ Auth::user()->username }}"
                 />
@@ -148,7 +148,7 @@
             {{-- Nombre de usuario --}}
             <h2 class="username mb-1">{{ Auth::user()->username }}</h2>
 
-            {{-- Estadísticas ficticias (puedes omitir o adaptar) --}}
+            {{-- Estadísticas (ficticias o reales, según quieras) --}}
             <div class="profile-stats d-flex justify-content-center gap-4">
                 <div><strong>0</strong> publicaciones</div>
                 <div><strong>0</strong> seguidores</div>
@@ -157,75 +157,38 @@
         </div>
 
         <!-- ==========================
-             FORMULARIOS SILUETA “LOGIN-STYLE”
+             FORMULARIOS DE CONFIGURACIÓN (sin tarjetas extra)
              ========================== -->
+
+        {{-- 1) Información de Perfil --}}
         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-            <div class="card card-transparent mb-5">
-                <div class="card-header px-4 py-3">
-                    <h5 class="mb-0 text-white">Información de Perfil</h5>
-                    <small class="text-white-50">
-                        Actualiza la información básica de tu cuenta.
-                    </small>
-                </div>
-                <div class="card-body px-4 profile-form-section">
-                    @livewire('profile.update-profile-information-form')
-                </div>
+            <div class="mb-5 profile-form-section">
+                @livewire('profile.update-profile-information-form')
             </div>
         @endif
-
         @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-            <div class="card card-transparent mb-5">
-                <div class="card-header px-4 py-3">
-                    <h5 class="mb-0 text-white">Cambiar Contraseña</h5>
-                    <small class="text-white-50">
-                        Asegúrate de usar una contraseña fuerte.
-                    </small>
-                </div>
-                <div class="card-body px-4 profile-form-section">
-                    @livewire('profile.update-password-form')
-                </div>
+            <hr class="profile-divider" />
+            <div class="mb-5 profile-form-section">
+                @livewire('profile.update-password-form')
             </div>
         @endif
-
         @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-            <div class="card card-transparent mb-5">
-                <div class="card-header px-4 py-3">
-                    <h5 class="mb-0 text-white">Autenticación de Dos Factores</h5>
-                    <small class="text-white-50">
-                        Añade más seguridad a tu cuenta.
-                    </small>
-                </div>
-                <div class="card-body px-4 profile-form-section">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
+            <hr class="profile-divider" />
+            <div class="mb-5 profile-form-section">
+                @livewire('profile.two-factor-authentication-form')
             </div>
         @endif
-
-        <div class="card card-transparent mb-5">
-            <div class="card-header px-4 py-3">
-                <h5 class="mb-0 text-white">Sesiones Activas</h5>
-                <small class="text-white-50">
-                    Gestiona y cierra sesiones activas en otros dispositivos.
-                </small>
-            </div>
-            <div class="card-body px-4 profile-form-section">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
+        <hr class="profile-divider" />
+        <div class="mb-5 profile-form-section">
+            @livewire('profile.logout-other-browser-sessions-form')
         </div>
-
         @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-            <div class="card card-transparent mb-5">
-                <div class="card-header px-4 py-3">
-                    <h5 class="mb-0 text-white">Eliminar Cuenta</h5>
-                    <small class="text-white-50">
-                        Eliminar permanentemente tu cuenta y sus datos.
-                    </small>
-                </div>
-                <div class="card-body px-4 profile-form-section">
-                    @livewire('profile.delete-user-form')
-                </div>
+            <hr class="profile-divider" />
+            <div class="mb-5 profile-form-section">
+                @livewire('profile.delete-user-form')
             </div>
         @endif
+
     </main>
 
     <!-- Bootstrap JS Bundle -->

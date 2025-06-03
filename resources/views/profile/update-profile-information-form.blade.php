@@ -1,95 +1,66 @@
 <x-form-section submit="updateProfileInformation">
-    <x-slot name="title">
-        {{ __('Profile Information') }}
-    </x-slot>
-
-    <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
-    </x-slot>
+    <x-slot name="title"></x-slot>
+    <x-slot name="description"></x-slot>
 
     <x-slot name="form">
-        <!-- Profile Photo -->
-        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
-                <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden"
-                            wire:model.live="photo"
-                            x-ref="photo"
-                            x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            " />
+        <div class="mb-4">
+            <div style="font-size:2rem; font-weight:600; line-height:1.1; color:#fff; margin-bottom:0; text-align:left;">Información de Perfil</div>
+            <div style="font-size:1rem; color:rgba(255,255,255,0.7); margin-bottom:2.2rem; text-align:left;">Modifica tu información básica, tu nombre de usuario y tu correo electrónico.</div>
+        </div>
 
-                <x-label for="photo" value="{{ __('Photo') }}" />
+        <!-- Nombre -->
+        <div class="mb-4">
+            <label for="name">Nombre</label>
+            <input id="name" type="text"
+                   class="form-control w-100 @error('state.name') is-invalid @enderror"
+                   wire:model="state.name" required autocomplete="name" />
+            @error('state.name')
+                <div class="text-danger mt-1">{{ $message }}</div>
+            @enderror
+        </div>
 
-                <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full size-20 object-cover">
-                </div>
-
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview" style="display: none;">
-                    <span class="block rounded-full size-20 bg-cover bg-no-repeat bg-center"
-                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
-                </x-secondary-button>
-
-                @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-secondary-button>
-                @endif
-
-                <x-input-error for="photo" class="mt-2" />
-            </div>
-        @endif
-
-        <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
-            <x-input-error for="name" class="mt-2" />
+        <!-- Nombre de usuario -->
+        <div class="mb-4">
+            <label for="username">Nombre de usuario</label>
+            <input id="username" type="text"
+                   class="form-control w-100 @error('state.username') is-invalid @enderror"
+                   wire:model="state.username" required autocomplete="username" />
+            @error('state.username')
+                <div class="text-danger mt-1">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
-            <x-input-error for="email" class="mt-2" />
+        <div class="mb-4">
+            <label for="email">Correo Electrónico</label>
+            <input id="email" type="email"
+                   class="form-control w-100 @error('state.email') is-invalid @enderror"
+                   wire:model="state.email" required autocomplete="email" />
+            @error('state.email')
+                <div class="text-danger mt-1">{{ $message }}</div>
+            @enderror
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
-                <p class="text-sm mt-2">
-                    {{ __('Your email address is unverified.') }}
-
-                    <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
+            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) 
+                 && ! $this->user->hasVerifiedEmail())
+                <div class="mt-2 text-white-50">
+                    Tu dirección de correo no está verificada.
+                    <button type="button"
+                            class="btn btn-link p-0"
+                            wire:click.prevent="sendEmailVerification">
+                        Haz clic aquí para reenviar el email de verificación.
                     </button>
-                </p>
-
+                </div>
                 @if ($this->verificationLinkSent)
-                    <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
-                    </p>
+                    <p class="text-success mt-1">Se ha enviado un nuevo enlace de verificación.</p>
                 @endif
             @endif
         </div>
     </x-slot>
 
     <x-slot name="actions">
-        <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
-        </x-action-message>
-
-        <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-button>
+        <div class="text-start w-100" style="display: flex; align-items: center; gap: 0;">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button><x-action-message class="action-message-guardado" on="saved">Guardado.</x-action-message>
+        </div>
     </x-slot>
+
 </x-form-section>
