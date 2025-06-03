@@ -45,7 +45,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.show') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>

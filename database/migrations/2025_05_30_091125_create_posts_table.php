@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('likes')->default(0)->comment('Nº de likes del post');
+            $table->string('cover')->nullable()->comment('Ruta a la imagen del post');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->comment('Propietario del post');
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->comment('Categoría del post');
             $table->timestamps();
         });
     }

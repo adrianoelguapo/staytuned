@@ -12,31 +12,17 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int,string>
-     */
     protected $fillable = [
         'username',
         'name',
         'bio',
         'email',
         'password',
-        'profile_photo_path', // ← lo añadimos aquí
+        'profile_photo_path',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int,string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -44,20 +30,10 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int,string>
-     */
     protected $appends = [
         'profile_photo_url',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @return array<string,string>
-     */
     protected function casts(): array
     {
         return [
@@ -66,7 +42,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function playlists(){
+    public function playlists()
+    {
         return $this->hasMany(Playlist::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }

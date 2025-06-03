@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Reply extends Model
 {
     protected $fillable = [
         'likes',
-        'cover',
+        'text',
         'user_id',
-        'category_id',
+        'comment_id',
     ];
 
     public function user()
@@ -18,13 +18,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function comment()
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Comment::class);
     }
 }

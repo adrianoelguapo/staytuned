@@ -234,6 +234,10 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
     margin-bottom: 0.6rem !important;
   }
 
+  body.login-body .login-box {
+    max-width: 575px;
+  }
+
   /* título y botón ligerísimamente más compactos */
   body.login-body .login-box h1 {
     font-size: 1.6rem;
