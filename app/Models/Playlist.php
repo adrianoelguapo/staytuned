@@ -8,6 +8,8 @@ class Playlist extends Model
 {
     protected $fillable = [
         'name',
+        'description',
+        'is_public',
         'likes',
         'length',
         'cover',
