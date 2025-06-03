@@ -3,368 +3,340 @@
 /* ================================================
    Estilos Globales y Reset Básico
    ================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-body.dashboard-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Instrument Sans', sans-serif;
-  font-weight: 500;
-  background: linear-gradient(
-    135deg,
-    #4f46e5 0%,
-    #7c3aed 35%,
-    #8b5cf6 60%,
-    #6366f1 100%
-  );
-  color: #fff;
-  min-height: 100vh;
-}
-
-/* === NAVBAR === */
-.navbar {
-  background: transparent;
-}
-.btn-offcanvas {
-  border: none;
-  background: transparent;
-}
-.navbar .navbar-brand {
-  font-size: 1.75rem;
-  color: #fff;
-}
-.nav-link-inline {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.nav-link-inline:hover {
-  color: #ede9fe;
-  text-decoration: underline;
-}
-
-/* === FOTO DE USUARIO EN NAVBAR === */
-.user-photo {
-  width: 2rem;
-  height: 2rem;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-/* === DROPDOWN (LG+) === */
-.dropdown-menu {
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  border-radius: 0.75rem;
-}
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  transition: background 0.2s ease;
-}
-.dropdown-item:hover {
-  background: rgba(124, 58, 237, 0.1);
-}
-
-/* === OFFCANVAS (≤LG) === */
-.offcanvas {
-  width: 280px !important;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.15);
-}
-.offcanvas-header {
-  padding: 1rem 0.75rem 0.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.offcanvas-title {
-  font-weight: 600;
-  color: #333;
-}
-.offcanvas-body {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.offcanvas .nav-link {
-  display: block;
-  width: 100%;
-  color: #444;
-  font-weight: 500;
-  padding: 0.75rem 1rem;
-  transition: background 0.2s ease;
-}
-.offcanvas .nav-link:hover,
-.offcanvas .nav-link.active {
-  background: rgba(124, 58, 237, 0.1);
-}
-.offcanvas .btn-link {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  color: #b91c1c;
-  text-align: left;
-  border-radius: 0;
-  transition: background 0.2s ease;
-}
-.offcanvas .btn-link:hover {
-  background: rgba(124, 58, 237, 0.1);
-}
-
-/* ================================================
-   CABECERA TIPO “INSTAGRAM PROFILE”
-   ================================================
-   Centrado, foto de perfil grande y datos del usuario */
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-.profile-header-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 4px solid #ffffff;
-  object-fit: cover;
-  background-color: #e5e7eb;
-}
-.username {
-  font-size: 1.75rem;
-  color: #ffffff;
-  margin: 0.5rem 0;
-}
-.profile-stats {
-  font-size: 0.9rem;
-  color: #f0f0f0;
-}
-.profile-stats div {
-  text-transform: capitalize;
-}
-
-/* ================================================
-   CARDS TRANSPARENTES (estilo Login/Register)
-   ================================================
-   Eliminamos fondo blanco y ponemos transparencia,
-   subrayado a inputs, colores de textos en blanco,
-   y adoptamos el estilo de auth.css para campos y botones */
-
-.card-transparent {
-  background: transparent !important;
-  border: none;
-  border-radius: 0.75rem;
-  /* Sombra suave para destacarla */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* = Encabezado de cada “card” = */
-.card-transparent .card-header {
-  background: transparent;
-  border-bottom: none;
-  padding: 1rem 1.5rem;
-}
-.card-transparent .card-header h5 {
-  margin: 0;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-.card-transparent .card-header small {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* = Cuerpo de la card con fondo ligeramente translúcido = */
-.card-transparent .card-body {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-}
-
-/* ================================================
-   ESTILOS DE FORMULARIO (tipo auth.css)
-   ================================================ */
-/* Etiquetas */
-.card-transparent .form-label {
-  font-weight: 500;
-  color: #f0f0f0;
-}
-
-/* Inputs de texto / email / password */
-.card-transparent .form-control {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 0 !important;
-  color: #fff !important;
-  padding: 0.15rem 0.2rem !important;
-  font-size: 0.95rem !important;
-  line-height: 1.2 !important;
-  transition: border-color 0.3s ease;
-}
-/* Focus en inputs */
-.card-transparent .form-control:focus {
-  border-bottom-color: #c1aff8 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  background: transparent !important;
-}
-
-/* File input (Examinar…) */
-.card-transparent .form-control[type="file"] {
-  border: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  color: #fff;
-  font-size: 0.95rem;
-}
-.card-transparent .form-control[type="file"]::-webkit-file-upload-button,
-.card-transparent .form-control[type="file"]::file-selector-button {
-  all: unset;
-  display: inline-block;
-  padding: 0.4rem 1.2rem;
-  margin-right: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 9999px;
-  font: inherit;
-  font-weight: 500;
-  color: #5b21b6;
-  background: #ffffff;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.card-transparent .form-control[type="file"]::-webkit-file-upload-button:hover,
-.card-transparent .form-control[type="file"]::file-selector-button:hover {
-  background: #ede9fe;
-}
-
-/* Textarea (si llegases a tener alguno) */
-.card-transparent textarea.form-control {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 0 !important;
-  color: #fff !important;
-  padding: 0.15rem 0.2rem !important;
-  font-size: 0.95rem !important;
-  transition: border-color 0.3s ease;
-}
-.card-transparent textarea.form-control:focus {
-  border-bottom-color: #c1aff8 !important;
-  background: transparent !important;
-}
-
-/* Minimizar márgenes entre campos */
-.card-transparent .mb-3 {
-  margin-bottom: 0.75rem !important;
-}
-
-/* ================================================
-   BOTONES (estilo auth.css)
-   ================================================ */
-/* Botón “Save” de cada sección Livewire */
-.card-transparent .btn {
-  border-radius: 9999px;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-/* Botón primario (Save) */
-.card-transparent .btn-primary {
-  background: #ffffff;
-  color: #5b21b6;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-}
-.card-transparent .btn-primary:hover {
-  background: #ede9fe;
-}
-/* Si hubiera botón outline-light: lo convertimos a estilo white-outline */
-.card-transparent .btn-outline-light {
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  color: #fff;
-  background: transparent;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-}
-.card-transparent .btn-outline-light:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #5b21b6;
-}
-
-/* Mensajes de error de validación (error Livewire) */
-.card-transparent .validation-errors p {
-  color: #ffcccc;
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
-}
-
-/* ================================================
-   ANULAR FONDO “BLANCO” DE X-FORM-SECTION Y DEMÁS
-   ================================================ */
-/* 1) Hacemos transparente cualquier contenedor con bg-white dentro de nuestro scope */
-.profile-form-section .bg-white {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-/* 2) Eliminar bordes redondeados y sombras “rounded-lg”, “shadow-sm” que pueda traer Jetstream */
-.profile-form-section .rounded-lg {
-  border-radius: 0 !important;
-}
-.profile-form-section .shadow-sm,
-.profile-form-section .shadow {
-  box-shadow: none !important;
-}
-/* 3) Ajustar padding excesivo que incluye Jetstream */
-.profile-form-section .px-6,
-.profile-form-section .py-6 {
-  padding: 0 !important;
-}
-.profile-form-section .p-6 {
-  padding: 0 !important;
-}
-/* 4) Forzar texto en blanco para títulos/subtítulos si estuvieran dentro de bg-white */
-.profile-form-section .bg-white h2,
-.profile-form-section .bg-white p,
-.profile-form-section .bg-white label {
-  color: #fff !important;
-}
-/* 5) Anular otros fondos grises que pudieran aparecer */
-.profile-form-section .bg-gray-100,
-.profile-form-section .bg-gray-50 {
-  background-color: transparent !important;
-}
-/* 6) Quitar bordes adicionales definidos por Jetstream */
-.profile-form-section .border,
-.profile-form-section .border-b,
-.profile-form-section .border-gray-200,
-.profile-form-section .border-gray-300 {
-  border: none !important;
-}
-
-/* ================================================
-   AJUSTES RESPONSIVOS
-   ================================================ */
-@media (max-width: 991.98px) {
-  main.container {
-    padding: 0 1rem;
-  }
-  .card-transparent {
-    margin-bottom: 1.5rem;
-  }
-  .card-transparent .card-header {
-    padding: 0.75rem 1rem;
-  }
-  .card-transparent .card-body {
-    padding: 1rem;
-  }
-}
-
-/* Para Livewire Action Messages */
-.card-transparent .action-message {
-  color: #a0d911; /* verde suave cuando guarde correctamente */
-  font-weight: 500;
-}
+   body.dashboard-body {
+     margin: 0;
+     padding: 0;
+     font-family: 'Instrument Sans', sans-serif;
+     font-weight: 500;
+     background: linear-gradient(
+       135deg,
+       #4f46e5 0%,
+       #7c3aed 35%,
+       #8b5cf6 60%,
+       #6366f1 100%
+     );
+     color: #fff;
+     min-height: 100vh;
+   }
+   
+   /* === NAVBAR === */
+   .navbar {
+     background: transparent;
+   }
+   .btn-offcanvas {
+     border: none;
+     background: transparent;
+   }
+   .navbar .navbar-brand {
+     font-size: 1.75rem;
+     color: #fff;
+   }
+   .nav-link-inline {
+     font-size: 1rem;
+     font-weight: 500;
+     color: #fff;
+     text-decoration: none;
+     transition: color 0.3s ease;
+   }
+   .nav-link-inline:hover {
+     color: #ede9fe;
+     text-decoration: underline;
+   }
+   
+   /* === FOTO DE USUARIO EN NAVBAR === */
+   .user-photo {
+     width: 2rem;
+     height: 2rem;
+     object-fit: cover;
+     border: 2px solid rgba(255, 255, 255, 0.6);
+   }
+   
+   /* === DROPDOWN (LG+) === */
+   .dropdown-menu {
+     background: rgba(255, 255, 255, 0.95);
+     border: none;
+     border-radius: 0.75rem;
+   }
+   .dropdown-item {
+     display: flex;
+     align-items: center;
+     width: 100%;
+     padding: 0.75rem 1rem;
+     transition: background 0.2s ease;
+   }
+   .dropdown-item:hover {
+     background: rgba(124, 58, 237, 0.1);
+   }
+   
+   /* === OFFCANVAS (≤LG) === */
+   .offcanvas {
+     width: 280px !important;
+     background: rgba(255, 255, 255, 0.95);
+     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.15);
+   }
+   .offcanvas-header {
+     padding: 1rem 0.75rem 0.5rem;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+   }
+   .offcanvas-title {
+     font-weight: 600;
+     color: #333;
+   }
+   .offcanvas-body {
+     padding: 0;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+   }
+   .offcanvas .nav-link {
+     display: block;
+     width: 100%;
+     color: #444;
+     font-weight: 500;
+     padding: 0.75rem 1rem;
+     transition: background 0.2s ease;
+   }
+   .offcanvas .nav-link:hover,
+   .offcanvas .nav-link.active {
+     background: rgba(124, 58, 237, 0.1);
+   }
+   .offcanvas .btn-link {
+     display: block;
+     width: 100%;
+     padding: 0.75rem 1rem;
+     color: #b91c1c;
+     text-align: left;
+     border-radius: 0;
+     transition: background 0.2s ease;
+   }
+   .offcanvas .btn-link:hover {
+     background: rgba(124, 58, 237, 0.1);
+   }
+   
+   /* ================================================
+      CABECERA TIPO “INSTAGRAM PROFILE”
+      ================================================
+      Centrado, foto de perfil grande y datos del usuario */
+   .profile-header {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-bottom: 2rem;
+   }
+   .profile-header-img {
+     width: 150px;
+     height: 150px;
+     border-radius: 50%;
+     border: 4px solid #ffffff;
+     object-fit: cover;
+     background-color: #e5e7eb;
+   }
+   .username {
+     font-size: 1.75rem;
+     color: #ffffff;
+     margin: 0.5rem 0;
+   }
+   .profile-stats {
+     font-size: 0.9rem;
+     color: #f0f0f0;
+   }
+   .profile-stats div {
+     text-transform: capitalize;
+   }
+   
+   /* ================================================
+      CARDS TRANSPARENTES (estilo Login/Register)
+      ================================================
+      Eliminamos fondo blanco y ponemos transparencia,
+      subrayado a inputs, colores de textos en blanco,
+      y adoptamos el estilo de auth.css para campos y botones */
+   
+   .card-transparent {
+     background: transparent !important;
+     border: none;
+     border-radius: 0.75rem;
+     /* Sombra suave para destacarla */
+     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+   }
+   
+   /* = Encabezado de cada “card” = */
+   .card-transparent .card-header {
+     background: transparent;
+     border-bottom: none;
+     padding: 1rem 1.5rem;
+   }
+   .card-transparent .card-header h5 {
+     margin: 0;
+     color: #fff;
+     font-weight: 600;
+     font-size: 1.25rem;
+   }
+   .card-transparent .card-header small {
+     color: rgba(255, 255, 255, 0.8);
+   }
+   
+   /* = Cuerpo de la card con fondo ligeramente translúcido = */
+   .card-transparent .card-body {
+     background: transparent; /* Ya no queremos un fondo medio-translúcido aquí */
+     padding: 1.5rem;
+   }
+   
+   /* ================================================
+      ESTILOS DE FORMULARIO (tipo auth.css)
+      ================================================ */
+   /* Etiquetas */
+   .card-transparent .form-label {
+     font-weight: 500;
+     color: #f0f0f0;
+   }
+   
+   /* Inputs (texto / email / password) */
+   .card-transparent input[type="text"],
+   .card-transparent input[type="email"],
+   .card-transparent input[type="password"],
+   .card-transparent textarea.form-control {
+     background: transparent !important;
+     border: none !important;
+     border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
+     border-radius: 0 !important;
+     color: #fff !important;
+     padding: 0.15rem 0.2rem !important;
+     font-size: 0.95rem !important;
+     line-height: 1.2 !important;
+     transition: border-color 0.3s ease;
+     width: 100%;
+   }
+   
+   /* Focus en inputs */
+   .card-transparent input[type="text"]:focus,
+   .card-transparent input[type="email"]:focus,
+   .card-transparent input[type="password"]:focus,
+   .card-transparent textarea.form-control:focus {
+     border-bottom-color: #c1aff8 !important;
+     box-shadow: none !important;
+     outline: none !important;
+     background: transparent !important;
+   }
+   
+   /* Forzar “campo vacío” (placeholder) en gris claro */
+   .card-transparent ::placeholder {
+     color: rgba(255, 255, 255, 0.6) !important;
+   }
+   
+   /* Si dentro del form hay inputs que todavía cargan clases Tailwind/Jetstream */
+   .card-transparent input.form-input {
+     background: transparent !important;
+     border: none !important;
+     border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
+     color: #fff !important;
+   }
+   
+   /* ================================================
+      BOTONES (estilo auth.css)
+      ================================================ */
+   /* Botón “Save” de cada sección Livewire */
+   .card-transparent .btn {
+     border-radius: 9999px;
+     font-weight: 500;
+     transition: background 0.3s ease;
+   }
+   /* Botón primario (Save) */
+   .card-transparent .btn-primary {
+     background: #ffffff;
+     color: #5b21b6;
+     border: none;
+     padding: 0.6rem 1.2rem;
+     font-size: 1rem;
+   }
+   .card-transparent .btn-primary:hover {
+     background: #ede9fe;
+   }
+   /* Outline-light reinterpretado a “white-outline” */
+   .card-transparent .btn-outline-light {
+     border: 1px solid rgba(255, 255, 255, 0.7);
+     color: #fff;
+     background: transparent;
+     padding: 0.6rem 1.2rem;
+     font-size: 1rem;
+   }
+   .card-transparent .btn-outline-light:hover {
+     background: rgba(255, 255, 255, 0.15);
+     color: #5b21b6;
+   }
+   
+   /* Mensajes de error de validación (error Livewire) */
+   .card-transparent .validation-errors p {
+     color: #ffcccc;
+     margin: 0.25rem 0;
+     font-size: 0.9rem;
+   }
+   
+   /* ================================================
+      ANULAR FONDO “BLANCO” Y TEXTOS DUPLICADOS DE JETSTREAM/LIVEWIRE
+      ================================================ */
+   /* 1) Eliminar cualquier contenedor bg-white que envuelva a los <x-form-section> */
+   .profile-form-section .bg-white {
+     background-color: transparent !important;
+     box-shadow: none !important;
+   }
+   /* 2) Evitar bordes redondeados y sombras propias de Jetstream */
+   .profile-form-section .rounded-lg {
+     border-radius: 0 !important;
+   }
+   .profile-form-section .shadow-sm,
+   .profile-form-section .shadow {
+     box-shadow: none !important;
+   }
+   /* 3) Quitar el padding excesivo que trae Jetstream */
+   .profile-form-section .px-6,
+   .profile-form-section .py-6 {
+     padding: 0 !important;
+   }
+   .profile-form-section .p-6 {
+     padding: 0 !important;
+   }
+   /* 4) Ocultar los títulos internos (h2) y descripciones (p) que inyecta X-Form-Section */
+   .profile-form-section h2,
+   .profile-form-section p {
+     display: none !important;
+   }
+   /* 5) Forzar etiquetas <label> en blanco por si Jetstream pone texto oscuro */
+   .profile-form-section label {
+     color: #fff !important;
+   }
+   /* 6) Evitar otros fondos grises que pudieran aparecer */
+   .profile-form-section .bg-gray-100,
+   .profile-form-section .bg-gray-50 {
+     background-color: transparent !important;
+   }
+   /* 7) Quitar borde inferior gris de Jetstream si apareciera */
+   .profile-form-section .border-b {
+     border-bottom: none !important;
+   }
+   
+   /* ================================================
+      AJUSTES RESPONSIVOS
+      ================================================ */
+   @media (max-width: 991.98px) {
+     main.container {
+       padding: 0 1rem;
+     }
+     .card-transparent {
+       margin-bottom: 1.5rem;
+     }
+     .card-transparent .card-header {
+       padding: 0.75rem 1rem;
+     }
+     .card-transparent .card-body {
+       padding: 1rem;
+     }
+   }
+   
+   /* Para Livewire Action Messages */
+   .card-transparent .action-message {
+     color: #a0d911; /* verde suave cuando guarde correctamente */
+     font-weight: 500;
+   }
+   
