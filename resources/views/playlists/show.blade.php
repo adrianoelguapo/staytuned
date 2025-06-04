@@ -290,25 +290,25 @@
                                             {{ $song->duration_formatted ?? $song->duration ?? '--:--' }}
                                         </div>
                                         <div class="song-actions">
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm btn-link text-muted" 
+                                            <div class="custom-dropdown-container">
+                                                <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
                                                         type="button" 
-                                                        data-bs-toggle="dropdown" 
-                                                        aria-expanded="false">
+                                                        data-song-id="{{ $song->id }}"
+                                                        onclick="toggleCustomDropdown(this)">
                                                     <i class="bi bi-three-dots"></i>
                                                 </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
+                                                <div class="custom-dropdown-menu" id="dropdown-{{ $song->id }}" style="display: none;">
+                                                    <div class="custom-dropdown-item">
                                                         <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
-                                                              method="POST">
+                                                              method="POST" style="margin: 0;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="dropdown-item text-danger">
+                                                            <button type="submit" class="custom-dropdown-btn text-danger">
                                                                 <i class="bi bi-trash me-2"></i>Quitar de la playlist
                                                             </button>
                                                         </form>
-                                                    </li>
-                                                </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -487,6 +487,79 @@
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchSpotify();
+            }
+        });
+
+        // Función para manejar dropdown personalizado
+        function toggleCustomDropdown(trigger) {
+            const songId = trigger.getAttribute('data-song-id');
+            const dropdown = document.getElementById('dropdown-' + songId);
+            
+            // Cerrar todos los otros dropdowns
+            document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
+                if (menu !== dropdown) {
+                    menu.style.display = 'none';
+                }
+            });
+            
+            // Toggle del dropdown actual
+            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+                // Mostrar dropdown
+                dropdown.style.display = 'block';
+                
+                // Forzar el recálculo del layout
+                dropdown.offsetHeight;
+                
+                // Posicionar el dropdown correctamente
+                const triggerRect = trigger.getBoundingClientRect();
+                const dropdownRect = dropdown.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const viewportWidth = window.innerWidth;
+                
+                // Calcular posición inicial (centrado con el botón)
+                let left = triggerRect.left - (dropdownRect.width / 2) + (triggerRect.width / 2);
+                let top = triggerRect.bottom + 8; // 8px de margen
+                
+                // Ajustar horizontalmente si se sale de la pantalla
+                if (left < 16) {
+                    left = 16; // Margen de 16px desde el borde izquierdo
+                } else if (left + dropdownRect.width > viewportWidth - 16) {
+                    left = viewportWidth - dropdownRect.width - 16; // Margen de 16px desde el borde derecho
+                }
+                
+                // Ajustar verticalmente si se sale de la pantalla por abajo
+                if (top + dropdownRect.height > viewportHeight - 16) {
+                    // Posicionar arriba del botón en lugar de abajo
+                    top = triggerRect.top - dropdownRect.height - 8;
+                    
+                    // Si también se sale por arriba, centrar en la pantalla
+                    if (top < 16) {
+                        top = Math.max(16, (viewportHeight - dropdownRect.height) / 2);
+                    }
+                }
+                
+                // Aplicar posición con position fixed
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = Math.round(top) + 'px';
+                dropdown.style.left = Math.round(left) + 'px';
+                dropdown.style.zIndex = '10001';
+                dropdown.style.transform = 'none';
+                dropdown.style.right = 'auto';
+                dropdown.style.bottom = 'auto';
+                
+                console.log('Dropdown positioned at:', { top: Math.round(top), left: Math.round(left) });
+            } else {
+                // Ocultar dropdown
+                dropdown.style.display = 'none';
+            }
+        }
+        
+        // Cerrar dropdowns al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-dropdown-container')) {
+                document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
             }
         });
 
