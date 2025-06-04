@@ -52,6 +52,17 @@ body.dashboard-body {
   left: 0;
 }
 
+/* Nav-link active state */
+.nav-link-inline.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-link-inline.active::before {
+  width: 100%;
+  left: 0;
+}
+
 /* === USER PHOTO === */
 .user-photo {
   width: 2rem; height: 2rem; object-fit: cover;

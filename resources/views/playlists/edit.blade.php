@@ -27,7 +27,7 @@
         <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="#" class="nav-link-inline">Explorar usuarios</a>
+            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
             <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
             <a href="#" class="nav-link-inline">Mis comunidades</a>
 
@@ -72,10 +72,9 @@
             <h5 class="offcanvas-title" id="offcanvasMenuLabel">StayTuned</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
         </div>
-        <div class="offcanvas-body d-flex flex-column p-0">
-            <nav class="nav flex-column">
+        <div class="offcanvas-body d-flex flex-column p-0">            <nav class="nav flex-column">
                 <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="#">Explorar usuarios</a>
+                <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
                 <a class="nav-link active" href="{{ route('playlists.index') }}">Mis playlists</a>
                 <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
@@ -113,14 +112,12 @@
                         </li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Editar</li>
                     </ol>
-                </nav>
-
-                <!-- Formulario de edición -->
-                <div class="card dashboard-card">
+                </nav>                <!-- Formulario de edición -->
+                <div class="card create-playlist-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-4">
-                            <i class="bi bi-pencil text-primary me-3 fs-3"></i>
-                            <h1 class="h3 mb-0">Editar Playlist</h1>
+                            <i class="bi bi-pencil text-white me-3 fs-3"></i>
+                            <h1 class="h3 mb-0 create-playlist-title">Editar Playlist</h1>
                         </div>
 
                         @if ($errors->any())
@@ -256,13 +253,11 @@
                             </div>
                         </form>
                     </div>
-                </div>
-
-                <!-- Vista previa de las canciones actuales -->
+                </div>                <!-- Vista previa de las canciones actuales -->
                 @if($playlist->songs->count() > 0)
-                    <div class="card dashboard-card mt-4">
+                    <div class="card create-playlist-card mt-4">
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title text-light">
                                 <i class="bi bi-music-note-list me-2"></i>
                                 Canciones en esta playlist
                             </h5>
@@ -289,7 +284,7 @@
                             </div>
                             
                             <div class="mt-3">
-                                <a href="{{ route('playlists.show', $playlist) }}" class="btn btn-sm btn-outline-primary">
+                                <a href="{{ route('playlists.show', $playlist) }}" class="btn btn-sm btn-outline-light">
                                     <i class="bi bi-eye me-2"></i>
                                     Ver todas las canciones
                                 </a>

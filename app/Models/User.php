@@ -61,4 +61,77 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reply::class);
     }
+
+    /**
+     * Usuarios que este usuario está siguiendo
+     */
+    public function following()
+    {
+        return $this->hasMany(Follow::class, 'follower_id');
+    }
+
+    /**
+     * Usuarios que están siguiendo a este usuario
+     */
+    public function followers()
+    {
+        return $this->morphMany(Follow::class, 'followable');
+    }
+
+    /**
+     * Verificar si este usuario está siguiendo a otro usuario
+     */
+    public function isFollowing(User $user)
+    {
+        return $this->following()
+            ->where('followable_type', User::class)
+            ->where('followable_id', $user->id)
+            ->exists();
+    }
+
+    /**
+     * Seguir a un usuario
+     */
+    public function follow(User $user)
+    {
+        if ($this->id === $user->id) {
+            return false; // No puede seguirse a sí mismo
+        }
+
+        return $this->following()->firstOrCreate([
+            'followable_type' => User::class,
+            'followable_id' => $user->id,
+        ], [
+            'followed_at' => now()
+        ]);
+    }
+
+    /**
+     * Dejar de seguir a un usuario
+     */
+    public function unfollow(User $user)
+    {
+        return $this->following()
+            ->where('followable_type', User::class)
+            ->where('followable_id', $user->id)
+            ->delete();
+    }
+
+    /**
+     * Obtener el conteo de usuarios que sigue
+     */
+    public function getFollowingCountAttribute()
+    {
+        return $this->following()
+            ->where('followable_type', User::class)
+            ->count();
+    }
+
+    /**
+     * Obtener el conteo de seguidores
+     */
+    public function getFollowersCountAttribute()
+    {
+        return $this->followers()->count();
+    }
 }

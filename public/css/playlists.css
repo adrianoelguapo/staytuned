@@ -1609,3 +1609,44 @@ body.dashboard-body {
 .modal-backdrop {
   z-index: 9999 !important;
 }
+
+/* Estilos específicos para vista previa de canciones en create-playlist-card */
+.create-playlist-card .song-preview-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.create-playlist-card .song-preview-title {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.create-playlist-card .song-preview-artist {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.create-playlist-card .text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Botón de ver todas las canciones con glassmorphism */
+.create-playlist-card .btn-outline-light {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.create-playlist-card .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.create-playlist-card .btn-outline-light:active {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(0);
+}
