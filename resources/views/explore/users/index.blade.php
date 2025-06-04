@@ -106,23 +106,22 @@
                                             <div class="text-white fw-bold">{{ $user->posts_count }}</div>
                                             <div class="text-light small">Posts</div>
                                         </div>
-                                    </div>
-
-                                    <!-- Botones de acción -->
+                                    </div>                                    <!-- Botones de acción -->
                                     <div class="d-flex gap-2 justify-content-center">
                                         <a href="{{ route('explore.users.show', $user) }}" 
                                            class="btn btn-outline-light btn-sm flex-fill">
-                                            <i class="fas fa-eye"></i> Ver perfil
+                                            <i class="fas fa-eye me-1"></i>
+                                            <span class="d-none d-sm-inline">Ver perfil</span>
                                         </a>
                                         
                                         @auth
                                             @if(Auth::id() !== $user->id)
                                                 <button type="button" 
-                                                        class="btn btn-sm follow-btn {{ in_array($user->id, $followingIds) ? 'btn-secondary' : 'btn-primary' }}"
+                                                        class="btn btn-sm follow-btn flex-fill {{ in_array($user->id, $followingIds) ? 'btn-secondary' : 'btn-primary' }}"
                                                         data-user-id="{{ $user->id }}"
                                                         data-following="{{ in_array($user->id, $followingIds) ? 'true' : 'false' }}">
-                                                    <i class="fas {{ in_array($user->id, $followingIds) ? 'fa-user-minus' : 'fa-user-plus' }}"></i>
-                                                    <span class="follow-text">{{ in_array($user->id, $followingIds) ? 'Siguiendo' : 'Seguir' }}</span>
+                                                    <i class="fas {{ in_array($user->id, $followingIds) ? 'fa-user-check' : 'fa-user-plus' }} me-1"></i>
+                                                    <span class="follow-text d-none d-sm-inline">{{ in_array($user->id, $followingIds) ? 'Siguiendo' : 'Seguir' }}</span>
                                                 </button>
                                             @endif
                                         @endauth
@@ -198,14 +197,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     const icon = button.querySelector('i');
                     const text = button.querySelector('.follow-text');
-                    
-                    if (newIsFollowing) {
-                        button.className = 'btn btn-sm follow-btn btn-secondary';
-                        icon.className = 'fas fa-user-minus';
+                      if (newIsFollowing) {
+                        button.className = 'btn btn-sm follow-btn flex-fill btn-secondary';
+                        icon.className = 'fas fa-user-check me-1';
                         text.textContent = 'Siguiendo';
                     } else {
-                        button.className = 'btn btn-sm follow-btn btn-primary';
-                        icon.className = 'fas fa-user-plus';
+                        button.className = 'btn btn-sm follow-btn flex-fill btn-primary';
+                        icon.className = 'fas fa-user-plus me-1';
                         text.textContent = 'Seguir';
                     }
                     
