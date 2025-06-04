@@ -18,7 +18,9 @@ class SpotifyService
 
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client = new Client([
+            'verify' => false // Desactivar verificación SSL en desarrollo
+        ]);
         $this->clientId = config('services.spotify.client_id');
         $this->clientSecret = config('services.spotify.client_secret');
         $this->redirectUri = config('services.spotify.redirect_uri');
@@ -33,8 +35,14 @@ class SpotifyService
         // Verificar si ya tenemos un token válido en cache
         $token = Cache::get('spotify_access_token');
         if ($token) {
+            Log::info('Using cached Spotify token');
             return $token;
         }
+
+        Log::info('Requesting new Spotify token', [
+            'client_id' => $this->clientId ? 'configured' : 'missing',
+            'client_secret' => $this->clientSecret ? 'configured' : 'missing'
+        ]);
 
         try {
             $response = $this->client->post($this->authUrl, [
@@ -53,10 +61,13 @@ class SpotifyService
                 // Guardar token en cache por 55 minutos (expira en 1 hora)
                 Cache::put('spotify_access_token', $data['access_token'], now()->addMinutes(55));
                 return $data['access_token'];
+            } else {
+                Log::error('No access token in Spotify response', $data);
             }
 
         } catch (GuzzleException $e) {
             Log::error('Error obteniendo token de Spotify: ' . $e->getMessage());
+            Log::error('Response body: ' . $e->getResponse()?->getBody()?->getContents());
         }
 
         return null;
@@ -69,6 +80,7 @@ class SpotifyService
     {
         $token = $this->getAccessToken();
         if (!$token) {
+            Log::error('No access token available for Spotify');
             return null;
         }
 
@@ -84,10 +96,12 @@ class SpotifyService
                 ],
             ]);
 
-            return json_decode($response->getBody(), true);
+            $result = json_decode($response->getBody(), true);
+            return $result;
 
         } catch (GuzzleException $e) {
             Log::error('Error buscando canciones en Spotify: ' . $e->getMessage());
+            Log::error('Response body: ' . $e->getResponse()?->getBody()?->getContents());
             return null;
         }
     }

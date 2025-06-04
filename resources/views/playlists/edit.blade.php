@@ -47,7 +47,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.show') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
@@ -81,7 +81,7 @@
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.show') }}">
+                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
                 <form method="POST" action="{{ route('logout') }}">

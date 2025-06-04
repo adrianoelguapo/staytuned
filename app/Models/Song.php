@@ -8,9 +8,17 @@ class Song extends Model
 {
     protected $fillable = [
         'name',
-        'duration',
+        'duration', 
         'cover',
-        'author'
+        'author',
+        'spotify_id',
+        'title',
+        'artist',
+        'album',
+        'album_image',
+        'spotify_url',
+        'preview_url',
+        'duration_formatted'
     ];
 
     public function playlists()

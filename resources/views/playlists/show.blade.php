@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $playlist->name }} | StayTuned</title>
@@ -47,7 +48,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.show') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
@@ -81,7 +82,7 @@
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.show') }}">
+                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -128,9 +129,13 @@
                                 <div class="playlist-cover-large">                                    @if($playlist->cover)
                                         <img src="{{ asset('storage/' . $playlist->cover) }}" 
                                              alt="{{ $playlist->name }}" 
-                                             class="img-fluid rounded">
+                                             class="playlist-header-cover"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="playlist-header-cover d-none align-items-center justify-content-center">
+                                            <i class="bi bi-music-note-beamed"></i>
+                                        </div>
                                     @else
-                                        <div class="playlist-placeholder-large">
+                                        <div class="playlist-header-cover d-flex align-items-center justify-content-center">
                                             <i class="bi bi-music-note-beamed"></i>
                                         </div>
                                     @endif
@@ -149,8 +154,7 @@
                                     <div class="playlist-meta-large">
                                         <span class="me-3">
                                             <img src="{{ Auth::user()->profile_photo_url }}" 
-                                                 class="rounded-circle me-2" 
-                                                 style="width: 24px; height: 24px;" 
+                                                 class="rounded-circle me-2 user-photo-small" 
                                                  alt="{{ Auth::user()->name }}">
                                             {{ Auth::user()->username }}
                                         </span>
@@ -171,11 +175,8 @@
                             <div class="col-auto">
                                 <!-- Acciones -->
                                 <div class="playlist-actions-header">
-                                    <button class="btn btn-play-large me-2">
-                                        <i class="bi bi-play-fill"></i>
-                                    </button>
                                     <div class="dropdown d-inline">
-                                        <button class="btn btn-options-large" type="button" 
+                                        <button class="btn btn-options-large btn-purple" type="button" 
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
@@ -254,8 +255,11 @@
                                     <div class="song-row">
                                         <div class="song-number">
                                             <span class="song-index">{{ $index + 1 }}</span>
-                                            <button class="btn-play-song">
-                                                <i class="bi bi-play-fill"></i>
+                                            <button class="btn-play-song" 
+                                                    onclick="openSpotify('{{ $song->spotify_url }}')" 
+                                                    title="Abrir en Spotify"
+                                                    {{ !$song->spotify_url ? 'disabled style="opacity: 0.3; cursor: not-allowed;" title="No disponible en Spotify"' : '' }}>
+                                                <i class="bi bi-spotify"></i>
                                             </button>
                                         </div>
                                         <div class="song-title">
@@ -263,11 +267,19 @@
                                                 @if($song->album_image)
                                                     <img src="{{ $song->album_image }}" 
                                                          alt="{{ $song->title }}" 
-                                                         class="song-cover">
+                                                         class="song-cover-img"
+                                                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none'); this.nextElementSibling.classList.add('d-flex');">
+                                                    <div class="song-cover-placeholder d-none align-items-center justify-content-center">
+                                                        <i class="bi bi-music-note"></i>
+                                                    </div>
+                                                @else
+                                                    <div class="song-cover-placeholder d-flex align-items-center justify-content-center">
+                                                        <i class="bi bi-music-note"></i>
+                                                    </div>
                                                 @endif
                                                 <div>
-                                                    <div class="song-name">{{ $song->title }}</div>
-                                                    <div class="song-artist">{{ $song->artist }}</div>
+                                                    <div class="song-name">{{ $song->title ?: $song->name ?: 'Canción sin título' }}</div>
+                                                    <div class="song-artist">{{ $song->artist ?: $song->author ?: 'Artista desconocido' }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +287,7 @@
                                             {{ $song->album ?? 'Desconocido' }}
                                         </div>
                                         <div class="song-duration">
-                                            {{ $song->duration ?? '--:--' }}
+                                            {{ $song->duration_formatted ?? $song->duration ?? '--:--' }}
                                         </div>
                                         <div class="song-actions">
                                             <div class="dropdown">
@@ -343,15 +355,19 @@
             const resultsDiv = document.getElementById('searchResults');
             resultsDiv.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Buscando...</span></div></div>';
 
-            // Aquí implementaremos la búsqueda de Spotify
             fetch(`{{ route('playlists.search') }}?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     displaySearchResults(data);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    resultsDiv.innerHTML = '<div class="alert alert-danger">Error al buscar canciones. Inténtalo de nuevo.</div>';
+                    console.error('Error details:', error);
+                    resultsDiv.innerHTML = `<div class="alert alert-danger">Error al buscar canciones: ${error.message}</div>`;
                 });
         }
 
@@ -369,15 +385,28 @@
                 html += `
                     <div class="search-result-item">
                         <div class="d-flex align-items-center">
-                            <img src="${track.album.images[2]?.url || ''}" alt="${track.name}" class="search-result-cover me-3">
+                            <div class="me-3">
+                                <img src="${track.album.images[2]?.url || track.album.images[1]?.url || track.album.images[0]?.url || ''}" 
+                                     alt="${track.name}" 
+                                     class="search-result-cover-img"
+                                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none'); this.nextElementSibling.classList.add('d-flex');"
+                                     style="${!track.album.images.length ? 'display:none;' : ''}">
+                                <div class="search-result-cover-placeholder ${track.album.images.length ? 'd-none' : 'd-flex'} align-items-center justify-content-center">
+                                    <i class="bi bi-music-note"></i>
+                                </div>
+                            </div>
                             <div class="flex-grow-1">
                                 <div class="search-result-title">${track.name}</div>
                                 <div class="search-result-artist">${track.artists.map(a => a.name).join(', ')}</div>
                                 <div class="search-result-album text-muted">${track.album.name}</div>
                             </div>
                             <div class="search-result-duration me-3">${formatDuration(track.duration_ms)}</div>
-                            <button class="btn btn-sm btn-primary-playlist" onclick="addToPlaylist('${track.id}')">
-                                <i class="bi bi-plus"></i>
+                            <button class="btn btn-sm btn-success me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
+                                <i class="bi bi-spotify"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary-playlist add-song-btn" onclick="addToPlaylist('${track.id}')">
+                                <i class="bi bi-plus-circle me-1"></i>
+                                <span class="d-none d-sm-inline">Agregar</span>
                             </button>
                         </div>
                     </div>
@@ -389,6 +418,13 @@
         }
 
         function addToPlaylist(spotifyId) {
+            const button = event.target.closest('.add-song-btn');
+            const originalContent = button.innerHTML;
+            
+            // Cambiar el botón a estado de carga
+            button.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> <span class="d-none d-sm-inline">Agregando...</span>';
+            button.disabled = true;
+            
             fetch(`{{ route('playlists.songs.add', $playlist) }}`, {
                 method: 'POST',
                 headers: {
@@ -400,13 +436,25 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    location.reload(); // Recargar para mostrar la nueva canción
+                    // Mostrar éxito
+                    button.innerHTML = '<i class="bi bi-check-circle me-1"></i> <span class="d-none d-sm-inline">¡Agregada!</span>';
+                    button.classList.add('success');
+                    
+                    // Recargar después de un breve delay
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 } else {
+                    // Restaurar botón en caso de error
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
                     alert('Error al agregar la canción: ' + data.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                button.innerHTML = originalContent;
+                button.disabled = false;
                 alert('Error al agregar la canción');
             });
         }
@@ -423,6 +471,18 @@
                 searchSpotify();
             }
         });
+
+        // Función para abrir Spotify
+        function openSpotify(spotifyUrl) {
+            // Si no hay URL de Spotify, mostrar mensaje
+            if (!spotifyUrl) {
+                alert('No hay enlace de Spotify disponible para esta canción');
+                return;
+            }
+
+            // Abrir Spotify en una nueva pestaña
+            window.open(spotifyUrl, '_blank');
+        }
     </script>
 </body>
 </html>

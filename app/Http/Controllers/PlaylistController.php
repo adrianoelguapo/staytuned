@@ -8,6 +8,7 @@ use App\Services\SpotifyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class PlaylistController extends Controller
 {
@@ -169,7 +170,8 @@ class PlaylistController extends Controller
                 return response()->json(['tracks' => []]);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error searching tracks'], 500);
+            Log::error('Error in searchSpotify: ' . $e->getMessage());
+            return response()->json(['error' => 'Error searching tracks: ' . $e->getMessage()], 500);
         }
     }
 
@@ -204,10 +206,11 @@ class PlaylistController extends Controller
                     'title' => $trackInfo['name'],
                     'artist' => implode(', ', array_column($trackInfo['artists'], 'name')),
                     'album' => $trackInfo['album']['name'] ?? null,
-                    'duration' => $this->formatDuration($trackInfo['duration_ms']),
+                    'duration_formatted' => $this->formatDuration($trackInfo['duration_ms']),
                     'spotify_id' => $trackInfo['id'],
                     'album_image' => $trackInfo['album']['images'][2]['url'] ?? null,
                     'spotify_url' => $trackInfo['external_urls']['spotify'] ?? null,
+                    'preview_url' => $trackInfo['preview_url'] ?? null,
                 ]);
             }
 

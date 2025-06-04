@@ -40,14 +40,14 @@
                    aria-expanded="false">
                     @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <img src="{{ Auth::user()->profile_photo_url }}"
-                             class="rounded-circle me-2 user-photo"
+                             class="rounded-circle me-2 user-photo-small"
                              alt="{{ Auth::user()->name }}" />
                     @endif
                     {{ Auth::user()->username }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.show') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
@@ -81,7 +81,7 @@
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.show') }}">
+                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -105,8 +105,8 @@
                         <i class="bi bi-music-note-list me-2"></i>
                         Mis Playlists
                     </h1>
-                    <a href="{{ route('playlists.create') }}" class="btn btn-primary-playlist">
-                        <i class="bi bi-plus-lg me-2"></i>
+                    <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                        <i class="bi bi-plus-circle me-2"></i>
                         Nueva Playlist
                     </a>
                 </div>
@@ -132,13 +132,17 @@
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="playlist-card">
                                     <!-- Imagen de la playlist -->
-                                    <div class="playlist-image">                                        @if($playlist->cover)
+                                    <div class="playlist-image">
+                                        @if($playlist->cover)
                                             <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                                 alt="{{ $playlist->name }}" 
-                                                 class="img-fluid">
+                                                 alt="{{ $playlist->name }}"
+                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <div class="playlist-placeholder" style="display: none;">
+                                                <i class="bi bi-music-note-beamed"></i>
+                                            </div>
                                         @else
                                             <div class="playlist-placeholder">
-                                                <i class="bi bi-music-note-beamed fs-1"></i>
+                                                <i class="bi bi-music-note-beamed"></i>
                                             </div>
                                         @endif
                                         
@@ -221,8 +225,8 @@
                             <p class="text-muted mb-4">
                                 Crea tu primera playlist y comienza a organizar tu música favorita
                             </p>
-                            <a href="{{ route('playlists.create') }}" class="btn btn-primary-playlist">
-                                <i class="bi bi-plus-lg me-2"></i>
+                            <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                                <i class="bi bi-plus-circle me-2"></i>
                                 Crear mi primera playlist
                             </a>
                         </div>
@@ -234,5 +238,62 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Mejorar posicionamiento de dropdowns con z-index alto
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.playlist-card .dropdown-toggle');
+            
+            dropdowns.forEach(function(dropdown) {
+                dropdown.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Cerrar otros dropdowns abiertos
+                    document.querySelectorAll('.playlist-card .dropdown-menu.show').forEach(function(menu) {
+                        if (menu !== dropdown.nextElementSibling) {
+                            menu.classList.remove('show');
+                        }
+                    });
+                    
+                    // Toggle del dropdown actual
+                    const menu = dropdown.nextElementSibling;
+                    if (menu && menu.classList.contains('dropdown-menu')) {
+                        setTimeout(function() {
+                            if (menu.classList.contains('show')) {
+                                menu.classList.remove('show');
+                            } else {
+                                menu.classList.add('show');
+                                
+                                // Calcular posición fija para que aparezca encima de todo
+                                const rect = dropdown.getBoundingClientRect();
+                                menu.style.position = 'fixed';
+                                menu.style.zIndex = '99999';
+                                menu.style.top = (rect.bottom + 5) + 'px';
+                                menu.style.left = (rect.right - menu.offsetWidth) + 'px';
+                                
+                                // Asegurar que no se salga de la pantalla
+                                if (menu.getBoundingClientRect().right > window.innerWidth) {
+                                    menu.style.left = (window.innerWidth - menu.offsetWidth - 10) + 'px';
+                                }
+                                if (menu.getBoundingClientRect().left < 0) {
+                                    menu.style.left = '10px';
+                                }
+                            }
+                        }, 10);
+                    }
+                });
+            });
+            
+            // Cerrar dropdowns al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.playlist-card .dropdown')) {
+                    document.querySelectorAll('.playlist-card .dropdown-menu.show').forEach(function(menu) {
+                        menu.classList.remove('show');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

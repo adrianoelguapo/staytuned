@@ -167,12 +167,50 @@ body.dashboard-body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Botón de Nueva Playlist mejorado */
+.btn-new-playlist {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-new-playlist:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-new-playlist:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-new-playlist i {
+  font-size: 1rem;
+}
+
 /* Grid de playlists */
 .playlists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
+  /* Asegurar que el contenedor permite el overflow de dropdowns */
+  overflow: visible !important;
+  position: relative;
+  z-index: 0; /* Z-index bajo para el contenedor */
 }
 
 /* Tarjeta de playlist */
@@ -184,6 +222,8 @@ body.dashboard-body {
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  z-index: 1; /* Z-index bajo para la tarjeta base */
 }
 
 .playlist-card:hover {
@@ -234,6 +274,7 @@ body.dashboard-body {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   overflow: hidden;
 }
 
@@ -344,13 +385,18 @@ body.dashboard-body {
 }
 
 .search-result-item {
-  padding: 12px 16px;
+  padding: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  margin-bottom: 8px;
 }
 
 .search-result-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-result-item:last-child {
@@ -358,33 +404,62 @@ body.dashboard-body {
 }
 
 .search-result-cover {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px;
+  min-height: 50px;
   object-fit: cover;
+  border-radius: 4px;
+  background-color: #6c757d;
+  margin-right: 12px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-result-title {
-  font-weight: 600;
-  color: #fff;
+  font-weight: 500;
+  color: #000 !important;
   margin-bottom: 2px;
 }
 
 .search-result-artist {
-  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
+  color: #333 !important;
   margin-bottom: 2px;
 }
 
 .search-result-album {
   font-size: 0.85rem;
+  color: #444 !important;
 }
 
 .search-result-duration {
-  color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
+  color: #555 !important;
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Reemplazar con clases separadas para imagen y placeholder */
+.search-result-cover-img {
+  width: 50px !important;
+  height: 50px !important;
   min-width: 50px;
-  text-align: center;
+  min-height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.search-result-cover-placeholder {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 4px;
+  background-color: #6c757d;
+  margin-right: 12px;
 }
 
 /* ================================================
@@ -462,9 +537,155 @@ body.dashboard-body {
 }
 
 /* ================================================
-   RESPONSIVIDAD ADICIONAL
+   DIMENSIONES ESTANDARIZADAS DE IMÁGENES
    ================================================ */
+
+/* Imágenes de canciones en la lista */
+.song-cover-img {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px;
+  min-height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Placeholder para canciones sin imagen */
+.song-cover-placeholder {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 4px;
+  background-color: #6c757d;
+}
+
+/* Imagen de header de playlist */
+.playlist-header-cover {
+  width: 180px !important;
+  height: 180px !important;
+  min-width: 180px;
+  min-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #6c757d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Foto de perfil de usuario pequeña */
+.user-photo-small {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  min-height: 24px;
+  object-fit: cover;
+}
+
+/* Contenedor de imagen de playlist para mantener proporciones */
+.playlist-cover-large {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #6c757d;
+}
+
+/* Estilos para placeholders de imágenes faltantes */
+.song-cover-placeholder i,
+.playlist-header-cover i,
+.search-result-cover-placeholder i {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.playlist-header-cover i {
+  font-size: 3rem;
+}
+
+/* ================================================
+   ESTILOS PARA TARJETAS DE PLAYLIST (INDEX)
+   ================================================ */
+
+/* Imagen de tarjeta de playlist en el grid */
+.playlist-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background-color: #6c757d;
+  z-index: 1; /* Z-index bajo para la imagen */
+}
+
+.playlist-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  z-index: 1; /* Z-index bajo para la imagen */
+}
+
+.playlist-card:hover .playlist-image img {
+  transform: scale(1.05);
+}
+
+/* Placeholder para playlists sin imagen */
+.playlist-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.playlist-placeholder i {
+  font-size: 3rem;
+}
+
+/* Responsive para tarjetas de playlist */
 @media (max-width: 768px) {
+  .playlist-image {
+    height: 160px;
+  }
+  
+  .playlist-placeholder i {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .playlist-image {
+    height: 140px;
+  }
+  
+  .playlist-placeholder i {
+    font-size: 2rem;
+  }
+}
+
+/* Responsive: ajustar tamaños en pantallas pequeñas */
+@media (max-width: 768px) {
+  .playlist-header-cover {
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px;
+    min-height: 120px;
+  }
+  
+  .playlist-cover-large {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .playlist-header-cover i {
+    font-size: 2rem;
+  }
+  
   .playlist-header-info h1 {
     font-size: 1.5rem;
   }
@@ -473,7 +694,8 @@ body.dashboard-body {
     margin-top: 1rem;
   }
   
-  .search-result-cover {
+  .search-result-cover-img,
+  .search-result-cover-placeholder {
     width: 40px;
     height: 40px;
   }
@@ -481,4 +703,909 @@ body.dashboard-body {
   .songs-preview {
     max-height: 150px;
   }
+}
+
+/* ================================================
+   ESTILOS PARA OVERLAY Y BOTONES DE PLAYLIST CARDS
+   ================================================ */
+
+/* Overlay que aparece al hacer hover */
+.playlist-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px 12px 0 0;
+  z-index: 2; /* Z-index bajo para que el dropdown esté encima */
+}
+
+.playlist-card:hover .playlist-overlay {
+  opacity: 1;
+}
+
+/* Contenedor de acciones */
+.playlist-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 3; /* Z-index medio para los botones */
+  position: relative;
+}
+
+/* Botón de reproducir */
+.btn-play {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #8b5cf6;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-play:hover {
+  background-color: #7c3aed;
+  transform: scale(1.05);
+  color: white;
+}
+
+/* Botón de opciones */
+.btn-options {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-options:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Dropdown menu personalizado */
+.playlist-actions .dropdown-menu {
+  background-color: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 160px;
+}
+
+.playlist-actions .dropdown-item {
+  color: #fff;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.playlist-actions .dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Botón eliminar en el dropdown */
+.playlist-card .dropdown-item.text-danger {
+  color: #dc3545 !important;
+}
+
+.playlist-card .dropdown-item.text-danger:hover {
+  background: rgba(220, 53, 69, 0.1) !important;
+  color: #dc3545 !important;
+}
+
+.playlist-card .dropdown-item.text-danger i {
+  color: #dc3545 !important;
+}
+
+.playlist-actions .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Corregir z-index del dropdown para que aparezca por encima de las tarjetas */
+.playlist-card .dropdown-menu {
+  z-index: 99999 !important;
+  position: fixed !important;
+  background: rgba(33, 37, 41, 0.98) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+  margin-top: 8px !important;
+  min-width: 160px !important;
+  transform: none !important;
+  right: auto !important;
+  left: auto !important;
+}
+
+.playlist-card .dropdown {
+  position: relative !important;
+}
+
+/* Forzar que el dropdown aparezca siempre visible */
+.playlist-card .dropdown-menu.show {
+  display: block !important;
+  position: fixed !important;
+  z-index: 99999 !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+}
+
+/* Asegurar que el overlay no interfiera con el dropdown */
+.playlist-overlay {
+  z-index: 1;
+}
+
+/* Mejorar la legibilidad del dropdown */
+.playlist-card .dropdown-item {
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 8px 16px !important;
+  font-size: 0.9rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.playlist-card .dropdown-item:hover {
+  background: rgba(124, 58, 237, 0.2) !important;
+  color: white !important;
+}
+
+.playlist-card .dropdown-item i {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.playlist-card .dropdown-item:hover i {
+  color: white !important;
+}
+
+/* Separador del dropdown */
+.playlist-card .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  margin: 4px 0 !important;
+}
+
+/* Forzar que el dropdown esté SIEMPRE encima de todo */
+.playlist-card .dropdown-menu,
+.playlist-card .dropdown-menu.show {
+  z-index: 999999 !important;
+  position: fixed !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* ================================================
+   ESTILOS PARA DURACIÓN Y BOTONES MEJORADOS
+   ================================================ */
+
+/* Estilo mejorado para la duración de las canciones */
+.song-duration {
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  color: #666;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Estilo mejorado para la duración en resultados de búsqueda */
+.search-result-duration {
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  color: #ccc;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  min-width: 55px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botones de header mejorados */
+.btn-play-large {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #8b5cf6;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.btn-play-large:hover {
+  background-color: #7c3aed;
+  transform: scale(1.05);
+  color: white;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn-options-large {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-options-large:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Botón violeta para opciones de playlist */
+.btn-purple {
+  background-color: #7c3aed !important;
+  border-color: #7c3aed !important;
+  color: white !important;
+}
+
+.btn-purple:hover {
+  background-color: #6d28d9 !important;
+  border-color: #6d28d9 !important;
+  color: white !important;
+  transform: scale(1.05);
+}
+
+.btn-purple:active,
+.btn-purple:focus {
+  background-color: #5b21b6 !important;
+  border-color: #5b21b6 !important;
+  color: white !important;
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.25) !important;
+}
+
+/* Botón de agregar mejorado en resultados de búsqueda */
+.search-result-item .btn {
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);
+}
+
+.search-result-item .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* Estado vacío del botón de búsqueda */
+.text-center .btn-primary-playlist {
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.text-center .btn-primary-playlist:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Botón específico para agregar canciones */
+.add-song-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  text-decoration: none;
+}
+
+.add-song-btn:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+.add-song-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* Animación de éxito al agregar canción */
+.add-song-btn.success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  animation: successPulse 0.6s ease;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Animación de spin para el loading */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ================================================
+   ESTILOS PARA TABLA DE CANCIONES
+   ================================================ */
+
+/* Contenedor principal de la tabla de canciones */
+.songs-table {
+  width: 100%;
+}
+
+/* Header de la tabla */
+.songs-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 200px 80px 50px;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filas de canciones */
+.song-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 200px 80px 50px;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.song-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Número de canción */
+.song-number {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.song-index {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.btn-play-song {
+  position: absolute;
+  background-color: #1db954; /* Verde de Spotify por defecto */
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-play-song:hover {
+  background-color: #1ed760 !important; /* Verde de Spotify más claro al hacer hover */
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-play-song:active {
+  background-color: #169c46 !important; /* Verde de Spotify más oscuro al hacer clic */
+  color: white;
+}
+
+/* Mostrar el botón cuando se hace hover sobre toda la fila */
+.song-row:hover .btn-play-song {
+  opacity: 1;
+}
+
+.song-row:hover .song-index {
+  opacity: 0;
+}
+
+/* Información de la canción */
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.song-name {
+  color: #000 !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.song-artist {
+  color: #333 !important;
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+/* Álbum */
+.song-album {
+  color: #444 !important;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Acciones de canción */
+.song-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.song-actions .btn {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.song-row:hover .song-actions .btn {
+  opacity: 1;
+}
+
+/* ================================================
+   EFECTO MIRROR BLUR PARA FORMULARIO DE CREAR PLAYLIST
+   ================================================ */
+
+/* Contenedor principal del formulario con efecto mirror blur */
+.playlist-form-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+/* Efecto de reflejo superior */
+.playlist-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Efecto de brillo en los bordes */
+.playlist-form-container::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 19px;
+  pointer-events: none;
+}
+
+/* Card del formulario con glassmorphism */
+.create-playlist-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 24px !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.15) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Efecto de reflejo en la card */
+.create-playlist-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  border-radius: 24px 24px 0 0;
+  z-index: 1;
+}
+
+/* Card body con padding ajustado */
+.create-playlist-card .card-body {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem !important;
+}
+
+/* Título del formulario con efecto glassmorphism */
+.create-playlist-title {
+  color: #fff !important;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Formularios con efecto glassmorphism */
+.playlist-form .form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.playlist-form .form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.15) !important;
+}
+
+.playlist-form .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Labels con mejor contraste */
+.playlist-form .form-label {
+  color: #fff !important;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+/* Texto de ayuda con glassmorphism */
+.playlist-form .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Radio buttons con efecto glassmorphism */
+.playlist-form .form-check {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.playlist-form .form-check:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.playlist-form .form-check-input {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  margin-top: 0.2rem;
+  margin-left: 0;
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.playlist-form .form-check-label {
+  color: #fff !important;
+  cursor: pointer;
+  flex: 1;
+  margin-bottom: 0;
+  width: calc(100% - 2rem);
+  line-height: 1.4;
+}
+
+.playlist-form .form-check-input:checked {
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+/* Preview de imagen con glassmorphism */
+.playlist-image-upload .image-preview {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.playlist-image-upload .image-preview:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.playlist-image-upload .image-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Botones con efecto glassmorphism mejorado */
+.playlist-form .btn-primary-playlist {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(124, 58, 237, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 8px 20px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.playlist-form .btn-primary-playlist:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 25px rgba(139, 92, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.playlist-form .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.playlist-form .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Alertas con glassmorphism */
+.playlist-form .alert {
+  background: rgba(220, 53, 69, 0.1) !important;
+  border: 1px solid rgba(220, 53, 69, 0.3) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  color: #fff !important;
+}
+
+/* Animación sutil para el formulario */
+.create-playlist-card {
+  animation: formGlassAppear 0.6s ease-out;
+}
+
+@keyframes formGlassAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive para el efecto glassmorphism */
+@media (max-width: 768px) {
+  .create-playlist-card .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  .create-playlist-card {
+    border-radius: 16px !important;
+  }
+  
+  .playlist-form .form-check {
+    padding: 0.75rem;
+  }
+}
+
+/* ================================================
+   GLASSMORPHISM PARA VISTA SHOW
+   ================================================ */
+
+/* Texto blanco para elementos dentro de dashboard-card */
+.dashboard-card h1,
+.dashboard-card h2, 
+.dashboard-card h3,
+.dashboard-card h4,
+.dashboard-card h5,
+.dashboard-card h6,
+.dashboard-card .card-title,
+.dashboard-card .playlist-title-large,
+.dashboard-card .playlist-description-large,
+.dashboard-card .playlist-meta-large,
+.dashboard-card .badge,
+.dashboard-card .text-muted {
+  color: #fff !important;
+}
+
+/* Estilos específicos para metadatos */
+.dashboard-card .playlist-meta-large span {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dashboard-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Botones con glassmorphism */
+.dashboard-card .btn-purple,
+.dashboard-card .btn-options-large {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-card .btn-purple:hover,
+.dashboard-card .btn-options-large:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Form controls con glassmorphism */
+.dashboard-card .form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.dashboard-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Tablas de canciones */
+.dashboard-card .songs-table {
+  color: #fff !important;
+}
+
+.dashboard-card .songs-header {
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.dashboard-card .song-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dashboard-card .song-row:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dashboard-card .song-name,
+.dashboard-card .song-artist {
+  color: #fff !important;
+}
+
+.dashboard-card .song-artist {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Badges con glassmorphism */
+.dashboard-card .badge {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Corrección de colores para tabla de canciones en glassmorphism */
+.dashboard-card .songs-header {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.dashboard-card .song-index {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dashboard-card .song-name {
+  color: #fff !important;
+}
+
+.dashboard-card .song-artist {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dashboard-card .song-album {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dashboard-card .song-duration {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Mejorar z-index para dropdown menus */
+.dropdown-menu {
+  z-index: 9999 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Asegurar que los modales estén por encima */
+.modal {
+  z-index: 10000 !important;
+}
+
+.modal-backdrop {
+  z-index: 9999 !important;
 }

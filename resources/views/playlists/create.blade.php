@@ -47,7 +47,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.show') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
@@ -81,7 +81,7 @@
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.show') }}">
+                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -113,11 +113,11 @@
                 </nav>
 
                 <!-- Formulario de creación -->
-                <div class="card dashboard-card">
+                <div class="card create-playlist-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-4">
-                            <i class="bi bi-plus-circle text-primary me-3 fs-3"></i>
-                            <h1 class="h3 mb-0">Crear Nueva Playlist</h1>
+                            <i class="bi bi-plus-circle text-white me-3 fs-3"></i>
+                            <h1 class="h3 mb-0 create-playlist-title">Crear Nueva Playlist</h1>
                         </div>
 
                         @if ($errors->any())
