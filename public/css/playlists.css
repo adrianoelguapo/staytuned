@@ -379,24 +379,24 @@ body.dashboard-body {
 .search-results {
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .search-result-item {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background-color 0.2s ease;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .search-result-item:hover {
-  background-color: rgba(255, 255, 255, 0.95);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .search-result-item:last-child {
@@ -418,20 +418,20 @@ body.dashboard-body {
 }
 
 .search-result-title {
-  font-weight: 500;
-  color: #000 !important;
+  font-weight: 600;
+  color: #fff !important;
   margin-bottom: 2px;
 }
 
 .search-result-artist {
   font-size: 0.9rem;
-  color: #333 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   margin-bottom: 2px;
 }
 
 .search-result-album {
   font-size: 0.85rem;
-  color: #444 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .search-result-duration {
@@ -453,13 +453,18 @@ body.dashboard-body {
 }
 
 .search-result-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px !important;
   height: 50px !important;
   min-width: 50px;
   min-height: 50px;
-  border-radius: 4px;
-  background-color: #6c757d;
-  margin-right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
 }
 
 /* ================================================
@@ -912,14 +917,15 @@ body.dashboard-body {
 .search-result-duration {
   font-family: 'Courier New', monospace;
   font-weight: 500;
-  color: #ccc;
-  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.85rem;
   min-width: 55px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
 }
 
 /* Botones de header mejorados */
@@ -993,12 +999,17 @@ body.dashboard-body {
   padding: 8px 16px;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  backdrop-filter: blur(8px);
 }
 
 .search-result-item .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Estado vacío del botón de búsqueda */
@@ -1017,39 +1028,45 @@ body.dashboard-body {
 
 /* Botón específico para agregar canciones */
 .add-song-btn {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  border: none;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
   border-radius: 20px;
   padding: 8px 16px;
   font-weight: 600;
   color: white;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
+  backdrop-filter: blur(8px);
 }
 
 .add-song-btn:hover {
-  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  background: rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.5);
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   color: white;
 }
 
 .add-song-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Animación de éxito al agregar canción */
 .add-song-btn.success {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: rgba(16, 185, 129, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  color: #fff !important;
   animation: successPulse 0.6s ease;
+  backdrop-filter: blur(8px);
 }
 
 @keyframes successPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(16, 185, 129, 0); }
+  50% { transform: scale(1.1); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 /* Animación de spin para el loading */
@@ -1650,3 +1667,117 @@ body.dashboard-body {
   background: rgba(255, 255, 255, 0.15) !important;
   transform: translateY(0);
 }
+
+/* Contenedor de resultados de búsqueda */
+.search-results-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  padding: 16px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.search-results-container .alert {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+}
+
+/* Campo de búsqueda con glassmorphism */
+.search-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 10px 15px !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Íconos en resultados de búsqueda */
+.search-result-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px;
+  min-height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.search-result-cover-img {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover .search-result-cover-img {
+  transform: scale(1.05);
+}
+
+/* Animaciones para íconos en búsqueda */
+.search-result-item i.bi-spotify {
+  color: #1DB954;
+  transition: all 0.3s ease;
+}
+
+.search-result-item button:hover i.bi-spotify {
+  transform: scale(1.2);
+}
+
+.search-result-item i.bi-plus-circle {
+  transition: all 0.3s ease;
+}
+
+.search-result-item button:hover i.bi-plus-circle {
+  transform: rotate(90deg);
+}
+
+/* Animación para ítem de búsqueda */
+.search-result-item {
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Añadir retardos para efecto cascada */
+.search-result-item:nth-child(1) { animation-delay: 0.05s; }
+.search-result-item:nth-child(2) { animation-delay: 0.10s; }
+.search-result-item:nth-child(3) { animation-delay: 0.15s; }
+.search-result-item:nth-child(4) { animation-delay: 0.20s; }
+.search-result-item:nth-child(5) { animation-delay: 0.25s; }
+.search-result-item:nth-child(6) { animation-delay: 0.30s; }
+.search-result-item:nth-child(7) { animation-delay: 0.35s; }
+.search-result-item:nth-child(8) { animation-delay: 0.40s; }
+.search-result-item:nth-child(9) { animation-delay: 0.45s; }
+.search-result-item:nth-child(10) { animation-delay: 0.50s; }

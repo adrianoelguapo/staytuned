@@ -102,7 +102,6 @@
                 <!-- Header con botón de crear playlist -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="h3 text-white mb-0">
-                        <i class="bi bi-music-note-list me-2"></i>
                         Mis Playlists
                     </h1>
                     <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">

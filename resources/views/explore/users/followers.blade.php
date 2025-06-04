@@ -3,9 +3,9 @@
 @section('title', 'Seguidores de ' . $user->name . ' | StayTuned')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
             <!-- Encabezado -->
             <div class="d-flex align-items-center mb-4">
                 <a href="{{ route('explore.users.show', $user) }}" 
@@ -88,9 +88,9 @@
                             <i class="fas fa-arrow-left"></i> Volver al perfil
                         </a>
                     </div>
-                </div>
-            @endif
-        </div>    </div>
+                </div>            @endif
+        </div>
+    </div>
 </div>
 @endsection
 

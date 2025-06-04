@@ -150,11 +150,11 @@
             {{-- Nombre de usuario --}}
             <h2 class="username mb-1">{{ Auth::user()->username }}</h2>
 
-            {{-- Estadísticas (ficticias o reales, según quieras) --}}
+            {{-- Estadísticas reales del usuario --}}
             <div class="profile-stats d-flex justify-content-center gap-4">
-                <div><strong>0</strong> publicaciones</div>
-                <div><strong>0</strong> seguidores</div>
-                <div><strong>0</strong> siguiendo</div>
+                <div><strong>{{ $stats['playlists_count'] }}</strong> playlists</div>
+                <div><strong>{{ $stats['followers_count'] }}</strong> seguidores</div>
+                <div><strong>{{ $stats['following_count'] }}</strong> siguiendo</div>
             </div>
         </div>
 

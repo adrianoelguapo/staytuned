@@ -221,18 +221,18 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <input type="text" 
-                                       class="form-control" 
+                                       class="form-control search-input" 
                                        id="searchInput" 
                                        placeholder="Buscar canciones, artistas o álbumes...">
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-primary-playlist w-100" onclick="searchSpotify()">
+                                <button class="btn btn-purple w-100" onclick="searchSpotify()">
                                     <i class="bi bi-search me-2"></i>
                                     Buscar
                                 </button>
                             </div>
                         </div>
-                        <div id="searchResults" class="mt-4"></div>
+                        <div id="searchResults" class="mt-4 search-results-container"></div>
                     </div>
                 </div>
 
@@ -338,13 +338,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Añadir animación al panel de búsqueda
         function toggleSpotifySearch() {
             const searchDiv = document.getElementById('spotifySearch');
-            if (searchDiv.style.display === 'none') {
+            
+            if (searchDiv.style.display === 'none' || !searchDiv.style.display) {
+                // Mostrar el panel con animación
                 searchDiv.style.display = 'block';
-                document.getElementById('searchInput').focus();
+                searchDiv.style.opacity = 0;
+                searchDiv.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    searchDiv.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    searchDiv.style.opacity = 1;
+                    searchDiv.style.transform = 'translateY(0)';
+                    document.getElementById('searchInput').focus();
+                }, 10);
             } else {
-                searchDiv.style.display = 'none';
+                // Ocultar el panel con animación
+                searchDiv.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                searchDiv.style.opacity = 0;
+                searchDiv.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    searchDiv.style.display = 'none';
+                }, 300);
             }
         }
 
@@ -353,7 +371,7 @@
             if (!query) return;
 
             const resultsDiv = document.getElementById('searchResults');
-            resultsDiv.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Buscando...</span></div></div>';
+            resultsDiv.innerHTML = '<div class="text-center p-4 dashboard-card loading-container"><div class="spinner-border" role="status"></div><div class="mt-2 text-white">Buscando canciones...</div></div>';
 
             fetch(`{{ route('playlists.search') }}?q=${encodeURIComponent(query)}`)
                 .then(response => {
@@ -367,7 +385,7 @@
                 })
                 .catch(error => {
                     console.error('Error details:', error);
-                    resultsDiv.innerHTML = `<div class="alert alert-danger">Error al buscar canciones: ${error.message}</div>`;
+                    resultsDiv.innerHTML = `<div class="alert alert-danger dashboard-card">Error al buscar canciones: ${error.message}</div>`;
                 });
         }
 
@@ -375,7 +393,7 @@
             const resultsDiv = document.getElementById('searchResults');
             
             if (!data.tracks || data.tracks.length === 0) {
-                resultsDiv.innerHTML = '<div class="alert alert-info">No se encontraron resultados.</div>';
+                resultsDiv.innerHTML = '<div class="alert alert-info dashboard-card">No se encontraron resultados. Intenta con otra búsqueda.</div>';
                 return;
             }
 
@@ -383,7 +401,7 @@
             
             data.tracks.forEach(track => {
                 html += `
-                    <div class="search-result-item">
+                    <div class="search-result-item dashboard-card">
                         <div class="d-flex align-items-center">
                             <div class="me-3">
                                 <img src="${track.album.images[2]?.url || track.album.images[1]?.url || track.album.images[0]?.url || ''}" 
@@ -398,10 +416,10 @@
                             <div class="flex-grow-1">
                                 <div class="search-result-title">${track.name}</div>
                                 <div class="search-result-artist">${track.artists.map(a => a.name).join(', ')}</div>
-                                <div class="search-result-album text-muted">${track.album.name}</div>
+                                <div class="search-result-album">${track.album.name}</div>
                             </div>
                             <div class="search-result-duration me-3">${formatDuration(track.duration_ms)}</div>
-                            <button class="btn btn-sm btn-success me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
+                            <button class="btn btn-sm btn-purple me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
                                 <i class="bi bi-spotify"></i>
                             </button>
                             <button class="btn btn-sm btn-primary-playlist add-song-btn" onclick="addToPlaylist('${track.id}')">

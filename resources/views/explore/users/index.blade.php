@@ -3,9 +3,9 @@
 @section('title', 'Explorar Usuarios | StayTuned')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
             <!-- Encabezado -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
@@ -22,7 +22,7 @@
                             <label for="search" class="form-label text-white">Buscar usuarios</label>
                             <div class="input-group">
                                 <input type="text" 
-                                       class="form-control bg-transparent border-secondary text-white" 
+                                       class="form-control" 
                                        id="search" 
                                        name="search" 
                                        value="{{ request('search') }}"
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="sort_by" class="form-label text-white">Ordenar por</label>
-                            <select class="form-select bg-transparent border-secondary text-white" 
+                            <select class="form-select custom-sort-select" 
                                     id="sort_by" 
                                     name="sort_by" 
                                     onchange="this.form.submit()">
@@ -58,7 +58,7 @@
                         <div class="col-md-2">
                             <label class="form-label d-block">&nbsp;</label>
                             @if(request()->hasAny(['search', 'sort_by']))
-                                <a href="{{ route('explore.users.index') }}" class="btn btn-outline-secondary w-100">
+                                <a href="{{ route('explore.users.index') }}" class="btn btn-clear-filter w-100">
                                     <i class="fas fa-times"></i> Limpiar
                                 </a>
                             @endif
@@ -229,61 +229,5 @@ document.addEventListener('DOMContentLoaded', function() {
 @endpush
 
 @push('styles')
-<style>
-.dashboard-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-.dashboard-card .form-control,
-.dashboard-card .form-select {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    color: white !important;
-}
-
-.dashboard-card .form-control:focus,
-.dashboard-card .form-select:focus {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
-    color: white !important;
-}
-
-.dashboard-card .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.dashboard-card .form-select option {
-    background: #333 !important;
-    color: white !important;
-}
-
-.follow-btn {
-    transition: all 0.3s ease;
-}
-
-.follow-btn:hover {
-    transform: translateY(-1px);
-}
-
-.pagination-custom .page-link {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-}
-
-.pagination-custom .page-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    color: white;
-}
-
-.pagination-custom .page-item.active .page-link {
-    background: rgba(124, 58, 237, 0.8);
-    border-color: rgba(124, 58, 237, 0.8);
-}
-</style>
+<link href="{{ asset('css/users.css') }}" rel="stylesheet">
 @endpush

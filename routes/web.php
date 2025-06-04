@@ -39,6 +39,7 @@ Route::middleware([
     });
 });
 
-Route::middleware(['auth', 'verified'])
-     ->get('/profile/settings', [ProfileController::class, 'edit'])
-     ->name('profile.settings');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
+    Route::post('/profile/update-bio', [\App\Http\Controllers\ProfileController::class, 'updateBio'])->name('profile.update-bio');
+});

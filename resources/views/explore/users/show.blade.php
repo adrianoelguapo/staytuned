@@ -3,8 +3,10 @@
 @section('title', $user->name . ' | StayTuned')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="row">
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="row">
         <!-- Información principal del usuario -->
         <div class="col-lg-4 mb-4">
             <div class="card dashboard-card">
@@ -227,8 +229,10 @@
                         </div>
                     @endif
                 </div>
+            </div>        </div>
             </div>
-        </div>    </div>
+        </div>
+    </div>
 </div>
 @endsection
 
