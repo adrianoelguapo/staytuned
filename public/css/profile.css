@@ -478,7 +478,7 @@ body.dashboard-body {
 }
 
 /* Si el formulario está dentro de un .container, elimina el padding solo para formularios */
-main.container > .profile-form-section {
+main.container > .profile-wform-section {
   padding-left: 0 !important;
   margin-left: 0 !important;
 }

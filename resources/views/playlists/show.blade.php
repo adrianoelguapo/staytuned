@@ -225,12 +225,25 @@
                                        id="searchInput" 
                                        placeholder="Buscar canciones, artistas o álbumes...">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <button class="btn btn-purple w-100" onclick="searchSpotify()">
                                     <i class="bi bi-search me-2"></i>
                                     Buscar
                                 </button>
                             </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()" style="display: none;">
+                                    <i class="bi bi-check-circle me-2"></i>
+                                    <span class="d-none d-lg-inline">Guardar</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Indicador de canciones pendientes -->
+                        <div id="pendingSongsIndicator" class="alert alert-info mt-3" style="display: none;">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <span id="pendingSongsCount">0</span> canción(es) agregada(s). 
+                            <strong>Haz clic en "Guardar" para aplicar los cambios.</strong>
                         </div>
                         <div id="searchResults" class="mt-4 search-results-container"></div>
                     </div>
@@ -363,12 +376,26 @@
                 setTimeout(() => {
                     searchDiv.style.display = 'none';
                 }, 300);
+                
+                // Limpiar búsqueda y canciones pendientes cuando se cancela
+                clearPendingSongs();
             }
+        }
+
+        function clearPendingSongs() {
+            pendingSongs.clear();
+            allSearchedTracks = {};
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+            updatePendingSongsIndicator();
         }
 
         function searchSpotify() {
             const query = document.getElementById('searchInput').value.trim();
-            if (!query) return;
+            if (!query) {
+                alert('Por favor, ingresa un término de búsqueda');
+                return;
+            }
 
             const resultsDiv = document.getElementById('searchResults');
             resultsDiv.innerHTML = '<div class="text-center p-4 dashboard-card loading-container"><div class="spinner-border" role="status"></div><div class="mt-2 text-white">Buscando canciones...</div></div>';
@@ -400,6 +427,16 @@
             let html = '<div class="search-results">';
             
             data.tracks.forEach(track => {
+                // Guardar información del track para uso posterior
+                allSearchedTracks[track.id] = track;
+                
+                // Verificar si la canción ya está agregada (pendiente)
+                const isAdded = pendingSongs.has(track.id);
+                const buttonClass = isAdded ? 'btn-success' : 'btn-primary-playlist';
+                const buttonText = isAdded ? 
+                    '<i class="bi bi-check-circle me-1"></i><span class="d-none d-sm-inline">Agregada</span>' : 
+                    '<i class="bi bi-plus-circle me-1"></i><span class="d-none d-sm-inline">Agregar</span>';
+                
                 html += `
                     <div class="search-result-item dashboard-card">
                         <div class="d-flex align-items-center">
@@ -422,9 +459,11 @@
                             <button class="btn btn-sm btn-purple me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
                                 <i class="bi bi-spotify"></i>
                             </button>
-                            <button class="btn btn-sm btn-primary-playlist add-song-btn" onclick="addToPlaylist('${track.id}')">
-                                <i class="bi bi-plus-circle me-1"></i>
-                                <span class="d-none d-sm-inline">Agregar</span>
+                            <button class="btn btn-sm ${buttonClass} add-song-btn" 
+                                    onclick="addToPlaylist('${track.id}')"
+                                    data-track-id="${track.id}"
+                                    ${isAdded ? 'disabled' : ''}>
+                                ${buttonText}
                             </button>
                         </div>
                     </div>
@@ -435,45 +474,131 @@
             resultsDiv.innerHTML = html;
         }
 
+        // Variables globales para tracking de canciones pendientes
+        let pendingSongs = new Set();
+        let allSearchedTracks = {};
+
         function addToPlaylist(spotifyId) {
             const button = event.target.closest('.add-song-btn');
-            const originalContent = button.innerHTML;
             
-            // Cambiar el botón a estado de carga
-            button.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> <span class="d-none d-sm-inline">Agregando...</span>';
+            // Si ya está agregada, no hacer nada
+            if (pendingSongs.has(spotifyId)) {
+                return;
+            }
+            
+            // Agregar a la lista de canciones pendientes
+            pendingSongs.add(spotifyId);
+            
+            // Actualizar el botón visualmente
+            button.innerHTML = '<i class="bi bi-check-circle me-1"></i><span class="d-none d-sm-inline">Agregada</span>';
+            button.classList.remove('btn-primary-playlist');
+            button.classList.add('btn-success');
             button.disabled = true;
             
-            fetch(`{{ route('playlists.songs.add', $playlist) }}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ spotify_id: spotifyId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Mostrar éxito
-                    button.innerHTML = '<i class="bi bi-check-circle me-1"></i> <span class="d-none d-sm-inline">¡Agregada!</span>';
-                    button.classList.add('success');
+            // Actualizar el contador y mostrar indicador
+            updatePendingSongsIndicator();
+        }
+
+        function updatePendingSongsIndicator() {
+            const indicator = document.getElementById('pendingSongsIndicator');
+            const saveBtn = document.getElementById('saveChangesBtn');
+            const countSpan = document.getElementById('pendingSongsCount');
+            
+            if (pendingSongs.size > 0) {
+                countSpan.textContent = pendingSongs.size;
+                indicator.style.display = 'block';
+                saveBtn.style.display = 'block';
+                
+                // Actualizar texto plural/singular
+                const songsText = pendingSongs.size === 1 ? 'canción agregada' : 'canciones agregadas';
+                indicator.innerHTML = `
+                    <i class="bi bi-info-circle me-2"></i>
+                    <span id="pendingSongsCount">${pendingSongs.size}</span> ${songsText}. 
+                    <strong>Haz clic en "Guardar" para aplicar los cambios.</strong>
+                `;
+            } else {
+                indicator.style.display = 'none';
+                saveBtn.style.display = 'none';
+            }
+        }
+
+        function saveChanges() {
+            if (pendingSongs.size === 0) {
+                return;
+            }
+            
+            const saveBtn = document.getElementById('saveChangesBtn');
+            const originalContent = saveBtn.innerHTML;
+            
+            // Mostrar estado de carga
+            saveBtn.innerHTML = '<i class="bi bi-arrow-repeat spin me-2"></i>Guardando...';
+            saveBtn.disabled = true;
+            
+            // Convertir Set a Array para envío
+            const songsToAdd = Array.from(pendingSongs);
+            
+            // Procesar canciones una por una
+            let processedCount = 0;
+            let successCount = 0;
+            let errors = [];
+            
+            songsToAdd.forEach((spotifyId, index) => {
+                fetch(`{{ route('playlists.songs.add', $playlist) }}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ spotify_id: spotifyId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    processedCount++;
                     
-                    // Recargar después de un breve delay
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
-                } else {
-                    // Restaurar botón en caso de error
-                    button.innerHTML = originalContent;
-                    button.disabled = false;
-                    alert('Error al agregar la canción: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                button.innerHTML = originalContent;
-                button.disabled = false;
-                alert('Error al agregar la canción');
+                    if (data.success) {
+                        successCount++;
+                    } else {
+                        const track = allSearchedTracks[spotifyId];
+                        const trackName = track ? track.name : 'Canción desconocida';
+                        errors.push(`${trackName}: ${data.message}`);
+                    }
+                    
+                    // Actualizar progreso
+                    saveBtn.innerHTML = `<i class="bi bi-arrow-repeat spin me-2"></i>Guardando... (${processedCount}/${songsToAdd.length})`;
+                    
+                    // Si terminamos de procesar todas las canciones
+                    if (processedCount === songsToAdd.length) {
+                        setTimeout(() => {
+                            if (errors.length > 0) {
+                                alert(`Se guardaron ${successCount} de ${songsToAdd.length} canciones.\n\nErrores:\n${errors.join('\n')}`);
+                            }
+                            
+                            // Recargar la página para mostrar los cambios
+                            location.reload();
+                        }, 500);
+                    }
+                })
+                .catch(error => {
+                    processedCount++;
+                    const track = allSearchedTracks[spotifyId];
+                    const trackName = track ? track.name : 'Canción desconocida';
+                    errors.push(`${trackName}: Error de conexión`);
+                    
+                    // Actualizar progreso
+                    saveBtn.innerHTML = `<i class="bi bi-arrow-repeat spin me-2"></i>Guardando... (${processedCount}/${songsToAdd.length})`;
+                    
+                    // Si terminamos de procesar todas las canciones
+                    if (processedCount === songsToAdd.length) {
+                        setTimeout(() => {
+                            if (errors.length > 0) {
+                                alert(`Se guardaron ${successCount} de ${songsToAdd.length} canciones.\n\nErrores:\n${errors.join('\n')}`);
+                            }
+                            
+                            // Recargar la página para mostrar los cambios
+                            location.reload();
+                        }, 500);
+                    }
+                });
             });
         }
 
