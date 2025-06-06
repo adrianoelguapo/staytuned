@@ -42,4 +42,8 @@ Route::middleware([
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
     Route::post('/profile/update-bio', [\App\Http\Controllers\ProfileController::class, 'updateBio'])->name('profile.update-bio');
+    
+    // Ruta para subida de fotos de perfil usando nuestro ProfileController
+    Route::post('/user/profile-photo', [\App\Http\Controllers\ProfileController::class, 'updateProfilePhoto'])
+         ->name('user-profile-photo.update');
 });
