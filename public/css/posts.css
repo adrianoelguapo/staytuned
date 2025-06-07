@@ -1,0 +1,783 @@
+/* posts.css */
+
+/* ================================================
+   IMPORTA LA TIPOGRAFÍA
+   ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* ================================================
+   RESET GLOBAL Y FONDO PRINCIPAL
+   ================================================ */
+body.dashboard-body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 35%, #8b5cf6 60%, #6366f1 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* ================================================
+   NAVBAR (IGUAL QUE DASHBOARD)
+   ================================================ */
+.navbar {
+  background: transparent !important;
+}
+.btn-offcanvas {
+  border: none;
+  background: transparent;
+}
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+  color: #fff;
+}
+.nav-link-inline {
+  position: relative;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.3s ease;
+}
+.nav-link-inline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+.nav-link-inline:hover::before {
+  width: 100%;
+  left: 0;
+}
+.user-photo {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Dropdown (LG+) */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 0.75rem;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  transition: background 0.2s ease;
+}
+.dropdown-item:hover {
+  background: rgba(124, 58, 237, 0.1);
+}
+
+/* Offcanvas (≤LG) */
+.offcanvas {
+  width: 280px !important;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.15);
+}
+.offcanvas-header {
+  padding: 1rem 0.75rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.offcanvas-title {
+  font-weight: 600;
+  color: #333;
+}
+.offcanvas-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.offcanvas .nav-link {
+  display: block;
+  width: 100%;
+  color: #444;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  transition: background 0.2s ease;
+}
+.offcanvas .nav-link:hover,
+.offcanvas .nav-link.active {
+  background: rgba(124, 58, 237, 0.1);
+}
+.offcanvas .btn-link {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: #b91c1c;
+  text-align: left;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+.offcanvas .btn-link:hover {
+  background: rgba(124, 58, 237, 0.1);
+}
+
+/* ================================================
+   POSTS ESPECÍFICOS
+   ================================================ */
+
+/* Cabecera de posts */
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.posts-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.btn-new-post {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-new-post:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-new-post:active {
+  transform: translateY(0);
+}
+
+.btn-new-post i {
+  margin-right: 8px;
+}
+
+/* Contenedor principal */
+.posts-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Posts cards */
+.post-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.post-card-body {
+  padding: 1.5rem;
+}
+
+/* Post header */
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.post-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.post-title:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.post-category {
+  background: rgba(124, 58, 237, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.post-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+/* Spotify info */
+.spotify-info {
+  background: rgba(30, 215, 96, 0.1);
+  border: 1px solid rgba(30, 215, 96, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 1rem 0;
+}
+
+.spotify-icon {
+  color: #1db954;
+  margin-right: 0.5rem;
+}
+
+.spotify-title {
+  color: #fff;
+  font-weight: 500;
+  margin: 0;
+}
+
+.spotify-artist {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Post footer */
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Like button */
+.like-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.like-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff6b6b;
+}
+
+.like-btn.liked {
+  color: #ff6b6b;
+}
+
+.like-btn.liked svg {
+  fill: #ff6b6b;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.empty-state p {
+  margin-bottom: 2rem;
+}
+
+/* Success message */
+.alert-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  color: rgba(34, 197, 94, 1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Form styles for create/edit */
+.form-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.form-label {
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Button styles */
+.btn-primary {
+  background: rgba(124, 58, 237, 0.8);
+  border: 1px solid rgba(124, 58, 237, 0.9);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: rgba(124, 58, 237, 1);
+  border-color: rgba(124, 58, 237, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* Spotify search */
+.spotify-search {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.spotify-results {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.spotify-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spotify-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.spotify-item.selected {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+/* Comments section */
+.comments-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-author {
+  color: #fff;
+  font-weight: 500;
+}
+
+.comment-date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.comment-content {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* ================================================
+   DASHBOARD CARD STYLES (BOOTSTRAP)
+   ================================================ */
+
+/* Dashboard container */
+.dashboard-container {
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+}
+
+/* Dashboard cards con glassmorphism */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ================================================
+   POSTS SHOW PAGE ESPECÍFICOS
+   ================================================ */
+
+/* Spotify content específico para show */
+.spotify-content {
+  background: rgba(30, 215, 96, 0.1);
+  border: 1px solid rgba(30, 215, 96, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.spotify-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spotify-type {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spotify-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.spotify-artist {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Like button mejorado */
+.like-btn {
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+.like-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ff6b6b;
+  transform: translateY(-1px);
+}
+
+.like-btn:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.like-icon {
+  fill: none;
+  stroke: currentColor;
+  transition: all 0.2s ease;
+}
+
+.like-icon.liked {
+  fill: #ff6b6b;
+  stroke: #ff6b6b;
+}
+
+/* ================================================
+   COMENTARIOS ESPECÍFICOS BOOTSTRAP
+   ================================================ */
+
+.comment-item {
+  transition: all 0.2s ease;
+}
+
+.comment-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 0.75rem !important;
+  margin: 0 -0.75rem;
+}
+
+.comment-text {
+  line-height: 1.6;
+}
+
+/* Estado vacío para comentarios */
+.empty-state-icon i {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+/* ================================================
+   FORMULARIOS MEJORADOS
+   ================================================ */
+
+.form-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-select {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.form-select option {
+  background: rgba(79, 70, 229, 0.9);
+  color: #fff;
+}
+
+/* Invalid feedback */
+.invalid-feedback {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25) !important;
+}
+
+/* ================================================
+   ALERTS MEJORADOS
+   ================================================ */
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  color: rgba(147, 197, 253, 1) !important;
+  border-radius: 8px;
+}
+
+/* ================================================
+   BOTONES ESPECÍFICOS
+   ================================================ */
+
+.btn-success {
+  background: rgba(34, 197, 94, 0.8);
+  border: 1px solid rgba(34, 197, 94, 0.9);
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: rgba(34, 197, 94, 1);
+  border-color: rgba(34, 197, 94, 1);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-link {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-link:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* ================================================
+   UTILIDADES DE TEXTO
+   ================================================ */
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-white-75 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* ================================================
+   RESPONSIVE MEJORADO
+   ================================================ */
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .spotify-content {
+    padding: 1rem;
+  }
+  
+  .spotify-image {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .form-container {
+    padding: 1rem;
+  }
+  
+  .posts-container {
+    padding: 1rem;
+  }
+  
+  .posts-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .posts-title {
+    font-size: 2rem;
+  }
+  
+  .post-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .post-cover {
+    width: 60px;
+    height: 60px;
+    align-self: flex-start;
+  }
+  
+  .post-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}

@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ExploreUsersController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,12 +17,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // Rutas de playlists
     Route::resource('playlists', PlaylistController::class);
+    
+    // Rutas de posts
+    Route::resource('posts', PostController::class);
+    Route::get('/posts/search/spotify', [PostController::class, 'searchSpotify'])->name('posts.search.spotify');
+    Route::post('/posts/{post}/like', [PostController::class, 'toggleLike'])->name('posts.like');
     
     // Rutas adicionales para funcionalidad de Spotify
     Route::get('/playlists/search/spotify', [PlaylistController::class, 'searchSpotify'])->name('playlists.search');
@@ -37,6 +43,13 @@ Route::middleware([
         Route::post('/users/{user}/follow', [ExploreUsersController::class, 'follow'])->name('users.follow');
         Route::delete('/users/{user}/unfollow', [ExploreUsersController::class, 'unfollow'])->name('users.unfollow');
     });
+});
+
+// Rutas para comentarios
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

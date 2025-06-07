@@ -167,6 +167,36 @@ class SpotifyService
     }
 
     /**
+     * Buscar playlists en Spotify
+     */
+    public function searchPlaylists(string $query, int $limit = 20): ?array
+    {
+        $token = $this->getAccessToken();
+        if (!$token) {
+            return null;
+        }
+
+        try {
+            $response = $this->client->get($this->baseUrl . 'search', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+                'query' => [
+                    'q' => $query,
+                    'type' => 'playlist',
+                    'limit' => $limit,
+                ],
+            ]);
+
+            return json_decode($response->getBody(), true);
+
+        } catch (GuzzleException $e) {
+            Log::error('Error buscando playlists en Spotify: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Obtener información de una canción por su ID
      */
     public function getTrack(string $trackId): ?array
@@ -244,6 +274,81 @@ class SpotifyService
 
         } catch (GuzzleException $e) {
             Log::error('Error obteniendo playlists destacadas: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Obtener información de un artista por su ID
+     */
+    public function getArtist(string $artistId): ?array
+    {
+        $token = $this->getAccessToken();
+        if (!$token) {
+            return null;
+        }
+
+        try {
+            $response = $this->client->get($this->baseUrl . 'artists/' . $artistId, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]);
+
+            return json_decode($response->getBody(), true);
+
+        } catch (GuzzleException $e) {
+            Log::error('Error obteniendo artista de Spotify: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Obtener información de un álbum por su ID
+     */
+    public function getAlbum(string $albumId): ?array
+    {
+        $token = $this->getAccessToken();
+        if (!$token) {
+            return null;
+        }
+
+        try {
+            $response = $this->client->get($this->baseUrl . 'albums/' . $albumId, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]);
+
+            return json_decode($response->getBody(), true);
+
+        } catch (GuzzleException $e) {
+            Log::error('Error obteniendo álbum de Spotify: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Obtener información de una playlist por su ID
+     */
+    public function getPlaylist(string $playlistId): ?array
+    {
+        $token = $this->getAccessToken();
+        if (!$token) {
+            return null;
+        }
+
+        try {
+            $response = $this->client->get($this->baseUrl . 'playlists/' . $playlistId, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]);
+
+            return json_decode($response->getBody(), true);
+
+        } catch (GuzzleException $e) {
+            Log::error('Error obteniendo playlist de Spotify: ' . $e->getMessage());
             return null;
         }
     }

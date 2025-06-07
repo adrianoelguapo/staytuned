@@ -28,6 +28,7 @@
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
             <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
             <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
+            <a href="{{ route('posts.index') }}" class="nav-link-inline">Publicaciones</a>
             <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
@@ -77,6 +78,7 @@
                 <a class="nav-link active" href="{{ route('dashboard') }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
                 <a class="nav-link" href="{{ route('playlists.index') }}">Mis playlists</a>
+                <a class="nav-link" href="{{ route('posts.index') }}">Publicaciones</a>
                 <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0">
@@ -99,9 +101,95 @@
     <main class="dashboard-container container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
+                <!-- Estadísticas generales -->
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-primary mb-2"></i>
+                                <h5 class="card-title">Total Publicaciones</h5>
+                                <p class="card-text fs-4 fw-bold">{{ $stats['total_posts'] ?? 0 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-people fs-1 text-success mb-2"></i>
+                                <h5 class="card-title">Total Usuarios</h5>
+                                <p class="card-text fs-4 fw-bold">{{ $stats['total_users'] ?? 0 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-person-check fs-1 text-info mb-2"></i>
+                                <h5 class="card-title">Mis Publicaciones</h5>
+                                <p class="card-text fs-4 fw-bold">{{ $stats['user_posts'] ?? 0 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget de publicaciones recientes -->
                 <div class="card dashboard-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Publicaciones Recientes</h5>
+                        <a href="{{ route('posts.index') }}" class="btn btn-sm btn-outline-primary">Ver todas</a>
+                    </div>
                     <div class="card-body">
-                        <h1 class="h3 mb-4">Dashboard</h1>
+                        @if($recentPosts && $recentPosts->count() > 0)
+                            @foreach($recentPosts as $post)
+                                <div class="d-flex align-items-start mb-3 pb-3 @if(!$loop->last) border-bottom @endif">
+                                    @if($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0)
+                                        <img src="{{ $post->spotify_data['images'][0]['url'] }}" 
+                                             alt="{{ $post->getSpotifyNameAttribute() }}" 
+                                             class="rounded me-3" 
+                                             style="width: 60px; height: 60px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-secondary rounded me-3 d-flex align-items-center justify-content-center" 
+                                             style="width: 60px; height: 60px;">
+                                            <i class="bi bi-music-note text-white"></i>
+                                        </div>
+                                    @endif
+                                    
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">
+                                            <a href="{{ route('posts.show', $post) }}" class="text-decoration-none">
+                                                {{ $post->title }}
+                                            </a>
+                                        </h6>
+                                        @if($post->spotify_data)
+                                            <p class="text-muted small mb-1">
+                                                <strong>{{ $post->getSpotifyNameAttribute() }}</strong>
+                                                @if($post->getSpotifyArtistAttribute())
+                                                    por {{ $post->getSpotifyArtistAttribute() }}
+                                                @endif
+                                            </p>
+                                        @endif
+                                        <small class="text-muted">
+                                            Por {{ $post->user->username }} en {{ $post->category->name }} 
+                                            · {{ $post->created_at->diffForHumans() }}
+                                        </small>
+                                    </div>
+                                    
+                                    <div class="text-end">
+                                        <small class="text-muted d-block">
+                                            <i class="bi bi-heart"></i> {{ $post->likes_count }}
+                                        </small>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="text-center py-4">
+                                <i class="bi bi-file-earmark-text fs-1 text-muted mb-3"></i>
+                                <p class="text-muted">No hay publicaciones aún.</p>
+                                <a href="{{ route('posts.create') }}" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Crear primera publicación
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

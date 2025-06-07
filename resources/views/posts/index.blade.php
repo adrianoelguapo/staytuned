@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Playlists | StayTuned</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Mis Publicaciones | StayTuned</title>    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
@@ -21,15 +21,16 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">StayTuned</a>
+            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">
+                StayTuned
+            </a>
         </div>
 
-        <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
             <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline active">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Publicaciones</a>
+            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
+            <a href="{{ route('posts.index') }}" class="nav-link-inline active">Publicaciones</a>
             <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
@@ -41,7 +42,7 @@
                    aria-expanded="false">
                     @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <img src="{{ Auth::user()->profile_photo_url }}"
-                             class="rounded-circle me-2 user-photo-small"
+                             class="rounded-circle me-2 user-photo"
                              alt="{{ Auth::user()->name }}" />
                     @endif
                     {{ Auth::user()->username }}
@@ -77,8 +78,8 @@
             <nav class="nav flex-column">
                 <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
-                <a class="nav-link active" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link" href="{{ route('posts.index') }}">Publicaciones</a>
+                <a class="nav-link" href="{{ route('playlists.index') }}">Mis playlists</a>
+                <a class="nav-link active" href="{{ route('posts.index') }}">Publicaciones</a>
                 <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0">
@@ -95,113 +96,142 @@
                 </form>
             </nav>
         </div>
-    </div>
-
+    </div>    <!-- Contenido principal -->
     <main class="dashboard-container container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
                 
-                <!-- Header con botón de crear playlist -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="h3 text-white mb-0">
-                        Mis Playlists
+                <!-- Header con botón de crear publicación -->
+                <div class="d-flex justify-content-between align-items-center mb-4">                    <h1 class="h3 text-white mb-0">
+                        Mis Publicaciones
                     </h1>
-                    <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                    <a href="{{ route('posts.create') }}" class="btn btn-new-playlist">
                         <i class="bi bi-plus-circle me-2"></i>
-                        Nueva Playlist
+                        Nueva Publicación
                     </a>
                 </div>
 
-                @if (session('success'))
+                <!-- Mensaje de éxito -->
+                @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
                 @endif
 
-                @if (session('error'))
+                @if(session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
                 @endif
 
-                @if($playlists->count() > 0)
-                    <!-- Grid de playlists -->
+                @if($posts->count() > 0)
+                    <!-- Grid de publicaciones -->
                     <div class="row g-4">
-                        @foreach($playlists as $playlist)
+                        @foreach($posts as $post)
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="playlist-card">
-                                    <!-- Imagen de la playlist -->
+                                    <!-- Imagen de la publicación -->
                                     <div class="playlist-image">
-                                        @if($playlist->cover)
-                                            <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                                 alt="{{ $playlist->name }}"
+                                        @if($post->cover || $post->spotify_image)
+                                            <img src="{{ $post->cover ?: $post->spotify_image }}" 
+                                                 alt="{{ $post->title }}"
                                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             <div class="playlist-placeholder" style="display: none;">
-                                                <i class="bi bi-music-note-beamed"></i>
+                                                <i class="bi bi-newspaper"></i>
                                             </div>
                                         @else
                                             <div class="playlist-placeholder">
-                                                <i class="bi bi-music-note-beamed"></i>
+                                                <i class="bi bi-newspaper"></i>
                                             </div>
                                         @endif
                                         
                                         <!-- Overlay con botones -->
                                         <div class="playlist-overlay">
                                             <div class="playlist-actions">
-                                                <a href="{{ route('playlists.show', $playlist) }}" 
+                                                <a href="{{ route('posts.show', $post) }}" 
                                                    class="btn btn-play">
-                                                    <i class="bi bi-play-fill"></i>
+                                                    <i class="bi bi-eye-fill"></i>
                                                 </a>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-options" type="button" 
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.show', $playlist) }}">
-                                                                <i class="bi bi-eye me-2"></i>Ver
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
-                                                                <i class="bi bi-pencil me-2"></i>Editar
-                                                            </a>
-                                                        </li>
-                                                        <li><hr class="dropdown-divider"></li>
-                                                        <li>
-                                                            <form action="{{ route('playlists.destroy', $playlist) }}" 
-                                                                  method="POST" 
-                                                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="dropdown-item text-danger">
-                                                                    <i class="bi bi-trash me-2"></i>Eliminar
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                @if($post->user_id === Auth::id())
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-options" type="button" 
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bi bi-three-dots"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{ route('posts.show', $post) }}">
+                                                                    <i class="bi bi-eye me-2"></i>Ver
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">
+                                                                    <i class="bi bi-pencil me-2"></i>Editar
+                                                                </a>
+                                                            </li>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li>
+                                                                <form action="{{ route('posts.destroy', $post) }}" 
+                                                                      method="POST" 
+                                                                      onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="dropdown-item text-danger">
+                                                                        <i class="bi bi-trash me-2"></i>Eliminar
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Info de la playlist -->
+                                    <!-- Info de la publicación -->
                                     <div class="playlist-info">
-                                        <h5 class="playlist-title">{{ $playlist->name }}</h5>
-                                        @if($playlist->description)
-                                            <p class="playlist-description">{{ Str::limit($playlist->description, 80) }}</p>
+                                        <h5 class="playlist-title">{{ $post->title }}</h5>
+                                        @if($post->content || $post->description)
+                                            <p class="playlist-description">{{ Str::limit($post->content ?: $post->description, 80) }}</p>
                                         @endif
                                         <div class="playlist-meta">
                                             <span class="playlist-songs">
-                                                <i class="bi bi-music-note me-1"></i>
-                                                {{ $playlist->songs->count() }} canciones
+                                                <i class="bi bi-person me-1"></i>
+                                                {{ $post->user->name }}
                                             </span>
                                             <span class="playlist-privacy">
-                                                <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
-                                                {{ $playlist->is_public ? 'Pública' : 'Privada' }}
+                                                <i class="bi bi-calendar me-1"></i>
+                                                {{ $post->created_at->diffForHumans() }}
+                                            </span>
+                                        </div>
+                                        @if($post->spotify_data)
+                                            <div class="playlist-meta mt-2">
+                                                <span class="playlist-songs">
+                                                    <i class="bi bi-spotify me-1 text-success"></i>
+                                                    {{ $post->spotify_name }}
+                                                    @if($post->spotify_artist)
+                                                        - {{ $post->spotify_artist }}
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        @endif
+                                        <div class="playlist-meta mt-2">
+                                            <button onclick="toggleLike({{ $post->id }})" 
+                                                    class="like-btn {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}"
+                                                    data-post-id="{{ $post->id }}"
+                                                    data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" 
+                                                     class="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none' }}">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                                </svg>
+                                                <span class="likes-count">{{ $post->likes_count }}</span>
+                                            </button>
+                                            <span class="playlist-privacy ms-2">
+                                                <i class="bi bi-tag me-1"></i>
+                                                {{ $post->category->text }}
                                             </span>
                                         </div>
                                     </div>
@@ -210,10 +240,10 @@
                         @endforeach
                     </div>
 
-                    <!-- Paginación si hay muchas playlists -->
-                    @if($playlists->hasPages())
+                    <!-- Paginación si hay muchas publicaciones -->
+                    @if($posts->hasPages())
                         <div class="d-flex justify-content-center mt-5">
-                            {{ $playlists->links() }}
+                            {{ $posts->links() }}
                         </div>
                     @endif
 
@@ -221,14 +251,13 @@
                     <!-- Estado vacío -->
                     <div class="card dashboard-card text-center py-5">
                         <div class="card-body">
-                            <i class="bi bi-music-note-list display-1 text-muted mb-3"></i>
-                            <h4 class="text-muted mb-3">No tienes playlists aún</h4>
+                            <i class="bi bi-newspaper display-1 text-muted mb-3"></i>                            <h4 class="text-muted mb-3">No tienes publicaciones aún</h4>
                             <p class="text-muted mb-4">
-                                Crea tu primera playlist y comienza a organizar tu música favorita
+                                Crea tu primera publicación y comienza a compartir tu música favorita.
                             </p>
-                            <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                            <a href="{{ route('posts.create') }}" class="btn btn-new-playlist">
                                 <i class="bi bi-plus-circle me-2"></i>
-                                Crear mi primera playlist
+                                Crear mi primera publicación
                             </a>
                         </div>
                     </div>
@@ -236,11 +265,43 @@
 
             </div>
         </div>
-    </main>
-
+    </main>    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
+        // Función para manejar los likes
+        function toggleLike(postId) {
+            const btn = document.querySelector(`[data-post-id="${postId}"]`);
+            const likesCountElement = btn.querySelector('.likes-count');
+            const heartIcon = btn.querySelector('svg');
+            
+            fetch(`/posts/${postId}/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                likesCountElement.textContent = data.likes_count;
+                
+                if (data.liked) {
+                    btn.classList.add('liked');
+                    heartIcon.classList.add('fill-current');
+                    heartIcon.classList.remove('stroke-current', 'fill-none');
+                } else {
+                    btn.classList.remove('liked');
+                    heartIcon.classList.remove('fill-current');
+                    heartIcon.classList.add('stroke-current', 'fill-none');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al procesar el like');
+            });
+        }
+
         // Mejorar posicionamiento de dropdowns con z-index alto
         document.addEventListener('DOMContentLoaded', function() {
             const dropdowns = document.querySelectorAll('.playlist-card .dropdown-toggle');

@@ -46,6 +46,10 @@
                class="nav-link-inline {{ request()->routeIs('playlists.*') ? 'active' : '' }}">
                 Mis playlists
             </a>
+            <a href="{{ route('posts.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
+                Publicaciones
+            </a>
             <a href="#" class="nav-link-inline">
                 Mis comunidades
             </a>
@@ -105,6 +109,10 @@
                 <a class="nav-link {{ request()->routeIs('playlists.*') ? 'active' : '' }}" 
                    href="{{ route('playlists.index') }}">
                     <i class="fas fa-music me-2"></i> Mis playlists
+                </a>
+                <a class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}" 
+                   href="{{ route('posts.index') }}">
+                    <i class="fas fa-newspaper me-2"></i> Publicaciones
                 </a>
                 <a class="nav-link" href="#">
                     <i class="fas fa-users-cog me-2"></i> Mis comunidades
