@@ -552,7 +552,7 @@ body.dashboard-body {
 
 /* Dashboard container */
 .dashboard-container {
-  padding: 2rem;
+  /* padding: 2rem; - Removido para que coincida con el ancho de playlists */
   min-height: calc(100vh - 80px);
 }
 
@@ -1102,6 +1102,23 @@ small.text-muted {
   color: rgba(255, 255, 255, 0.6) !important;
   font-size: 0.85rem !important;
   font-weight: 400 !important;
+}
+
+/* Estado vacío específico para dashboard cards */
+.dashboard-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 1rem !important;
+}
+
+.dashboard-card h4.text-muted {
+  color: #fff !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+.dashboard-card .display-1 {
+  font-size: 3.5rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* Invalid feedback con glassmorphism */

@@ -255,9 +255,10 @@
                     <!-- Estado vacío -->
                     <div class="card dashboard-card text-center py-5">
                         <div class="card-body">
-                            <i class="bi bi-newspaper display-1 text-muted mb-3"></i>                            <h4 class="text-muted mb-3">No tienes publicaciones aún</h4>
+                            <i class="bi bi-newspaper display-1 text-muted mb-3"></i>
+                            <h4 class="text-muted mb-3">No tienes publicaciones aún</h4>
                             <p class="text-muted mb-4">
-                                Crea tu primera publicación y comienza a compartir tu música favorita.
+                                Crea tu primera publicación y comienza a compartir tu música favorita
                             </p>
                             <a href="{{ route('posts.create') }}" class="btn btn-new-playlist">
                                 <i class="bi bi-plus-circle me-2"></i>
