@@ -52,13 +52,20 @@
 
             <!-- Usuario -->
             <div class="dropdown">
-                <button class="btn btn-link dropdown-toggle d-flex align-items-center p-0" 
-                        type="button" id="userDropdown" data-bs-toggle="dropdown">
-                    <img src="<?php echo e(Auth::user()->profile_photo_url); ?>" 
-                         alt="<?php echo e(Auth::user()->name); ?>" 
-                         class="user-photo rounded-circle me-2">
-                    <span class="text-white"><?php echo e(Auth::user()->name); ?></span>
-                </button>
+                <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
+                   href="#"
+                   id="userDropdown"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
+                             class="rounded-circle me-2 user-photo"
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
+                </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
