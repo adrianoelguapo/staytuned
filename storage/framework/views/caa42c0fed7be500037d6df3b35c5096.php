@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -164,40 +165,29 @@ unset($__errorArgs, $__bag); ?>
                                     </div>                                    <!-- Categoría -->
                                     <div class="mb-4">
                                         <label for="category_id" class="form-label">Tipo de Publicación</label>
-                                        <select class="form-control <?php $__errorArgs = ['category_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" 
-                                                id="category_id" 
-                                                name="category_id" 
-                                                required
-                                                onchange="updateCategoryContent(); updateSpotifySearch();">
-                                            <option value="">Selecciona el tipo de contenido</option>
-                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($category->id); ?>" 
-                                                        data-type="<?php echo e($category->type); ?>"
-                                                        data-text="<?php echo e($category->text); ?>"
-                                                        <?php echo e(old('category_id') == $category->id ? 'selected' : ''); ?>>
-                                                    <?php echo e(ucfirst($category->type)); ?>
-
-                                                </option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </select>
+                                        
+                                        <!-- Botón selector de categoría -->
+                                        <button type="button" id="categorySelector" class="category-selector-btn">
+                                            <span id="categorySelectedText">Selecciona el tipo de contenido</span>
+                                            <i class="bi bi-chevron-down category-selector-arrow"></i>
+                                        </button>
+                                        
+                                        <!-- Input oculto para enviar el valor -->
+                                        <input type="hidden" id="category_id" name="category_id" value="<?php echo e(old('category_id')); ?>" required>
+                                        
                                         <?php $__errorArgs = ['category_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                            <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
                                         <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
+
+                                    <!-- El modal se movió fuera del contenedor -->
 
                                     <!-- Contenido automático basado en categoría -->
                                     <div class="mb-4">
@@ -284,6 +274,34 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
+    <!-- Modal de selección de categorías (posicionado fuera de todos los contenedores) -->
+    <div id="categoryModal" class="category-modal">
+        <div class="category-modal-content">
+            <div class="category-modal-header">
+                <h5 class="category-modal-title">Selecciona el tipo de publicación</h5>
+                <button type="button" class="category-modal-close" id="closeCategoryModal">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="category-options">
+                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="category-option" 
+                         data-value="<?php echo e($category->id); ?>" 
+                         data-type="<?php echo e($category->type); ?>"
+                         data-text="<?php echo e($category->text); ?>">
+                        <div>
+                            <div class="fw-semibold"><?php echo e(ucfirst($category->type)); ?></div>
+                            <small class="text-muted"><?php echo e($category->text); ?></small>
+                        </div>
+                        <div class="category-option-check">
+                            <i class="bi bi-check" style="display: none;"></i>
+                        </div>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       <script>
         let selectedSpotifyItem = null;
@@ -297,33 +315,37 @@ unset($__errorArgs, $__bag); ?>
             'playlist': 'playlist'
         };        // Función para actualizar el contenido de la categoría
         function updateCategoryContent() {
-            const categorySelect = document.getElementById('category_id');
+            const categoryIdInput = document.getElementById('category_id');
             const contentDiv = document.getElementById('category_content');
-            const selectedOption = categorySelect.options[categorySelect.selectedIndex];
             
-            if (selectedOption.value) {
-                const categoryText = selectedOption.getAttribute('data-text');
-                const categoryType = selectedOption.getAttribute('data-type');
+            if (categoryIdInput.value) {
+                // Buscar la opción seleccionada en el modal
+                const selectedOption = document.querySelector(`[data-value="${categoryIdInput.value}"]`);
                 
-                // Crear un mensaje más descriptivo con el tipo de contenido
-                const typeLabels = {
-                    'cancion': 'canción',
-                    'album': 'álbum', 
-                    'artista': 'artista',
-                    'playlist': 'playlist'
-                };
-                
-                contentDiv.innerHTML = `
-                    <div class="d-flex align-items-start">
-                        <i class="bi bi-quote text-primary me-2 fs-5"></i>
-                        <div>
-                            <p class="mb-2">"${categoryText}"</p>
-                            <small class="text-muted">
-                                Tu publicación compartirá una <strong>${typeLabels[categoryType]}</strong> de Spotify con este mensaje.
-                            </small>
+                if (selectedOption) {
+                    const categoryText = selectedOption.getAttribute('data-text');
+                    const categoryType = selectedOption.getAttribute('data-type');
+                    
+                    // Crear un mensaje más descriptivo con el tipo de contenido
+                    const typeLabels = {
+                        'cancion': 'canción',
+                        'album': 'álbum', 
+                        'artista': 'artista',
+                        'playlist': 'playlist'
+                    };
+                    
+                    contentDiv.innerHTML = `
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-quote text-primary me-2 fs-5"></i>
+                            <div>
+                                <p class="mb-2">"${categoryText}"</p>
+                                <small class="text-muted">
+                                    Tu publicación compartirá una <strong>${typeLabels[categoryType]}</strong> de Spotify con este mensaje.
+                                </small>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             } else {
                 contentDiv.innerHTML = '<em class="text-muted">Selecciona un tipo de publicación para ver el contenido...</em>';
             }
@@ -331,35 +353,39 @@ unset($__errorArgs, $__bag); ?>
 
         // Función para actualizar la sección de Spotify según la categoría
         function updateSpotifySearch() {
-            const categorySelect = document.getElementById('category_id');
-            const selectedOption = categorySelect.options[categorySelect.selectedIndex];
+            const categoryIdInput = document.getElementById('category_id');
             const spotifySection = document.getElementById('spotify-section');
             const noSpotifySection = document.getElementById('no-spotify-section');
             const spotifySearchText = document.getElementById('spotify-search-text');
             
-            if (selectedOption.value) {
-                const categoryType = selectedOption.getAttribute('data-type');
+            if (categoryIdInput.value) {
+                // Buscar la opción seleccionada en el modal
+                const selectedOption = document.querySelector(`[data-value="${categoryIdInput.value}"]`);
                 
-                // Mostrar sección de Spotify para todos los tipos
-                spotifySection.style.display = 'block';
-                noSpotifySection.style.display = 'none';
-                
-                // Actualizar el tipo de búsqueda
-                currentSearchType = categoryToSpotifyType[categoryType] || 'track';
-                
-                // Actualizar texto del placeholder
-                const searchTexts = {
-                    'track': 'Buscar canciones en Spotify',
-                    'album': 'Buscar álbumes en Spotify', 
-                    'artist': 'Buscar artistas en Spotify',
-                    'playlist': 'Buscar playlists en Spotify'
-                };
-                
-                spotifySearchText.textContent = searchTexts[currentSearchType];
-                document.getElementById('spotifySearch').placeholder = `Buscar ${currentSearchType === 'track' ? 'canciones' : currentSearchType === 'album' ? 'álbumes' : currentSearchType === 'artist' ? 'artistas' : 'playlists'}...`;
-                
-                // Limpiar selección previa si cambia el tipo
-                clearSelection();
+                if (selectedOption) {
+                    const categoryType = selectedOption.getAttribute('data-type');
+                    
+                    // Mostrar sección de Spotify para todos los tipos
+                    spotifySection.style.display = 'block';
+                    noSpotifySection.style.display = 'none';
+                    
+                    // Actualizar el tipo de búsqueda
+                    currentSearchType = categoryToSpotifyType[categoryType] || 'track';
+                    
+                    // Actualizar texto del placeholder
+                    const searchTexts = {
+                        'track': 'Buscar canciones en Spotify',
+                        'album': 'Buscar álbumes en Spotify', 
+                        'artist': 'Buscar artistas en Spotify',
+                        'playlist': 'Buscar playlists en Spotify'
+                    };
+                    
+                    spotifySearchText.textContent = searchTexts[currentSearchType];
+                    document.getElementById('spotifySearch').placeholder = `Buscar ${currentSearchType === 'track' ? 'canciones' : currentSearchType === 'album' ? 'álbumes' : currentSearchType === 'artist' ? 'artistas' : 'playlists'}...`;
+                    
+                    // Limpiar selección previa si cambia el tipo
+                    clearSelection();
+                }
             } else {
                 // Ocultar sección de Spotify si no hay categoría seleccionada
                 spotifySection.style.display = 'none';
@@ -567,6 +593,98 @@ unset($__errorArgs, $__bag); ?>
                 validationMessage.style.display = 'none';
             });
         });
+        // =============================================
+        // FUNCIONALIDAD DEL MODAL DE CATEGORÍAS
+        // =============================================
+        
+        // Variables del modal
+        const categoryModal = document.getElementById('categoryModal');
+        const categorySelector = document.getElementById('categorySelector');
+        const closeCategoryModal = document.getElementById('closeCategoryModal');
+        const categorySelectedText = document.getElementById('categorySelectedText');
+        const categoryIdInput = document.getElementById('category_id');
+        const categoryOptions = document.querySelectorAll('.category-option');
+
+        // Abrir modal
+        categorySelector.addEventListener('click', function() {
+            categoryModal.classList.add('show');
+            document.body.classList.add('modal-open'); // Prevenir scroll del body
+        });
+
+        // Cerrar modal
+        function closeCategoryModalFunc() {
+            categoryModal.classList.remove('show');
+            document.body.classList.remove('modal-open'); // Restaurar scroll del body
+        }
+
+        closeCategoryModal.addEventListener('click', closeCategoryModalFunc);
+
+        // Cerrar modal al hacer clic fuera del contenido
+        categoryModal.addEventListener('click', function(e) {
+            if (e.target === categoryModal) {
+                closeCategoryModalFunc();
+            }
+        });
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && categoryModal.classList.contains('show')) {
+                closeCategoryModalFunc();
+            }
+        });
+
+        // Seleccionar categoría
+        categoryOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remover selección anterior
+                categoryOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.querySelector('.bi-check').style.display = 'none';
+                });
+
+                // Agregar selección actual
+                this.classList.add('selected');
+                this.querySelector('.bi-check').style.display = 'block';
+
+                // Obtener datos
+                const value = this.getAttribute('data-value');
+                const type = this.getAttribute('data-type');
+                const text = this.getAttribute('data-text');
+
+                // Actualizar elementos
+                categoryIdInput.value = value;
+                categorySelectedText.textContent = this.querySelector('.fw-semibold').textContent;
+                
+                // Agregar clase de seleccionado al botón
+                categorySelector.classList.add('selected');
+
+                // Cerrar modal después de un breve delay
+                setTimeout(() => {
+                    closeCategoryModalFunc();
+                    
+                    // Llamar funciones existentes
+                    updateCategoryContent();
+                    updateSpotifySearch();
+                }, 300);
+            });
+        });
+
+        // Función para marcar categoría seleccionada si hay valor previo
+        function initializeSelectedCategory() {
+            const currentValue = categoryIdInput.value;
+            if (currentValue) {
+                const selectedOption = document.querySelector(`[data-value="${currentValue}"]`);
+                if (selectedOption) {
+                    selectedOption.classList.add('selected');
+                    selectedOption.querySelector('.bi-check').style.display = 'block';
+                    categorySelectedText.textContent = selectedOption.querySelector('.fw-semibold').textContent;
+                    categorySelector.classList.add('selected');
+                }
+            }
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', initializeSelectedCategory);
     </script>
 
 </body>

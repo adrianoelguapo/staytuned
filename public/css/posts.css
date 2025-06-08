@@ -822,6 +822,27 @@ body.dashboard-body {
   }
 }
 
+@media (min-width: 769px) {
+  .category-modal-content {
+    width: 85%;
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 992px) {
+  .category-modal-content {
+    width: 80%;
+    max-width: 750px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .category-modal-content {
+    width: 75%;
+    max-width: 800px;
+  }
+}
+
 /* ================================================
    GLASSMORPHISM PARA TEXTAREA Y FORM CONTROLS
    ================================================ */
@@ -1408,4 +1429,689 @@ small.text-muted {
   background: rgba(255, 255, 255, 0.2) !important;
   color: #fff !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ================================================
+   ESTILOS GLASSMORPHISM ESPECÍFICOS PARA DESPLEGABLE DE CATEGORÍAS
+   ================================================ */
+
+/* Mejorar el efecto glassmorphism para el select de categorías - Consistente con otros form-control */
+#category_id,
+.category-select {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.2px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+/* Opciones del dropdown con la misma tonalidad que el input */
+#category_id option,
+.category-select option {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  color: #fff !important;
+  padding: 0.75rem 1rem !important;
+  border: none !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.2px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Estado hover para las opciones */
+#category_id option:hover,
+.category-select option:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+}
+
+/* Estado seleccionado para las opciones */
+#category_id option:checked,
+#category_id option:selected,
+.category-select option:checked,
+.category-select option:selected {
+  background: rgba(139, 92, 246, 0.2) !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+
+/* Estilo especial para la primera opción (placeholder) */
+#category_id option:first-child,
+.category-select option:first-child {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-style: italic !important;
+}
+
+/* Efecto hover para el select de categorías */
+#category_id:hover,
+.category-select:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Efecto focus para el select de categorías mejorado */
+#category_id:focus,
+.category-select:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow: 
+    0 0 0 0.25rem rgba(139, 92, 246, 0.15),
+    0 15px 45px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+  outline: none !important;
+}
+
+/* Icono personalizado para el dropdown */
+#category_id,
+.category-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+  background-position: right 1rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.5em 1.5em !important;
+  padding-right: 3rem !important;
+}
+
+/* Modal de selección de categorías con glassmorphism */
+.category-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.category-modal.show {
+  display: flex !important;
+  opacity: 1;
+  align-items: center;
+  justify-content: center;
+  animation: modalGlassAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Asegurar que cubra toda la pantalla */
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Asegurar que el contenido del modal esté centrado */
+.category-modal-content {
+  margin: auto;
+  position: relative;
+}
+
+/* Prevenir scroll del body cuando el modal está abierto */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Mejoras para el fondo glassmorphism */
+.category-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+/* Asegurar que no haya espacios blancos en el fondo */
+.category-modal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(79, 70, 229, 0.4) 0%, 
+    rgba(124, 58, 237, 0.4) 35%, 
+    rgba(139, 92, 246, 0.4) 60%, 
+    rgba(99, 102, 241, 0.4) 100%);
+  z-index: -2;
+}
+
+/* Estilo adicional para el overlay principal */
+.category-modal {
+  background: rgba(0, 0, 0, 0.8) !important; /* Fondo más oscuro para mayor contraste */
+}
+
+/* Animaciones adicionales para mejor UX */
+.category-option {
+  position: relative;
+  overflow: hidden;
+}
+
+.category-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.category-option:hover::before {
+  left: 100%;
+}
+
+/* Efecto de partículas en el fondo del modal (opcional) */
+.category-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Estados de accesibilidad mejorados */
+.category-option:focus {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+.category-modal-close:focus {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+/* Mejoras para modo de alto contraste */
+@media (prefers-contrast: high) {
+  .category-modal-content {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .category-option {
+    border-width: 1.5px;
+  }
+
+  .category-option.selected {
+    border-width: 2px;
+  }
+}
+
+/* Soporte para animaciones reducidas */
+@media (prefers-reduced-motion: reduce) {
+  .category-modal,
+  .category-modal-content,
+  .category-option,
+  .category-selector-btn {
+    transition: none;
+    animation: none;
+  }
+
+  .category-modal.show {
+    animation: none;
+  }
+}
+
+/* ================================================
+   MODAL GLASSMORPHISM COMPLETO PARA CATEGORÍAS
+   ================================================ */
+
+/* Botón selector de categorías con glassmorphism */
+.category-selector-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.75rem;
+  color: #fff !important;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.category-selector-btn:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.08) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.category-selector-btn:focus {
+  outline: none !important;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 100%) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow: 
+    0 0 0 3px rgba(139, 92, 246, 0.25),
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.category-selector-btn.selected {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.25) 0%, 
+    rgba(124, 58, 237, 0.15) 100%) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  box-shadow: 
+    0 0 0 1px rgba(139, 92, 246, 0.4), 
+    0 4px 20px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+
+.category-selector-arrow {
+  transition: transform 0.3s ease;
+}
+
+.category-selector-btn:hover .category-selector-arrow {
+  transform: rotate(180deg);
+}
+
+/* Modal overlay con glassmorphism - Posicionamiento absoluto para cubrir toda la pantalla */
+.category-modal {
+  display: none;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  z-index: 99999 !important;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.category-modal.show {
+  display: flex !important;
+  opacity: 1 !important;
+  animation: modalGlassAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Contenido del modal */
+.category-modal-content {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.05) 100%) !important;
+  backdrop-filter: blur(40px) !important;
+  -webkit-backdrop-filter: blur(40px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1.5rem;
+  padding: 0;
+  margin: 2rem;
+  max-width: 650px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 0 50px rgba(255, 255, 255, 0.05);
+  transform: scale(0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-modal.show .category-modal-content {
+  transform: scale(1);
+}
+
+/* Header del modal */
+.category-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.category-modal-title {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.category-modal-close {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.category-modal-close:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.08) 100%);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de opciones */
+.category-options {
+  padding: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Opciones individuales */
+.category-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.category-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.15), 
+    transparent);
+  transition: left 0.6s ease;
+}
+
+.category-option:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.18) 0%, 
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.15) 100%);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.category-option:hover::before {
+  left: 100%;
+}
+
+.category-option.selected {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.3) 0%, 
+    rgba(124, 58, 237, 0.2) 100%) !important;
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  box-shadow: 
+    0 8px 25px rgba(139, 92, 246, 0.3),
+    0 0 0 1px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.category-option-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.category-option.selected .category-option-check {
+  background: rgba(139, 92, 246, 0.8);
+}
+
+.category-option-check i {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+/* Animación de aparición del modal */
+@keyframes modalGlassAppear {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+/* Prevenir scroll del body */
+body.modal-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Scrollbar personalizado para las opciones */
+.category-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.category-options::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.category-options::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.category-options::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .category-modal-content {
+    max-width: 500px;
+    width: 95%;
+    margin: 1rem;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .category-modal-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+  }
+
+  .category-modal-title {
+    font-size: 1.125rem;
+  }
+
+  .category-option {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-options {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    gap: 0.75rem;
+  }
+  
+  /* Mejorar visibilidad del botón selector en móviles */
+  .category-selector-btn {
+    padding: 1rem;
+    font-size: 1rem;
+    min-height: 3.5rem;
+  }
+  
+  .category-selector-arrow {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-modal-content {
+    width: 95%;
+    margin: 0.5rem;
+  }
+
+  .category-modal-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .category-option {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Estados de accesibilidad */
+.category-option:focus {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+.category-modal-close:focus {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: high) {
+  .category-modal-content {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .category-option {
+    border-width: 1.5px;
+  }
+
+  .category-option.selected {
+    border-width: 2px;
+  }
+}
+
+/* Animaciones reducidas */
+@media (prefers-reduced-motion: reduce) {
+  .category-modal,
+  .category-modal-content,
+  .category-option,
+  .category-selector-btn {
+    transition: none;
+    animation: none;
+  }
+
+  .category-modal.show {
+    animation: none;
+  }
+
+  .category-option::before {
+    display: none;
+  }
 }
