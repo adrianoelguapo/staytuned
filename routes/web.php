@@ -7,6 +7,7 @@ use App\Http\Controllers\ExploreUsersController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommunityController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +27,12 @@ Route::middleware([
     Route::resource('posts', PostController::class);
     Route::get('/posts/search/spotify', [PostController::class, 'searchSpotify'])->name('posts.search.spotify');
     Route::post('/posts/{post}/like', [PostController::class, 'toggleLike'])->name('posts.like');
+    
+    // Rutas de comunidades
+    Route::resource('communities', CommunityController::class);
+    Route::post('/communities/{community}/join', [CommunityController::class, 'join'])->name('communities.join');
+    Route::post('/communities/{community}/leave', [CommunityController::class, 'leave'])->name('communities.leave');
+    Route::get('/communities/{community}/create-post', [CommunityController::class, 'createPost'])->name('communities.create-post');
     
     // Rutas adicionales para funcionalidad de Spotify
     Route::get('/playlists/search/spotify', [PlaylistController::class, 'searchSpotify'])->name('playlists.search');

@@ -1,0 +1,738 @@
+/* ====================================================
+   0) IMPORTA LA TIPOGRAFÍA
+   ==================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* ====================================================
+   1) RESET Y FONDO GLOBAL
+   ==================================================== */
+body {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* ====================================================
+   2) ENCABEZADO DE COMUNIDADES (Glassmorphism)
+   ==================================================== */
+.communities-header {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border: 1.5px solid rgba(255,255,255,0.18);
+}
+.communities-header h2 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.communities-header p {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+/* ====================================================
+   3) ENCABEZADOS DE SECCIÓN
+   ==================================================== */
+.section-header {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.section-header i {
+    color: #a5b4fc;
+    font-size: 1.3rem;
+}
+
+/* ====================================================
+   4) TARJETAS DE COMUNIDAD (Glassmorphism)
+   ==================================================== */
+.community-card {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+.community-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.28);
+}
+
+/* ====================================================
+   5) PORTADA DE COMUNIDAD
+   ==================================================== */
+.community-cover {
+    height: 120px;
+    background: rgba(120,120,255,0.10);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+.community-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 0.75rem;
+}
+.community-card:hover .community-cover img {
+    transform: scale(1.05);
+}
+.community-cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(30,41,59,0.7) 100%);
+    z-index: 1;
+    border-radius: 0.75rem;
+}
+.community-cover .placeholder-icon {
+    font-size: 3rem;
+    color: rgba(255,255,255,0.7);
+    z-index: 2;
+    position: relative;
+}
+
+/* ====================================================
+   6) INFORMACIÓN DE COMUNIDAD
+   ==================================================== */
+.community-info {
+    background: transparent;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.community-title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    line-height: 1.3;
+    display: block;
+}
+.community-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.community-title a:hover {
+    color: #a5b4fc;
+}
+.community-description {
+    color: #e0e0e0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ====================================================
+   7) ESTADÍSTICAS
+   ==================================================== */
+.community-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #c7d2fe;
+    font-size: 0.92rem;
+}
+.stat-item i {
+    color: #a5b4fc;
+    font-size: 0.85rem;
+}
+
+/* ====================================================
+   8) BADGES DE TIPO DE COMUNIDAD
+   ==================================================== */
+.community-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(99,102,241,0.13);
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.18);
+}
+.community-badge-public {
+    background: rgba(34,197,94,0.13);
+    color: #34d399;
+    border: 1px solid rgba(34,197,94,0.18);
+}
+.community-badge-private {
+    background: rgba(251,191,36,0.13);
+    color: #fbbf24;
+    border: 1px solid rgba(251,191,36,0.18);
+}
+
+/* ====================================================
+   9) ACCIONES DE TARJETA
+   ==================================================== */
+.community-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.btn-community {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1.5rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    box-shadow: none;
+}
+.btn-community-primary {
+    background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%);
+    color: #fff;
+    border: none;
+}
+.btn-community-secondary {
+    background: rgba(255,255,255,0.13);
+    color: #a5b4fc;
+    border: none;
+}
+.btn-community-danger {
+    background: rgba(239,68,68,0.13);
+    color: #ef4444;
+    border: none;
+}
+.btn-community:hover, .btn-community:focus {
+    filter: brightness(1.15);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 16px rgba(99,102,241,0.13);
+    color: #fff;
+}
+
+/* ====================================================
+   10) LAYOUT DE GRID (Full Width)
+   ==================================================== */
+.communities-grid, .community-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* ====================================================
+   11) ESTADO VACÍO
+   ==================================================== */
+.community-empty, .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(255,255,255,0.10);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 1.25rem;
+    margin: 2rem 0;
+    color: #e0e0e0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+.community-empty i, .empty-state i {
+    font-size: 4rem;
+    color: #a5b4fc;
+    margin-bottom: 1rem;
+}
+.community-empty h3, .empty-state h4 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.community-empty .btn, .empty-state .btn {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 1.5rem;
+    font-weight: 600;
+    padding: 0.7rem 2rem;
+    margin-top: 1.5rem;
+    transition: all 0.2s;
+}
+.community-empty .btn:hover, .empty-state .btn:hover {
+    background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%);
+    color: #fff;
+    border: none;
+}
+
+/* ====================================================
+   12) FORMULARIOS DE COMUNIDAD
+   ==================================================== */
+.community-form {
+    background: rgba(255,255,255,0.10);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+.community-form-group {
+    margin-bottom: 1.5rem;
+}
+.community-form-label {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.community-form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.13);
+    border: 1.5px solid rgba(124,58,237,0.25);
+    border-radius: 0.75rem;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.community-form-control:focus {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124,58,237,0.18);
+}
+
+/* ====================================================
+   SECCIÓN DE POSTS EN COMUNIDADES
+   ==================================================== */
+.community-posts {
+    margin-top: 3rem;
+}
+
+.community-posts-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+}
+
+.community-posts-title {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.community-posts-title i {
+    color: #a5b4fc;
+    font-size: 1.5rem;
+}
+
+/* Responsive ajustes para la sección de posts */
+@media (max-width: 768px) {
+    .community-posts-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .community-posts-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ====================================================
+   DISEÑO HORIZONTAL DE COMUNIDADES (Similar a posts)
+   ==================================================== */
+
+/* Contenedor de lista de comunidades */
+.communities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Tarjeta de comunidad de ancho completo */
+.community-card-full-width {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+}
+
+.community-card-full-width:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Cuerpo de la tarjeta de comunidad */
+.community-card-body {
+    padding: 2rem;
+}
+
+/* Contenedor principal del contenido de comunidad */
+.community-content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Contenedor de la imagen/cover de comunidad */
+.community-cover-container {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.community-cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.community-card-full-width:hover .community-cover-image {
+    transform: scale(1.05);
+}
+
+.community-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Contenedor de información de la comunidad */
+.community-info-container {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Sección de cabecera de la comunidad */
+.community-header-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.community-title-link {
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+}
+
+.community-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.community-title-link:hover .community-title {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Descripción de la comunidad */
+.community-description {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+/* Sección de footer de la comunidad */
+.community-footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1rem;
+}
+
+/* Meta información de la comunidad */
+.community-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.community-stat {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+.community-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+.community-author {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+/* Sección de acciones de la comunidad */
+.community-actions-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Responsive para comunidades horizontales */
+@media (max-width: 768px) {
+    .community-content-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .community-cover-container {
+        width: 100%;
+        height: 200px;
+        align-self: center;
+        max-width: 300px;
+    }
+    
+    .community-footer-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .community-meta-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .community-actions-section {
+        align-self: stretch;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .community-card-body {
+        padding: 1.5rem;
+    }
+    
+    .community-title {
+        font-size: 1.3rem;
+    }
+    
+    .community-header-section {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+/* ================================================
+   HEADER HORIZONTAL DE COMUNIDADES (COMO PLAYLISTS)
+   ================================================ */
+
+/* Contenedor de imagen de comunidad para mantener proporciones */
+.community-cover-large {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #6c757d;
+}
+
+/* Imagen de header de comunidad */
+.community-header-cover {
+  width: 180px !important;
+  height: 180px !important;
+  min-width: 180px;
+  min-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #6c757d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para placeholders de imágenes de comunidades */
+.community-header-cover i {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Título grande de comunidad */
+.community-title-large {
+  font-size: 2.5rem !important;
+  font-weight: 700;
+  color: #fff !important;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+/* Descripción grande de comunidad */
+.community-description-large {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* Meta información grande de comunidad */
+.community-meta-large {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.community-meta-large span {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Acciones del header de comunidad */
+.community-actions-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Responsive: ajustar tamaños en pantallas pequeñas */
+@media (max-width: 768px) {
+  .community-header-cover {
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px;
+    min-height: 120px;
+  }
+  
+  .community-cover-large {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .community-header-cover i {
+    font-size: 2rem;
+  }
+  
+  .community-title-large {
+    font-size: 1.8rem !important;
+  }
+  
+  .community-description-large {
+    font-size: 0.9rem;
+  }
+  
+  .community-meta-large {
+    font-size: 0.8rem;
+    gap: 0.25rem 1rem;
+  }
+  
+  .community-actions-header {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .community-header-cover {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px;
+    min-height: 100px;
+  }
+  
+  .community-cover-large {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .community-title-large {
+    font-size: 1.5rem !important;
+  }
+  
+  .community-meta-large {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Foto de perfil extra pequeña para headers */
+.user-photo-xs {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px;
+  min-height: 20px;
+  object-fit: cover;
+}

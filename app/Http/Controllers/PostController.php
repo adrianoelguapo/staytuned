@@ -50,7 +50,16 @@ class PostController extends Controller
             'category_id' => 'required|exists:categories,id',
             'spotify_id' => 'required|string', // Hacer obligatorio el contenido de Spotify
             'spotify_type' => 'required|in:track,artist,album,playlist',
+            'community_id' => 'nullable|exists:communities,id',
         ]);
+
+        // Verificar permisos de comunidad si se especifica
+        if ($request->community_id) {
+            $community = \App\Models\Community::findOrFail($request->community_id);
+            if (!$community->hasMember(Auth::user()) && !$community->isOwner(Auth::user())) {
+                abort(403, 'No tienes permisos para publicar en esta comunidad.');
+            }
+        }
 
         // Obtener la categoría para usar su texto como contenido
         $category = Category::findOrFail($request->category_id);
@@ -59,6 +68,7 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $category->text, // Usar el texto de la categoría como contenido
             'category_id' => $request->category_id,
+            'community_id' => $request->community_id,
             'user_id' => Auth::id(),
             'likes' => 0,
         ];
@@ -83,6 +93,13 @@ class PostController extends Controller
         }
 
         $post = Post::create($postData);
+
+        // Redirigir según el contexto
+        if ($request->community_id) {
+            $community = \App\Models\Community::findOrFail($request->community_id);
+            return redirect()->route('communities.show', $community)
+                ->with('success', 'Publicación creada exitosamente en la comunidad.');
+        }
 
         return redirect()->route('posts.show', $post)
             ->with('success', 'Publicación creada exitosamente.');

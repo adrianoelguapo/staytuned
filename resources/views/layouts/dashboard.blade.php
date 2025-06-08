@@ -50,8 +50,9 @@
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
                 Mis Publicaciones
             </a>
-            <a href="#" class="nav-link-inline">
-                Mis comunidades
+            <a href="{{ route('communities.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('communities.*') ? 'active' : '' }}">
+                Comunidades
             </a>
 
             <!-- Dropdown de usuario -->
@@ -114,8 +115,9 @@
                    href="{{ route('posts.index') }}">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
-                <a class="nav-link" href="#">
-                    <i class="fas fa-users-cog me-2"></i> Mis comunidades
+                <a class="nav-link {{ request()->routeIs('communities.*') ? 'active' : '' }}" 
+                   href="{{ route('communities.index') }}">
+                    <i class="fas fa-users me-2"></i> Comunidades
                 </a>
             </nav>
             <hr class="my-0 border-secondary">

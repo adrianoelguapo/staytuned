@@ -134,4 +134,60 @@ class User extends Authenticatable
     {
         return $this->followers()->count();
     }
+
+    /**
+     * Comunidades que posee este usuario
+     */
+    public function ownedCommunities()
+    {
+        return $this->hasMany(Community::class);
+    }
+
+    /**
+     * Comunidades de las que es miembro este usuario
+     */
+    public function communities()
+    {
+        return $this->belongsToMany(Community::class, 'community_user')
+                    ->withPivot('joined_at', 'role')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Verificar si el usuario es miembro de una comunidad
+     */
+    public function isMemberOf(Community $community)
+    {
+        return $this->communities()->where('community_id', $community->id)->exists();
+    }
+
+    /**
+     * Verificar si el usuario es propietario de una comunidad
+     */
+    public function ownscommunity(Community $community)
+    {
+        return $this->ownedCommunities()->where('id', $community->id)->exists();
+    }
+
+    /**
+     * Unirse a una comunidad
+     */
+    public function joinCommunity(Community $community, $role = 'member')
+    {
+        if (!$this->isMemberOf($community)) {
+            return $this->communities()->attach($community->id, [
+                'joined_at' => now(),
+                'role' => $role,
+            ]);
+        }
+        return false;
+    }
+
+    /**
+     * Salir de una comunidad
+     */
+    public function leaveCommunity(Community $community)
+    {
+        return $this->communities()->detach($community->id);
+    }
 }
