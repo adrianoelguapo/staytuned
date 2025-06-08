@@ -390,7 +390,77 @@
     </main>    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>        // Funciones para comentarios
+    <script>
+        // Función para likes
+        function toggleLike(postId) {
+            console.log('toggleLike called with postId:', postId);
+            <?php if(auth()->guard()->check()): ?>
+                const button = document.querySelector(`[data-post-id="${postId}"]`);
+                console.log('Button found:', button);
+                
+                if (!button) {
+                    console.error('No se encontró el botón de like');
+                    return;
+                }
+                
+                const likesCountElement = button.querySelector('.likes-count');
+                const heartIcon = button.querySelector('svg');
+                const isLiked = button.dataset.liked === 'true';
+                
+                console.log('Elements found:', { likesCountElement, heartIcon, isLiked });
+
+                // Deshabilitar el botón temporalmente
+                button.disabled = true;
+
+                const formData = new FormData();
+                formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                console.log('Sending request to:', `/posts/${postId}/like`);
+                
+                fetch(`/posts/${postId}/like`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.success) {
+                        // Actualizar el contador de likes
+                        likesCountElement.textContent = data.likes_count;
+                        
+                        // Actualizar el estado del botón
+                        button.dataset.liked = data.liked.toString();
+                        
+                        // Actualizar el estilo del corazón
+                        if (data.liked) {
+                            heartIcon.classList.add('liked');
+                        } else {
+                            heartIcon.classList.remove('liked');
+                        }
+                    } else {
+                        console.error('Error in response:', data);
+                        alert(data.error || 'Error al procesar el like');
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('Error al procesar el like. Por favor, intenta de nuevo.');
+                })
+                .finally(() => {
+                    // Rehabilitar el botón
+                    button.disabled = false;
+                });
+            <?php else: ?>
+                alert('Debes iniciar sesión para dar like a las publicaciones.');
+                window.location.href = '/login';
+            <?php endif; ?>
+        }
+
+        // Funciones para comentarios
         document.getElementById('comment-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -407,13 +477,13 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Comentando...';
 
+            const formData = new FormData();
+            formData.append('text', text);
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
             fetch(`/posts/<?php echo e($post->id); ?>/comments`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ text: text })
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
@@ -432,7 +502,7 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error al agregar comentario:', error);
                 alert('Error al agregar el comentario');
             })
             .finally(() => {
@@ -537,13 +607,14 @@
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Guardando...';
 
+            const formData = new FormData();
+            formData.append('text', newText);
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+            formData.append('_method', 'PATCH');
+
             fetch(`/comments/${commentId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ text: newText })
+                method: 'POST',
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
@@ -600,12 +671,13 @@
                 return;
             }
 
+            const formData = new FormData();
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+            formData.append('_method', 'DELETE');
+
             fetch(`/comments/${commentId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
+                method: 'POST',
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
@@ -654,24 +726,41 @@
 
         // Función para likes
         function toggleLike(postId) {
+            console.log('toggleLike called with postId:', postId);
             <?php if(auth()->guard()->check()): ?>
                 const button = document.querySelector(`[data-post-id="${postId}"]`);
+                console.log('Button found:', button);
+                
+                if (!button) {
+                    console.error('No se encontró el botón de like');
+                    return;
+                }
+                
                 const likesCountElement = button.querySelector('.likes-count');
                 const heartIcon = button.querySelector('svg');
                 const isLiked = button.dataset.liked === 'true';
+                
+                console.log('Elements found:', { likesCountElement, heartIcon, isLiked });
 
                 // Deshabilitar el botón temporalmente
                 button.disabled = true;
 
-                fetch(`/posts/${postId}/toggle-like`, {
+                const formData = new FormData();
+                formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                console.log('Sending request to:', `/posts/${postId}/like`);
+                
+                fetch(`/posts/${postId}/like`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
+                    body: formData
                 })
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Response data:', data);
                     if (data.success) {
                         // Actualizar el contador de likes
                         likesCountElement.textContent = data.likes_count;
@@ -685,10 +774,13 @@
                         } else {
                             heartIcon.classList.remove('liked');
                         }
+                    } else {
+                        console.error('Error in response:', data);
+                        alert(data.error || 'Error al procesar el like');
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error('Fetch error:', error);
                     alert('Error al procesar el like. Por favor, intenta de nuevo.');
                 })
                 .finally(() => {
@@ -698,7 +790,9 @@
             <?php else: ?>
                 alert('Debes iniciar sesión para dar like a las publicaciones.');
                 window.location.href = '/login';
-            <?php endif; ?>    </script>
+            <?php endif; ?>
+        }
+    </script>
 </body>
 </html>
 <?php /**PATH C:\laragon\www\staytuned\resources\views/posts/show.blade.php ENDPATH**/ ?>
