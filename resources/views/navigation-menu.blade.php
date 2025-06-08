@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.*')">
-                        {{ __('Publicaciones') }}
+                        {{ __('Mis Publicaciones') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.*')">
                         {{ __('Playlists') }}
@@ -152,7 +152,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.*')">
-                {{ __('Publicaciones') }}
+                {{ __('Mis Publicaciones') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.*')">
                 {{ __('Playlists') }}

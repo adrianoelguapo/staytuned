@@ -44,7 +44,7 @@
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
             <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
             <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Publicaciones</a>
+            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
             <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
@@ -112,7 +112,7 @@
                 <a class="nav-link active" href="{{ route('dashboard') }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
                 <a class="nav-link" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link" href="{{ route('posts.index') }}">Publicaciones</a>
+                <a class="nav-link" href="{{ route('posts.index') }}">Mis Publicaciones</a>
                 <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0" />

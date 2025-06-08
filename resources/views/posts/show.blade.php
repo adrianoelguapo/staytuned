@@ -47,8 +47,9 @@
             </a>
             <a href="{{ route('posts.index') }}" 
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
-                Publicaciones
+                Mis Publicaciones
             </a>
+            <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <!-- Usuario -->
             <div class="dropdown">
@@ -107,7 +108,10 @@
                 </a>
                 <a class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}" 
                    href="{{ route('posts.index') }}">
-                    <i class="fas fa-newspaper me-2"></i> Publicaciones
+                    <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
+                </a>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-users me-2"></i> Mis comunidades
                 </a>
             </nav>
             <hr class="my-0 border-secondary">

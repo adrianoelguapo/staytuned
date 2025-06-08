@@ -29,7 +29,7 @@
             <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
             <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar usuarios</a>
             <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline">Mis playlists</a>
-            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline active">Publicaciones</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline active">Mis Publicaciones</a>
             <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
@@ -79,7 +79,7 @@
                 <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
                 <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">Explorar usuarios</a>
                 <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">Mis playlists</a>
-                <a class="nav-link active" href="<?php echo e(route('posts.index')); ?>">Publicaciones</a>
+                <a class="nav-link active" href="<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
                 <a class="nav-link" href="#">Mis comunidades</a>
             </nav>
             <hr class="my-0">

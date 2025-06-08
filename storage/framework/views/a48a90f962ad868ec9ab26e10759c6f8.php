@@ -49,6 +49,7 @@
                class="nav-link-inline <?php echo e(request()->routeIs('posts.*') ? 'active' : ''); ?>">
                 Publicaciones
             </a>
+            <a href="#" class="nav-link-inline">Mis comunidades</a>
 
             <!-- Usuario -->
             <div class="dropdown">
@@ -109,6 +110,9 @@
                 <a class="nav-link <?php echo e(request()->routeIs('posts.*') ? 'active' : ''); ?>" 
                    href="<?php echo e(route('posts.index')); ?>">
                     <i class="fas fa-newspaper me-2"></i> Publicaciones
+                </a>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-users me-2"></i> Mis comunidades
                 </a>
             </nav>
             <hr class="my-0 border-secondary">

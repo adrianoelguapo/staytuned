@@ -47,7 +47,7 @@
             </a>
             <a href="{{ route('posts.index') }}" 
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
-                Publicaciones
+                Mis Publicaciones
             </a>
 
             <!-- Usuario -->
@@ -101,7 +101,7 @@
                 </a>
                 <a class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}" 
                    href="{{ route('posts.index') }}">
-                    <i class="fas fa-newspaper me-2"></i> Publicaciones
+                    <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
             </nav>
             <hr class="my-0 border-secondary">
