@@ -821,3 +821,574 @@ body.dashboard-body {
     align-items: flex-start;
   }
 }
+
+/* ================================================
+   GLASSMORPHISM PARA TEXTAREA Y FORM CONTROLS
+   ================================================ */
+
+/* Form controls con efecto glassmorphism */
+.dashboard-card .form-control {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.3s ease !important;
+  font-weight: 400 !important;
+}
+
+.dashboard-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  outline: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.dashboard-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+/* Textarea específico con glassmorphism mejorado */
+.dashboard-card textarea.form-control {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+  padding: 1rem 1.25rem !important;
+  resize: vertical !important;
+  min-height: 120px !important;
+  line-height: 1.6 !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2px !important;
+}
+
+.dashboard-card textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 0 0.3rem rgba(255, 255, 255, 0.06), 
+              0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  color: #fff !important;
+  transform: translateY(-2px) !important;
+}
+
+.dashboard-card textarea.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+}
+
+/* Textarea dinámico para editar comentarios */
+.comment-item textarea.form-control {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  resize: vertical !important;
+  min-height: 80px !important;
+}
+
+.comment-item textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+}
+
+.comment-item textarea.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ================================================
+   GLASSMORPHISM GLOBAL PARA TEXTAREAS
+   ================================================ */
+
+/* Estilos glassmorphism para todos los textareas */
+textarea.form-control {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 1rem 1.25rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-weight: 400 !important;
+  resize: vertical !important;
+  min-height: 100px !important;
+  line-height: 1.6 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 0 0.3rem rgba(255, 255, 255, 0.08), 
+              0 4px 25px rgba(0, 0, 0, 0.15) !important;
+  color: #fff !important;
+  outline: none !important;
+  transform: translateY(-2px) !important;
+}
+
+textarea.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+}
+
+/* Textarea en modales y formularios especiales */
+.modal textarea.form-control,
+.form-container textarea.form-control,
+.create-post-container textarea.form-control {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+  padding: 1.25rem 1.5rem !important;
+  min-height: 120px !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+.modal textarea.form-control:focus,
+.form-container textarea.form-control:focus,
+.create-post-container textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 0 0 0.4rem rgba(255, 255, 255, 0.1), 
+              0 6px 30px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Textarea en playlist forms */
+.playlist-form textarea.form-control {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(30px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border-radius: 16px !important;
+  padding: 1.5rem !important;
+  min-height: 140px !important;
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+}
+
+.playlist-form textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 0 0.35rem rgba(255, 255, 255, 0.06), 
+              0 8px 35px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Asegurar que el texto sea blanco en todos los casos */
+textarea.form-control,
+textarea.form-control:focus,
+textarea.form-control:active,
+textarea.form-control:hover {
+  color: #ffffff !important;
+}
+
+/* Estilos especiales para textarea en comentarios dinámicos */
+.edit-comment-form textarea.form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  min-height: 80px !important;
+}
+
+.edit-comment-form textarea.form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ================================================
+   GLASSMORPHISM PARA INPUTS Y SELECTS
+   ================================================ */
+
+/* Inputs con glassmorphism */
+input.form-control,
+select.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.2px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.08), 
+              0 4px 20px rgba(0, 0, 0, 0.12) !important;
+  color: #fff !important;
+  outline: none !important;
+  transform: translateY(-1px) !important;
+}
+
+input.form-control::placeholder,
+select.form-control::placeholder,
+.form-select::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+}
+
+/* Asegurar texto blanco en inputs y selects */
+input.form-control,
+input.form-control:focus,
+input.form-control:active,
+input.form-control:hover,
+select.form-control,
+select.form-control:focus,
+select.form-control:active,
+select.form-control:hover,
+.form-select,
+.form-select:focus,
+.form-select:active,
+.form-select:hover {
+  color: #ffffff !important;
+}
+
+/* Options en selects */
+select.form-control option,
+.form-select option {
+  background: rgba(79, 70, 229, 0.95) !important;
+  color: #fff !important;
+  padding: 0.5rem !important;
+}
+
+/* Labels con mejor contraste */
+.form-label {
+  color: #fff !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Small text y help text */
+.text-muted,
+small.text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+}
+
+/* Invalid feedback con glassmorphism */
+.invalid-feedback {
+  background: rgba(220, 53, 69, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(220, 53, 69, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
+  margin-top: 0.5rem !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+
+/* Valid feedback con glassmorphism */
+.valid-feedback {
+  background: rgba(25, 135, 84, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(25, 135, 84, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
+  margin-top: 0.5rem !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+
+/* ================================================
+   BOTONES CON GLASSMORPHISM
+   ================================================ */
+
+/* Botones primarios con glassmorphism */
+.btn-primary {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #fff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.15), 
+              0 6px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Botones secundarios */
+.btn-secondary,
+.btn-outline-primary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 0.65rem 1.25rem !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.3px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+.btn-secondary:hover,
+.btn-outline-primary:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Botones de acción pequeños */
+.btn-sm {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.85rem !important;
+  border-radius: 8px !important;
+}
+
+/* Botones de iconos */
+.btn-icon {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  transform: scale(1.05) !important;
+}
+
+/* Asegurar que los botones mantengan el texto blanco */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-outline-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  color: #ffffff !important;
+}
+
+/* Efectos especiales para botones con iconos */
+.btn i {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) !important;
+}
+
+/* ================================================
+   GLASSMORPHISM PARA MODALES Y ELEMENTOS ESPECIALES
+   ================================================ */
+
+/* Modales con glassmorphism */
+.modal-content {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+}
+
+.modal-title {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.modal-body {
+  color: #fff !important;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+}
+
+/* Cerrar modal */
+.btn-close {
+  filter: invert(1) !important;
+  opacity: 0.8 !important;
+}
+
+.btn-close:hover {
+  opacity: 1 !important;
+}
+
+/* Cards especiales con glassmorphism */
+.card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-header {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px 16px 0 0 !important;
+}
+
+.card-body {
+  color: #fff !important;
+}
+
+.card-title {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Alertas con glassmorphism */
+.alert {
+  backdrop-filter: blur(20px) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+}
+
+.alert-success {
+  background: rgba(25, 135, 84, 0.15) !important;
+  border-color: rgba(25, 135, 84, 0.3) !important;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.15) !important;
+  border-color: rgba(220, 53, 69, 0.3) !important;
+}
+
+.alert-warning {
+  background: rgba(255, 193, 7, 0.15) !important;
+  border-color: rgba(255, 193, 7, 0.3) !important;
+}
+
+.alert-info {
+  background: rgba(13, 202, 240, 0.15) !important;
+  border-color: rgba(13, 202, 240, 0.3) !important;
+}
+
+/* Dropdowns con glassmorphism */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dropdown-item {
+  color: #fff !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+/* Progress bars con glassmorphism */
+.progress {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+/* Navegación pills/tabs con glassmorphism */
+.nav-pills .nav-link {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-pills .nav-link:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.nav-pills .nav-link.active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
