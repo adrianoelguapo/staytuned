@@ -144,17 +144,17 @@
                                     <div class="d-flex align-items-center">
                                         @if($post->user->profile_photo_url)
                                             <img src="{{ $post->user->profile_photo_url }}" 
-                                                 alt="{{ $post->user->name }}" 
+                                                 alt="{{ $post->user->username }}" 
                                                  class="rounded-circle me-3"
                                                  style="width: 48px; height: 48px; object-fit: cover;">
                                         @else
                                             <div class="bg-light bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center me-3"
                                                  style="width: 48px; height: 48px;">
-                                                <span class="text-white fw-medium">{{ substr($post->user->name, 0, 1) }}</span>
+                                                <span class="text-white fw-medium">{{ substr($post->user->username, 0, 1) }}</span>
                                             </div>
                                         @endif
                                         <div>
-                                            <h5 class="text-white fw-semibold mb-1">{{ $post->user->name }}</h5>
+                                            <h5 class="text-white fw-semibold mb-1">{{ $post->user->username }}</h5>
                                             <p class="text-white-50 mb-0 small">{{ $post->created_at->diffForHumans() }}</p>
                                         </div>
                                     </div>
@@ -162,7 +162,7 @@
                                 
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="badge bg-primary bg-opacity-25 text-white border border-primary border-opacity-50 px-3 py-2">
-                                        {{ $post->category->text }}
+                                        {{ ucfirst($post->category->type) }}
                                     </span>
                                     
                                     @can('update', $post)
