@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -127,112 +128,115 @@
                 @endif
 
                 @if($posts->count() > 0)
-                    <!-- Grid de publicaciones -->
-                    <div class="row g-4">
+                    <!-- Lista de publicaciones -->
+                    <div class="posts-list">
                         @foreach($posts as $post)
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="playlist-card">
-                                    <!-- Imagen de la publicación -->
-                                    <div class="playlist-image">
-                                        @if($post->cover || $post->spotify_image)
-                                            <img src="{{ $post->cover ?: $post->spotify_image }}" 
-                                                 alt="{{ $post->title }}"
-                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                            <div class="playlist-placeholder" style="display: none;">
-                                                <i class="bi bi-newspaper"></i>
-                                            </div>
-                                        @else
-                                            <div class="playlist-placeholder">
-                                                <i class="bi bi-newspaper"></i>
-                                            </div>
-                                        @endif
+                            <div class="post-card-full-width">
+                                <div class="post-card-body">
+                                    <!-- Contenido principal -->
+                                    <div class="post-content-wrapper">
+                                        <!-- Imagen/Cover de la publicación -->
+                                        <div class="post-cover-container">
+                                            @if($post->cover || $post->spotify_image)
+                                                <img src="{{ $post->cover ?: $post->spotify_image }}" 
+                                                     alt="{{ $post->title }}"
+                                                     class="post-cover-image"
+                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                <div class="post-cover-placeholder" style="display: none;">
+                                                    <i class="bi bi-newspaper"></i>
+                                                </div>
+                                            @else
+                                                <div class="post-cover-placeholder">
+                                                    <i class="bi bi-newspaper"></i>
+                                                </div>
+                                            @endif
+                                        </div>
                                         
-                                        <!-- Overlay con botones -->
-                                        <div class="playlist-overlay">
-                                            <div class="playlist-actions">
-                                                <a href="{{ route('posts.show', $post) }}" 
-                                                   class="btn btn-play">
-                                                    <i class="bi bi-eye-fill"></i>
+                                        <!-- Información del post -->
+                                        <div class="post-info-container">
+                                            <div class="post-header-section">
+                                                <a href="{{ route('posts.show', $post) }}" class="post-title-link">
+                                                    <h3 class="post-title">{{ $post->title }}</h3>
                                                 </a>
-                                                @if($post->user_id === Auth::id())
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-options" type="button" 
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="bi bi-three-dots"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a class="dropdown-item" href="{{ route('posts.show', $post) }}">
-                                                                    <i class="bi bi-eye me-2"></i>Ver
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">
-                                                                    <i class="bi bi-pencil me-2"></i>Editar
-                                                                </a>
-                                                            </li>
-                                                            <li><hr class="dropdown-divider"></li>
-                                                            <li>
-                                                                <form action="{{ route('posts.destroy', $post) }}" 
-                                                                      method="POST" 
-                                                                      onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item text-danger">
-                                                                        <i class="bi bi-trash me-2"></i>Eliminar
-                                                                    </button>
-                                                                </form>
-                                                            </li>
-                                                        </ul>
+                                                <span class="post-category-badge">{{ $post->category->text }}</span>
+                                            </div>
+                                            
+                                            @if($post->content || $post->description)
+                                                <p class="post-description">{{ Str::limit($post->content ?: $post->description, 150) }}</p>
+                                            @endif
+                                            
+                                            @if($post->spotify_data)
+                                                <div class="spotify-info-card">
+                                                    <i class="bi bi-spotify spotify-icon"></i>
+                                                    <div class="spotify-text">
+                                                        <div class="spotify-track-name">{{ $post->spotify_name }}</div>
+                                                        @if($post->spotify_artist)
+                                                            <div class="spotify-artist-name">{{ $post->spotify_artist }}</div>
+                                                        @endif
                                                     </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Info de la publicación -->
-                                    <div class="playlist-info">
-                                        <h5 class="playlist-title">{{ $post->title }}</h5>
-                                        @if($post->content || $post->description)
-                                            <p class="playlist-description">{{ Str::limit($post->content ?: $post->description, 80) }}</p>
-                                        @endif
-                                        <div class="playlist-meta">
-                                            <span class="playlist-songs">
-                                                <i class="bi bi-person me-1"></i>
-                                                {{ $post->user->name }}
-                                            </span>
-                                            <span class="playlist-privacy">
-                                                <i class="bi bi-calendar me-1"></i>
-                                                {{ $post->created_at->diffForHumans() }}
-                                            </span>
-                                        </div>
-                                        @if($post->spotify_data)
-                                            <div class="playlist-meta mt-2">
-                                                <span class="playlist-songs">
-                                                    <i class="bi bi-spotify me-1 text-success"></i>
-                                                    {{ $post->spotify_name }}
-                                                    @if($post->spotify_artist)
-                                                        - {{ $post->spotify_artist }}
+                                                </div>
+                                            @endif
+                                            
+                                            <!-- Meta información y acciones -->
+                                            <div class="post-footer-section">
+                                                <div class="post-meta-info">
+                                                    <span class="post-author">
+                                                        <i class="bi bi-person me-1"></i>
+                                                        {{ $post->user->name }}
+                                                    </span>
+                                                    <span class="post-date">
+                                                        <i class="bi bi-calendar me-1"></i>
+                                                        {{ $post->created_at->diffForHumans() }}
+                                                    </span>
+                                                </div>
+                                                
+                                                <div class="post-actions-section">
+                                                    <button onclick="toggleLike({{ $post->id }})" 
+                                                            class="like-btn {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}"
+                                                            data-post-id="{{ $post->id }}"
+                                                            data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" 
+                                                             class="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none' }}">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                                        </svg>
+                                                        <span class="likes-count">{{ $post->likes_count }}</span>
+                                                    </button>
+                                                    
+                                                    @if($post->user_id === Auth::id())
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" 
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a class="dropdown-item" href="{{ route('posts.show', $post) }}">
+                                                                        <i class="bi bi-eye me-2"></i>Ver
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">
+                                                                        <i class="bi bi-pencil me-2"></i>Editar
+                                                                    </a>
+                                                                </li>
+                                                                <li><hr class="dropdown-divider"></li>
+                                                                <li>
+                                                                    <form action="{{ route('posts.destroy', $post) }}" 
+                                                                          method="POST" 
+                                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="dropdown-item text-danger">
+                                                                            <i class="bi bi-trash me-2"></i>Eliminar
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     @endif
-                                                </span>
+                                                </div>
                                             </div>
-                                        @endif
-                                        <div class="playlist-meta mt-2">
-                                            <button onclick="toggleLike({{ $post->id }})" 
-                                                    class="like-btn {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}"
-                                                    data-post-id="{{ $post->id }}"
-                                                    data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
-                                                <svg width="16" height="16" viewBox="0 0 24 24" 
-                                                     class="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none' }}">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                                </svg>
-                                                <span class="likes-count">{{ $post->likes_count }}</span>
-                                            </button>
-                                            <span class="playlist-privacy ms-2">
-                                                <i class="bi bi-tag me-1"></i>
-                                                {{ $post->category->text }}
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
