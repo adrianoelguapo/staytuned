@@ -4,164 +4,169 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
+<link rel="stylesheet" href="{{ asset('css/playlists.css') }}">
 @endpush
 
 @section('content')
-<div class="container-xl">
-    <!-- Header -->
-    <div class="mb-4">
-        <div class="d-flex align-items-center mb-2">
-            <a href="{{ route('communities.index') }}" class="text-success me-3">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h2 class="text-white mb-0">
-                <i class="fas fa-plus text-success me-2"></i>
-                Crear Nueva Comunidad
-            </h2>
-        </div>
-        <p class="text-muted">Crea un espacio único para compartir música con personas afines</p>
-    </div>
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('communities.index') }}" class="text-white-50">
+                            <i class="fas fa-users me-1"></i>
+                            Mis Comunidades
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Nueva Comunidad</li>
+                </ol>
+            </nav>
 
-    <!-- Formulario -->
-    <div class="community-form">
-        <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            
-            <!-- Nombre -->
-            <div class="community-form-group">
-                <label for="name" class="community-form-label">
-                    <i class="fas fa-tag me-2"></i>
-                    Nombre de la Comunidad *
-                </label>
-                <input type="text" 
-                       class="community-form-control @error('name') is-invalid @enderror" 
-                       id="name" 
-                       name="name" 
-                       value="{{ old('name') }}"
-                       placeholder="Ej: Amantes del Rock Clásico"
-                       required>
-                @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
+            <!-- Formulario de creación -->
+            <div class="card create-playlist-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fas fa-plus-circle text-white me-3 fs-3"></i>
+                        <h1 class="h3 mb-0 create-playlist-title">Crear Nueva Comunidad</h1>
+                    </div>
 
-            <!-- Descripción -->
-            <div class="community-form-group">
-                <label for="description" class="community-form-label">
-                    <i class="fas fa-align-left me-2"></i>
-                    Descripción
-                </label>
-                <textarea class="community-form-control community-form-textarea @error('description') is-invalid @enderror" 
-                          id="description" 
-                          name="description" 
-                          placeholder="Describe de qué trata tu comunidad, qué tipo de música comparten, reglas, etc.">{{ old('description') }}</textarea>
-                @error('description')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                <small class="text-muted">Ayuda a otros usuarios a entender el propósito de tu comunidad</small>
-            </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-            <!-- Imagen de portada -->
-            <div class="community-form-group">
-                <label for="cover_image" class="community-form-label">
-                    <i class="fas fa-image me-2"></i>
-                    Imagen de Portada
-                </label>
-                <input type="file" 
-                       class="community-form-control @error('cover_image') is-invalid @enderror" 
-                       id="cover_image" 
-                       name="cover_image"
-                       accept="image/jpeg,image/png,image/jpg,image/gif">
-                @error('cover_image')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                <small class="text-muted">Formatos soportados: JPEG, PNG, JPG, GIF. Tamaño máximo: 2MB</small>
-            </div>
+                    <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data" class="playlist-form">
+                        @csrf
+                        
+                        <div class="row">
+                            <!-- Columna izquierda - Imagen -->
+                            <div class="col-md-4 mb-4">
+                                <label class="form-label">Imagen de la comunidad</label>
+                                <div class="playlist-image-upload">
+                                    <div class="image-preview" id="imagePreview">
+                                        <div class="image-placeholder">
+                                            <i class="fas fa-image fs-1"></i>
+                                            <p class="mt-2 mb-0">Seleccionar imagen</p>
+                                        </div>
+                                    </div>
+                                    <input type="file" 
+                                           class="form-control mt-3" 
+                                           id="cover_image"
+                                           name="cover_image" 
+                                           accept="image/*"
+                                           onchange="previewImage(this)">
+                                    <small class="text-muted">JPG, PNG, GIF. Máximo 2MB.</small>
+                                </div>
+                            </div>
 
-            <!-- Vista previa de imagen -->
-            <div id="image-preview" style="display: none;" class="community-form-group">
-                <img id="preview-img" src="" alt="Vista previa" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-            </div>
+                            <!-- Columna derecha - Formulario -->
+                            <div class="col-md-8">
+                                <!-- Nombre de la comunidad -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">
+                                        Nombre de la comunidad <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control @error('name') is-invalid @enderror" 
+                                           id="name" 
+                                           name="name" 
+                                           value="{{ old('name') }}" 
+                                           maxlength="100" 
+                                           placeholder="Ej: Amantes del Rock Clásico"
+                                           required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-            <!-- Privacidad -->
-            <div class="community-form-check">
-                <input type="checkbox" 
-                       id="is_private" 
-                       name="is_private" 
-                       value="1"
-                       {{ old('is_private') ? 'checked' : '' }}>
-                <label for="is_private">
-                    <i class="fas fa-lock me-2"></i>
-                    Hacer esta comunidad privada
-                </label>
-            </div>
-            <small class="text-muted d-block mt-2">
-                Las comunidades privadas solo son visibles para los miembros invitados
-            </small>
+                                <!-- Descripción -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Descripción</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" 
+                                              id="description" 
+                                              name="description" 
+                                              rows="4" 
+                                              maxlength="500"
+                                              placeholder="Describe de qué trata tu comunidad, qué tipo de música comparten, reglas, etc.">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <small class="text-muted">Máximo 500 caracteres</small>
+                                </div>
 
-            <!-- Botones -->
-            <div class="d-flex gap-3 mt-4">
-                <button type="submit" class="btn-community btn-community-primary flex-fill">
-                    <i class="fas fa-plus me-2"></i>
-                    Crear Comunidad
-                </button>
-                <a href="{{ route('communities.index') }}" class="btn-community btn-community-secondary">
-                    <i class="fas fa-times me-2"></i>
-                    Cancelar
-                </a>
-            </div>
-        </form>
-    </div>
+                                <!-- Privacidad -->
+                                <div class="mb-4">
+                                    <label class="form-label">Privacidad</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="radio" 
+                                               name="is_private" 
+                                               id="public" 
+                                               value="0" 
+                                               {{ old('is_private', '0') == '0' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="public">
+                                            <i class="fas fa-globe me-2"></i>
+                                            <strong>Pública</strong>
+                                            <br>
+                                            <small class="text-muted">Cualquier usuario puede encontrar y unirse a esta comunidad</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="radio" 
+                                               name="is_private" 
+                                               id="private" 
+                                               value="1" 
+                                               {{ old('is_private') == '1' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="private">
+                                            <i class="fas fa-lock me-2"></i>
+                                            <strong>Privada</strong>
+                                            <br>
+                                            <small class="text-muted">Solo los usuarios invitados pueden ver y participar en esta comunidad</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <!-- Información adicional -->
-    <div class="row mt-5">
-        <div class="col-md-6">
-            <div class="bg-dark border border-secondary rounded p-4">
-                <h5 class="text-success mb-3">
-                    <i class="fas fa-lightbulb me-2"></i>
-                    Consejos para tu Comunidad
-                </h5>
-                <ul class="text-muted mb-0">
-                    <li class="mb-2">Elige un nombre descriptivo y atractivo</li>
-                    <li class="mb-2">Describe claramente el género o tema musical</li>
-                    <li class="mb-2">Establece reglas claras para las publicaciones</li>
-                    <li class="mb-2">Usa una imagen de portada llamativa</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="bg-dark border border-secondary rounded p-4">
-                <h5 class="text-info mb-3">
-                    <i class="fas fa-users me-2"></i>
-                    ¿Privada o Pública?
-                </h5>
-                <div class="text-muted">
-                    <p class="mb-2"><strong>Pública:</strong> Cualquier usuario puede encontrar y unirse</p>
-                    <p class="mb-0"><strong>Privada:</strong> Solo los usuarios invitados pueden ver y participar</p>
+                        <!-- Botones de acción -->
+                        <div class="d-flex gap-3 justify-content-end">
+                            <a href="{{ route('communities.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary-playlist">
+                                <i class="fas fa-plus me-2"></i>
+                                Crear Comunidad
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
-document.getElementById('cover_image').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('image-preview');
-    const previewImg = document.getElementById('preview-img');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            preview.style.display = 'block';
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Vista previa" class="img-fluid rounded">`;
+            }
+            reader.readAsDataURL(input.files[0]);
         }
-        reader.readAsDataURL(file);
-    } else {
-        preview.style.display = 'none';
     }
-});
 </script>
-@endsection
+@endpush

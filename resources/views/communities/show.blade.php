@@ -8,7 +8,10 @@
 @endpush
 
 @section('content')
-<div class="container-xl">    <!-- Community Header -->
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <!-- Community Header -->
     <div class="community-header card dashboard-card mb-4">
         <div class="card-body">
             <div class="row align-items-center">
@@ -73,6 +76,17 @@
                 <div class="col-auto">
                     <!-- Acciones -->
                     <div class="community-actions-header">
+                        @if($isOwner)
+                            <!-- Botón para ver solicitudes pendientes -->
+                            <a href="{{ route('communities.requests', $community) }}" class="btn btn-outline-purple me-2">
+                                <i class="fas fa-user-clock me-1"></i>
+                                Solicitudes
+                                @if($community->pendingRequestsCount() > 0)
+                                    <span class="badge bg-danger ms-1">{{ $community->pendingRequestsCount() }}</span>
+                                @endif
+                            </a>
+                        @endif
+                        
                         <div class="dropdown d-inline">
                             <button class="btn btn-options-large btn-purple" type="button" 
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -118,6 +132,20 @@
                                                 </button>
                                             </form>
                                         </li>
+                                    @else
+                                        @if($hasPendingRequest)
+                                            <li>
+                                                <span class="dropdown-item text-muted">
+                                                    <i class="fas fa-clock me-2"></i>Solicitud pendiente
+                                                </span>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#requestMembershipModal">
+                                                    <i class="fas fa-paper-plane me-2"></i>Solicitar membresía
+                                                </button>
+                                            </li>
+                                        @endif
                                     @endif
                                 @endif
                             </ul>
@@ -129,7 +157,8 @@
     </div>
 
     <!-- Posts Section -->
-    <div class="community-posts">        <div class="community-posts-header">
+    <div class="community-posts">
+        <div class="community-posts-header">
             <h3 class="community-posts-title">
                 <i class="fas fa-newspaper me-2"></i>
                 Publicaciones de la Comunidad
@@ -141,10 +170,13 @@
                     Nueva Publicación
                 </a>
             @endif
-        </div>        @if($posts->count() > 0)
-            <!-- Lista de publicaciones -->
-            <div class="posts-list">
-                @foreach($posts as $post)
+        </div>
+        
+        @if(!$community->is_private || $isMember || $isOwner)
+            @if($posts->count() > 0)
+                <!-- Lista de publicaciones -->
+                <div class="posts-list">
+                    @foreach($posts as $post)
                     <div class="post-card-full-width">
                         <div class="post-card-body">
                             <!-- Contenido principal -->
@@ -272,8 +304,74 @@
                     </a>
                 @endif
             </div>
-        @endif</div>
+        @endif
+        @endif
+        </div>
+    </div>
 </div>
+
+<!-- Modal para solicitar membresía -->
+@if(!$isOwner && !$isMember && $community->is_private && !$hasPendingRequest)
+<div class="modal fade" id="requestMembershipModal" tabindex="-1" aria-labelledby="requestMembershipModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestMembershipModalLabel">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Solicitar membresía a {{ $community->name }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('communities.request', $community) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Mensaje para el administrador (opcional)</label>
+                        <textarea class="form-control bg-secondary border-0 text-white" 
+                                  id="message" 
+                                  name="message" 
+                                  rows="3" 
+                                  placeholder="¿Por qué te gustaría unirte a esta comunidad?"></textarea>
+                    </div>
+                    <div class="alert alert-info mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Tu solicitud será revisada por el administrador de la comunidad.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-purple">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Enviar solicitud
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
+<!-- Mensaje especial para comunidades privadas -->
+@if(!$isOwner && !$isMember && $community->is_private)
+<div class="alert alert-warning mt-3">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <i class="fas fa-lock fa-2x"></i>
+        </div>
+        <div class="col">
+            <h6 class="mb-1">Esta es una comunidad privada</h6>
+            <p class="mb-0 small">
+                @if($hasPendingRequest)
+                    Tu solicitud de membresía está pendiente de aprobación.
+                @else
+                    Necesitas solicitar membresía para ver las publicaciones y participar.
+                @endif
+            </p>
+        </div>
+    </div>
+</div>
+@endif
+
 @endsection
 
 @push('scripts')

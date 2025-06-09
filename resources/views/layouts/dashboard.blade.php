@@ -53,6 +53,9 @@
             <a href="{{ route('communities.index') }}" 
                class="nav-link-inline {{ request()->routeIs('communities.*') ? 'active' : '' }}">
                 Mis Comunidades
+                @if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0)
+                    <span class="badge bg-danger ms-1">{{ $pendingCommunityRequests }}</span>
+                @endif
             </a>
 
             <!-- Dropdown de usuario -->
@@ -118,6 +121,9 @@
                 <a class="nav-link {{ request()->routeIs('communities.*') ? 'active' : '' }}" 
                    href="{{ route('communities.index') }}">
                     <i class="fas fa-users me-2"></i> Mis Comunidades
+                    @if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0)
+                        <span class="badge bg-danger ms-1">{{ $pendingCommunityRequests }}</span>
+                    @endif
                 </a>
             </nav>
             <hr class="my-0 border-secondary">

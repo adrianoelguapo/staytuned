@@ -101,7 +101,7 @@
     <!-- Contenido principal -->
     <div class="dashboard-container container-fluid py-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-10">
                 
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="mb-4">

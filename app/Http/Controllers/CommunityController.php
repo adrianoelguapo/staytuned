@@ -25,7 +25,10 @@ class CommunityController extends Controller
             ->take(10)
             ->get();
 
-        return view('communities.index', compact('userCommunities', 'ownedCommunities', 'publicCommunities'));
+        // Obtener el conteo de solicitudes pendientes
+        $pendingCommunityRequests = Auth::user()->totalPendingCommunityRequests();
+
+        return view('communities.index', compact('userCommunities', 'ownedCommunities', 'publicCommunities', 'pendingCommunityRequests'));
     }
 
     /**
@@ -73,21 +76,76 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        // Verificar acceso a comunidad privada
-        if ($community->is_private && !$community->hasMember(Auth::user()) && !$community->isOwner(Auth::user())) {
-            abort(403, 'No tienes acceso a esta comunidad privada.');
-        }
-
-        $posts = $community->posts()
-            ->with(['user', 'category', 'comments.user', 'comments.replies.user'])
-            ->withCount('likes')
-            ->latest()
-            ->paginate(10);
-
         $isMember = $community->hasMember(Auth::user());
         $isOwner = $community->isOwner(Auth::user());
+        
+        // Verificar si el usuario tiene una solicitud pendiente
+        $hasPendingRequest = false;
+        if (!$isMember && !$isOwner && $community->is_private) {
+            $hasPendingRequest = $community->hasPendingRequest(Auth::user());
+        }
 
-        return view('communities.show', compact('community', 'posts', 'isMember', 'isOwner'));
+        // Verificar acceso a comunidad privada - permitir vista previa pero sin posts
+        $posts = collect();
+        if (!$community->is_private || $isMember || $isOwner) {
+            $posts = $community->posts()
+                ->with(['user', 'category', 'comments.user', 'comments.replies.user'])
+                ->withCount('likes')
+                ->latest()
+                ->paginate(10);
+        }
+
+        return view('communities.show', compact('community', 'posts', 'isMember', 'isOwner', 'hasPendingRequest'));
+    }
+
+    /**
+     * Search communities for AJAX requests
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        
+        if (empty($query) || strlen($query) < 2) {
+            return response()->json(['communities' => []]);
+        }
+
+        // Buscar comunidades privadas por nombre
+        $communities = Community::where('name', 'LIKE', '%' . $query . '%')
+            ->where('is_private', true)
+            ->with('owner')
+            ->get()
+            ->map(function ($community) {
+                $user = Auth::user();
+                $isMember = $community->hasMember($user);
+                $isOwner = $community->isOwner($user);
+                
+                // Verificar estado de solicitud
+                $requestStatus = null;
+                if (!$isMember && !$isOwner) {
+                    $request = $community->requests()
+                        ->where('user_id', $user->id)
+                        ->latest()
+                        ->first();
+                    
+                    if ($request) {
+                        $requestStatus = $request->status;
+                    }
+                }
+
+                return [
+                    'id' => $community->id,
+                    'name' => $community->name,
+                    'description' => $community->description,
+                    'cover_image' => $community->cover_image,
+                    'is_member' => $isMember,
+                    'is_owner' => $isOwner,
+                    'request_status' => $requestStatus,
+                    'members_count' => $community->members_count,
+                    'posts_count' => $community->posts_count,
+                ];
+            });
+
+        return response()->json(['communities' => $communities]);
     }
 
     /**

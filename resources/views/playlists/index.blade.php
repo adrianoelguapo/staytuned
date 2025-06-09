@@ -222,7 +222,7 @@
                     <div class="card dashboard-card text-center py-5">
                         <div class="card-body">
                             <i class="bi bi-music-note-list display-1 text-muted mb-3"></i>
-                            <h4 class="text-muted mb-3">No tienes playlists aún</h4>
+                            <h4 class="text-light mb-3">No tienes playlists aún</h4>
                             <p class="text-muted mb-4">
                                 Crea tu primera playlist y comienza a organizar tu música favorita
                             </p>

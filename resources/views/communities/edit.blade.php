@@ -4,197 +4,179 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
+<link rel="stylesheet" href="{{ asset('css/playlists.css') }}">
 @endpush
 
 @section('content')
-<div class="container-xl">
-    <!-- Header -->
-    <div class="mb-4">
-        <div class="d-flex align-items-center mb-2">
-            <a href="{{ route('communities.show', $community) }}" class="text-success me-3">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h2 class="text-white mb-0">
-                <i class="fas fa-edit text-success me-2"></i>
-                Editar Comunidad
-            </h2>
-        </div>
-        <p class="text-muted">Actualiza la información de tu comunidad</p>
-    </div>
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('communities.index') }}" class="text-white-50">
+                            <i class="fas fa-users me-1"></i>
+                            Mis Comunidades
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('communities.show', $community) }}" class="text-white-50">{{ $community->name }}</a>
+                    </li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Editar</li>
+                </ol>
+            </nav>
 
-    <!-- Formulario -->
-    <div class="community-form">
-        <form action="{{ route('communities.update', $community) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            
-            <!-- Nombre -->
-            <div class="community-form-group">
-                <label for="name" class="community-form-label">
-                    <i class="fas fa-tag me-2"></i>
-                    Nombre de la Comunidad *
-                </label>
-                <input type="text" 
-                       class="community-form-control @error('name') is-invalid @enderror" 
-                       id="name" 
-                       name="name" 
-                       value="{{ old('name', $community->name) }}"
-                       placeholder="Ej: Amantes del Rock Clásico"
-                       required>
-                @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
+            <!-- Formulario de edición -->
+            <div class="card create-playlist-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fas fa-edit text-white me-3 fs-3"></i>
+                        <h1 class="h3 mb-0 create-playlist-title">Editar Comunidad</h1>
+                    </div>
 
-            <!-- Descripción -->
-            <div class="community-form-group">
-                <label for="description" class="community-form-label">
-                    <i class="fas fa-align-left me-2"></i>
-                    Descripción
-                </label>
-                <textarea class="community-form-control community-form-textarea @error('description') is-invalid @enderror" 
-                          id="description" 
-                          name="description" 
-                          placeholder="Describe de qué trata tu comunidad, qué tipo de música comparten, reglas, etc.">{{ old('description', $community->description) }}</textarea>
-                @error('description')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                <small class="text-muted">Ayuda a otros usuarios a entender el propósito de tu comunidad</small>
-            </div>
-
-            <!-- Imagen actual -->
-            @if($community->cover_image)
-            <div class="community-form-group">
-                <label class="community-form-label">Imagen Actual</label>
-                <div>
-                    <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                         alt="{{ $community->name }}" 
-                         style="max-width: 300px; height: 150px; object-fit: cover; border-radius: 8px;">
-                </div>
-            </div>
-            @endif
-
-            <!-- Nueva imagen de portada -->
-            <div class="community-form-group">
-                <label for="cover_image" class="community-form-label">
-                    <i class="fas fa-image me-2"></i>
-                    {{ $community->cover_image ? 'Cambiar Imagen de Portada' : 'Imagen de Portada' }}
-                </label>
-                <input type="file" 
-                       class="community-form-control @error('cover_image') is-invalid @enderror" 
-                       id="cover_image" 
-                       name="cover_image"
-                       accept="image/jpeg,image/png,image/jpg,image/gif">
-                @error('cover_image')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-                <small class="text-muted">
-                    Formatos soportados: JPEG, PNG, JPG, GIF. Tamaño máximo: 2MB
-                    @if($community->cover_image)
-                        <br>Deja en blanco para mantener la imagen actual
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
-                </small>
-            </div>
 
-            <!-- Vista previa de nueva imagen -->
-            <div id="image-preview" style="display: none;" class="community-form-group">
-                <label class="community-form-label">Vista Previa</label>
-                <img id="preview-img" src="" alt="Vista previa" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-            </div>
+                    <form action="{{ route('communities.update', $community) }}" method="POST" enctype="multipart/form-data" class="playlist-form">
+                        @csrf
+                        @method('PUT')
+                        
+                        <div class="row">
+                            <!-- Columna izquierda - Imagen -->
+                            <div class="col-md-4 mb-4">
+                                <label class="form-label">Imagen de la comunidad</label>
+                                <div class="playlist-image-upload">
+                                    <div class="image-preview" id="imagePreview">
+                                        @if($community->cover_image)
+                                            <img src="{{ asset('storage/' . $community->cover_image) }}" 
+                                                 alt="{{ $community->name }}" 
+                                                 class="img-fluid rounded">
+                                        @else
+                                            <div class="image-placeholder">
+                                                <i class="fas fa-image fs-1"></i>
+                                                <p class="mt-2 mb-0">Seleccionar imagen</p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <input type="file" 
+                                           class="form-control mt-3" 
+                                           id="cover_image"
+                                           name="cover_image" 
+                                           accept="image/*"
+                                           onchange="previewImage(this)">
+                                    <small class="text-muted">JPG, PNG, GIF. Máximo 2MB. Deja en blanco para mantener la imagen actual.</small>
+                                </div>
+                            </div>
 
-            <!-- Privacidad -->
-            <div class="community-form-check">
-                <input type="checkbox" 
-                       id="is_private" 
-                       name="is_private" 
-                       value="1"
-                       {{ old('is_private', $community->is_private) ? 'checked' : '' }}>
-                <label for="is_private">
-                    <i class="fas fa-lock me-2"></i>
-                    Hacer esta comunidad privada
-                </label>
-            </div>
-            <small class="text-muted d-block mt-2">
-                Las comunidades privadas solo son visibles para los miembros invitados
-            </small>
+                            <!-- Columna derecha - Formulario -->
+                            <div class="col-md-8">
+                                <!-- Nombre de la comunidad -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">
+                                        Nombre de la comunidad <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control @error('name') is-invalid @enderror" 
+                                           id="name" 
+                                           name="name" 
+                                           value="{{ old('name', $community->name) }}" 
+                                           maxlength="100" 
+                                           placeholder="Ej: Amantes del Rock Clásico"
+                                           required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-            <!-- Estadísticas -->
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="text-center p-3 bg-secondary bg-opacity-20 rounded">
-                        <div class="text-success h4 mb-1">{{ $community->members_count }}</div>
-                        <div class="text-muted small">Miembros</div>
-                    </div>
+                                <!-- Descripción -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Descripción</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" 
+                                              id="description" 
+                                              name="description" 
+                                              rows="4" 
+                                              maxlength="500"
+                                              placeholder="Describe de qué trata tu comunidad, qué tipo de música comparten, reglas, etc.">{{ old('description', $community->description) }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <small class="text-muted">Máximo 500 caracteres</small>
+                                </div>
+
+                                <!-- Privacidad -->
+                                <div class="mb-4">
+                                    <label class="form-label">Privacidad</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="radio" 
+                                               name="is_private" 
+                                               id="public" 
+                                               value="0" 
+                                               {{ old('is_private', $community->is_private ? '1' : '0') == '0' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="public">
+                                            <i class="fas fa-globe me-2"></i>
+                                            <strong>Pública</strong>
+                                            <br>
+                                            <small class="text-muted">Cualquier usuario puede encontrar y unirse a esta comunidad</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="radio" 
+                                               name="is_private" 
+                                               id="private" 
+                                               value="1" 
+                                               {{ old('is_private', $community->is_private ? '1' : '0') == '1' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="private">
+                                            <i class="fas fa-lock me-2"></i>
+                                            <strong>Privada</strong>
+                                            <br>
+                                            <small class="text-muted">Solo los usuarios invitados pueden ver y participar en esta comunidad</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="d-flex gap-3 justify-content-end">
+                            <a href="{{ route('communities.show', $community) }}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary-playlist">
+                                <i class="fas fa-save me-2"></i>
+                                Actualizar Comunidad
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <div class="text-center p-3 bg-secondary bg-opacity-20 rounded">
-                        <div class="text-success h4 mb-1">{{ $community->posts_count }}</div>
-                        <div class="text-muted small">Publicaciones</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center p-3 bg-secondary bg-opacity-20 rounded">
-                        <div class="text-success h4 mb-1">{{ $community->created_at->diffForHumans() }}</div>
-                        <div class="text-muted small">Creada</div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Botones -->
-            <div class="d-flex gap-3 mt-4">
-                <button type="submit" class="btn-community btn-community-primary flex-fill">
-                    <i class="fas fa-save me-2"></i>
-                    Guardar Cambios
-                </button>
-                <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-secondary">
-                    <i class="fas fa-times me-2"></i>
-                    Cancelar
-                </a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Zona peligrosa -->
-    <div class="mt-5">
-        <div class="border border-danger rounded p-4">
-            <h5 class="text-danger mb-3">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                Zona Peligrosa
-            </h5>
-            <p class="text-muted mb-3">
-                Una vez que elimines la comunidad, no hay vuelta atrás. Por favor, ten cuidado.
-            </p>
-            <form action="{{ route('communities.destroy', $community) }}" method="POST" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-community btn-community-danger"
-                        onclick="return confirm('¿Estás absolutamente seguro? Esta acción eliminará la comunidad y todas sus publicaciones de forma permanente.')">
-                    <i class="fas fa-trash me-2"></i>
-                    Eliminar Comunidad
-                </button>
-            </form>
         </div>
     </div>
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
-document.getElementById('cover_image').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('image-preview');
-    const previewImg = document.getElementById('preview-img');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            preview.style.display = 'block';
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Vista previa" class="img-fluid rounded">`;
+            }
+            reader.readAsDataURL(input.files[0]);
         }
-        reader.readAsDataURL(file);
-    } else {
-        preview.style.display = 'none';
     }
-});
 </script>
-@endsection
+@endpush

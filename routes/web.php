@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\CommunityRequestController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,9 +31,16 @@ Route::middleware([
     
     // Rutas de comunidades
     Route::resource('communities', CommunityController::class);
+    Route::get('/communities/search', [CommunityController::class, 'search'])->name('communities.search');
     Route::post('/communities/{community}/join', [CommunityController::class, 'join'])->name('communities.join');
     Route::post('/communities/{community}/leave', [CommunityController::class, 'leave'])->name('communities.leave');
     Route::get('/communities/{community}/create-post', [CommunityController::class, 'createPost'])->name('communities.create-post');
+    
+    // Rutas para solicitudes de membresía a comunidades privadas
+    Route::post('/communities/{community}/request', [CommunityRequestController::class, 'store'])->name('communities.request');
+    Route::get('/communities/{community}/requests', [CommunityRequestController::class, 'index'])->name('communities.requests');
+    Route::patch('/community-requests/{request}/approve', [CommunityRequestController::class, 'approve'])->name('community-requests.approve');
+    Route::patch('/community-requests/{request}/reject', [CommunityRequestController::class, 'reject'])->name('community-requests.reject');
     
     // Rutas adicionales para funcionalidad de Spotify
     Route::get('/playlists/search/spotify', [PlaylistController::class, 'searchSpotify'])->name('playlists.search');

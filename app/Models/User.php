@@ -190,4 +190,15 @@ class User extends Authenticatable
     {
         return $this->communities()->detach($community->id);
     }
+
+    /**
+     * Obtener el total de solicitudes pendientes para las comunidades que posee el usuario
+     */
+    public function totalPendingCommunityRequests()
+    {
+        return $this->ownedCommunities()
+            ->join('community_requests', 'communities.id', '=', 'community_requests.community_id')
+            ->where('community_requests.status', 'pending')
+            ->count();
+    }
 }

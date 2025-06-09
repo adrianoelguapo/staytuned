@@ -7,20 +7,93 @@
 @endpush
 
 @section('content')
-<div class="container-xl mt-5">    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2 class="text-white mb-2">
-                Comunidades
-            </h2>
-        </div>
-        <a href="{{ route('communities.create') }}" class="btn-new-playlist">
-            <i class="fas fa-plus me-2"></i>
-            Crear Comunidad
-        </a>
-    </div>    <!-- Mis Comunidades -->
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="text-white mb-2">
+                        Comunidades
+                    </h2>
+                </div>
+                <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+                    <i class="fas fa-plus me-2"></i>
+                    Crear Comunidad
+                </a>
+            </div>
+
+            <!-- Notificaciones de solicitudes pendientes -->
+            @if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0)
+            <div class="alert alert-info mb-4">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-bell fa-2x text-primary"></i>
+                    </div>
+                    <div class="col">
+                        <h6 class="mb-1">
+                            <strong>{{ $pendingCommunityRequests }}</strong> 
+                            {{ $pendingCommunityRequests == 1 ? 'solicitud pendiente' : 'solicitudes pendientes' }}
+                        </h6>
+                        <p class="mb-0 small">
+                            Tienes {{ $pendingCommunityRequests == 1 ? 'una solicitud' : 'solicitudes' }} de membresía esperando tu aprobación.
+                        </p>
+                    </div>
+                    <div class="col-auto">
+                        <a href="#mis-comunidades" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye me-1"></i>
+                            Revisar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <!-- Buscar Comunidades Privadas -->
+            <div class="card dashboard-card mb-4">
+                <div class="card-body">
+                    <h5 class="text-white mb-3">
+                        <i class="fas fa-search me-2"></i>
+                        Buscar Comunidades Privadas
+                    </h5>
+                    <p class="text-muted small mb-3">
+                        ¿Conoces el nombre de una comunidad privada? Búscala aquí para solicitar membresía.
+                    </p>
+                    
+                    <form id="searchPrivateCommunitiesForm" class="row g-3">
+                        <div class="col-md-8">
+                            <input type="text" 
+                                   class="form-control bg-secondary border-0 text-white" 
+                                   id="searchCommunityInput"
+                                   placeholder="Buscar por nombre de comunidad..."
+                                   autocomplete="off">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-purple w-100">
+                                <i class="fas fa-search me-2"></i>
+                                Buscar
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Resultados de búsqueda -->
+                    <div id="searchResults" class="mt-3" style="display: none;">
+                        <h6 class="text-white mb-2">Resultados:</h6>
+                        <div id="resultsContainer"></div>
+                    </div>
+
+                    <!-- Loading spinner -->
+                    <div id="searchLoading" class="text-center mt-3" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Buscando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mis Comunidades -->
     @if($ownedCommunities->count() > 0)
-    <div class="community-section">
+    <div class="community-section" id="mis-comunidades">
         <h3 class="community-section-title">
             <i class="fas fa-crown"></i>
             Mis Comunidades
@@ -261,13 +334,30 @@
                                         <i class="fas fa-eye me-1"></i>
                                         Ver
                                     </a>
-                                    <form action="{{ route('communities.join', $community) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn-community btn-community-primary btn-sm">
-                                            <i class="fas fa-plus me-1"></i>
-                                            Unirse
-                                        </button>
-                                    </form>
+                                    @if($community->is_private)
+                                        @if($community->hasPendingRequest(Auth::user()))
+                                            <button class="btn-community btn-community-secondary btn-sm" disabled>
+                                                <i class="fas fa-clock me-1"></i>
+                                                Solicitud Enviada
+                                            </button>
+                                        @else
+                                            <button type="button" 
+                                                    class="btn-community btn-community-primary btn-sm" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#requestModal{{ $community->id }}">
+                                                <i class="fas fa-paper-plane me-1"></i>
+                                                Solicitar Unirse
+                                            </button>
+                                        @endif
+                                    @else
+                                        <form action="{{ route('communities.join', $community) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn-community btn-community-primary btn-sm">
+                                                <i class="fas fa-plus me-1"></i>
+                                                Unirse
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -295,5 +385,252 @@
             </div>
         </div>
     @endif
+        </div>
+    </div>
 </div>
+
+<!-- Modales para solicitar membresía -->
+@foreach($publicCommunities as $community)
+    @if($community->is_private)
+        <!-- Modal para solicitar membresía -->
+        <div class="modal fade" id="requestModal{{ $community->id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ $community->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+                    <div class="modal-header border-bottom border-white border-opacity-25">
+                        <h5 class="modal-title text-white" id="requestModalLabel{{ $community->id }}">
+                            Solicitar unirse a {{ $community->name }}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <form action="{{ route('communities.request', $community) }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="message{{ $community->id }}" class="form-label text-white">Mensaje (opcional)</label>
+                                <textarea 
+                                    class="form-control" 
+                                    id="message{{ $community->id }}" 
+                                    name="message" 
+                                    rows="3" 
+                                    placeholder="Escribe un mensaje para el administrador de la comunidad..."
+                                    style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: white;"
+                                ></textarea>
+                            </div>
+                            <p class="text-white-50 small">
+                                Tu solicitud será enviada al administrador de la comunidad para su revisión.
+                            </p>
+                        </div>
+                        <div class="modal-footer border-top border-white border-opacity-25">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-1"></i>
+                                Enviar Solicitud
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
+
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('searchPrivateCommunitiesForm');
+    const searchInput = document.getElementById('searchCommunityInput');
+    const searchResults = document.getElementById('searchResults');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const searchLoading = document.getElementById('searchLoading');
+
+    // Función para buscar comunidades
+    function searchCommunities(query) {
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        searchLoading.style.display = 'block';
+        searchResults.style.display = 'none';
+
+        fetch(`/communities/search?q=${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            searchLoading.style.display = 'none';
+            displayResults(data.communities);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            searchLoading.style.display = 'none';
+            resultsContainer.innerHTML = '<div class="alert alert-danger">Error al buscar comunidades</div>';
+            searchResults.style.display = 'block';
+        });
+    }
+
+    // Función para mostrar resultados
+    function displayResults(communities) {
+        if (communities.length === 0) {
+            resultsContainer.innerHTML = '<div class="alert alert-info">No se encontraron comunidades con ese nombre</div>';
+        } else {
+            let html = '';
+            communities.forEach(community => {
+                const statusBadge = getStatusBadge(community.request_status);
+                const actionButton = getActionButton(community);
+                
+                html += `
+                    <div class="card bg-dark bg-opacity-50 mb-2">
+                        <div class="card-body py-3">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    ${community.cover_image 
+                                        ? `<img src="/storage/${community.cover_image}" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">`
+                                        : `<div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="fas fa-users text-white"></i></div>`
+                                    }
+                                </div>
+                                <div class="col">
+                                    <h6 class="text-white mb-1">${community.name}</h6>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-lock me-1"></i>Privada
+                                        </span>
+                                        ${statusBadge}
+                                    </div>
+                                    ${community.description ? `<p class="text-muted small mb-0 mt-1">${community.description}</p>` : ''}
+                                </div>
+                                <div class="col-auto">
+                                    ${actionButton}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            resultsContainer.innerHTML = html;
+        }
+        searchResults.style.display = 'block';
+    }
+
+    // Función para obtener el badge de estado
+    function getStatusBadge(status) {
+        switch(status) {
+            case 'pending':
+                return '<span class="badge bg-warning text-dark"><i class="fas fa-clock me-1"></i>Pendiente</span>';
+            case 'approved':
+                return '<span class="badge bg-success"><i class="fas fa-check me-1"></i>Miembro</span>';
+            case 'rejected':
+                return '<span class="badge bg-danger"><i class="fas fa-times me-1"></i>Rechazada</span>';
+            default:
+                return '';
+        }
+    }
+
+    // Función para obtener el botón de acción
+    function getActionButton(community) {
+        if (community.is_owner) {
+            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-eye me-1"></i>Ver
+                    </a>`;
+        } else if (community.is_member) {
+            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-eye me-1"></i>Ver
+                    </a>`;
+        } else if (community.request_status === 'pending') {
+            return `<span class="text-muted small">Solicitud enviada</span>`;
+        } else if (community.request_status === 'rejected') {
+            return `<button class="btn btn-sm btn-outline-primary" onclick="requestMembership(${community.id}, '${community.name}')">
+                        <i class="fas fa-paper-plane me-1"></i>Solicitar de nuevo
+                    </button>`;
+        } else {
+            return `<button class="btn btn-sm btn-primary" onclick="requestMembership(${community.id}, '${community.name}')">
+                        <i class="fas fa-paper-plane me-1"></i>Solicitar
+                    </button>`;
+        }
+    }
+
+    // Event listeners
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        searchCommunities(searchInput.value.trim());
+    });
+
+    // Búsqueda en tiempo real con debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchCommunities(this.value.trim());
+        }, 300);
+    });
+});
+
+// Función global para solicitar membresía desde los resultados de búsqueda
+function requestMembership(communityId, communityName) {
+    // Crear y mostrar modal dinámico
+    const modalHtml = `
+        <div class="modal fade" id="searchRequestModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-white">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Solicitar membresía a ${communityName}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form id="searchRequestForm" action="/communities/${communityId}/request" method="POST">
+                        <input type="hidden" name="_token" value="${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="searchMessage" class="form-label">Mensaje para el administrador (opcional)</label>
+                                <textarea class="form-control bg-secondary border-0 text-white" 
+                                          id="searchMessage" 
+                                          name="message" 
+                                          rows="3" 
+                                          placeholder="¿Por qué te gustaría unirte a esta comunidad?"></textarea>
+                            </div>
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Tu solicitud será revisada por el administrador de la comunidad.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-purple">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Enviar solicitud
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remover modal anterior si existe
+    const existingModal = document.getElementById('searchRequestModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Agregar modal al DOM
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('searchRequestModal'));
+    modal.show();
+    
+    // Limpiar modal después de cerrarlo
+    document.getElementById('searchRequestModal').addEventListener('hidden.bs.modal', function() {
+        this.remove();
+    });
+}
+</script>
+@endpush

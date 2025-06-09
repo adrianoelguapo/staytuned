@@ -102,100 +102,280 @@
     <main class="dashboard-container container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
-                <!-- Estadísticas generales -->
-                <div class="row mb-4">
+                
+                <!-- Header del Dashboard -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="text-white mb-1">
+                            <i class="fas fa-home me-2"></i>
+                            Dashboard
+                        </h1>
+                        <p class="text-light mb-0">Mantente al día con las publicaciones de tus seguidos y comunidades</p>
+                    </div>
+                </div>
+
+                <!-- Estadísticas rápidas -->
+                <div class="row mb-5">
                     <div class="col-md-4 mb-3">
                         <div class="card dashboard-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-file-earmark-text fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title">Total Publicaciones</h5>
-                                <p class="card-text fs-4 fw-bold"><?php echo e($stats['total_posts'] ?? 0); ?></p>
+                                <i class="fas fa-user-friends fs-1 text-primary mb-2"></i>
+                                <h5 class="card-title text-white">Siguiendo</h5>
+                                <p class="card-text fs-4 fw-bold text-white"><?php echo e($stats['following_count'] ?? 0); ?></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="card dashboard-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-people fs-1 text-success mb-2"></i>
-                                <h5 class="card-title">Total Usuarios</h5>
-                                <p class="card-text fs-4 fw-bold"><?php echo e($stats['total_users'] ?? 0); ?></p>
+                                <i class="fas fa-users fs-1 text-success mb-2"></i>
+                                <h5 class="card-title text-white">Mis Comunidades</h5>
+                                <p class="card-text fs-4 fw-bold text-white"><?php echo e($stats['communities_count'] ?? 0); ?></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="card dashboard-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-person-check fs-1 text-info mb-2"></i>
-                                <h5 class="card-title">Mis Publicaciones</h5>
-                                <p class="card-text fs-4 fw-bold"><?php echo e($stats['user_posts'] ?? 0); ?></p>
+                                <i class="fas fa-newspaper fs-1 text-info mb-2"></i>
+                                <h5 class="card-title text-white">Mis Publicaciones</h5>
+                                <p class="card-text fs-4 fw-bold text-white"><?php echo e($stats['user_posts'] ?? 0); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Widget de publicaciones recientes -->
-                <div class="card dashboard-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Publicaciones Recientes</h5>
-                        <a href="<?php echo e(route('posts.index')); ?>" class="btn btn-sm btn-outline-primary">Ver todas</a>
+                <!-- Sección de Publicaciones de Seguidos -->
+                <div class="mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-white mb-0">
+                            <i class="fas fa-user-friends me-2"></i>
+                            Publicaciones de Seguidos
+                        </h2>
+                        <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-search me-1"></i>
+                            Explorar más usuarios
+                        </a>
                     </div>
-                    <div class="card-body">
-                        <?php if($recentPosts && $recentPosts->count() > 0): ?>
-                            <?php $__currentLoopData = $recentPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="d-flex align-items-start mb-3 pb-3 <?php if(!$loop->last): ?> border-bottom <?php endif; ?>">
-                                    <?php if($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0): ?>
-                                        <img src="<?php echo e($post->spotify_data['images'][0]['url']); ?>" 
-                                             alt="<?php echo e($post->getSpotifyNameAttribute()); ?>" 
-                                             class="rounded me-3" 
-                                             style="width: 60px; height: 60px; object-fit: cover;">
-                                    <?php else: ?>
-                                        <div class="bg-secondary rounded me-3 d-flex align-items-center justify-content-center" 
-                                             style="width: 60px; height: 60px;">
-                                            <i class="bi bi-music-note text-white"></i>
-                                        </div>
-                                    <?php endif; ?>
-                                    
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">
-                                            <a href="<?php echo e(route('posts.show', $post)); ?>" class="text-decoration-none">
-                                                <?php echo e($post->title); ?>
 
-                                            </a>
-                                        </h6>
-                                        <?php if($post->spotify_data): ?>
-                                            <p class="text-muted small mb-1">
-                                                <strong><?php echo e($post->getSpotifyNameAttribute()); ?></strong>
-                                                <?php if($post->getSpotifyArtistAttribute()): ?>
-                                                    por <?php echo e($post->getSpotifyArtistAttribute()); ?>
-
+                    <?php if($followingPosts && $followingPosts->count() > 0): ?>
+                        <div class="posts-list">
+                            <?php $__currentLoopData = $followingPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="post-card-full-width mb-4">
+                                    <div class="post-card-body">
+                                        <!-- Contenido principal -->
+                                        <div class="post-content-wrapper">
+                                            <!-- Imagen/Cover de la publicación -->
+                                            <div class="post-cover-container">
+                                                <?php if($post->cover || ($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0)): ?>
+                                                    <img src="<?php echo e($post->cover ?: $post->spotify_data['images'][0]['url']); ?>" 
+                                                         alt="<?php echo e($post->title); ?>"
+                                                         class="post-cover-image"
+                                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                    <div class="post-cover-placeholder" style="display: none;">
+                                                        <i class="fas fa-newspaper"></i>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="post-cover-placeholder">
+                                                        <i class="fas fa-newspaper"></i>
+                                                    </div>
                                                 <?php endif; ?>
-                                            </p>
-                                        <?php endif; ?>
-                                        <small class="text-muted">
-                                            Por <?php echo e($post->user->username); ?> en <?php echo e($post->category->name); ?> 
-                                            · <?php echo e($post->created_at->diffForHumans()); ?>
+                                            </div>
+                                            
+                                            <!-- Información del post -->
+                                            <div class="post-info-container">
+                                                <div class="post-header-section">
+                                                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
+                                                        <h3 class="post-title"><?php echo e($post->title); ?></h3>
+                                                    </a>
+                                                    <span class="post-category-badge"><?php echo e($post->category->name); ?></span>
+                                                </div>
+                                                
+                                                <?php if($post->content || $post->description): ?>
+                                                    <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($post->spotify_data): ?>
+                                                    <div class="spotify-info-card">
+                                                        <i class="fab fa-spotify spotify-icon"></i>
+                                                        <div class="spotify-text">
+                                                            <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
+                                                            <?php if($post->spotify_artist): ?>
+                                                                <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                                
+                                                <!-- Meta información y acciones -->
+                                                <div class="post-footer-section">
+                                                    <div class="post-meta-info">
+                                                        <span class="post-author">
+                                                            <i class="fas fa-user me-1"></i>
+                                                            <?php echo e($post->user->username); ?>
 
-                                        </small>
-                                    </div>
-                                    
-                                    <div class="text-end">
-                                        <small class="text-muted d-block">
-                                            <i class="bi bi-heart"></i> <?php echo e($post->likes_count); ?>
+                                                        </span>
+                                                        <span class="post-date">
+                                                            <i class="fas fa-calendar me-1"></i>
+                                                            <?php echo e($post->created_at->diffForHumans()); ?>
 
-                                        </small>
+                                                        </span>
+                                                        <span class="post-stat">
+                                                            <i class="fas fa-heart me-1"></i>
+                                                            <?php echo e($post->likes_count ?? 0); ?> likes
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    <div class="post-actions-section">
+                                                        <a href="<?php echo e(route('posts.show', $post)); ?>" class="btn-community btn-community-primary btn-sm">
+                                                            <i class="fas fa-eye me-1"></i>
+                                                            Ver
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php else: ?>
-                            <div class="text-center py-4">
-                                <i class="bi bi-file-earmark-text fs-1 text-muted mb-3"></i>
-                                <p class="text-muted">No hay publicaciones aún.</p>
-                                <a href="<?php echo e(route('posts.create')); ?>" class="btn btn-primary">
-                                    <i class="bi bi-plus-circle me-2"></i>Crear primera publicación
+                        </div>
+                    <?php else: ?>
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center py-5">
+                                <i class="fas fa-user-friends fa-3x text-muted mb-3"></i>
+                                <h5 class="text-white mb-2">Sin publicaciones de seguidos</h5>
+                                <p class="text-light mb-3">No sigues a ningún usuario aún o no han publicado contenido.</p>
+                                <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-outline-light">
+                                    <i class="fas fa-search me-2"></i>
+                                    Explorar usuarios
                                 </a>
                             </div>
-                        <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Sección de Publicaciones de Comunidades -->
+                <div class="mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-white mb-0">
+                            <i class="fas fa-users me-2"></i>
+                            Publicaciones de Mis Comunidades
+                        </h2>
+                        <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-users me-1"></i>
+                            Ver mis comunidades
+                        </a>
                     </div>
+
+                    <?php if($communityPosts && $communityPosts->count() > 0): ?>
+                        <div class="posts-list">
+                            <?php $__currentLoopData = $communityPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="post-card-full-width mb-4">
+                                    <div class="post-card-body">
+                                        <!-- Contenido principal -->
+                                        <div class="post-content-wrapper">
+                                            <!-- Imagen/Cover de la publicación -->
+                                            <div class="post-cover-container">
+                                                <?php if($post->cover || ($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0)): ?>
+                                                    <img src="<?php echo e($post->cover ?: $post->spotify_data['images'][0]['url']); ?>" 
+                                                         alt="<?php echo e($post->title); ?>"
+                                                         class="post-cover-image"
+                                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                    <div class="post-cover-placeholder" style="display: none;">
+                                                        <i class="fas fa-newspaper"></i>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="post-cover-placeholder">
+                                                        <i class="fas fa-newspaper"></i>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            
+                                            <!-- Información del post -->
+                                            <div class="post-info-container">
+                                                <div class="post-header-section">
+                                                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
+                                                        <h3 class="post-title"><?php echo e($post->title); ?></h3>
+                                                    </a>
+                                                    <div class="d-flex gap-2">
+                                                        <span class="post-category-badge"><?php echo e($post->category->name); ?></span>
+                                                        <?php if($post->community): ?>
+                                                            <span class="community-badge community-badge-public">
+                                                                <i class="fas fa-users me-1"></i>
+                                                                <?php echo e($post->community->name); ?>
+
+                                                            </span>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                                
+                                                <?php if($post->content || $post->description): ?>
+                                                    <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($post->spotify_data): ?>
+                                                    <div class="spotify-info-card">
+                                                        <i class="fab fa-spotify spotify-icon"></i>
+                                                        <div class="spotify-text">
+                                                            <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
+                                                            <?php if($post->spotify_artist): ?>
+                                                                <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                                
+                                                <!-- Meta información y acciones -->
+                                                <div class="post-footer-section">
+                                                    <div class="post-meta-info">
+                                                        <span class="post-author">
+                                                            <i class="fas fa-user me-1"></i>
+                                                            <?php echo e($post->user->username); ?>
+
+                                                        </span>
+                                                        <span class="post-date">
+                                                            <i class="fas fa-calendar me-1"></i>
+                                                            <?php echo e($post->created_at->diffForHumans()); ?>
+
+                                                        </span>
+                                                        <span class="post-stat">
+                                                            <i class="fas fa-heart me-1"></i>
+                                                            <?php echo e($post->likes_count ?? 0); ?> likes
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    <div class="post-actions-section">
+                                                        <a href="<?php echo e(route('posts.show', $post)); ?>" class="btn-community btn-community-primary btn-sm">
+                                                            <i class="fas fa-eye me-1"></i>
+                                                            Ver
+                                                        </a>
+                                                        <?php if($post->community): ?>
+                                                            <a href="<?php echo e(route('communities.show', $post->community)); ?>" class="btn-community btn-community-secondary btn-sm">
+                                                                <i class="fas fa-users me-1"></i>
+                                                                Comunidad
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center py-5">
+                                <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                                <h5 class="text-white mb-2">Sin publicaciones de comunidades</h5>
+                                <p class="text-light mb-3">No perteneces a ninguna comunidad aún o no hay publicaciones nuevas.</p>
+                                <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light">
+                                    <i class="fas fa-users me-2"></i>
+                                    Explorar comunidades
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

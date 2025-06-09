@@ -50,6 +50,22 @@ class Community extends Model
     }
 
     /**
+     * Obtener las solicitudes de membresía de la comunidad
+     */
+    public function requests()
+    {
+        return $this->hasMany(CommunityRequest::class);
+    }
+
+    /**
+     * Obtener las solicitudes pendientes de membresía
+     */
+    public function pendingRequests()
+    {
+        return $this->hasMany(CommunityRequest::class)->where('status', 'pending');
+    }
+
+    /**
      * Verificar si un usuario es miembro de la comunidad
      */
     public function hasMember(User $user)
@@ -101,5 +117,48 @@ class Community extends Model
     public function getPostsCountAttribute()
     {
         return $this->posts()->count();
+    }
+
+    /**
+     * Verificar si un usuario tiene una solicitud pendiente
+     */
+    public function hasPendingRequest(User $user)
+    {
+        return $this->requests()
+                    ->where('user_id', $user->id)
+                    ->where('status', 'pending')
+                    ->exists();
+    }
+
+    /**
+     * Verificar si un usuario puede unirse a la comunidad
+     */
+    public function canUserJoin(User $user)
+    {
+        // No puede unirse si ya es miembro
+        if ($this->hasMember($user)) {
+            return false;
+        }
+        
+        // No puede unirse si es el propietario
+        if ($this->isOwner($user)) {
+            return false;
+        }
+        
+        // Si es pública, puede unirse directamente
+        if (!$this->is_private) {
+            return true;
+        }
+        
+        // Si es privada, solo puede solicitar membresía si no tiene una solicitud pendiente
+        return !$this->hasPendingRequest($user);
+    }
+
+    /**
+     * Obtener el conteo de solicitudes pendientes
+     */
+    public function pendingRequestsCount()
+    {
+        return $this->requests()->where('status', 'pending')->count();
     }
 }

@@ -375,7 +375,7 @@ body.dashboard-body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.8);
   padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: all 0.3s ease;
 }
 
@@ -1126,6 +1126,10 @@ small.text-muted {
 }
 
 /* Estado vacío específico para dashboard cards */
+.dashboard-card h4 {
+  color: #fff !important;
+}
+
 .dashboard-card .text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
   font-size: 1rem !important;
@@ -1138,8 +1142,8 @@ small.text-muted {
 }
 
 .dashboard-card .display-1 {
-  font-size: 3.5rem !important;
-  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 6rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Invalid feedback con glassmorphism */
