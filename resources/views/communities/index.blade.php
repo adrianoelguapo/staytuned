@@ -7,16 +7,14 @@
 @endpush
 
 @section('content')
-<div class="container-xl">    <!-- Header -->
+<div class="container-xl mt-5">    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="text-white mb-2">
-                <i class="fas fa-users me-2"></i>
                 Comunidades
             </h2>
-            <p class="text-muted mb-0">Descubre y únete a comunidades musicales</p>
         </div>
-        <a href="{{ route('communities.create') }}" class="btn-community btn-community-primary">
+        <a href="{{ route('communities.create') }}" class="btn-new-playlist">
             <i class="fas fa-plus me-2"></i>
             Crear Comunidad
         </a>
@@ -283,15 +281,19 @@
 
     <!-- Estado vacío -->
     @if($ownedCommunities->count() == 0 && $userCommunities->count() == 0 && $publicCommunities->count() == 0)
-    <div class="community-empty">
-        <i class="fas fa-users"></i>
-        <h3>No hay comunidades disponibles</h3>
-        <p>Crea la primera comunidad y conecta con otros amantes de la música</p>
-        <a href="{{ route('communities.create') }}" class="btn-community btn-community-primary mt-3">
-            <i class="fas fa-plus me-2"></i>
-            Crear Primera Comunidad
-        </a>
-    </div>
+        <div class="card dashboard-card text-center py-5">
+            <div class="card-body">
+                <i class="bi bi-people display-1 text-light mb-3"></i>
+                <h4 class="text-light mb-3">No hay comunidades disponibles</h4>
+                <p class="text-light mb-4">
+                    Crea la primera comunidad y conecta con otros amantes de la música
+                </p>
+                <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Crear Primera Comunidad
+                </a>
+            </div>
+        </div>
     @endif
 </div>
 @endsection

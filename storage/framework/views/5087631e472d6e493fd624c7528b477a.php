@@ -52,7 +52,7 @@
             </a>
             <a href="<?php echo e(route('communities.index')); ?>" 
                class="nav-link-inline <?php echo e(request()->routeIs('communities.*') ? 'active' : ''); ?>">
-                Comunidades
+                Mis Comunidades
             </a>
 
             <!-- Dropdown de usuario -->
@@ -118,7 +118,7 @@
                 </a>
                 <a class="nav-link <?php echo e(request()->routeIs('communities.*') ? 'active' : ''); ?>" 
                    href="<?php echo e(route('communities.index')); ?>">
-                    <i class="fas fa-users me-2"></i> Comunidades
+                    <i class="fas fa-users me-2"></i> Mis Comunidades
                 </a>
             </nav>
             <hr class="my-0 border-secondary">

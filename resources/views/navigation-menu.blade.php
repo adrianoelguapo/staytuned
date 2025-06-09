@@ -22,7 +22,7 @@
                         {{ __('Playlists') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('communities.index') }}" :active="request()->routeIs('communities.*')">
-                        {{ __('Comunidades') }}
+                        {{ __('Mis Comunidades') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('explore.users.index') }}" :active="request()->routeIs('explore.users.*')">
                         {{ __('Explorar Usuarios') }}
@@ -161,7 +161,7 @@
                 {{ __('Playlists') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('communities.index') }}" :active="request()->routeIs('communities.*')">
-                {{ __('Comunidades') }}
+                {{ __('Mis Comunidades') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('explore.users.index') }}" :active="request()->routeIs('explore.users.*')">
                 {{ __('Explorar Usuarios') }}

@@ -49,7 +49,7 @@
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
                 Mis Publicaciones
             </a>
-            <a href="#" class="nav-link-inline">Mis comunidades</a>
+            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
 
             <!-- Usuario -->
             <div class="dropdown">
@@ -110,7 +110,7 @@
                    href="{{ route('posts.index') }}">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('communities.index') }}">
                     <i class="fas fa-users me-2"></i> Mis comunidades
                 </a>
             </nav>
