@@ -6,8 +6,8 @@
     <title>Mis Playlists | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -21,16 +21,16 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">StayTuned</a>
+            <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('dashboard')); ?>">StayTuned</a>
         </div>
 
         <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline active">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
+            <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
+            <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar usuarios</a>
+            <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline active">Mis playlists</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline">Mis Publicaciones</a>
+            <a href="<?php echo e(route('communities.index')); ?>" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -39,23 +39,24 @@
                    role="button"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img src="{{ Auth::user()->profile_photo_url }}"
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
                              class="rounded-circle me-2 user-photo-small"
-                             alt="{{ Auth::user()->name }}" />
-                    @endif
-                    {{ Auth::user()->username }}
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit"
                                     class="dropdown-item d-flex align-items-center text-danger">
                                 <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -75,19 +76,19 @@
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
-                <a class="nav-link active" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link" href="{{ route('posts.index') }}">Mis Publicaciones</a>
-                <a class="nav-link" href="{{ route('communities.index') }}">Mis comunidades</a>
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">Explorar usuarios</a>
+                <a class="nav-link active" href="<?php echo e(route('playlists.index')); ?>">Mis playlists</a>
+                <a class="nav-link" href="<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
+                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">Mis comunidades</a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
+                <a class="nav-link d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -109,51 +110,53 @@
                         </h1>
                         <p class="text-white mb-0">Organiza y gestiona tus colecciones musicales personalizadas</p>
                     </div>
-                    <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                    <a href="<?php echo e(route('playlists.create')); ?>" class="btn btn-new-playlist">
                         <i class="bi bi-plus-circle me-2"></i>
                         Nueva Playlist
                     </a>
                 </div>
 
-                @if (session('success'))
+                <?php if(session('success')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
+                        <?php echo e(session('success')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if (session('error'))
+                <?php if(session('error')): ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
+                        <?php echo e(session('error')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if($playlists->count() > 0)
+                <?php if($playlists->count() > 0): ?>
                     <!-- Grid de playlists -->
                     <div class="row g-4">
-                        @foreach($playlists as $playlist)
+                        <?php $__currentLoopData = $playlists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $playlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="playlist-card">
                                     <!-- Imagen de la playlist -->
                                     <div class="playlist-image">
-                                        @if($playlist->cover)
-                                            <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                                 alt="{{ $playlist->name }}"
+                                        <?php if($playlist->cover): ?>
+                                            <img src="<?php echo e(asset('storage/' . $playlist->cover)); ?>" 
+                                                 alt="<?php echo e($playlist->name); ?>"
                                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             <div class="playlist-placeholder" style="display: none;">
                                                 <i class="bi bi-music-note-beamed"></i>
                                             </div>
-                                        @else
+                                        <?php else: ?>
                                             <div class="playlist-placeholder">
                                                 <i class="bi bi-music-note-beamed"></i>
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
                                         
                                         <!-- Overlay con botones -->
                                         <div class="playlist-overlay">
                                             <div class="playlist-actions">
-                                                <a href="{{ route('playlists.show', $playlist) }}" 
+                                                <a href="<?php echo e(route('playlists.show', $playlist)); ?>" 
                                                    class="btn btn-play">
                                                     <i class="bi bi-play-fill"></i>
                                                 </a>
@@ -164,22 +167,22 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.show', $playlist) }}">
+                                                            <a class="dropdown-item" href="<?php echo e(route('playlists.show', $playlist)); ?>">
                                                                 <i class="bi bi-eye me-2"></i>Ver
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
+                                                            <a class="dropdown-item" href="<?php echo e(route('playlists.edit', $playlist)); ?>">
                                                                 <i class="bi bi-pencil me-2"></i>Editar
                                                             </a>
                                                         </li>
                                                         <li><hr class="dropdown-divider"></li>
                                                         <li>
-                                                            <form action="{{ route('playlists.destroy', $playlist) }}" 
+                                                            <form action="<?php echo e(route('playlists.destroy', $playlist)); ?>" 
                                                                   method="POST" 
                                                                   onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
                                                                 <button type="submit" class="dropdown-item text-danger">
                                                                     <i class="bi bi-trash me-2"></i>Eliminar
                                                                 </button>
@@ -193,34 +196,36 @@
                                     
                                     <!-- Info de la playlist -->
                                     <div class="playlist-info">
-                                        <h5 class="playlist-title">{{ $playlist->name }}</h5>
-                                        @if($playlist->description)
-                                            <p class="playlist-description">{{ Str::limit($playlist->description, 80) }}</p>
-                                        @endif
+                                        <h5 class="playlist-title"><?php echo e($playlist->name); ?></h5>
+                                        <?php if($playlist->description): ?>
+                                            <p class="playlist-description"><?php echo e(Str::limit($playlist->description, 80)); ?></p>
+                                        <?php endif; ?>
                                         <div class="playlist-meta">
                                             <span class="playlist-songs">
                                                 <i class="bi bi-music-note me-1"></i>
-                                                {{ $playlist->songs->count() }} canciones
+                                                <?php echo e($playlist->songs->count()); ?> canciones
                                             </span>
                                             <span class="playlist-privacy">
-                                                <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
-                                                {{ $playlist->is_public ? 'Pública' : 'Privada' }}
+                                                <i class="bi bi-<?php echo e($playlist->is_public ? 'globe' : 'lock'); ?> me-1"></i>
+                                                <?php echo e($playlist->is_public ? 'Pública' : 'Privada'); ?>
+
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 
                     <!-- Paginación si hay muchas playlists -->
-                    @if($playlists->hasPages())
+                    <?php if($playlists->hasPages()): ?>
                         <div class="d-flex justify-content-center mt-5">
-                            {{ $playlists->links() }}
-                        </div>
-                    @endif
+                            <?php echo e($playlists->links()); ?>
 
-                @else
+                        </div>
+                    <?php endif; ?>
+
+                <?php else: ?>
                     <!-- Estado vacío -->
                     <div class="card dashboard-card text-center py-5">
                         <div class="card-body">
@@ -229,13 +234,13 @@
                             <p class="text-muted mb-4">
                                 Crea tu primera playlist y comienza a organizar tu música favorita
                             </p>
-                            <a href="{{ route('playlists.create') }}" class="btn btn-new-playlist">
+                            <a href="<?php echo e(route('playlists.create')); ?>" class="btn btn-new-playlist">
                                 <i class="bi bi-plus-circle me-2"></i>
                                 Crear mi primera playlist
                             </a>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
             </div>
         </div>
@@ -301,3 +306,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\laragon\www\staytuned\resources\views/playlists/index.blade.php ENDPATH**/ ?>

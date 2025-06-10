@@ -1,12 +1,10 @@
-@extends('layouts.dashboard')
+<?php $__env->startSection('title', 'Comunidades'); ?>
 
-@section('title', 'Comunidades')
+<?php $__env->startPush('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/community-fixed.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
-@endpush
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
@@ -14,18 +12,18 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="text-white mb-2" style="font-size: 2.5rem;">
-                        Mis Comunidades
+                        Comunidades
                     </h1>
                     <p class="text-white mb-0">Administra y participa en las comunidades donde compartes tu pasión por la música</p>
                 </div>
-                <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+                <a href="<?php echo e(route('communities.create')); ?>" class="btn-new-playlist">
                     <i class="fas fa-plus me-2"></i>
                     Crear Comunidad
                 </a>
             </div>
 
             <!-- Notificaciones de solicitudes pendientes -->
-            @if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0)
+            <?php if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0): ?>
             <div class="alert alert-info mb-4">
                 <div class="row align-items-center">
                     <div class="col-auto">
@@ -33,11 +31,12 @@
                     </div>
                     <div class="col">
                         <h6 class="mb-1">
-                            <strong>{{ $pendingCommunityRequests }}</strong> 
-                            {{ $pendingCommunityRequests == 1 ? 'solicitud pendiente' : 'solicitudes pendientes' }}
+                            <strong><?php echo e($pendingCommunityRequests); ?></strong> 
+                            <?php echo e($pendingCommunityRequests == 1 ? 'solicitud pendiente' : 'solicitudes pendientes'); ?>
+
                         </h6>
                         <p class="mb-0 small">
-                            Tienes {{ $pendingCommunityRequests == 1 ? 'una solicitud' : 'solicitudes' }} de membresía esperando tu aprobación.
+                            Tienes <?php echo e($pendingCommunityRequests == 1 ? 'una solicitud' : 'solicitudes'); ?> de membresía esperando tu aprobación.
                         </p>
                     </div>
                     <div class="col-auto">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
 
             <!-- Buscar Comunidades Privadas -->
             <div class="card dashboard-card mb-4">
@@ -93,77 +92,78 @@
             </div>
 
             <!-- Mis Comunidades -->
-    @if($ownedCommunities->count() > 0)
+    <?php if($ownedCommunities->count() > 0): ?>
     <div class="community-section" id="mis-comunidades">
         <h3 class="community-section-title">
             <i class="fas fa-crown"></i>
             Mis Comunidades
         </h3>
         <div class="communities-list">
-            @foreach($ownedCommunities as $community)
+            <?php $__currentLoopData = $ownedCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="community-card-full-width">
                 <div class="community-card-body">
                     <!-- Contenido principal -->
                     <div class="community-content-wrapper">
                         <!-- Imagen/Cover de la comunidad -->
                         <div class="community-cover-container">
-                            @if($community->cover_image)
-                                <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                     alt="{{ $community->name }}"
+                            <?php if($community->cover_image): ?>
+                                <img src="<?php echo e(asset('storage/' . $community->cover_image)); ?>" 
+                                     alt="<?php echo e($community->name); ?>"
                                      class="community-cover-image">
-                            @else
+                            <?php else: ?>
                                 <div class="community-cover-placeholder">
                                     <i class="fas fa-users"></i>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         
                         <!-- Información de la comunidad -->
                         <div class="community-info-container">
                             <div class="community-header-section">
-                                <a href="{{ route('communities.show', $community) }}" class="community-title-link">
-                                    <h3 class="community-title">{{ $community->name }}</h3>
+                                <a href="<?php echo e(route('communities.show', $community)); ?>" class="community-title-link">
+                                    <h3 class="community-title"><?php echo e($community->name); ?></h3>
                                 </a>
-                                @if($community->is_private)
+                                <?php if($community->is_private): ?>
                                     <span class="community-badge community-badge-private">
                                         <i class="fas fa-lock"></i>
                                         Privada
                                     </span>
-                                @else
+                                <?php else: ?>
                                     <span class="community-badge community-badge-public">
                                         <i class="fas fa-globe"></i>
                                         Pública
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             
-                            @if($community->description)
-                                <p class="community-description">{{ Str::limit($community->description, 150) }}</p>
-                            @endif
+                            <?php if($community->description): ?>
+                                <p class="community-description"><?php echo e(Str::limit($community->description, 150)); ?></p>
+                            <?php endif; ?>
                             
                             <!-- Meta información y acciones -->
                             <div class="community-footer-section">
                                 <div class="community-meta-info">
                                     <span class="community-stat">
                                         <i class="fas fa-users me-1"></i>
-                                        {{ $community->members_count }} miembros
+                                        <?php echo e($community->members_count); ?> miembros
                                     </span>
                                     <span class="community-stat">
                                         <i class="fas fa-newspaper me-1"></i>
-                                        {{ $community->posts_count }} posts
+                                        <?php echo e($community->posts_count); ?> posts
                                     </span>
                                     <span class="community-date">
                                         <i class="fas fa-calendar me-1"></i>
-                                        {{ $community->created_at->diffForHumans() }}
+                                        <?php echo e($community->created_at->diffForHumans()); ?>
+
                                     </span>
                                 </div>
                                 
                                 <div class="community-actions-section">
-                                    <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-primary btn-sm">
+                                    <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn-community btn-community-primary btn-sm">
                                         <i class="fas fa-eye me-1"></i>
                                         Ver
                                     </a>
-                                    <a href="{{ route('communities.edit', $community) }}" class="btn-community btn-community-secondary btn-sm">
+                                    <a href="<?php echo e(route('communities.edit', $community)); ?>" class="btn-community btn-community-secondary btn-sm">
                                         <i class="fas fa-edit me-1"></i>
                                         Editar
                                     </a>
@@ -173,82 +173,83 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-    @endif    <!-- Comunidades Unidas -->
-    @if($userCommunities->count() > 0)
+    <?php endif; ?>    <!-- Comunidades Unidas -->
+    <?php if($userCommunities->count() > 0): ?>
     <div class="community-section">
         <h3 class="community-section-title">
             <i class="fas fa-handshake"></i>
             Comunidades Unidas
         </h3>
         <div class="communities-list">
-            @foreach($userCommunities as $community)
+            <?php $__currentLoopData = $userCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="community-card-full-width">
                 <div class="community-card-body">
                     <!-- Contenido principal -->
                     <div class="community-content-wrapper">
                         <!-- Imagen/Cover de la comunidad -->
                         <div class="community-cover-container">
-                            @if($community->cover_image)
-                                <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                     alt="{{ $community->name }}"
+                            <?php if($community->cover_image): ?>
+                                <img src="<?php echo e(asset('storage/' . $community->cover_image)); ?>" 
+                                     alt="<?php echo e($community->name); ?>"
                                      class="community-cover-image">
-                            @else
+                            <?php else: ?>
                                 <div class="community-cover-placeholder">
                                     <i class="fas fa-users"></i>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         
                         <!-- Información de la comunidad -->
                         <div class="community-info-container">
                             <div class="community-header-section">
-                                <a href="{{ route('communities.show', $community) }}" class="community-title-link">
-                                    <h3 class="community-title">{{ $community->name }}</h3>
+                                <a href="<?php echo e(route('communities.show', $community)); ?>" class="community-title-link">
+                                    <h3 class="community-title"><?php echo e($community->name); ?></h3>
                                 </a>
-                                @if($community->is_private)
+                                <?php if($community->is_private): ?>
                                     <span class="community-badge community-badge-private">
                                         <i class="fas fa-lock"></i>
                                         Privada
                                     </span>
-                                @else
+                                <?php else: ?>
                                     <span class="community-badge community-badge-public">
                                         <i class="fas fa-globe"></i>
                                         Pública
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             
-                            @if($community->description)
-                                <p class="community-description">{{ Str::limit($community->description, 150) }}</p>
-                            @endif
+                            <?php if($community->description): ?>
+                                <p class="community-description"><?php echo e(Str::limit($community->description, 150)); ?></p>
+                            <?php endif; ?>
                             
                             <!-- Meta información y acciones -->
                             <div class="community-footer-section">
                                 <div class="community-meta-info">
                                     <span class="community-stat">
                                         <i class="fas fa-users me-1"></i>
-                                        {{ $community->members_count }} miembros
+                                        <?php echo e($community->members_count); ?> miembros
                                     </span>
                                     <span class="community-stat">
                                         <i class="fas fa-newspaper me-1"></i>
-                                        {{ $community->posts_count }} posts
+                                        <?php echo e($community->posts_count); ?> posts
                                     </span>
                                     <span class="community-author">
                                         <i class="fas fa-user me-1"></i>
-                                        {{ $community->owner->name }}
+                                        <?php echo e($community->owner->name); ?>
+
                                     </span>
                                 </div>
                                 
                                 <div class="community-actions-section">
-                                    <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-primary btn-sm">
+                                    <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn-community btn-community-primary btn-sm">
                                         <i class="fas fa-eye me-1"></i>
                                         Ver
                                     </a>
-                                    <form action="{{ route('communities.leave', $community) }}" method="POST" class="d-inline">
-                                        @csrf
+                                    <form action="<?php echo e(route('communities.leave', $community)); ?>" method="POST" class="d-inline">
+                                        <?php echo csrf_field(); ?>
                                         <button type="submit" class="btn-community btn-community-danger btn-sm" 
                                                 onclick="return confirm('¿Estás seguro de que quieres salir de esta comunidad?')">
                                             <i class="fas fa-sign-out-alt me-1"></i>
@@ -261,117 +262,118 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-    @endif    <!-- Comunidades Públicas -->
-    @if($publicCommunities->count() > 0)
+    <?php endif; ?>    <!-- Comunidades Públicas -->
+    <?php if($publicCommunities->count() > 0): ?>
     <div class="community-section">
         <h3 class="community-section-title">
             <i class="fas fa-compass"></i>
             Descubrir Comunidades
         </h3>
         <div class="communities-list">
-            @foreach($publicCommunities as $community)
+            <?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="community-card-full-width">
                 <div class="community-card-body">
                     <!-- Contenido principal -->
                     <div class="community-content-wrapper">
                         <!-- Imagen/Cover de la comunidad -->
                         <div class="community-cover-container">
-                            @if($community->cover_image)
-                                <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                     alt="{{ $community->name }}"
+                            <?php if($community->cover_image): ?>
+                                <img src="<?php echo e(asset('storage/' . $community->cover_image)); ?>" 
+                                     alt="<?php echo e($community->name); ?>"
                                      class="community-cover-image">
-                            @else
+                            <?php else: ?>
                                 <div class="community-cover-placeholder">
                                     <i class="fas fa-users"></i>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         
                         <!-- Información de la comunidad -->
                         <div class="community-info-container">
                             <div class="community-header-section">
-                                <a href="{{ route('communities.show', $community) }}" class="community-title-link">
-                                    <h3 class="community-title">{{ $community->name }}</h3>
+                                <a href="<?php echo e(route('communities.show', $community)); ?>" class="community-title-link">
+                                    <h3 class="community-title"><?php echo e($community->name); ?></h3>
                                 </a>
-                                @if($community->is_private)
+                                <?php if($community->is_private): ?>
                                     <span class="community-badge community-badge-private">
                                         <i class="fas fa-lock"></i>
                                         Privada
                                     </span>
-                                @else
+                                <?php else: ?>
                                     <span class="community-badge community-badge-public">
                                         <i class="fas fa-globe"></i>
                                         Pública
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             
-                            @if($community->description)
-                                <p class="community-description">{{ Str::limit($community->description, 150) }}</p>
-                            @endif
+                            <?php if($community->description): ?>
+                                <p class="community-description"><?php echo e(Str::limit($community->description, 150)); ?></p>
+                            <?php endif; ?>
                             
                             <!-- Meta información y acciones -->
                             <div class="community-footer-section">
                                 <div class="community-meta-info">
                                     <span class="community-stat">
                                         <i class="fas fa-users me-1"></i>
-                                        {{ $community->members_count }} miembros
+                                        <?php echo e($community->members_count); ?> miembros
                                     </span>
                                     <span class="community-stat">
                                         <i class="fas fa-newspaper me-1"></i>
-                                        {{ $community->posts_count }} posts
+                                        <?php echo e($community->posts_count); ?> posts
                                     </span>
                                     <span class="community-author">
                                         <i class="fas fa-user me-1"></i>
-                                        {{ $community->owner->name }}
+                                        <?php echo e($community->owner->name); ?>
+
                                     </span>
                                 </div>
                                 
                                 <div class="community-actions-section">
-                                    <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-primary btn-sm">
+                                    <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn-community btn-community-primary btn-sm">
                                         <i class="fas fa-eye me-1"></i>
                                         Ver
                                     </a>
-                                    @if($community->is_private)
-                                        @if($community->hasPendingRequest(Auth::user()))
+                                    <?php if($community->is_private): ?>
+                                        <?php if($community->hasPendingRequest(Auth::user())): ?>
                                             <button class="btn-community btn-community-secondary btn-sm" disabled>
                                                 <i class="fas fa-clock me-1"></i>
                                                 Solicitud Enviada
                                             </button>
-                                        @else
+                                        <?php else: ?>
                                             <button type="button" 
                                                     class="btn-community btn-community-primary btn-sm" 
                                                     data-bs-toggle="modal" 
-                                                    data-bs-target="#requestModal{{ $community->id }}">
+                                                    data-bs-target="#requestModal<?php echo e($community->id); ?>">
                                                 <i class="fas fa-paper-plane me-1"></i>
                                                 Solicitar Unirse
                                             </button>
-                                        @endif
-                                    @else
-                                        <form action="{{ route('communities.join', $community) }}" method="POST" class="d-inline">
-                                            @csrf
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <form action="<?php echo e(route('communities.join', $community)); ?>" method="POST" class="d-inline">
+                                            <?php echo csrf_field(); ?>
                                             <button type="submit" class="btn-community btn-community-primary btn-sm">
                                                 <i class="fas fa-plus me-1"></i>
                                                 Unirse
                                             </button>
                                         </form>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Estado vacío -->
-    @if($ownedCommunities->count() == 0 && $userCommunities->count() == 0 && $publicCommunities->count() == 0)
+    <?php if($ownedCommunities->count() == 0 && $userCommunities->count() == 0 && $publicCommunities->count() == 0): ?>
         <div class="card dashboard-card text-center py-5">
             <div class="card-body">
                 <i class="bi bi-people display-1 text-light mb-3"></i>
@@ -379,38 +381,39 @@
                 <p class="text-light mb-4">
                     Crea la primera comunidad y conecta con otros amantes de la música
                 </p>
-                <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+                <a href="<?php echo e(route('communities.create')); ?>" class="btn-new-playlist">
                     <i class="bi bi-plus-circle me-2"></i>
                     Crear Primera Comunidad
                 </a>
             </div>
         </div>
-    @endif
+    <?php endif; ?>
         </div>
     </div>
 </div>
 
 <!-- Modales para solicitar membresía -->
-@foreach($publicCommunities as $community)
-    @if($community->is_private)
+<?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php if($community->is_private): ?>
         <!-- Modal para solicitar membresía -->
-        <div class="modal fade" id="requestModal{{ $community->id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ $community->id }}" aria-hidden="true">
+        <div class="modal fade" id="requestModal<?php echo e($community->id); ?>" tabindex="-1" aria-labelledby="requestModalLabel<?php echo e($community->id); ?>" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
                     <div class="modal-header border-bottom border-white border-opacity-25">
-                        <h5 class="modal-title text-white" id="requestModalLabel{{ $community->id }}">
-                            Solicitar unirse a {{ $community->name }}
+                        <h5 class="modal-title text-white" id="requestModalLabel<?php echo e($community->id); ?>">
+                            Solicitar unirse a <?php echo e($community->name); ?>
+
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
-                    <form action="{{ route('communities.request', $community) }}" method="POST">
-                        @csrf
+                    <form action="<?php echo e(route('communities.request', $community)); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="message{{ $community->id }}" class="form-label text-white">Mensaje (opcional)</label>
+                                <label for="message<?php echo e($community->id); ?>" class="form-label text-white">Mensaje (opcional)</label>
                                 <textarea 
                                     class="form-control" 
-                                    id="message{{ $community->id }}" 
+                                    id="message<?php echo e($community->id); ?>" 
                                     name="message" 
                                     rows="3" 
                                     placeholder="Escribe un mensaje para el administrador de la comunidad..."
@@ -432,12 +435,12 @@
                 </div>
             </div>
         </div>
-    @endif
-@endforeach
+    <?php endif; ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('searchPrivateCommunitiesForm');
@@ -634,4 +637,6 @@ function requestMembership(communityId, communityName) {
     });
 }
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.dashboard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\staytuned\resources\views/communities/index.blade.php ENDPATH**/ ?>
