@@ -390,7 +390,7 @@
                     </div>
 
                     <!-- Navegación -->
-                    <div class="mt-4">
+                    <div class="mt-4 mb-4">
                         <a href="<?php echo e(route('posts.index')); ?>" class="btn btn-secondary">
                             <i class="fas fa-arrow-left me-2"></i>
                             Volver a publicaciones

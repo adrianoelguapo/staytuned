@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="text-white mb-2" style="font-size: 2.5rem;">
-                        Comunidades
+                        Mis Comunidades
                     </h1>
                     <p class="text-white mb-0">Administra y participa en las comunidades donde compartes tu pasión por la música</p>
                 </div>
