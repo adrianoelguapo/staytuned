@@ -398,9 +398,10 @@
         <!-- Modal para solicitar membresía -->
         <div class="modal fade" id="requestModal<?php echo e($community->id); ?>" tabindex="-1" aria-labelledby="requestModalLabel<?php echo e($community->id); ?>" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-                    <div class="modal-header border-bottom border-white border-opacity-25">
-                        <h5 class="modal-title text-white" id="requestModalLabel<?php echo e($community->id); ?>">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="requestModalLabel<?php echo e($community->id); ?>">
+                            <i class="fas fa-paper-plane me-2"></i>
                             Solicitar unirse a <?php echo e($community->name); ?>
 
                         </h5>
@@ -410,21 +411,21 @@
                         <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="message<?php echo e($community->id); ?>" class="form-label text-white">Mensaje (opcional)</label>
+                                <label for="message<?php echo e($community->id); ?>" class="form-label">Mensaje (opcional)</label>
                                 <textarea 
                                     class="form-control" 
                                     id="message<?php echo e($community->id); ?>" 
                                     name="message" 
                                     rows="3" 
                                     placeholder="Escribe un mensaje para el administrador de la comunidad..."
-                                    style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: white;"
                                 ></textarea>
                             </div>
-                            <p class="text-white-50 small">
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
                                 Tu solicitud será enviada al administrador de la comunidad para su revisión.
-                            </p>
+                            </div>
                         </div>
-                        <div class="modal-footer border-top border-white border-opacity-25">
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-paper-plane me-1"></i>
@@ -490,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const actionButton = getActionButton(community);
                 
                 html += `
-                    <div class="card bg-dark bg-opacity-50 mb-2">
+                    <div class="card dashboard-card mb-2">
                         <div class="card-body py-3">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -539,21 +540,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para obtener el botón de acción
     function getActionButton(community) {
         if (community.is_owner) {
-            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-light">
+            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-purple">
                         <i class="fas fa-eye me-1"></i>Ver
                     </a>`;
         } else if (community.is_member) {
-            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-success">
+            return `<a href="/communities/${community.id}" class="btn btn-sm btn-outline-purple">
                         <i class="fas fa-eye me-1"></i>Ver
                     </a>`;
         } else if (community.request_status === 'pending') {
             return `<span class="text-muted small">Solicitud enviada</span>`;
         } else if (community.request_status === 'rejected') {
-            return `<button class="btn btn-sm btn-outline-primary" onclick="requestMembership(${community.id}, '${community.name}')">
+            return `<button class="btn btn-sm btn-community-primary" onclick="requestMembership(${community.id}, '${community.name}')">
                         <i class="fas fa-paper-plane me-1"></i>Solicitar de nuevo
                     </button>`;
         } else {
-            return `<button class="btn btn-sm btn-primary" onclick="requestMembership(${community.id}, '${community.name}')">
+            return `<button class="btn btn-sm btn-community-primary" onclick="requestMembership(${community.id}, '${community.name}')">
                         <i class="fas fa-paper-plane me-1"></i>Solicitar
                     </button>`;
         }
@@ -583,7 +584,7 @@ function requestMembership(communityId, communityName) {
             <div class="modal-dialog">
                 <div class="modal-content bg-dark">
                     <div class="modal-header">
-                        <h5 class="modal-title text-white">
+                        <h5 class="modal-title">
                             <i class="fas fa-paper-plane me-2"></i>
                             Solicitar membresía a ${communityName}
                         </h5>
@@ -594,7 +595,7 @@ function requestMembership(communityId, communityName) {
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="searchMessage" class="form-label">Mensaje para el administrador (opcional)</label>
-                                <textarea class="form-control bg-secondary border-0 text-white" 
+                                <textarea class="form-control" 
                                           id="searchMessage" 
                                           name="message" 
                                           rows="3" 
