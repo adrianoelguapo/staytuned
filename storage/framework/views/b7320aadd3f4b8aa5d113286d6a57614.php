@@ -203,7 +203,7 @@
                                         <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
                                             <h3 class="post-title"><?php echo e($post->title); ?></h3>
                                         </a>
-                                        <span class="post-category-badge"><?php echo e($post->category->text); ?></span>
+                                        <span class="post-category-badge"><?php echo e(ucfirst($post->category->type)); ?></span>
                                     </div>
                                     
                                     <?php if($post->content || $post->description): ?>
@@ -225,11 +225,13 @@
                                     <!-- Meta información y acciones -->
                                     <div class="post-footer-section">
                                         <div class="post-meta-info">
-                                            <span class="post-author">
-                                                <i class="fas fa-user me-1"></i>
-                                                <?php echo e($post->user->name); ?>
-
-                                            </span>
+                                            <a href="<?php echo e(route('explore.users.show', $post->user)); ?>" class="post-author d-flex align-items-center text-decoration-none">
+                                                <img src="<?php echo e($post->user->profile_photo_url); ?>" 
+                                                     class="rounded-circle me-2" 
+                                                     style="width: 24px; height: 24px; object-fit: cover;"
+                                                     alt="<?php echo e($post->user->name); ?>">
+                                                <span class="text-white"><?php echo e($post->user->username); ?></span>
+                                            </a>
                                             <span class="post-date">
                                                 <i class="fas fa-calendar me-1"></i>
                                                 <?php echo e($post->created_at->diffForHumans()); ?>

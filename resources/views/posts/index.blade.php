@@ -162,7 +162,7 @@
                                                 <a href="{{ route('posts.show', $post) }}" class="post-title-link">
                                                     <h3 class="post-title">{{ $post->title }}</h3>
                                                 </a>
-                                                <span class="post-category-badge">{{ $post->category->text }}</span>
+                                                <span class="post-category-badge">{{ ucfirst($post->category->type) }}</span>
                                             </div>
                                             
                                             @if($post->content || $post->description)
@@ -184,10 +184,13 @@
                                             <!-- Meta información y acciones -->
                                             <div class="post-footer-section">
                                                 <div class="post-meta-info">
-                                                    <span class="post-author">
-                                                        <i class="bi bi-person me-1"></i>
-                                                        {{ $post->user->name }}
-                                                    </span>
+                                                    <a href="{{ route('explore.users.show', $post->user) }}" class="post-author d-flex align-items-center text-decoration-none">
+                                                        <img src="{{ $post->user->profile_photo_url }}" 
+                                                             class="rounded-circle me-2" 
+                                                             style="width: 24px; height: 24px; object-fit: cover;"
+                                                             alt="{{ $post->user->name }}">
+                                                        <span class="text-white">{{ $post->user->username }}</span>
+                                                    </a>
                                                     <span class="post-date">
                                                         <i class="bi bi-calendar me-1"></i>
                                                         {{ $post->created_at->diffForHumans() }}

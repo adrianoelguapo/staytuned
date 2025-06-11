@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Community;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -265,6 +266,8 @@ class CommunityController extends Controller
             abort(403, 'Debes ser miembro de esta comunidad para crear posts.');
         }
 
-        return view('communities.create-post', compact('community'));
+        $categories = Category::all();
+
+        return view('communities.create-post', compact('community', 'categories'));
     }
 }
