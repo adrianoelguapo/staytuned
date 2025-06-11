@@ -16,11 +16,15 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $userCommunities = Auth::user()->communities()->with('owner')->get();
         $ownedCommunities = Auth::user()->ownedCommunities()->get();
+        $userCommunities = Auth::user()->communities()
+            ->whereNotIn('communities.id', $ownedCommunities->pluck('id'))
+            ->with('owner')
+            ->get();
         $publicCommunities = Community::where('is_private', false)
             ->where('user_id', '!=', Auth::id())
             ->whereNotIn('id', $userCommunities->pluck('id'))
+            ->whereNotIn('id', $ownedCommunities->pluck('id'))
             ->with('owner')
             ->latest()
             ->take(10)

@@ -45,6 +45,7 @@ Route::middleware([
     // Rutas adicionales para funcionalidad de Spotify
     Route::get('/playlists/search/spotify', [PlaylistController::class, 'searchSpotify'])->name('playlists.search');
     Route::post('/playlists/{playlist}/songs/add', [PlaylistController::class, 'addSong'])->name('playlists.songs.add');
+    Route::post('/playlists/{playlist}/songs/remove-by-spotify-id', [PlaylistController::class, 'removeSongBySpotifyId'])->name('playlists.songs.removeBySpotifyId');
     Route::delete('/playlists/{playlist}/songs/{song}', [PlaylistController::class, 'removeSong'])->name('playlists.songs.remove');
     
     // Rutas para explorar usuarios

@@ -81,98 +81,101 @@
    BOTONES DE ACCIONES DE USUARIO - GLASSMORPHISM
    ====================================================*/
 
-/* Botón Ver perfil - estilo glassmorphism con mayor contraste */
+/* Botón Ver perfil - estilo glassmorphism consistente */
 .btn-outline-light {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
     border-radius: 0.75rem !important;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
 }
 
 .btn-outline-light:hover, 
 .btn-outline-light:focus {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
     color: #fff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
 }
 
 .btn-outline-light:active {
-    transform: translateY(0);
-    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(0) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: none !important;
 }
 
-/* Botón Seguir - estilo glassmorphism azul con mayor contraste */
+/* Botón Seguir - mismo estilo glassmorphism que Ver perfil */
 .follow-btn.btn-primary {
-    background: rgba(37, 99, 235, 0.25) !important;
-    border: 1.5px solid rgba(37, 99, 235, 0.6) !important;
-    color: #2563eb !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
     border-radius: 0.75rem !important;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
     width: 110px !important;
-    min-width: unset;
+    min-width: unset !important;
+    box-shadow: none !important;
 }
 
 .follow-btn.btn-primary:hover, 
 .follow-btn.btn-primary:focus {
-    background: rgba(37, 99, 235, 0.4) !important;
-    border-color: rgba(37, 99, 235, 0.8) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
     color: #fff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
 }
 
 .follow-btn.btn-primary:active {
-    transform: translateY(0);
-    background: rgba(37, 99, 235, 0.35) !important;
+    transform: translateY(0) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: none !important;
 }
 
-/* Botón Siguiendo - estilo glassmorphism verde con hover rojo intenso */
+/* Botón Siguiendo - mismo estilo glassmorphism que Ver perfil */
 .follow-btn.btn-secondary {
-    background: rgba(16, 185, 129, 0.25) !important;
-    border: 1.5px solid rgba(16, 185, 129, 0.6) !important;
-    color: #10b981 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
     border-radius: 0.75rem !important;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
     width: 110px !important;
-    min-width: unset;
+    min-width: unset !important;
+    box-shadow: none !important;
 }
 
 .follow-btn.btn-secondary:hover, 
 .follow-btn.btn-secondary:focus {
-    background: rgba(220, 38, 38, 0.3) !important;
-    border-color: rgba(220, 38, 38, 0.7) !important;
-    color: #dc2626 !important;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
 }
 
 .follow-btn.btn-secondary:active {
-    transform: translateY(0);
-    background: rgba(220, 38, 38, 0.25) !important;
+    transform: translateY(0) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: none !important;
 }
 
-/* Efecto hover especial para cambiar texto en "Siguiendo" con mayor contraste */
+/* Efecto hover especial para cambiar texto en "Siguiendo" */
 .follow-btn.btn-secondary:hover .follow-text {
     position: relative;
     overflow: hidden;
@@ -185,7 +188,7 @@
     left: 0;
     top: 0;
     right: 0;
-    color: #dc2626;
+    color: #fff !important;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -199,7 +202,7 @@
 
 .follow-btn.btn-secondary:hover .fas.fa-user-check::before {
     content: "\f235"; /* Icono de user-times */
-    color: #dc2626;
+    color: #fff !important;
 }
 
 /* Asegurar que los botones tengan un ancho mínimo adecuado */
@@ -212,6 +215,7 @@
 @media (max-width: 768px) {
     .follow-btn.btn-secondary:hover .follow-text::before {
         content: "Cancelar";
+        color: #fff !important;
     }
     
     .follow-btn {
@@ -252,6 +256,7 @@
     /* Asegurar que el texto del botón se vea bien en móviles */
     .follow-btn.btn-secondary:hover .follow-text::before {
         font-size: 0.75rem;
+        color: #fff !important;
     }
 }
 
@@ -272,4 +277,42 @@
     cursor: not-allowed;
     transform: none !important;
     pointer-events: none;
+}
+
+/* Reglas adicionales para forzar glassmorphism en botones - todos iguales */
+.user-card .follow-btn.btn-primary,
+.user-card .follow-btn.btn-secondary,
+.user-card .btn-outline-light {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: none !important;
+}
+
+.user-card .follow-btn.btn-primary:hover,
+.user-card .follow-btn.btn-secondary:hover,
+.user-card .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
+}
+
+/* Sobreescribir estilos específicos de Bootstrap - todos iguales */
+.btn.btn-primary.follow-btn,
+.btn.btn-secondary.follow-btn {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: none !important;
+}
+
+.btn.btn-primary.follow-btn:hover,
+.btn.btn-secondary.follow-btn:hover,
+.btn.btn-primary.follow-btn:focus,
+.btn.btn-secondary.follow-btn:focus {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
 }

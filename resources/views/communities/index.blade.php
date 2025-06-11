@@ -92,13 +92,17 @@
                 </div>
             </div>
 
-            <!-- Mis Comunidades -->
+            <!-- Mis Comunidades (Comunidades que soy dueño) -->
     @if($ownedCommunities->count() > 0)
     <div class="community-section" id="mis-comunidades">
-        <h3 class="community-section-title">
-            <i class="fas fa-crown"></i>
-            Mis Comunidades
-        </h3>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="text-white mb-2 d-flex align-items-center">
+                    Mis Comunidades
+                </h2>
+                <p class="text-white-50 mb-0">Comunidades que has creado y administras</p>
+            </div>
+        </div>
         <div class="communities-list">
             @foreach($ownedCommunities as $community)
             <div class="community-card-full-width">
@@ -176,13 +180,17 @@
             @endforeach
         </div>
     </div>
-    @endif    <!-- Comunidades Unidas -->
+    @endif    <!-- Comunidades Unidas (Comunidades donde soy miembro) -->
     @if($userCommunities->count() > 0)
     <div class="community-section">
-        <h3 class="community-section-title">
-            <i class="fas fa-handshake"></i>
-            Comunidades Unidas
-        </h3>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="text-white mb-2 d-flex align-items-center">
+                    Comunidades Unidas
+                </h2>
+                <p class="text-white-50 mb-0">Comunidades a las que te has unido como miembro</p>
+            </div>
+        </div>
         <div class="communities-list">
             @foreach($userCommunities as $community)
             <div class="community-card-full-width">
@@ -264,13 +272,18 @@
             @endforeach
         </div>
     </div>
-    @endif    <!-- Comunidades Públicas -->
+    @endif    <!-- Descubrir Comunidades -->
     @if($publicCommunities->count() > 0)
     <div class="community-section">
-        <h3 class="community-section-title">
-            <i class="fas fa-compass"></i>
-            Descubrir Comunidades
-        </h3>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="text-white mb-2 d-flex align-items-center">
+                    <i class="fas fa-compass me-3"></i>
+                    Descubrir Comunidades
+                </h2>
+                <p class="text-white-50 mb-0">Explora nuevas comunidades públicas para unirte</p>
+            </div>
+        </div>
         <div class="communities-list">
             @foreach($publicCommunities as $community)
             <div class="community-card-full-width">

@@ -251,6 +251,43 @@ class PlaylistController extends Controller
     }
 
     /**
+     * Remover una canción de la playlist por spotify_id
+     */
+    public function removeSongBySpotifyId(Request $request, Playlist $playlist)
+    {
+        // Verificar que la playlist pertenece al usuario
+        if ($playlist->user_id !== Auth::id()) {
+            return response()->json(['success' => false, 'message' => 'No autorizado'], 403);
+        }
+
+        $request->validate([
+            'spotify_id' => 'required|string'
+        ]);
+
+        try {
+            // Buscar la canción por spotify_id
+            $song = Song::where('spotify_id', $request->spotify_id)->first();
+            
+            if (!$song) {
+                return response()->json(['success' => false, 'message' => 'Canción no encontrada']);
+            }
+
+            // Verificar que la canción está en la playlist
+            if (!$playlist->songs()->where('song_id', $song->id)->exists()) {
+                return response()->json(['success' => false, 'message' => 'La canción no está en esta playlist']);
+            }
+
+            // Remover la canción de la playlist
+            $playlist->songs()->detach($song->id);
+
+            return response()->json(['success' => true, 'message' => 'Canción removida de la playlist']);
+            
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error al remover la canción: ' . $e->getMessage()]);
+        }
+    }
+
+    /**
      * Formatear duración de milisegundos a MM:SS
      */
     private function formatDuration($ms)

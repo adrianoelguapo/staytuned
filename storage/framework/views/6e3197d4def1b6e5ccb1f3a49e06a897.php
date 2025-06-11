@@ -1,8 +1,6 @@
-@extends('layouts.dashboard')
+<?php $__env->startSection('title', $user->name . ' | StayTuned'); ?>
 
-@section('title', $user->name . ' | StayTuned')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
@@ -13,60 +11,61 @@
                 <div class="card-body text-center">
                     <!-- Foto de perfil -->
                     <div class="position-relative mb-3">
-                        <img src="{{ $user->profile_photo_url }}" 
-                             alt="{{ $user->name }}" 
+                        <img src="<?php echo e($user->profile_photo_url); ?>" 
+                             alt="<?php echo e($user->name); ?>" 
                              class="rounded-circle border border-3 border-light"
                              style="width: 120px; height: 120px; object-fit: cover;">
                     </div>
 
                     <!-- Información básica -->
-                    <h2 class="text-white mb-1">{{ $user->name }}</h2>
-                    <p class="text-light mb-3">{{ '@' . $user->username }}</p>
+                    <h2 class="text-white mb-1"><?php echo e($user->name); ?></h2>
+                    <p class="text-light mb-3"><?php echo e('@' . $user->username); ?></p>
                     
-                    @if($user->bio)
-                        <p class="text-light mb-4">{{ $user->bio }}</p>
-                    @endif
+                    <?php if($user->bio): ?>
+                        <p class="text-light mb-4"><?php echo e($user->bio); ?></p>
+                    <?php endif; ?>
 
                     <!-- Estadísticas -->
                     <div class="row text-center mb-4">
                         <div class="col-4">
-                            <a href="{{ route('explore.users.followers', $user) }}" 
+                            <a href="<?php echo e(route('explore.users.followers', $user)); ?>" 
                                class="text-decoration-none text-white">
-                                <div class="fw-bold fs-5">{{ $stats['followers_count'] }}</div>
+                                <div class="fw-bold fs-5"><?php echo e($stats['followers_count']); ?></div>
                                 <div class="text-light small">Seguidores</div>
                             </a>
                         </div>
                         <div class="col-4">
-                            <a href="{{ route('explore.users.following', $user) }}" 
+                            <a href="<?php echo e(route('explore.users.following', $user)); ?>" 
                                class="text-decoration-none text-white">
-                                <div class="fw-bold fs-5">{{ $stats['following_count'] }}</div>
+                                <div class="fw-bold fs-5"><?php echo e($stats['following_count']); ?></div>
                                 <div class="text-light small">Siguiendo</div>
                             </a>
                         </div>
                         <div class="col-4">
-                            <div class="fw-bold fs-5">{{ $stats['playlists_count'] }}</div>
+                            <div class="fw-bold fs-5"><?php echo e($stats['playlists_count']); ?></div>
                             <div class="text-light small">Playlists</div>
                         </div>
                     </div>
 
                     <!-- Botón de seguir (solo si no es el usuario actual) -->
-                    @auth
-                        @if(Auth::id() !== $user->id)
+                    <?php if(auth()->guard()->check()): ?>
+                        <?php if(Auth::id() !== $user->id): ?>
                             <button type="button" 
-                                    class="btn btn-lg w-100 follow-btn {{ $isFollowing ? 'btn-secondary' : 'btn-primary' }}"
-                                    data-user-id="{{ $user->id }}"
-                                    data-following="{{ $isFollowing ? 'true' : 'false' }}">
-                                <i class="fas {{ $isFollowing ? 'fa-user-minus' : 'fa-user-plus' }} me-2"></i>
-                                <span class="follow-text">{{ $isFollowing ? 'Siguiendo' : 'Seguir' }}</span>
+                                    class="btn btn-lg w-100 follow-btn <?php echo e($isFollowing ? 'btn-secondary' : 'btn-primary'); ?>"
+                                    data-user-id="<?php echo e($user->id); ?>"
+                                    data-following="<?php echo e($isFollowing ? 'true' : 'false'); ?>">
+                                <i class="fas <?php echo e($isFollowing ? 'fa-user-minus' : 'fa-user-plus'); ?> me-2"></i>
+                                <span class="follow-text"><?php echo e($isFollowing ? 'Siguiendo' : 'Seguir'); ?></span>
                             </button>
-                        @endif
-                    @endauth
+                        <?php endif; ?>
+                    <?php endif; ?>
 
                     <!-- Información adicional -->
                     <div class="mt-4 pt-3 border-top border-secondary">
                         <div class="text-light small">
                             <i class="fas fa-calendar-alt me-1"></i>
-                            Se unió en {{ $user->created_at->format('F Y') }}
+                            Se unió en <?php echo e($user->created_at->format('F Y')); ?>
+
                         </div>
                     </div>
                 </div>
@@ -84,7 +83,7 @@
                             data-bs-target="#playlists" 
                             type="button" 
                             role="tab">
-                        <i class="fas fa-music me-2"></i>Playlists ({{ $stats['playlists_count'] }})
+                        <i class="fas fa-music me-2"></i>Playlists (<?php echo e($stats['playlists_count']); ?>)
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -94,7 +93,7 @@
                             data-bs-target="#posts" 
                             type="button" 
                             role="tab">
-                        <i class="fas fa-newspaper me-2"></i>Publicaciones ({{ $stats['posts_count'] }})
+                        <i class="fas fa-newspaper me-2"></i>Publicaciones (<?php echo e($stats['posts_count']); ?>)
                     </button>
                 </li>
             </ul>
@@ -103,46 +102,47 @@
             <div class="tab-content" id="userContentTabsContent">
                 <!-- Pestana de Playlists -->
                 <div class="tab-pane fade show active" id="playlists" role="tabpanel">
-                    @if($user->playlists->count() > 0)
+                    <?php if($user->playlists->count() > 0): ?>
                         <div class="row">
-                            @foreach($user->playlists as $playlist)
+                            <?php $__currentLoopData = $user->playlists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $playlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-md-6 mb-4">
                                     <div class="card dashboard-card h-100">
                                         <div class="card-body">
                                             <div class="d-flex align-items-start">
                                                 <!-- Imagen de la playlist -->
                                                 <div class="playlist-image me-3">
-                                                    @if($playlist->image_url)
-                                                        <img src="{{ $playlist->image_url }}" 
-                                                             alt="{{ $playlist->name }}"
+                                                    <?php if($playlist->image_url): ?>
+                                                        <img src="<?php echo e($playlist->image_url); ?>" 
+                                                             alt="<?php echo e($playlist->name); ?>"
                                                              class="rounded"
                                                              style="width: 60px; height: 60px; object-fit: cover;">
-                                                    @else
+                                                    <?php else: ?>
                                                         <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
                                                              style="width: 60px; height: 60px;">
                                                             <i class="fas fa-music text-light"></i>
                                                         </div>
-                                                    @endif
+                                                    <?php endif; ?>
                                                 </div>
 
                                                 <!-- Información de la playlist -->
                                                 <div class="flex-grow-1">
-                                                    <h6 class="text-white mb-1">{{ $playlist->name }}</h6>
-                                                    @if($playlist->description)
+                                                    <h6 class="text-white mb-1"><?php echo e($playlist->name); ?></h6>
+                                                    <?php if($playlist->description): ?>
                                                         <p class="text-light small mb-2">
-                                                            {{ Str::limit($playlist->description, 80) }}
+                                                            <?php echo e(Str::limit($playlist->description, 80)); ?>
+
                                                         </p>
-                                                    @endif
+                                                    <?php endif; ?>
                                                     <div class="text-light small">
                                                         <i class="fas fa-music me-1"></i>
-                                                        {{ $playlist->songs_count ?? 0 }} canciones
+                                                        <?php echo e($playlist->songs_count ?? 0); ?> canciones
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Botón de ver playlist -->
                                             <div class="mt-3">
-                                                <a href="{{ route('playlists.show', $playlist) }}" 
+                                                <a href="<?php echo e(route('playlists.show', $playlist)); ?>" 
                                                    class="btn btn-outline-light btn-sm w-100">
                                                     <i class="fas fa-play me-1"></i>Ver Playlist
                                                 </a>
@@ -150,79 +150,81 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
 
-                        @if($stats['playlists_count'] > 6)
+                        <?php if($stats['playlists_count'] > 6): ?>
                             <div class="text-center mt-3">
-                                <a href="{{ route('playlists.index', ['user' => $user->id]) }}" 
+                                <a href="<?php echo e(route('playlists.index', ['user' => $user->id])); ?>" 
                                    class="btn btn-outline-light">
                                     Ver todas las playlists
                                 </a>
                             </div>
-                        @endif
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <div class="card dashboard-card">
                             <div class="card-body text-center py-5">
                                 <i class="fas fa-music fa-3x text-light mb-3"></i>
                                 <h5 class="text-white mb-2">Sin playlists públicas</h5>
-                                <p class="text-light">{{ $user->name }} aún no ha creado playlists públicas.</p>
+                                <p class="text-light"><?php echo e($user->name); ?> aún no ha creado playlists públicas.</p>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <!-- Pestana de Publicaciones -->
                 <div class="tab-pane fade" id="posts" role="tabpanel">
-                    @if($user->posts->count() > 0)
+                    <?php if($user->posts->count() > 0): ?>
                         <div class="space-y-4">
-                            @foreach($user->posts as $post)
-                                <div class="card dashboard-card mb-4 post-card-hover" onclick="window.location.href='{{ route('posts.show', $post) }}'" style="cursor: pointer;">
+                            <?php $__currentLoopData = $user->posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="card dashboard-card mb-4 post-card-hover" onclick="window.location.href='<?php echo e(route('posts.show', $post)); ?>'" style="cursor: pointer;">
                                     <div class="card-body">
                                         <!-- Header del post -->
                                         <div class="d-flex justify-content-between align-items-start mb-3 pb-3 border-bottom border-light border-opacity-25">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ $user->profile_photo_url }}" 
-                                                     alt="{{ $user->username }}"
+                                                <img src="<?php echo e($user->profile_photo_url); ?>" 
+                                                     alt="<?php echo e($user->username); ?>"
                                                      class="rounded-circle me-3"
                                                      style="width: 48px; height: 48px; object-fit: cover;">
                                                 <div>
-                                                    <h6 class="text-white fw-semibold mb-1">{{ $user->username }}</h6>
-                                                    <small class="text-white-50">{{ $post->created_at->diffForHumans() }}</small>
+                                                    <h6 class="text-white fw-semibold mb-1"><?php echo e($user->username); ?></h6>
+                                                    <small class="text-white-50"><?php echo e($post->created_at->diffForHumans()); ?></small>
                                                 </div>
                                             </div>
                                             <span class="badge bg-primary bg-opacity-25 text-white border border-primary border-opacity-50 px-3 py-2">
-                                                {{ ucfirst($post->category->type) }}
+                                                <?php echo e(ucfirst($post->category->type)); ?>
+
                                             </span>
                                         </div>
 
                                         <!-- Título del post -->
-                                        @if($post->title)
-                                            <h5 class="text-white fw-bold mb-3">{{ $post->title }}</h5>
-                                        @endif
+                                        <?php if($post->title): ?>
+                                            <h5 class="text-white fw-bold mb-3"><?php echo e($post->title); ?></h5>
+                                        <?php endif; ?>
 
                                         <!-- Contenido del post -->
-                                        @if($post->description)
+                                        <?php if($post->description): ?>
                                             <div class="text-white-75 mb-3">
-                                                {{ Str::limit($post->description, 200) }}
+                                                <?php echo e(Str::limit($post->description, 200)); ?>
+
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
 
                                         <!-- Contenido de Spotify si existe -->
-                                        @if($post->spotify_data)
+                                        <?php if($post->spotify_data): ?>
                                             <div class="spotify-preview-card mb-3">
                                                 <div class="d-flex align-items-center gap-3">
-                                                    @if($post->spotify_image)
-                                                        <img src="{{ $post->spotify_image }}" 
-                                                             alt="{{ $post->spotify_name }}"
+                                                    <?php if($post->spotify_image): ?>
+                                                        <img src="<?php echo e($post->spotify_image); ?>" 
+                                                             alt="<?php echo e($post->spotify_name); ?>"
                                                              class="rounded-3 flex-shrink-0"
                                                              style="width: 60px; height: 60px; object-fit: cover;">
-                                                    @endif
+                                                    <?php endif; ?>
                                                     <div class="flex-grow-1 min-w-0">
-                                                        <div class="text-white fw-medium">{{ $post->spotify_name }}</div>
-                                                        @if($post->spotify_artist)
-                                                            <div class="text-white-50 small">{{ $post->spotify_artist }}</div>
-                                                        @endif
+                                                        <div class="text-white fw-medium"><?php echo e($post->spotify_name); ?></div>
+                                                        <?php if($post->spotify_artist): ?>
+                                                            <div class="text-white-50 small"><?php echo e($post->spotify_artist); ?></div>
+                                                        <?php endif; ?>
                                                         <div class="d-flex align-items-center mt-1">
                                                             <i class="fab fa-spotify text-success me-1"></i>
                                                             <span class="text-white-50 small">Spotify</span>
@@ -230,16 +232,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
 
                                         <!-- Estadísticas del post -->
                                         <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light border-opacity-25">
                                             <div class="d-flex gap-4">
                                                 <span class="text-light small d-flex align-items-center">
-                                                    <i class="fas fa-heart me-1 text-danger"></i>{{ $post->likes_count ?? 0 }} likes
+                                                    <i class="fas fa-heart me-1 text-danger"></i><?php echo e($post->likes_count ?? 0); ?> likes
                                                 </span>
                                                 <span class="text-light small d-flex align-items-center">
-                                                    <i class="fas fa-comment me-1 text-info"></i>{{ $post->comments_count ?? 0 }} comentarios
+                                                    <i class="fas fa-comment me-1 text-info"></i><?php echo e($post->comments_count ?? 0); ?> comentarios
                                                 </span>
                                             </div>
                                             <div class="text-light small">
@@ -248,34 +250,34 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
 
-                        @if($stats['posts_count'] > 10)
+                        <?php if($stats['posts_count'] > 10): ?>
                             <div class="text-center mt-3">
                                 <button class="btn btn-outline-light">
                                     Ver todas las publicaciones
                                 </button>
                             </div>
-                        @endif
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <div class="card dashboard-card">
                             <div class="card-body text-center py-5">
                                 <i class="fas fa-newspaper fa-3x text-light mb-3"></i>
                                 <h5 class="text-white mb-2">Sin publicaciones</h5>
-                                <p class="text-light">{{ $user->name }} aún no ha realizado ninguna publicación.</p>
+                                <p class="text-light"><?php echo e($user->name); ?> aún no ha realizado ninguna publicación.</p>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>        </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Manejar botón de seguir/dejar de seguir
@@ -343,9 +345,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
 .dashboard-card {
     background: rgba(255, 255, 255, 0.1);
@@ -530,4 +532,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.dashboard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\staytuned\resources\views/explore/users/show.blade.php ENDPATH**/ ?>

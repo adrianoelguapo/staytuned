@@ -234,19 +234,13 @@
                                 </button>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()" style="display: none;">
+                                <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()">
                                     <i class="bi bi-check-circle me-2"></i>
                                     <span class="d-none d-lg-inline">Guardar</span>
                                 </button>
                             </div>
                         </div>
                         
-                        <!-- Indicador de canciones pendientes -->
-                        <div id="pendingSongsIndicator" class="alert alert-info mt-3" style="display: none;">
-                            <i class="bi bi-info-circle me-2"></i>
-                            <span id="pendingSongsCount">0</span> canción(es) agregada(s). 
-                            <strong>Haz clic en "Guardar" para aplicar los cambios.</strong>
-                        </div>
                         <div id="searchResults" class="mt-4 search-results-container"></div>
                     </div>
                 </div>
@@ -432,8 +426,10 @@
                 // Guardar información del track para uso posterior
                 allSearchedTracks[track.id] = track;
                 
-                // Verificar si la canción ya está agregada (pendiente)
-                const isAdded = pendingSongs.has(track.id);
+                // Verificar si la canción ya está agregada (en playlist o pendiente)
+                const isInPlaylist = existingSongsInPlaylist.has(track.id);
+                const isPending = pendingSongs.has(track.id);
+                const isAdded = isInPlaylist || isPending;
                 const buttonClass = isAdded ? 'btn-success' : 'btn-primary-playlist';
                 const buttonText = isAdded ? 
                     '<i class="bi bi-check-circle me-1"></i><span class="d-none d-sm-inline">Agregada</span>' : 
@@ -458,13 +454,12 @@
                                 <div class="search-result-album">${track.album.name}</div>
                             </div>
                             <div class="search-result-duration me-3">${formatDuration(track.duration_ms)}</div>
-                            <button class="btn btn-sm btn-purple me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
-                                <i class="bi bi-spotify"></i>
+                            <button class="btn btn-sm spotify-btn me-2" onclick="window.open('${track.external_urls.spotify}', '_blank')" title="Abrir en Spotify">
+                                <i class="bi bi-spotify" style="color: white;"></i>
                             </button>
-                            <button class="btn btn-sm ${buttonClass} add-song-btn" 
-                                    onclick="addToPlaylist('${track.id}')"
-                                    data-track-id="${track.id}"
-                                    ${isAdded ? 'disabled' : ''}>
+                            <button class="btn btn-sm ${buttonClass} add-song-btn fixed-size-btn" 
+                                    onclick="togglePlaylistSong('${track.id}')"
+                                    data-track-id="${track.id}">
                                 ${buttonText}
                             </button>
                         </div>
@@ -476,16 +471,42 @@
             resultsDiv.innerHTML = html;
         }
 
-        // Variables globales para tracking de canciones pendientes
+        // Variables globales para tracking de canciones pendientes y existentes
         let pendingSongs = new Set();
         let allSearchedTracks = {};
+        let existingSongsInPlaylist = new Set();
 
-        function addToPlaylist(spotifyId) {
+        // Cargar canciones existentes en la playlist
+        @if($playlist->songs->count() > 0)
+            @foreach($playlist->songs as $song)
+                @if($song->spotify_id)
+                    existingSongsInPlaylist.add('{{ $song->spotify_id }}');
+                @endif
+            @endforeach
+        @endif
+
+        function togglePlaylistSong(spotifyId) {
             const button = event.target.closest('.add-song-btn');
+            const track = allSearchedTracks[spotifyId];
             
-            // Si ya está agregada, no hacer nada
-            if (pendingSongs.has(spotifyId)) {
-                return;
+            // Verificar el estado actual de la canción
+            const isInPlaylist = existingSongsInPlaylist.has(spotifyId);
+            const isPending = pendingSongs.has(spotifyId);
+            const isCurrentlyAdded = button.classList.contains('btn-success');
+            
+            if (isCurrentlyAdded) {
+                // Si está marcada como agregada, permitir removerla
+                removeSongFromPlaylist(spotifyId, button);
+            } else {
+                // Agregar a la playlist
+                addSongToPlaylist(spotifyId, button);
+            }
+        }
+
+        function addSongToPlaylist(spotifyId, button) {
+            // Verificar si ya está en la playlist
+            if (existingSongsInPlaylist.has(spotifyId)) {
+                return; // No hacer nada si ya está en la playlist
             }
             
             // Agregar a la lista de canciones pendientes
@@ -495,113 +516,90 @@
             button.innerHTML = '<i class="bi bi-check-circle me-1"></i><span class="d-none d-sm-inline">Agregada</span>';
             button.classList.remove('btn-primary-playlist');
             button.classList.add('btn-success');
-            button.disabled = true;
             
-            // Actualizar el contador y mostrar indicador
-            updatePendingSongsIndicator();
+            // Guardar inmediatamente en la base de datos
+            saveToDatabase(spotifyId, 'add');
         }
 
-        function updatePendingSongsIndicator() {
-            const indicator = document.getElementById('pendingSongsIndicator');
-            const saveBtn = document.getElementById('saveChangesBtn');
-            const countSpan = document.getElementById('pendingSongsCount');
+        function removeSongFromPlaylist(spotifyId, button) {
+            // Remover de la lista de canciones pendientes si estaba ahí
+            pendingSongs.delete(spotifyId);
             
-            if (pendingSongs.size > 0) {
-                countSpan.textContent = pendingSongs.size;
-                indicator.style.display = 'block';
-                saveBtn.style.display = 'block';
-                
-                // Actualizar texto plural/singular
-                const songsText = pendingSongs.size === 1 ? 'canción agregada' : 'canciones agregadas';
-                indicator.innerHTML = `
-                    <i class="bi bi-info-circle me-2"></i>
-                    <span id="pendingSongsCount">${pendingSongs.size}</span> ${songsText}. 
-                    <strong>Haz clic en "Guardar" para aplicar los cambios.</strong>
-                `;
-            } else {
-                indicator.style.display = 'none';
-                saveBtn.style.display = 'none';
-            }
+            // Actualizar el botón visualmente
+            button.innerHTML = '<i class="bi bi-plus-circle me-1"></i><span class="d-none d-sm-inline">Agregar</span>';
+            button.classList.remove('btn-success');
+            button.classList.add('btn-primary-playlist');
+            
+            // Remover inmediatamente de la base de datos
+            saveToDatabase(spotifyId, 'remove');
+        }
+
+        function saveToDatabase(spotifyId, action) {
+            const route = action === 'add' ? 
+                `{{ route('playlists.songs.add', $playlist) }}` : 
+                `{{ route('playlists.songs.removeBySpotifyId', $playlist) }}`;
+            
+            fetch(route, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ spotify_id: spotifyId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Si la operación fue exitosa, actualizar las listas correspondientes
+                    if (action === 'add') {
+                        existingSongsInPlaylist.add(spotifyId);
+                        pendingSongs.delete(spotifyId); // Mover de pendiente a existente
+                    } else {
+                        existingSongsInPlaylist.delete(spotifyId);
+                        pendingSongs.delete(spotifyId);
+                    }
+                } else {
+                    // Si hay error, revertir el cambio visual
+                    const button = document.querySelector(`[data-track-id="${spotifyId}"]`);
+                    if (action === 'add') {
+                        button.innerHTML = '<i class="bi bi-plus-circle me-1"></i><span class="d-none d-sm-inline">Agregar</span>';
+                        button.classList.remove('btn-success');
+                        button.classList.add('btn-primary-playlist');
+                        pendingSongs.delete(spotifyId);
+                    } else {
+                        button.innerHTML = '<i class="bi bi-check-circle me-1"></i><span class="d-none d-sm-inline">Agregada</span>';
+                        button.classList.remove('btn-primary-playlist');
+                        button.classList.add('btn-success');
+                    }
+                    
+                    // Mostrar mensaje de error en console en lugar de alert
+                    console.error('Error:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Error se muestra en console en lugar de alert
+            });
+        }
+
+        // Función simplificada ya que no usamos el indicador visual
+        function updatePendingSongsIndicator() {
+            // Esta función se mantiene por compatibilidad pero ya no muestra indicadores
+            return;
         }
 
         function saveChanges() {
-            if (pendingSongs.size === 0) {
-                return;
-            }
-            
+            // Mostrar estado de carga
             const saveBtn = document.getElementById('saveChangesBtn');
             const originalContent = saveBtn.innerHTML;
             
-            // Mostrar estado de carga
-            saveBtn.innerHTML = '<i class="bi bi-arrow-repeat spin me-2"></i>Guardando...';
+            saveBtn.innerHTML = '<i class="bi bi-arrow-repeat spin me-2"></i>Aplicando cambios...';
             saveBtn.disabled = true;
             
-            // Convertir Set a Array para envío
-            const songsToAdd = Array.from(pendingSongs);
-            
-            // Procesar canciones una por una
-            let processedCount = 0;
-            let successCount = 0;
-            let errors = [];
-            
-            songsToAdd.forEach((spotifyId, index) => {
-                fetch(`{{ route('playlists.songs.add', $playlist) }}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ spotify_id: spotifyId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    processedCount++;
-                    
-                    if (data.success) {
-                        successCount++;
-                    } else {
-                        const track = allSearchedTracks[spotifyId];
-                        const trackName = track ? track.name : 'Canción desconocida';
-                        errors.push(`${trackName}: ${data.message}`);
-                    }
-                    
-                    // Actualizar progreso
-                    saveBtn.innerHTML = `<i class="bi bi-arrow-repeat spin me-2"></i>Guardando... (${processedCount}/${songsToAdd.length})`;
-                    
-                    // Si terminamos de procesar todas las canciones
-                    if (processedCount === songsToAdd.length) {
-                        setTimeout(() => {
-                            if (errors.length > 0) {
-                                alert(`Se guardaron ${successCount} de ${songsToAdd.length} canciones.\n\nErrores:\n${errors.join('\n')}`);
-                            }
-                            
-                            // Recargar la página para mostrar los cambios
-                            location.reload();
-                        }, 500);
-                    }
-                })
-                .catch(error => {
-                    processedCount++;
-                    const track = allSearchedTracks[spotifyId];
-                    const trackName = track ? track.name : 'Canción desconocida';
-                    errors.push(`${trackName}: Error de conexión`);
-                    
-                    // Actualizar progreso
-                    saveBtn.innerHTML = `<i class="bi bi-arrow-repeat spin me-2"></i>Guardando... (${processedCount}/${songsToAdd.length})`;
-                    
-                    // Si terminamos de procesar todas las canciones
-                    if (processedCount === songsToAdd.length) {
-                        setTimeout(() => {
-                            if (errors.length > 0) {
-                                alert(`Se guardaron ${successCount} de ${songsToAdd.length} canciones.\n\nErrores:\n${errors.join('\n')}`);
-                            }
-                            
-                            // Recargar la página para mostrar los cambios
-                            location.reload();
-                        }, 500);
-                    }
-                });
-            });
+            // Esperar un momento para mostrar el estado de carga y luego recargar
+            setTimeout(() => {
+                location.reload();
+            }, 800);
         }
 
         function formatDuration(ms) {
@@ -631,52 +629,8 @@
             
             // Toggle del dropdown actual
             if (dropdown.style.display === 'none' || dropdown.style.display === '') {
-                // Mostrar dropdown
                 dropdown.style.display = 'block';
-                
-                // Forzar el recálculo del layout
-                dropdown.offsetHeight;
-                
-                // Posicionar el dropdown correctamente
-                const triggerRect = trigger.getBoundingClientRect();
-                const dropdownRect = dropdown.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                const viewportWidth = window.innerWidth;
-                
-                // Calcular posición inicial (centrado con el botón)
-                let left = triggerRect.left - (dropdownRect.width / 2) + (triggerRect.width / 2);
-                let top = triggerRect.bottom + 8; // 8px de margen
-                
-                // Ajustar horizontalmente si se sale de la pantalla
-                if (left < 16) {
-                    left = 16; // Margen de 16px desde el borde izquierdo
-                } else if (left + dropdownRect.width > viewportWidth - 16) {
-                    left = viewportWidth - dropdownRect.width - 16; // Margen de 16px desde el borde derecho
-                }
-                
-                // Ajustar verticalmente si se sale de la pantalla por abajo
-                if (top + dropdownRect.height > viewportHeight - 16) {
-                    // Posicionar arriba del botón en lugar de abajo
-                    top = triggerRect.top - dropdownRect.height - 8;
-                    
-                    // Si también se sale por arriba, centrar en la pantalla
-                    if (top < 16) {
-                        top = Math.max(16, (viewportHeight - dropdownRect.height) / 2);
-                    }
-                }
-                
-                // Aplicar posición con position fixed
-                dropdown.style.position = 'fixed';
-                dropdown.style.top = Math.round(top) + 'px';
-                dropdown.style.left = Math.round(left) + 'px';
-                dropdown.style.zIndex = '10001';
-                dropdown.style.transform = 'none';
-                dropdown.style.right = 'auto';
-                dropdown.style.bottom = 'auto';
-                
-                console.log('Dropdown positioned at:', { top: Math.round(top), left: Math.round(left) });
             } else {
-                // Ocultar dropdown
                 dropdown.style.display = 'none';
             }
         }
