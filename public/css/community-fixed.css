@@ -1343,14 +1343,10 @@ body {
 }
 
 /* Asegurar que el modal esté siempre centrado */
-.modal {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
 .modal.show {
     display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Alert para comunidades privadas */
