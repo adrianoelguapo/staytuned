@@ -1,13 +1,11 @@
-@extends('layouts.dashboard')
+<?php $__env->startSection('title', $community->name); ?>
 
-@section('title', $community->name)
+<?php $__env->startPush('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/community-fixed.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/posts.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
-<link rel="stylesheet" href="{{ asset('css/posts.css') }}">
-@endpush
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
@@ -18,57 +16,59 @@
                 <div class="col-auto">
                     <!-- Imagen de la comunidad -->
                     <div class="community-cover-large">
-                        @if($community->cover_image)
-                            <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                 alt="{{ $community->name }}" 
+                        <?php if($community->cover_image): ?>
+                            <img src="<?php echo e(asset('storage/' . $community->cover_image)); ?>" 
+                                 alt="<?php echo e($community->name); ?>" 
                                  class="community-header-cover"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="community-header-cover d-none align-items-center justify-content-center">
                                 <i class="fas fa-users"></i>
                             </div>
-                        @else
+                        <?php else: ?>
                             <div class="community-header-cover d-flex align-items-center justify-content-center">
                                 <i class="fas fa-users"></i>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col">
                     <!-- Info de la comunidad -->
                     <div class="community-header-info">
-                        @if($community->is_private)
+                        <?php if($community->is_private): ?>
                             <span class="badge bg-secondary mb-2">
                                 <i class="fas fa-lock me-1"></i>
                                 COMUNIDAD PRIVADA
                             </span>
-                        @else
+                        <?php else: ?>
                             <span class="badge bg-secondary mb-2">
                                 <i class="fas fa-globe me-1"></i>
                                 COMUNIDAD PÚBLICA
                             </span>
-                        @endif
-                        <h1 class="community-title-large">{{ $community->name }}</h1>
+                        <?php endif; ?>
+                        <h1 class="community-title-large"><?php echo e($community->name); ?></h1>
                         
-                        @if($community->description)
-                            <p class="community-description-large text-muted">{{ $community->description }}</p>
-                        @endif
+                        <?php if($community->description): ?>
+                            <p class="community-description-large text-muted"><?php echo e($community->description); ?></p>
+                        <?php endif; ?>
                           <div class="community-meta-large">
                             <span class="me-3">
-                                <img src="{{ $community->owner->profile_photo_url }}" 
+                                <img src="<?php echo e($community->owner->profile_photo_url); ?>" 
                                      class="rounded-circle me-2 user-photo-xs" 
-                                     alt="{{ $community->owner->name }}">
-                                {{ $community->owner->username }}
+                                     alt="<?php echo e($community->owner->name); ?>">
+                                <?php echo e($community->owner->username); ?>
+
                             </span>
                             <span class="me-3">
                                 <i class="fas fa-users me-1"></i>
-                                {{ $community->members_count }} miembros
+                                <?php echo e($community->members_count); ?> miembros
                             </span>
                             <span class="me-3">
                                 <i class="fas fa-newspaper me-1"></i>
-                                {{ $community->posts_count }} publicaciones
+                                <?php echo e($community->posts_count); ?> publicaciones
                             </span>
                             <span class="text-muted">
-                                Creada {{ $community->created_at->diffForHumans() }}
+                                Creada <?php echo e($community->created_at->diffForHumans()); ?>
+
                             </span>
                         </div>
                     </div>
@@ -76,16 +76,16 @@
                 <div class="col-auto">
                     <!-- Acciones -->
                     <div class="community-actions-header">
-                        @if($isOwner)
+                        <?php if($isOwner): ?>
                             <!-- Botón para ver solicitudes pendientes -->
-                            <a href="{{ route('communities.requests', $community) }}" class="btn btn-outline-purple me-2">
+                            <a href="<?php echo e(route('communities.requests', $community)); ?>" class="btn btn-outline-purple me-2">
                                 <i class="fas fa-user-clock me-1"></i>
                                 Solicitudes
-                                @if($community->pendingRequestsCount() > 0)
-                                    <span class="badge bg-danger ms-1">{{ $community->pendingRequestsCount() }}</span>
-                                @endif
+                                <?php if($community->pendingRequestsCount() > 0): ?>
+                                    <span class="badge bg-danger ms-1"><?php echo e($community->pendingRequestsCount()); ?></span>
+                                <?php endif; ?>
                             </a>
-                        @endif
+                        <?php endif; ?>
                         
                         <div class="dropdown d-inline">
                             <button class="btn btn-options-large btn-purple" type="button" 
@@ -93,61 +93,61 @@
                                 <i class="fas fa-ellipsis-h"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                @if($isOwner)
+                                <?php if($isOwner): ?>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('communities.edit', $community) }}">
+                                        <a class="dropdown-item" href="<?php echo e(route('communities.edit', $community)); ?>">
                                             <i class="fas fa-edit me-2"></i>Editar comunidad
                                         </a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        <form action="{{ route('communities.destroy', $community) }}" 
+                                        <form action="<?php echo e(route('communities.destroy', $community)); ?>" 
                                               method="POST" 
                                               onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta comunidad? Esta acción no se puede deshacer.')">
-                                            @csrf
-                                            @method('DELETE')
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
                                             <button type="submit" class="dropdown-item text-danger">
                                                 <i class="fas fa-trash me-2"></i>Eliminar comunidad
                                             </button>
                                         </form>
                                     </li>
-                                @elseif($isMember)
+                                <?php elseif($isMember): ?>
                                     <li>
-                                        <form action="{{ route('communities.leave', $community) }}" 
+                                        <form action="<?php echo e(route('communities.leave', $community)); ?>" 
                                               method="POST" 
                                               onsubmit="return confirm('¿Estás seguro de que quieres salir de esta comunidad?')">
-                                            @csrf
+                                            <?php echo csrf_field(); ?>
                                             <button type="submit" class="dropdown-item text-danger">
                                                 <i class="fas fa-sign-out-alt me-2"></i>Salir de la comunidad
                                             </button>
                                         </form>
                                     </li>
-                                @else
-                                    @if(!$community->is_private)
+                                <?php else: ?>
+                                    <?php if(!$community->is_private): ?>
                                         <li>
-                                            <form action="{{ route('communities.join', $community) }}" method="POST">
-                                                @csrf
+                                            <form action="<?php echo e(route('communities.join', $community)); ?>" method="POST">
+                                                <?php echo csrf_field(); ?>
                                                 <button type="submit" class="dropdown-item">
                                                     <i class="fas fa-plus me-2"></i>Unirse a la comunidad
                                                 </button>
                                             </form>
                                         </li>
-                                    @else
-                                        @if($hasPendingRequest)
+                                    <?php else: ?>
+                                        <?php if($hasPendingRequest): ?>
                                             <li>
                                                 <span class="dropdown-item text-muted">
                                                     <i class="fas fa-clock me-2"></i>Solicitud pendiente
                                                 </span>
                                             </li>
-                                        @else
+                                        <?php else: ?>
                                             <li>
                                                 <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#requestMembershipModal">
                                                     <i class="fas fa-paper-plane me-2"></i>Solicitar membresía
                                                 </button>
                                             </li>
-                                        @endif
-                                    @endif
-                                @endif
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -164,92 +164,94 @@
                 Publicaciones de la Comunidad
             </h3>
             
-            @if($isMember || $isOwner)
-                <a href="{{ route('communities.create-post', $community) }}" class="btn-community btn-community-primary">
+            <?php if($isMember || $isOwner): ?>
+                <a href="<?php echo e(route('communities.create-post', $community)); ?>" class="btn-community btn-community-primary">
                     <i class="fas fa-plus me-2"></i>
                     Nueva Publicación
                 </a>
-            @endif
+            <?php endif; ?>
         </div>
         
-        @if(!$community->is_private || $isMember || $isOwner)
-            @if($posts->count() > 0)
+        <?php if(!$community->is_private || $isMember || $isOwner): ?>
+            <?php if($posts->count() > 0): ?>
                 <!-- Lista de publicaciones -->
                 <div class="posts-list">
-                    @foreach($posts as $post)
+                    <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="post-card-full-width">
                         <div class="post-card-body">
                             <!-- Contenido principal -->
                             <div class="post-content-wrapper">
                                 <!-- Imagen/Cover de la publicación -->
                                 <div class="post-cover-container">
-                                    @if($post->cover || $post->spotify_image)
-                                        <img src="{{ $post->cover ?: $post->spotify_image }}" 
-                                             alt="{{ $post->title }}"
+                                    <?php if($post->cover || $post->spotify_image): ?>
+                                        <img src="<?php echo e($post->cover ?: $post->spotify_image); ?>" 
+                                             alt="<?php echo e($post->title); ?>"
                                              class="post-cover-image"
                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                         <div class="post-cover-placeholder" style="display: none;">
                                             <i class="fas fa-newspaper"></i>
                                         </div>
-                                    @else
+                                    <?php else: ?>
                                         <div class="post-cover-placeholder">
                                             <i class="fas fa-newspaper"></i>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                                 
                                 <!-- Información del post -->
                                 <div class="post-info-container">
                                     <div class="post-header-section">
-                                        <a href="{{ route('posts.show', $post) }}" class="post-title-link">
-                                            <h3 class="post-title">{{ $post->title }}</h3>
+                                        <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
+                                            <h3 class="post-title"><?php echo e($post->title); ?></h3>
                                         </a>
-                                        <span class="post-category-badge">{{ $post->category->text }}</span>
+                                        <span class="post-category-badge"><?php echo e($post->category->text); ?></span>
                                     </div>
                                     
-                                    @if($post->content || $post->description)
-                                        <p class="post-description">{{ Str::limit($post->content ?: $post->description, 150) }}</p>
-                                    @endif
+                                    <?php if($post->content || $post->description): ?>
+                                        <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
+                                    <?php endif; ?>
                                     
-                                    @if($post->spotify_data)
+                                    <?php if($post->spotify_data): ?>
                                         <div class="spotify-info-card">
                                             <i class="fab fa-spotify spotify-icon"></i>
                                             <div class="spotify-text">
-                                                <div class="spotify-track-name">{{ $post->spotify_name }}</div>
-                                                @if($post->spotify_artist)
-                                                    <div class="spotify-artist-name">{{ $post->spotify_artist }}</div>
-                                                @endif
+                                                <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
+                                                <?php if($post->spotify_artist): ?>
+                                                    <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                     
                                     <!-- Meta información y acciones -->
                                     <div class="post-footer-section">
                                         <div class="post-meta-info">
                                             <span class="post-author">
                                                 <i class="fas fa-user me-1"></i>
-                                                {{ $post->user->name }}
+                                                <?php echo e($post->user->name); ?>
+
                                             </span>
                                             <span class="post-date">
                                                 <i class="fas fa-calendar me-1"></i>
-                                                {{ $post->created_at->diffForHumans() }}
+                                                <?php echo e($post->created_at->diffForHumans()); ?>
+
                                             </span>
                                         </div>
                                         
                                         <div class="post-actions-section">
-                                            <button onclick="toggleLike({{ $post->id }})" 
-                                                    class="like-btn {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}"
-                                                    data-post-id="{{ $post->id }}"
-                                                    data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
+                                            <button onclick="toggleLike(<?php echo e($post->id); ?>)" 
+                                                    class="like-btn <?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : ''); ?>"
+                                                    data-post-id="<?php echo e($post->id); ?>"
+                                                    data-liked="<?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false'); ?>">
                                                 <svg width="16" height="16" viewBox="0 0 24 24" 
-                                                     class="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none' }}">
+                                                     class="<?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none'); ?>">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                                 </svg>
-                                                <span class="likes-count">{{ $post->likes_count }}</span>
+                                                <span class="likes-count"><?php echo e($post->likes_count); ?></span>
                                             </button>
                                             
-                                            @if($post->user_id === Auth::id())
+                                            <?php if($post->user_id === Auth::id()): ?>
                                                 <div class="dropdown">
                                                     <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" 
                                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -257,22 +259,22 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('posts.show', $post) }}">
+                                                            <a class="dropdown-item" href="<?php echo e(route('posts.show', $post)); ?>">
                                                                 <i class="fas fa-eye me-2"></i>Ver
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">
+                                                            <a class="dropdown-item" href="<?php echo e(route('posts.edit', $post)); ?>">
                                                                 <i class="fas fa-pencil-alt me-2"></i>Editar
                                                             </a>
                                                         </li>
                                                         <li><hr class="dropdown-divider"></li>
                                                         <li>
-                                                            <form action="{{ route('posts.destroy', $post) }}" 
+                                                            <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
                                                                   method="POST" 
                                                                   onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
                                                                 <button type="submit" class="dropdown-item text-danger">
                                                                     <i class="fas fa-trash me-2"></i>Eliminar
                                                                 </button>
@@ -280,18 +282,19 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>            <!-- Paginación -->
             <div class="d-flex justify-content-center mt-4">
-                {{ $posts->links() }}
-            </div>        @else
+                <?php echo e($posts->links()); ?>
+
+            </div>        <?php else: ?>
             <!-- Estado vacío -->
             <div class="card dashboard-card text-center py-5">
                 <div class="card-body">
@@ -300,34 +303,35 @@
                     <p class="text-muted mb-4">
                         Esta comunidad está esperando su primera publicación
                     </p>
-                    @if($isMember || $isOwner)
-                        <a href="{{ route('communities.create-post', $community) }}" class="btn btn-new-playlist">
+                    <?php if($isMember || $isOwner): ?>
+                        <a href="<?php echo e(route('communities.create-post', $community)); ?>" class="btn btn-new-playlist">
                             <i class="fas fa-plus me-2"></i>
                             Crear Primera Publicación
                         </a>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
-        @endif
-        @endif
+        <?php endif; ?>
+        <?php endif; ?>
         </div>
     </div>
 </div>
 
 <!-- Modal para solicitar membresía -->
-@if(!$isOwner && !$isMember && $community->is_private && !$hasPendingRequest)
+<?php if(!$isOwner && !$isMember && $community->is_private && !$hasPendingRequest): ?>
 <div class="modal fade" id="requestMembershipModal" tabindex="-1" aria-labelledby="requestMembershipModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-dark">
             <div class="modal-header">
                 <h5 class="modal-title" id="requestMembershipModalLabel">
                     <i class="fas fa-paper-plane me-2"></i>
-                    Solicitar membresía a {{ $community->name }}
+                    Solicitar membresía a <?php echo e($community->name); ?>
+
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('communities.request', $community) }}" method="POST">
-                @csrf
+            <form action="<?php echo e(route('communities.request', $community)); ?>" method="POST">
+                <?php echo csrf_field(); ?>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="message" class="form-label">Mensaje para el administrador (opcional)</label>
@@ -353,10 +357,10 @@
         </div>
     </div>
 </div>
-@endif
+<?php endif; ?>
 
 <!-- Mensaje especial para comunidades privadas -->
-@if(!$isOwner && !$isMember && $community->is_private)
+<?php if(!$isOwner && !$isMember && $community->is_private): ?>
 <div class="alert alert-warning mt-3">
     <div class="row align-items-center">
         <div class="col-auto">
@@ -365,20 +369,20 @@
         <div class="col">
             <h6 class="mb-1">Esta es una comunidad privada</h6>
             <p class="mb-0 small">
-                @if($hasPendingRequest)
+                <?php if($hasPendingRequest): ?>
                     Tu solicitud de membresía está pendiente de aprobación.
-                @else
+                <?php else: ?>
                     Necesitas solicitar membresía para ver las publicaciones y participar.
-                @endif
+                <?php endif; ?>
             </p>
         </div>
     </div>
 </div>
-@endif
+<?php endif; ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 // Función para manejar los likes
 function toggleLike(postId) {
@@ -414,4 +418,6 @@ function toggleLike(postId) {
     });
 }
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.dashboard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\staytuned\resources\views/communities/show.blade.php ENDPATH**/ ?>

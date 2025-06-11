@@ -57,14 +57,14 @@
                         <i class="fas fa-search me-2"></i>
                         Buscar Comunidades Privadas
                     </h5>
-                    <p class="text-muted small mb-3">
+                    <p class="text-light small mb-3">
                         ¿Conoces el nombre de una comunidad privada? Búscala aquí para solicitar membresía.
                     </p>
                     
                     <form id="searchPrivateCommunitiesForm" class="row g-3">
                         <div class="col-md-8">
                             <input type="text" 
-                                   class="form-control bg-secondary border-0 text-white" 
+                                   class="form-control" 
                                    id="searchCommunityInput"
                                    placeholder="Buscar por nombre de comunidad..."
                                    autocomplete="off">

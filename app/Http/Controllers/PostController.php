@@ -120,8 +120,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
-        $categories = Category::all();
-        return view('posts.edit', compact('post', 'categories'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -133,16 +132,10 @@ class PostController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
         ]);
-
-        // Obtener la categoría para usar su texto como contenido
-        $category = Category::findOrFail($request->category_id);
 
         $post->update([
             'title' => $request->title,
-            'content' => $category->text, // Usar el texto de la categoría como contenido
-            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('posts.show', $post)

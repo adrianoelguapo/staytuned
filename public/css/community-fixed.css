@@ -227,9 +227,33 @@ body {
     box-shadow: none;
 }
 .btn-community-primary {
-    background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%);
-    color: #fff;
-    border: none;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    font-size: 0.95rem !important;
+}
+
+.btn-community-primary:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    text-decoration: none !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-community-primary i {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
 }
 .btn-community-secondary {
     background: rgba(255,255,255,0.13);
@@ -810,27 +834,35 @@ body {
     color: white;
 }
 
-/* Botón púrpura outline */
+/* Botón púrpura outline con glassmorphism */
 .btn-outline-purple {
-    background: transparent;
-    border: 2px solid #8b5cf6;
-    color: #8b5cf6;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    font-size: 0.95rem !important;
 }
 
 .btn-outline-purple:hover {
-    background: #8b5cf6;
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-    text-decoration: none;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    text-decoration: none !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-outline-purple i {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
 }
 
 /* Badge de notificación */
@@ -878,6 +910,79 @@ body {
     opacity: 0.8;
 }
 
+/* ====================================================
+   GLASSMORPHISM PARA BUSCADOR DE COMUNIDADES PRIVADAS
+   ==================================================== */
+
+/* Input de búsqueda de comunidades con glassmorphism */
+#searchCommunityInput.form-control {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+#searchCommunityInput.form-control:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 
+        0 0 0 0.2rem rgba(255, 255, 255, 0.1),
+        0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    color: #fff !important;
+    outline: none !important;
+    transform: translateY(-1px) !important;
+}
+
+#searchCommunityInput.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+}
+
+/* Botón de búsqueda con mismo estilo que btn-new-playlist */
+#searchPrivateCommunitiesForm .btn-purple {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    font-size: 0.95rem !important;
+    justify-content: center !important;
+}
+
+#searchPrivateCommunitiesForm .btn-purple:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+#searchPrivateCommunitiesForm .btn-purple:active {
+    transform: translateY(0) !important;
+}
+
+#searchPrivateCommunitiesForm .btn-purple i {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
+}
+
 /* Estilos para formularios en modales */
 .form-control.bg-secondary {
     background: rgba(55, 65, 81, 0.8) !important;
@@ -910,7 +1015,12 @@ body {
     }
     
     .btn-outline-purple {
-        font-size: 0.875rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.875rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .btn-community-primary {
+        font-size: 0.875rem !important;
+        padding: 0.5rem 1rem !important;
     }
 }

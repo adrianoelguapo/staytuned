@@ -203,7 +203,7 @@
                         <!-- Botones -->
                         <div class="d-flex gap-3">
                             <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-primary">Crear Publicación</button>
+                            <button type="submit" class="btn btn-primary-playlist">Crear Publicación</button>
                         </div>
 
                     </form>
