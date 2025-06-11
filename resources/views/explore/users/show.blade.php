@@ -112,8 +112,8 @@
                                             <div class="d-flex align-items-start">
                                                 <!-- Imagen de la playlist -->
                                                 <div class="playlist-image me-3">
-                                                    @if($playlist->image_url)
-                                                        <img src="{{ $playlist->image_url }}" 
+                                                    @if($playlist->cover)
+                                                        <img src="{{ asset('storage/' . $playlist->cover) }}" 
                                                              alt="{{ $playlist->name }}"
                                                              class="rounded"
                                                              style="width: 60px; height: 60px; object-fit: cover;">

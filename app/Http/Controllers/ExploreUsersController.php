@@ -70,6 +70,7 @@ class ExploreUsersController extends Controller
         $user->load([
             'playlists' => function($query) {
                 $query->where('is_public', true)
+                      ->withCount('songs')
                       ->latest()
                       ->take(6);
             },

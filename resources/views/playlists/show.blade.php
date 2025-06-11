@@ -155,10 +155,10 @@
                                     
                                     <div class="playlist-meta-large">
                                         <span class="me-3">
-                                            <img src="{{ Auth::user()->profile_photo_url }}" 
+                                            <img src="{{ $playlist->user->profile_photo_url }}" 
                                                  class="rounded-circle me-2 user-photo-small" 
-                                                 alt="{{ Auth::user()->name }}">
-                                            {{ Auth::user()->username }}
+                                                 alt="{{ $playlist->user->name }}">
+                                            {{ $playlist->user->username }}
                                         </span>
                                         <span class="me-3">
                                             <i class="bi bi-music-note me-1"></i>
@@ -175,75 +175,79 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <!-- Acciones -->
-                                <div class="playlist-actions-header">
-                                    <div class="dropdown d-inline">
-                                        <button class="btn btn-options-large btn-purple" type="button" 
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-three-dots"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <button class="dropdown-item" onclick="toggleSpotifySearch()">
-                                                    <i class="bi bi-plus me-2"></i>Agregar canciones
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
-                                                    <i class="bi bi-pencil me-2"></i>Editar playlist
-                                                </a>
-                                            </li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li>
-                                                <form action="{{ route('playlists.destroy', $playlist) }}" 
-                                                      method="POST" 
-                                                      onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="dropdown-item text-danger">
-                                                        <i class="bi bi-trash me-2"></i>Eliminar playlist
+                                <!-- Acciones (solo para el propietario) -->
+                                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                    <div class="playlist-actions-header">
+                                        <div class="dropdown d-inline">
+                                            <button class="btn btn-options-large btn-purple" type="button" 
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="bi bi-three-dots"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <button class="dropdown-item" onclick="toggleSpotifySearch()">
+                                                        <i class="bi bi-plus me-2"></i>Agregar canciones
                                                     </button>
-                                                </form>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
+                                                        <i class="bi bi-pencil me-2"></i>Editar playlist
+                                                    </a>
+                                                </li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <form action="{{ route('playlists.destroy', $playlist) }}" 
+                                                          method="POST" 
+                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item text-danger">
+                                                            <i class="bi bi-trash me-2"></i>Eliminar playlist
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Buscar canciones en Spotify (inicialmente oculto) -->
-                <div id="spotifySearch" class="card dashboard-card mb-4" style="display: none;">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="bi bi-search me-2"></i>
-                            Buscar canciones en Spotify
-                        </h5>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <input type="text" 
-                                       class="form-control search-input" 
-                                       id="searchInput" 
-                                       placeholder="Buscar canciones, artistas o álbumes...">
+                <!-- Buscar canciones en Spotify (inicialmente oculto) - Solo para el propietario -->
+                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                    <div id="spotifySearch" class="card dashboard-card mb-4" style="display: none;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-search me-2"></i>
+                                Buscar canciones en Spotify
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" 
+                                           class="form-control search-input" 
+                                           id="searchInput" 
+                                           placeholder="Buscar canciones, artistas o álbumes...">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-purple w-100" onclick="searchSpotify()">
+                                        <i class="bi bi-search me-2"></i>
+                                        Buscar
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        <span class="d-none d-lg-inline">Guardar</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-purple w-100" onclick="searchSpotify()">
-                                    <i class="bi bi-search me-2"></i>
-                                    Buscar
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()">
-                                    <i class="bi bi-check-circle me-2"></i>
-                                    <span class="d-none d-lg-inline">Guardar</span>
-                                </button>
-                            </div>
+                            
+                            <div id="searchResults" class="mt-4 search-results-container"></div>
                         </div>
-                        
-                        <div id="searchResults" class="mt-4 search-results-container"></div>
                     </div>
-                </div>
+                @endif
 
                 <!-- Lista de canciones -->
                 <div class="card dashboard-card">
@@ -299,26 +303,29 @@
                                             {{ $song->duration_formatted ?? $song->duration ?? '--:--' }}
                                         </div>
                                         <div class="song-actions">
-                                            <div class="custom-dropdown-container">
-                                                <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
-                                                        type="button" 
-                                                        data-song-id="{{ $song->id }}"
-                                                        onclick="toggleCustomDropdown(this)">
-                                                    <i class="bi bi-three-dots"></i>
-                                                </button>
-                                                <div class="custom-dropdown-menu" id="dropdown-{{ $song->id }}" style="display: none;">
-                                                    <div class="custom-dropdown-item">
-                                                        <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
-                                                              method="POST" style="margin: 0;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="custom-dropdown-btn text-danger">
-                                                                <i class="bi bi-trash me-2"></i>Quitar de la playlist
-                                                            </button>
-                                                        </form>
+                                            <!-- Solo mostrar acciones si es el propietario -->
+                                            @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                                <div class="custom-dropdown-container">
+                                                    <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
+                                                            type="button" 
+                                                            data-song-id="{{ $song->id }}"
+                                                            onclick="toggleCustomDropdown(this)">
+                                                        <i class="bi bi-three-dots"></i>
+                                                    </button>
+                                                    <div class="custom-dropdown-menu" id="dropdown-{{ $song->id }}" style="display: none;">
+                                                        <div class="custom-dropdown-item">
+                                                            <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
+                                                                  method="POST" style="margin: 0;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="custom-dropdown-btn text-danger">
+                                                                    <i class="bi bi-trash me-2"></i>Quitar de la playlist
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -327,14 +334,26 @@
                             <!-- Estado vacío -->
                             <div class="text-center py-5">
                                 <i class="bi bi-music-note display-1 text-muted mb-3"></i>
-                                <h4 class="text-muted mb-3">Tu playlist está vacía</h4>
+                                <h4 class="text-muted mb-3">
+                                    @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                        Tu playlist está vacía
+                                    @else
+                                        Esta playlist está vacía
+                                    @endif
+                                </h4>
                                 <p class="text-muted mb-4">
-                                    Busca y agrega tus canciones favoritas para comenzar a disfrutar tu música
+                                    @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                        Busca y agrega tus canciones favoritas para comenzar a disfrutar tu música
+                                    @else
+                                        El propietario de esta playlist aún no ha agregado canciones
+                                    @endif
                                 </p>
-                                <button class="btn btn-primary-playlist" onclick="toggleSpotifySearch()">
-                                    <i class="bi bi-search me-2"></i>
-                                    Buscar canciones
-                                </button>
+                                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                    <button class="btn btn-primary-playlist" onclick="toggleSpotifySearch()">
+                                        <i class="bi bi-search me-2"></i>
+                                        Buscar canciones
+                                    </button>
+                                @endif
                             </div>
                         @endif
                     </div>

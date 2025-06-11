@@ -70,12 +70,14 @@ class PlaylistController extends Controller
      */
     public function show(Playlist $playlist)
     {
-        // Verificar que la playlist pertenece al usuario
-        if ($playlist->user_id !== Auth::id()) {
-            abort(403);
+        // Verificar que la playlist sea pública o pertenezca al usuario autenticado
+        if (!$playlist->is_public && $playlist->user_id !== Auth::id()) {
+            abort(403, 'No tienes permisos para ver esta playlist.');
         }
 
-        $playlist->load('songs');
+        // Cargar las relaciones necesarias
+        $playlist->load(['songs', 'user']);
+        
         return view('playlists.show', compact('playlist'));
     }
 

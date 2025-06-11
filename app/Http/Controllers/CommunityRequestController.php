@@ -30,6 +30,32 @@ class CommunityRequestController extends Controller
             'message' => 'nullable|string|max:500'
         ]);
 
+        // Buscar si ya existe una solicitud previa
+        $existingRequest = CommunityRequest::where('user_id', $user->id)
+            ->where('community_id', $community->id)
+            ->first();
+
+        if ($existingRequest) {
+            // Si la solicitud existe y está pendiente, no hacer nada
+            if ($existingRequest->status === 'pending') {
+                return redirect()->back()->with('info', 'Ya tienes una solicitud pendiente para esta comunidad.');
+            }
+            
+            // Si fue rechazada o aprobada, crear nueva solicitud como "reenvío"
+            if ($existingRequest->status === 'rejected' || $existingRequest->status === 'approved') {
+                $existingRequest->update([
+                    'message' => $request->message,
+                    'status' => 'pending',
+                    'admin_message' => null,
+                    'responded_at' => null,
+                    'updated_at' => now()
+                ]);
+                
+                return redirect()->back()->with('success', 'Solicitud reenviada correctamente. El administrador de la comunidad revisará tu nueva solicitud.');
+            }
+        }
+
+        // Crear nueva solicitud si no existe ninguna previa
         CommunityRequest::create([
             'user_id' => $user->id,
             'community_id' => $community->id,

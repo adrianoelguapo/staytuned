@@ -125,7 +125,7 @@ class CommunityRequestTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_request_membership_twice()
+    public function user_cannot_request_membership_twice_if_pending()
     {
         // Crear propietario, usuario y comunidad privada
         $owner = User::factory()->create();
@@ -154,7 +154,49 @@ class CommunityRequestTest extends TestCase
             ->count());
 
         $response->assertRedirect();
-        $response->assertSessionHas('error');
+        $response->assertSessionHas('info'); // Cambié de 'error' a 'info'
+    }
+
+    /** @test */
+    public function user_can_request_membership_again_after_rejection()
+    {
+        // Crear propietario, usuario y comunidad privada
+        $owner = User::factory()->create();
+        $user = User::factory()->create();
+        $community = Community::factory()->create([
+            'user_id' => $owner->id,
+            'is_private' => true,
+        ]);
+
+        // Crear una solicitud rechazada
+        $rejectedRequest = CommunityRequest::create([
+            'user_id' => $user->id,
+            'community_id' => $community->id,
+            'status' => 'rejected',
+            'admin_message' => 'No cumples los requisitos.',
+            'responded_at' => now(),
+        ]);
+
+        // El usuario solicita de nuevo
+        $response = $this->actingAs($user)
+            ->post(route('communities.request', $community), [
+                'message' => 'He mejorado mi perfil, por favor considera mi solicitud.',
+            ]);
+
+        // Verificar que la solicitud anterior fue actualizada
+        $rejectedRequest->refresh();
+        $this->assertEquals('pending', $rejectedRequest->status);
+        $this->assertEquals('He mejorado mi perfil, por favor considera mi solicitud.', $rejectedRequest->message);
+        $this->assertNull($rejectedRequest->admin_message);
+        $this->assertNull($rejectedRequest->responded_at);
+
+        // Verificar que solo hay una solicitud en la base de datos (la actualizada)
+        $this->assertEquals(1, CommunityRequest::where('user_id', $user->id)
+            ->where('community_id', $community->id)
+            ->count());
+
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
     }
 
     /** @test */

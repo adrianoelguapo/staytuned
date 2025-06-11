@@ -1,14 +1,12 @@
-@extends('layouts.dashboard')
+<?php $__env->startSection('title', 'Solicitudes de Membresía - ' . $community->name); ?>
 
-@section('title', 'Solicitudes de Membresía - ' . $community->name)
+<?php $__env->startPush('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/community-fixed.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/users.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/community-requests.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
-<link rel="stylesheet" href="{{ asset('css/users.css') }}">
-<link rel="stylesheet" href="{{ asset('css/community-requests.css') }}">
-@endpush
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid py-5 requests-page">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
@@ -18,58 +16,61 @@
                     <h1 class="text-white mb-2" style="font-size: 2.5rem;">
                         Solicitudes de Membresía
                     </h1>
-                    <p class="text-white mb-0">Gestiona las solicitudes para unirse a <strong>{{ $community->name }}</strong></p>
+                    <p class="text-white mb-0">Gestiona las solicitudes para unirse a <strong><?php echo e($community->name); ?></strong></p>
                 </div>
-                <a href="{{ route('communities.show', $community) }}" class="btn btn-new-playlist">
+                <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn btn-new-playlist">
                     <i class="bi bi-arrow-left me-2"></i>
                     Volver a la Comunidad
                 </a>
             </div>
 
-            @if (session('success'))
+            <?php if(session('success')): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
+                    <?php echo e(session('success')); ?>
+
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
-            @endif
+            <?php endif; ?>
 
-            @if (session('error'))
+            <?php if(session('error')): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
+                    <?php echo e(session('error')); ?>
+
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
-            @endif
+            <?php endif; ?>
 
-            @if($pendingRequests->count() > 0)
+            <?php if($pendingRequests->count() > 0): ?>
                 <!-- Lista de solicitudes pendientes -->
                 <div class="row g-4">
-                    @foreach($pendingRequests as $request)
+                    <?php $__currentLoopData = $pendingRequests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-12">
                             <div class="card dashboard-card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-start">
                                         <!-- Avatar del usuario -->
                                         <div class="me-3">
-                                            @if($request->user->profile_photo_path)
-                                                <img src="{{ asset('storage/' . $request->user->profile_photo_path) }}" 
-                                                     alt="{{ $request->user->name }}"
+                                            <?php if($request->user->profile_photo_path): ?>
+                                                <img src="<?php echo e(asset('storage/' . $request->user->profile_photo_path)); ?>" 
+                                                     alt="<?php echo e($request->user->name); ?>"
                                                      class="rounded-circle"
                                                      style="width: 60px; height: 60px; object-fit: cover;">
-                                            @else
+                                            <?php else: ?>
                                                 <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" 
                                                      style="width: 60px; height: 60px;">
                                                     <i class="bi bi-person text-white fs-4"></i>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
 
                                         <!-- Información del usuario y solicitud -->
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-start mb-2">
                                                 <div>
-                                                    <h5 class="mb-1 text-white">{{ $request->user->name }}</h5>
+                                                    <h5 class="mb-1 text-white"><?php echo e($request->user->name); ?></h5>
                                                     <p class="text-white-50 mb-0">
-                                                        <i class="bi bi-at me-1"></i>{{ $request->user->username }}
+                                                        <i class="bi bi-at me-1"></i><?php echo e($request->user->username); ?>
+
                                                     </p>
                                                 </div>
                                                 <span class="badge glassmorphism-warning">
@@ -80,24 +81,25 @@
 
                                             <p class="text-white-50 small mb-2">
                                                 <i class="bi bi-clock me-1"></i>
-                                                Solicitó hace {{ $request->created_at->diffForHumans() }}
+                                                Solicitó hace <?php echo e($request->created_at->diffForHumans()); ?>
+
                                             </p>
 
-                                            @if($request->message)
+                                            <?php if($request->message): ?>
                                                 <div class="mb-3">
                                                     <h6 class="text-white-50 small mb-2">Mensaje del usuario:</h6>
                                                     <div class="p-3 rounded" style="background: rgba(255, 255, 255, 0.1);">
-                                                        <p class="text-white mb-0">{{ $request->message }}</p>
+                                                        <p class="text-white mb-0"><?php echo e($request->message); ?></p>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
 
                                             <!-- Acciones -->
                                             <div class="d-flex gap-2 flex-wrap">
                                                 <!-- Botón Aprobar -->
-                                                <form action="{{ route('community-requests.approve', $request) }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('PATCH')
+                                                <form action="<?php echo e(route('community-requests.approve', $request)); ?>" method="POST" class="d-inline">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('PATCH'); ?>
                                                     <button type="submit" class="btn btn-sm glassmorphism-success">
                                                         <i class="bi bi-check-lg me-1"></i>
                                                         Aprobar
@@ -108,13 +110,13 @@
                                                 <button type="button" 
                                                         class="btn btn-sm glassmorphism-danger" 
                                                         data-bs-toggle="modal" 
-                                                        data-bs-target="#rejectModal{{ $request->id }}">
+                                                        data-bs-target="#rejectModal<?php echo e($request->id); ?>">
                                                     <i class="bi bi-x-lg me-1"></i>
                                                     Rechazar
                                                 </button>
 
                                                 <!-- Ver perfil del usuario -->
-                                                <a href="{{ route('explore.users.show', $request->user) }}" 
+                                                <a href="<?php echo e(route('explore.users.show', $request->user)); ?>" 
                                                    class="btn btn-sm glassmorphism-white">
                                                     <i class="bi bi-person me-1"></i>
                                                     Ver Perfil
@@ -125,9 +127,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-            @else
+            <?php else: ?>
                 <!-- Estado vacío - Idéntico al diseño de playlists -->
                 <div class="card dashboard-card text-center py-5">
                     <div class="card-body">
@@ -136,38 +138,39 @@
                         <p class="text-light mb-4">
                             No tienes solicitudes de membresía pendientes para esta comunidad.
                         </p>
-                        <a href="{{ route('communities.show', $community) }}" class="btn btn-new-playlist">
+                        <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn btn-new-playlist">
                             <i class="bi bi-arrow-left me-2"></i>
                             Volver a la Comunidad
                         </a>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
 <!-- Modales para rechazar solicitudes -->
-@foreach($pendingRequests as $request)
-    <div class="modal fade" id="rejectModal{{ $request->id }}" tabindex="-1" aria-labelledby="rejectModalLabel{{ $request->id }}" aria-hidden="true">
+<?php $__currentLoopData = $pendingRequests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <div class="modal fade" id="rejectModal<?php echo e($request->id); ?>" tabindex="-1" aria-labelledby="rejectModalLabel<?php echo e($request->id); ?>" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-dark">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="rejectModalLabel{{ $request->id }}">
+                    <h5 class="modal-title" id="rejectModalLabel<?php echo e($request->id); ?>">
                         <i class="bi bi-x-circle me-2"></i>
-                        Rechazar solicitud de {{ $request->user->name }}
+                        Rechazar solicitud de <?php echo e($request->user->name); ?>
+
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <form action="{{ route('community-requests.reject', $request) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
+                <form action="<?php echo e(route('community-requests.reject', $request)); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="admin_message{{ $request->id }}" class="form-label">Mensaje para el usuario (opcional)</label>
+                            <label for="admin_message<?php echo e($request->id); ?>" class="form-label">Mensaje para el usuario (opcional)</label>
                             <textarea 
                                 class="form-control" 
-                                id="admin_message{{ $request->id }}" 
+                                id="admin_message<?php echo e($request->id); ?>" 
                                 name="admin_message" 
                                 rows="3" 
                                 placeholder="Explica el motivo del rechazo (opcional)..."
@@ -189,11 +192,11 @@
             </div>
         </div>
     </div>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Inicializando sistema minimalista de botones');
@@ -246,4 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Sistema minimalista inicializado');
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.dashboard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\staytuned\resources\views/communities/requests.blade.php ENDPATH**/ ?>

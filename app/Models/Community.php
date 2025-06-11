@@ -150,8 +150,25 @@ class Community extends Model
             return true;
         }
         
-        // Si es privada, solo puede solicitar membresía si no tiene una solicitud pendiente
-        return !$this->hasPendingRequest($user);
+        // Si es privada, puede solicitar membresía solo si:
+        // 1. No tiene ninguna solicitud previa, o
+        // 2. Su solicitud anterior fue rechazada
+        $lastRequest = $this->requests()
+            ->where('user_id', $user->id)
+            ->latest()
+            ->first();
+            
+        if (!$lastRequest) {
+            return true; // No tiene solicitudes previas
+        }
+        
+        // Si tiene una solicitud pendiente, no puede hacer otra
+        if ($lastRequest->status === 'pending') {
+            return false;
+        }
+        
+        // Si fue rechazada o aprobada (aunque ya no debería estar aquí si fue aprobada), puede solicitar de nuevo
+        return true;
     }
 
     /**
