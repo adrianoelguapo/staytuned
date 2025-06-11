@@ -30,8 +30,8 @@ Route::middleware([
     Route::post('/posts/{post}/like', [PostController::class, 'toggleLike'])->name('posts.like');
     
     // Rutas de comunidades
-    Route::resource('communities', CommunityController::class);
     Route::get('/communities/search', [CommunityController::class, 'search'])->name('communities.search');
+    Route::resource('communities', CommunityController::class);
     Route::post('/communities/{community}/join', [CommunityController::class, 'join'])->name('communities.join');
     Route::post('/communities/{community}/leave', [CommunityController::class, 'leave'])->name('communities.leave');
     Route::get('/communities/{community}/create-post', [CommunityController::class, 'createPost'])->name('communities.create-post');
