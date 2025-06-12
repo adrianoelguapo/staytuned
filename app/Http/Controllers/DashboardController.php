@@ -17,18 +17,25 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         
-        // Obtener publicaciones de usuarios seguidos
+        // Obtener IDs de usuarios seguidos
         $followingUserIds = $user->following()
             ->where('followable_type', User::class)
             ->pluck('followable_id');
+        
+        // Obtener IDs de comunidades del usuario
+        $userCommunityIds = $user->communities()->pluck('communities.id');
+        
+        // Obtener publicaciones de usuarios seguidos QUE NO ESTÉN EN COMUNIDADES
+        // (Solo publicaciones públicas individuales)
         $followingPosts = Post::with(['user', 'category', 'likes'])
             ->whereIn('user_id', $followingUserIds)
+            ->whereNull('community_id') // Solo publicaciones que NO están en comunidades
             ->orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
 
         // Obtener publicaciones de comunidades a las que pertenece el usuario
-        $userCommunityIds = $user->communities()->pluck('communities.id');
+        // (Incluye publicaciones de cualquier usuario dentro de esas comunidades)
         $communityPosts = Post::with(['user', 'category', 'likes', 'community'])
             ->whereIn('community_id', $userCommunityIds)
             ->orderBy('created_at', 'desc')
