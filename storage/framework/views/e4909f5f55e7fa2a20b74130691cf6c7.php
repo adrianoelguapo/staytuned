@@ -126,4 +126,9 @@
 
 </body>
 </html>
+
+
+
+
+
 <?php /**PATH C:\laragon\www\staytuned\resources\views/auth/register.blade.php ENDPATH**/ ?>

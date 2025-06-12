@@ -62,4 +62,9 @@
 
     </body>
 
-</html><?php /**PATH C:\laragon\www\staytuned\resources\views/welcome.blade.php ENDPATH**/ ?>
+</html>
+
+
+
+
+<?php /**PATH C:\laragon\www\staytuned\resources\views/welcome.blade.php ENDPATH**/ ?>

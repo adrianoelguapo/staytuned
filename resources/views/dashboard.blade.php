@@ -129,8 +129,9 @@
             <div class="col-12 col-lg-10">
                 
                 <!-- Header del Dashboard -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>                        <h1 class="text-white mb-1">
+                <div class="d-flex justify-content-between align-items-center mb-4 text-center text-md-start">
+                    <div class="w-100 w-md-auto">
+                        <h1 class="text-white mb-1">
                             Dashboard
                         </h1>
                         <p class="text-light mb-0">Mantente al día con las publicaciones de tus seguidos y comunidades</p>
@@ -170,16 +171,16 @@
 
                 <!-- Sección de Publicaciones de Seguidos -->
                 <div class="mb-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
+                        <div class="mb-3 mb-lg-0">
                             <h2 class="text-white mb-0">
                                 Publicaciones Recientes de Seguidos
                             </h2>
                             <small class="text-light">Últimas 24 horas</small>
                         </div>
-                        <a href="{{ route('explore.users.index') }}" class="btn btn-outline-light btn-sm">
+                        <a href="{{ route('explore.users.index') }}" class="btn btn-outline-light btn-sm w-100 dashboard-action-btn">
                             <i class="fas fa-search me-1"></i>
-                            Explorar más usuarios
+                            Explorar Más Usuarios
                         </a>
                     </div>
 
@@ -190,14 +191,14 @@
 
                 <!-- Sección de Publicaciones de Comunidades -->
                 <div class="mb-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
+                        <div class="mb-3 mb-lg-0">
                             <h2 class="text-white mb-0">
                                 Publicaciones Recientes de Mis Comunidades
                             </h2>
                             <small class="text-light">Últimas 24 horas</small>
                         </div>
-                        <a href="{{ route('communities.index') }}" class="btn btn-outline-light btn-sm">
+                        <a href="{{ route('communities.index') }}" class="btn btn-outline-light btn-sm w-100 dashboard-action-btn">
                             <i class="fas fa-users me-1"></i>
                             Ver Mis Comunidades
                         </a>
@@ -240,6 +241,14 @@
         background: rgba(255, 255, 255, 0.05) !important;
         border-color: rgba(255, 255, 255, 0.1) !important;
         color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    /* Estilos responsive para botones de acción del dashboard */
+    @media (min-width: 992px) {
+        .dashboard-action-btn {
+            max-width: 200px !important;
+            width: auto !important;
+        }
     }
     </style>
 

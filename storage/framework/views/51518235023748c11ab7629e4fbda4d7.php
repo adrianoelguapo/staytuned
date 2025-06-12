@@ -2,16 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"                     <i class="fas fa-users me-2"></i> Explorar Usuarios
-                </a>
-                <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">
-                    <i class="fas fa-music me-2"></i> Mis Playlists
-                </a>
-                <a class="nav-link" href="<?php echo e(route('posts.index')); ?>">
-                    <i class="fas fa-edit me-2"></i> Mis Publicaciones
-                </a>
-                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">
-                    <i class="fas fa-users me-2"></i> Mis Comunidadesta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Configuración de Perfil | StayTuned</title>
 
     <!-- Bootstrap CSS -->
@@ -28,9 +20,9 @@
 
     <!-- CSS personalizado -->
     <link href="<?php echo e(asset('css/profile.css')); ?>" rel="stylesheet" />
-<link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
-
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
 </head>
+
 <body class="dashboard-body">
     <!-- ==========================
          NAVBAR (igual que en Dashboard)
@@ -129,13 +121,13 @@
                     <i class="fas fa-users me-2"></i> Explorar Usuarios
                 </a>
                 <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">
-                    <i class="fas fa-music me-2"></i> Mis playlists
+                    <i class="fas fa-music me-2"></i> Mis Playlists
                 </a>
                 <a class="nav-link" href="<?php echo e(route('posts.index')); ?>">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
                 <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">
-                    <i class="fas fa-users me-2"></i> Mis comunidades
+                    <i class="fas fa-users me-2"></i> Mis Comunidades
                 </a>
             </nav>
             <hr class="my-0" />
