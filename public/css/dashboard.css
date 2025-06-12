@@ -54,11 +54,22 @@ body.dashboard-body {
 
 /* Nav-link active state */
 .nav-link-inline.active {
-  color: #fff;
-  font-weight: 600;
+  color: #fff !important;
+  font-weight: 600 !important;
 }
 
 .nav-link-inline.active::before {
+  width: 100% !important;
+  left: 0 !important;
+  background: #fff !important;
+}
+
+/* Nav-link hover state */
+.nav-link-inline:hover {
+  color: #fff !important;
+}
+
+.nav-link-inline:hover::before {
   width: 100%;
   left: 0;
 }
@@ -214,144 +225,810 @@ body.dashboard-body {
   transform: scale(1.1);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 992px) {
-  .offcanvas {
-    width: 65% !important;
+/* ====================================================
+   ICONOS DE ESTADO VACÍO - SELECTORES ESPECÍFICOS
+   ==================================================== */
+
+/* SOLO iconos de estado vacío principales - NO afectar botones */
+.dashboard-card .text-center > i.fa-user-friends:not(.btn i),
+.dashboard-card .text-center > i.fa-users:not(.btn i),
+.dashboard-card .text-center > i.fa-newspaper:not(.btn i),
+.dashboard-card .text-center > i.bi-inbox:not(.btn i),
+.dashboard-card .text-center > i.fa-3x:not(.btn i) {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 4rem !important;
+  margin-bottom: 1.5rem !important;
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  line-height: 1 !important;
+}
+
+/* ====================================================
+   ASEGURAR CARGA DE ICONOS FONT AWESOME - SIN AFECTAR BOTONES
+   ==================================================== */
+
+/* Force visibility for FontAwesome icons SOLO para estados vacíos */
+.dashboard-card .text-center .fas:not(.btn .fas),
+.dashboard-card .text-center .fa:not(.btn .fa),
+.dashboard-card .text-center .fab:not(.btn .fab),
+.dashboard-card .text-center .far:not(.btn .far) {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+}
+
+/* Specific fixes for dashboard empty state icons - SIN AFECTAR BOTONES */
+.dashboard-card .text-center .fas.fa-user-friends:not(.btn .fas)::before {
+  content: "\f500" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.dashboard-card .text-center .fas.fa-users:not(.btn .fas)::before {
+  content: "\f0c0" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.dashboard-card .text-center .fas.fa-newspaper:not(.btn .fas)::before {
+  content: "\f1ea" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Force display for all empty state icons - SIN AFECTAR BOTONES */
+.dashboard-card .text-center i.fas:not(.btn i),
+.dashboard-card .text-center i.fa:not(.btn i),
+.dashboard-card .text-center i.fab:not(.btn i),
+.dashboard-card .text-center i.far:not(.btn i) {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 3rem !important;
+  margin-bottom: 1rem !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Override any competing styles - SIN AFECTAR BOTONES */
+.dashboard-card .text-center .fa-3x:not(.btn .fa-3x) {
+  font-size: 3em !important;
+  line-height: 1 !important;
+  vertical-align: baseline !important;
+}
+
+/* Ensure Font Awesome CDN styles don't get overridden - SIN AFECTAR BOTONES */
+.dashboard-card .text-center i[class*="fa-"]:not(.btn i) {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  speak: none !important;
+}
+
+/* ====================================================
+   ESTILOS PARA OFFCANVAS ENLACES ACTIVOS
+   ==================================================== */
+
+/* Nav links activos en offcanvas */
+.offcanvas .nav-link.active {
+  background: rgba(124, 58, 237, 0.2) !important;
+  color: #8b5cf6 !important;
+  font-weight: 600 !important;
+}
+
+.offcanvas .nav-link:hover {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #7c3aed !important;
+}
+
+/* ====================================================
+   CORRECCIONES ADICIONALES PARA NAVEGACIÓN
+   ==================================================== */
+
+/* Asegurar que los enlaces del navbar principal funcionen */
+.navbar .nav-link-inline {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar .nav-link-inline:hover {
+  color: #fff !important;
+}
+
+.navbar .nav-link-inline.active {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Dropdown toggle activo */
+.navbar .dropdown-toggle.nav-link-inline {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar .dropdown-toggle.nav-link-inline:hover {
+  color: #fff !important;
+}
+
+/* ====================================================
+   ICONOS DE ESTADO VACÍO - SOLUCIÓN ESPECIFICA SIN AFECTAR BOTONES
+   ==================================================== */
+
+/* Estados vacíos específicos con iconos forzados - SOLO para iconos directos, NO para botones */
+.dashboard-card .text-center.py-5 > i:not(.btn i),
+.dashboard-card .text-center.py-4 > i:not(.btn i) {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 4rem !important;
+  margin-bottom: 1.5rem !important;
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Iconos específicos para cada tipo de estado vacío - SOLO iconos directos */
+.dashboard-card .card-body.text-center > i.fa-user-friends:not(.btn i),
+.dashboard-card .card-body.text-center > i.fa-users:not(.btn i),
+.dashboard-card .card-body.text-center > i.fa-newspaper:not(.btn i),
+.dashboard-card .card-body.text-center > i.bi-inbox:not(.btn i),
+.dashboard-card .card-body.text-center > i.bi-newspaper:not(.btn i),
+.dashboard-card .card-body.text-center > i.bi-people:not(.btn i) {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 4rem !important;
+  margin-bottom: 1.5rem !important;
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  line-height: 1 !important;
+}
+
+/* Iconos con clase fa-3x específicamente para estados vacíos - NO para botones */
+.dashboard-card .text-center > i.fa-3x:not(.btn i) {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 3rem !important;
+  margin-bottom: 1.5rem !important;
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  line-height: 1 !important;
+}
+
+/* Bootstrap Icons específicos - SOLO iconos directos */
+.dashboard-card .card-body.text-center > .bi:not(.btn .bi) {
+  font-family: "bootstrap-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1 !important;
+  vertical-align: -.125em !important;
+}
+
+/* Font Awesome icons específicos - SOLO iconos directos */
+.dashboard-card .card-body.text-center > .fas:not(.btn .fas) {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1 !important;
+}
+
+/* Classes display específicas - SOLO para iconos principales */
+.dashboard-card .text-center > .display-1:not(.btn .display-1) {
+  font-size: 4rem !important;
+  line-height: 1 !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Estados específicos del dashboard - textos */
+.dashboard-card h4.text-white,
+.dashboard-card h4.text-light,
+.dashboard-card h4.text-muted,
+.dashboard-card h5.text-white {
+  color: #fff !important;
+  margin-bottom: 1rem !important;
+}
+
+.dashboard-card p.text-light,
+.dashboard-card p.text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* ====================================================
+   GLASSMORPHISM PARA BOTONES DEL DASHBOARD - MEJORADO
+   ==================================================== */
+
+/* TODOS los botones en dashboard cards con glassmorphism */
+.dashboard-card .btn,
+.dashboard-card button,
+.dashboard-card a.btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.95rem !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Específicamente para btn-outline-light */
+.dashboard-card .btn-outline-light {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 14px !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  padding: 0.8rem 1.8rem !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ====================================================
+   GLASSMORPHISM GLOBAL PARA TODOS LOS BOTONES BTN-OUTLINE-LIGHT
+   ==================================================== */
+
+/* Aplicar glassmorphism a TODOS los botones btn-outline-light en el dashboard */
+.dashboard-container .btn-outline-light,
+.btn-outline-light {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 14px !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  padding: 0.8rem 1.8rem !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.95rem !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Específicos para botones pequeños btn-sm */
+.dashboard-container .btn-outline-light.btn-sm,
+.btn-outline-light.btn-sm {
+  padding: 0.6rem 1.2rem !important;
+  font-size: 0.875rem !important;
+  border-radius: 12px !important;
+}
+
+/* Estados hover para TODOS los btn-outline-light */
+.dashboard-container .btn-outline-light:hover,
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 
+    0 10px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  text-decoration: none !important;
+}
+
+/* Estados focus para TODOS los btn-outline-light */
+.dashboard-container .btn-outline-light:focus,
+.btn-outline-light:focus {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  box-shadow: 
+    0 0 0 0.15rem rgba(255, 255, 255, 0.25),
+    0 10px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* Estados active para TODOS los btn-outline-light */
+.dashboard-container .btn-outline-light:active,
+.btn-outline-light:active {
+  transform: translateY(0px) !important;
+  box-shadow: 
+    0 5px 20px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Iconos dentro de botones btn-outline-light globales */
+.dashboard-container .btn-outline-light i,
+.btn-outline-light i {
+  font-size: 1em !important;
+  color: inherit !important;
+  margin: 0 !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  opacity: 0.9 !important;
+  line-height: inherit !important;
+  vertical-align: middle !important;
+}
+
+/* Asegurar que NO se apliquen estilos de iconos vacíos a botones */
+.dashboard-card .btn *,
+.dashboard-card .btn-outline-light *,
+.dashboard-card .btn-glass *,
+.dashboard-card button *,
+.dashboard-card a.btn * {
+  font-size: inherit !important;
+  color: inherit !important;
+  display: inline !important;
+}
+
+/* ====================================================
+   ESTILOS GLASSMORPHISM PARA PAGINACIÓN
+   ==================================================== */
+
+/* Contenedor de paginación */
+.pagination {
+  gap: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Enlaces y botones de paginación con glassmorphism */
+.pagination .page-link {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pagination .page-link:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  text-decoration: none !important;
+}
+
+.pagination .page-link:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+  text-decoration: none !important;
+}
+
+/* Página activa */
+.pagination .page-item.active .page-link {
+  background: rgba(124, 58, 237, 0.3) !important;
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2) !important;
+}
+
+.pagination .page-item.active .page-link:hover {
+  background: rgba(124, 58, 237, 0.4) !important;
+  border-color: rgba(124, 58, 237, 0.6) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Enlaces deshabilitados */
+.pagination .page-item.disabled .page-link {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.pagination .page-item.disabled .page-link:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Botones de navegación (anterior/siguiente) */
+.pagination .page-link[aria-label="Previous"],
+.pagination .page-link[aria-label="Next"] {
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* ====================================================
+   ESTILOS DE PAGINACIÓN GLASSMORPHISM MEJORADOS
+   ==================================================== */
+
+/* Estilos específicos para paginación custom */
+.pagination-custom {
+  margin-bottom: 0 !important;
+}
+
+.pagination-custom .page-link {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  margin: 0 0.25rem !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  min-width: 45px !important;
+  height: 45px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pagination-custom .page-link:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  text-decoration: none !important;
+}
+
+.pagination-custom .page-item.active .page-link {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+.pagination-custom .page-item.disabled .page-link {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Información de paginación debajo de los controles */
+.pagination-info {
+  margin-top: 1rem !important;
+  text-align: center !important;
+}
+
+.pagination-info small {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  display: inline-block !important;
+}
+
+/* ====================================================
+   FIN DE ESTILOS DE PAGINACIÓN
+   ==================================================== */
+
+/* ====================================================
+   DROPDOWNS ESPECÍFICOS PARA POSTS
+   ==================================================== */
+
+/* Dropdowns en post cards */
+.post-card-full-width .dropdown {
+  position: relative !important;
+}
+
+.post-card-full-width .dropdown-toggle {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.875rem !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.post-card-full-width .dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  text-decoration: none !important;
+}
+
+.post-card-full-width .dropdown-toggle:focus {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+  text-decoration: none !important;
+}
+
+.post-card-full-width .dropdown-toggle::after {
+  display: none !important;
+}
+
+.post-card-full-width .dropdown-menu {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+  padding: 0.5rem 0 !important;
+  min-width: 180px !important;
+  z-index: 999999 !important;
+  position: fixed !important;
+}
+
+.post-card-full-width .dropdown-item {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.2s ease !important;
+  border-radius: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.post-card-full-width .dropdown-item:hover {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #7c3aed !important;
+}
+
+.post-card-full-width .dropdown-item.text-danger {
+  color: #dc2626 !important;
+}
+
+.post-card-full-width .dropdown-item.text-danger:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+}
+
+.post-card-full-width .dropdown-divider {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  margin: 0.25rem 0 !important;
+}
+
+/* ====================================================
+   FIN DE ESTILOS PARA DROPDOWNS DE POSTS
+   ==================================================== */
+
+/* ====================================================
+   Z-INDEX FORZADO PARA DROPDOWNS - MÁXIMA PRIORIDAD
+   ==================================================== */
+
+/* Asegurar que los dropdowns aparezcan por encima de TODO */
+.dropdown-menu.show {
+  z-index: 999999 !important;
+  position: fixed !important;
+}
+
+/* Específicamente para dropdowns de posts */
+.post-card-full-width .dropdown-menu.show {
+  z-index: 999999 !important;
+  position: fixed !important;
+  transform: none !important;
+}
+
+/* Resetear cualquier z-index conflictivo en elementos padre */
+.post-card-full-width,
+.post-card-body,
+.post-content-wrapper,
+.post-actions-section {
+  z-index: auto !important;
+  position: relative !important;
+}
+
+/* Asegurar que el dropdown no sea afectado por overflow hidden */
+.posts-list {
+  overflow: visible !important;
+}
+
+.post-card-full-width {
+  overflow: visible !important;
+}
+
+/* ====================================================
+   FORZAR Z-INDEX MÁXIMO PARA DROPDOWNS - SOLUCIÓN DEFINITIVA
+   ==================================================== */
+
+/* Asegurar que NADA pueda estar por encima de los dropdowns */
+.dropdown-menu.show,
+.post-card-full-width .dropdown-menu.show {
+  z-index: 999999 !important;
+  position: fixed !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  will-change: transform !important;
+}
+
+/* Resetear cualquier contexto de apilamiento que pueda interferir */
+.posts-list,
+.post-card-full-width,
+.post-card-body,
+.post-content-wrapper,
+.post-info-container,
+.post-footer-section,
+.post-actions-section {
+  z-index: auto !important;
+  position: relative !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  isolation: auto !important;
+}
+
+/* Asegurar que no hay overflow hidden que pueda cortar el dropdown */
+.posts-list,
+.post-card-full-width,
+.post-card-body,
+.dashboard-container,
+main {
+  overflow: visible !important;
+}
+
+/* Estilo específico para el contenedor padre del dropdown */
+.post-card-full-width .dropdown {
+  position: static !important;
+  z-index: auto !important;
+}
+
+/* Asegurar que el botón del dropdown no interfiera */
+.post-card-full-width .dropdown-toggle {
+  z-index: auto !important;
+  position: relative !important;
+}
+
+/* ====================================================
+   FIN DE FORZADO DE Z-INDEX
+   ==================================================== */
+
+/* === CUSTOM DROPDOWN STYLES (GLASSMORPHISM) === */
+#global-dropdown-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 999999 !important;
+}
+
+.custom-dropdown-menu {
+  position: absolute !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  padding: 0.5rem 0 !important;
+  min-width: 180px !important;
+  max-width: 200px !important;
+  pointer-events: auto !important;
+  z-index: 999999 !important;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.custom-dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.5rem 1rem !important;
+  color: #374151 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+  background: transparent !important;
+  width: 100% !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  font-size: 0.875rem !important;
+}
+
+.custom-dropdown-item:hover {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #7c3aed !important;
+  text-decoration: none !important;
+}
+
+.custom-dropdown-item.danger {
+  color: #dc2626 !important;
+}
+
+.custom-dropdown-item.danger:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+}
+
+.custom-dropdown-divider {
+  border: none !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  margin: 0.25rem 0 !important;
+}
+
+/* === Asegurar z-index máximo para dropdowns === */
+.dropdown-menu.show {
+  z-index: 999999 !important;
+}
+
+/* === Glassmorphism overrides === */
+.custom-dropdown-menu * {
+  pointer-events: auto !important;
+}
+
+/* === RESPONSIVE DROPDOWN ADJUSTMENTS === */
+@media (max-width: 768px) {
+  .custom-dropdown-menu {
+    min-width: 160px !important;
+    max-width: 180px !important;
   }
 }
 
-/* === GLASSMORPHISM BUTTONS === */
-.btn-glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0.75rem;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-glass:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.btn-glass:focus {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
-}
-
-/* Variaciones de tamaño */
-.btn-glass.btn-sm {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  border-radius: 0.5rem;
-}
-
-.btn-glass.btn-lg {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.125rem;
-  border-radius: 1rem;
-}
-
-/* Override para btn-outline-light en dashboard */
-.dashboard-container .btn-outline-light {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0.75rem;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.dashboard-container .btn-outline-light:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Override para botones de comunidad en dashboard */
-.dashboard-container .btn-community {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0.75rem;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.dashboard-container .btn-community:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.dashboard-container .btn-community-primary {
-  background: rgba(99, 102, 241, 0.2);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
-}
-
-.dashboard-container .btn-community-primary:hover {
-  background: rgba(99, 102, 241, 0.3);
-  border-color: rgba(99, 102, 241, 0.4);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
-}
-
-.dashboard-container .btn-community-secondary {
-  background: rgba(124, 58, 237, 0.15);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  color: #c4b5fd;
-}
-
-.dashboard-container .btn-community-secondary:hover {
-  background: rgba(124, 58, 237, 0.25);
-  border-color: rgba(124, 58, 237, 0.35);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
-}
-
-/* Fix para elementos que se salen de su contenedor */
-.dashboard-container .post-card-full-width {
-  position: relative;
-  overflow: hidden;
-}
-
-.dashboard-container .post-info-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.dashboard-container .post-header-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.dashboard-container .post-category-badge {
-  position: relative;
-  z-index: 1;
-}
+/* === PAGINATION GLASSMORPHISM === */

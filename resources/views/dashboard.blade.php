@@ -28,11 +28,26 @@
 
         <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
+            <a href="{{ route('dashboard') }}" 
+               class="nav-link-inline {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                Dashboard
+            </a>
+            <a href="{{ route('explore.users.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('explore.users.*') ? 'active' : '' }}">
+                Explorar usuarios
+            </a>
+            <a href="{{ route('playlists.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('playlists.*') ? 'active' : '' }}">
+                Mis playlists
+            </a>
+            <a href="{{ route('posts.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
+                Mis Publicaciones
+            </a>
+            <a href="{{ route('communities.index') }}" 
+               class="nav-link-inline {{ request()->routeIs('communities.*') ? 'active' : '' }}">
+                Mis comunidades
+            </a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"

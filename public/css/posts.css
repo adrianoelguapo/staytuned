@@ -2433,3 +2433,38 @@ body.modal-open {
   color: rgba(255, 255, 255, 0.6) !important;
   margin: 0 !important;
 }
+
+/* 1) Asegurarnos de que el padre no oculte el dropdown */
+.posts-list,
+.post-card-full-width {
+  overflow: visible !important;
+}
+
+/* 2) Convertimos cada tarjeta en un contexto de apilado */
+.post-card-full-width {
+  position: relative !important;
+}
+
+/* 3) Forzamos que el menú sea absoluto dentro de la tarjeta y por encima de todo */
+.post-card-full-width .dropdown-menu {
+  position: absolute !important;
+  top: calc(100% + 0.5rem) !important; /* justo debajo del botón */
+  right: 1rem !important;               /* o el valor que necesites */
+  z-index: 10000 !important;
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  min-width: 180px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  pointer-events: auto; /* que reciba clicks */
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity .2s, transform .2s;
+}
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+}

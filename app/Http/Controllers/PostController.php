@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $posts = Auth::user()->posts()->with(['user', 'category'])
             ->orderBy('created_at', 'desc')
-            ->paginate(12);
+            ->paginate(3); // Cambiar a 3 posts por página
 
         return view('posts.index', compact('posts'));
     }
