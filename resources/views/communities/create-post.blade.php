@@ -146,6 +146,9 @@
                             <h1 class="h3 mb-0 create-playlist-title">Crear Nueva Publicación</h1>
                         </div>
 
+                        <!-- Alerta de contenido moderado -->
+                        @include('components.content-moderation-alert')
+
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul class="mb-0">

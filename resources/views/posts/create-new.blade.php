@@ -109,6 +109,9 @@
                 </div>
 
                 <div class="playlist-card">
+                    <!-- Alerta de contenido moderado -->
+                    @include('components.content-moderation-alert')
+
                     <form method="POST" action="{{ route('posts.store') }}">
                         @csrf
 
