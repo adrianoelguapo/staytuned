@@ -573,17 +573,25 @@
             const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
             const textElement = commentItem.querySelector('.comment-text');
             const currentText = textElement.textContent;
+            const buttonsContainer = commentItem.querySelector('.d-flex.gap-2');
+            
+            // Guardar estado original
+            commentItem.dataset.originalText = currentText;
+            commentItem.dataset.originalButtons = buttonsContainer.outerHTML;
+            
+            // Ocultar botones originales
+            buttonsContainer.style.display = 'none';
             
             // Crear textarea para edición
             const textarea = document.createElement('textarea');
             textarea.value = currentText;
-            textarea.className = 'form-control';
+            textarea.className = 'form-control mb-2';
             textarea.rows = 3;
             
-            // Crear botones
-            const buttonsDiv = document.createElement('div');
-            buttonsDiv.className = 'mt-2 d-flex gap-2';
-            buttonsDiv.innerHTML = `
+            // Crear botones de edición
+            const editButtonsDiv = document.createElement('div');
+            editButtonsDiv.className = 'edit-buttons d-flex gap-2';
+            editButtonsDiv.innerHTML = `
                 <button onclick="saveComment(${commentId})" class="btn btn-primary btn-sm">
                     <i class="fas fa-save me-1"></i>Guardar
                 </button>
@@ -592,14 +600,11 @@
                 </button>
             `;
             
-            // Reemplazar contenido
-            const container = textElement.parentElement;
-            container.innerHTML = '';
-            container.appendChild(textarea);
-            container.appendChild(buttonsDiv);
-            
-            // Guardar texto original para cancelar
-            container.dataset.originalText = currentText;
+            // Reemplazar texto con textarea
+            const textContainer = textElement.parentElement;
+            textElement.style.display = 'none';
+            textContainer.appendChild(textarea);
+            textContainer.appendChild(editButtonsDiv);
             
             textarea.focus();
         }
@@ -631,7 +636,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Restaurar vista normal
+                    // Restaurar vista normal con nuevo texto
                     restoreCommentView(commentId, newText);
                 } else {
                     alert(data.error || 'Error al actualizar el comentario');
@@ -649,40 +654,43 @@
 
         function cancelEdit(commentId) {
             const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
-            const container = commentItem.querySelector('textarea').parentElement;
-            const originalText = container.dataset.originalText;
+            const originalText = commentItem.dataset.originalText;
             
             restoreCommentView(commentId, originalText);
         }
 
         function restoreCommentView(commentId, text) {
             const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
-            const container = commentItem.querySelector('textarea').parentElement;
+            const textElement = commentItem.querySelector('.comment-text');
+            const textarea = commentItem.querySelector('textarea');
+            const editButtons = commentItem.querySelector('.edit-buttons');
+            const originalButtons = commentItem.querySelector('.d-flex.gap-2');
             
-            container.innerHTML = `
-                <p class="comment-text text-white-75 small mb-0">${text}</p>
-            `;
+            // Actualizar texto del comentario
+            textElement.textContent = text;
             
-            // Restaurar botones de edición
-            const buttonsDiv = document.createElement('div');
-            buttonsDiv.className = 'd-flex gap-2';
-            buttonsDiv.innerHTML = `
-                <button onclick="editComment(${commentId})" class="btn btn-link btn-sm text-white-50 p-0">
-                    Editar
-                </button>
-                <button onclick="deleteComment(${commentId})" class="btn btn-link btn-sm text-danger p-0">
-                    Eliminar
-                </button>
-            `;
+            // Mostrar texto original y ocultar textarea
+            textElement.style.display = 'block';
+            if (textarea) {
+                textarea.remove();
+            }
             
-            container.parentElement.appendChild(buttonsDiv);
+            // Remover botones de edición
+            if (editButtons) {
+                editButtons.remove();
+            }
+            
+            // Mostrar botones originales
+            if (originalButtons) {
+                originalButtons.style.display = 'flex';
+            }
+            
+            // Limpiar datos temporales
+            delete commentItem.dataset.originalText;
+            delete commentItem.dataset.originalButtons;
         }
 
         function deleteComment(commentId) {
-            if (!confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
-                return;
-            }
-
             const formData = new FormData();
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('_method', 'DELETE');
