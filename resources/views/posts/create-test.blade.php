@@ -20,3 +20,8 @@
     <p>Categorías disponibles: {{ $categories->count() ?? 0 }}</p>
 </body>
 </html>
+
+
+
+
+

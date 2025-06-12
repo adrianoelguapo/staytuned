@@ -35,11 +35,11 @@
             </a>
             <a href="{{ route('explore.users.index') }}" 
                class="nav-link-inline {{ request()->routeIs('explore.users.*') ? 'active' : '' }}">
-                Explorar usuarios
+                Explorar Usuarios
             </a>
             <a href="{{ route('playlists.index') }}" 
                class="nav-link-inline {{ request()->routeIs('playlists.*') ? 'active' : '' }}">
-                Mis playlists
+                Mis Playlists
             </a>
             <a href="{{ route('posts.index') }}" 
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
@@ -47,7 +47,7 @@
             </a>
             <a href="{{ route('communities.index') }}" 
                class="nav-link-inline {{ request()->routeIs('communities.*') ? 'active' : '' }}">
-                Mis comunidades
+                Mis Comunidades 
             </a>
 
             <div class="dropdown">
@@ -97,16 +97,16 @@
                     <i class="fas fa-home me-2"></i> Dashboard
                 </a>
                 <a class="nav-link" href="{{ route('explore.users.index') }}">
-                    <i class="fas fa-users me-2"></i> Explorar usuarios
+                    <i class="fas fa-users me-2"></i> Explorar Usuarios
                 </a>
                 <a class="nav-link" href="{{ route('playlists.index') }}">
-                    <i class="fas fa-music me-2"></i> Mis playlists
+                    <i class="fas fa-music me-2"></i> Mis Playlists
                 </a>
                 <a class="nav-link" href="{{ route('posts.index') }}">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
                 <a class="nav-link" href="{{ route('communities.index') }}">
-                    <i class="fas fa-users me-2"></i> Mis comunidades
+                    <i class="fas fa-users me-2"></i> Mis Comunidades
                 </a>
             </nav>
             <hr class="my-0">
@@ -199,7 +199,7 @@
                         </div>
                         <a href="{{ route('communities.index') }}" class="btn btn-outline-light btn-sm">
                             <i class="fas fa-users me-1"></i>
-                            Ver mis comunidades
+                            Ver Mis Comunidades
                         </a>
                     </div>
 
@@ -465,3 +465,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+
+

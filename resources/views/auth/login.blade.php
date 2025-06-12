@@ -14,13 +14,13 @@
 
     <body class = "login-body">
 
-        <nav class = "navbar navbar-expand-lg px-5 py-3">
+        <nav class = "navbar navbar-expand-lg px-3 px-lg-5 py-3">
 
             <a class = "navbar-brand text-white fw-bold" href = "{{ url('/') }}"> StayTuned</a>
 
             @if (Route::has('login'))
 
-                <div class = "ms-auto d-flex align-items-center gap-2">
+                <div class = "ms-auto ms-lg-auto d-flex align-items-center gap-2">
 
                     @auth
 
@@ -124,3 +124,8 @@
     </body>
 
 </html>
+
+
+
+
+

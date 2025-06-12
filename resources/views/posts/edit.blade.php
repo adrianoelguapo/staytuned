@@ -42,11 +42,11 @@
             </a>
             <a href="{{ route('explore.users.index') }}" 
                class="nav-link-inline {{ request()->routeIs('explore.users.*') ? 'active' : '' }}">
-                Explorar usuarios
+                Explorar Usuarios
             </a>
             <a href="{{ route('playlists.index') }}" 
                class="nav-link-inline {{ request()->routeIs('playlists.*') ? 'active' : '' }}">
-                Mis playlists
+                Mis Playlists
             </a>
             <a href="{{ route('posts.index') }}" 
                class="nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">
@@ -96,11 +96,11 @@
                 </a>
                 <a class="nav-link {{ request()->routeIs('explore.users.*') ? 'active' : '' }}" 
                    href="{{ route('explore.users.index') }}">
-                    <i class="fas fa-users me-2"></i> Explorar usuarios
+                    <i class="fas fa-users me-2"></i> Explorar Usuarios
                 </a>
                 <a class="nav-link {{ request()->routeIs('playlists.*') ? 'active' : '' }}" 
                    href="{{ route('playlists.index') }}">
-                    <i class="fas fa-music me-2"></i> Mis playlists
+                    <i class="fas fa-music me-2"></i> Mis Playlists
                 </a>
                 <a class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}" 
                    href="{{ route('posts.index') }}">
@@ -108,7 +108,7 @@
                 </a>
                 <a class="nav-link {{ request()->routeIs('communities.*') ? 'active' : '' }}" 
                    href="{{ route('communities.index') }}">
-                    <i class="fas fa-users me-2"></i> Mis comunidades
+                    <i class="fas fa-users me-2"></i> Mis Comunidades
                 </a>
             </nav>
             <hr class="my-0 border-secondary">
@@ -242,3 +242,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+
+

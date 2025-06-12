@@ -10,11 +10,11 @@
 </head>
 <body class="login-body">
 
-    <nav class="navbar navbar-expand-lg px-5 py-3">
+    <nav class="navbar navbar-expand-lg px-3 px-lg-5 py-3">
         <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('/')); ?>">StayTuned</a>
 
         <?php if(Route::has('login')): ?>
-            <div class="ms-auto d-flex align-items-center gap-2">
+            <div class="ms-auto ms-lg-auto d-flex align-items-center gap-2">
                 <?php if(auth()->guard()->check()): ?>
                     <a href="<?php echo e(url('/dashboard')); ?>" class="btn btn-outline-light small-button">Dashboard</a>
                 <?php else: ?>

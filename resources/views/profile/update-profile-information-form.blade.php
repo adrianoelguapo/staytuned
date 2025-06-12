@@ -62,7 +62,7 @@
             <textarea id="bio" type="text" maxlength="255"
                 class="form-control w-100 @error('state.bio') is-invalid @enderror"
                 wire:model.defer="state.bio" rows="3"></textarea>
-            <div class="form-text">Máximo 255 caracteres.</div>
+            <div class="form-text text-light">Máximo 255 caracteres.</div>
             @error('state.bio')
                 <div class="text-danger mt-1">{{ $message }}</div>
             @enderror
@@ -76,3 +76,8 @@
     </x-slot>
 
 </x-form-section>
+
+
+
+
+

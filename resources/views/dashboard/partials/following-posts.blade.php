@@ -102,8 +102,13 @@
             <p class="text-light mb-3">No hay publicaciones de los últimos usuarios que sigues en las últimas 24 horas.</p>
             <a href="{{ route('explore.users.index') }}" class="btn btn-outline-light">
                 <i class="fas fa-search me-2"></i>
-                Explorar usuarios
+                Explorar Usuarios
             </a>
         </div>
     </div>
 @endif
+
+
+
+
+

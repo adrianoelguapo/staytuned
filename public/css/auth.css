@@ -30,6 +30,23 @@ body.twofactor-body {
   font-size: 1.75rem;
 }
 
+/* Responsive navbar para móviles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  /* En móviles, hacer que los botones estén en línea con el logo */
+  .navbar .ms-auto {
+    margin-left: 0 !important;
+  }
+}
+
 /* === BOTONES PEQUEÑOS DEL NAVBAR === */
 .small-button {
   padding: 0.4rem 1.2rem;
@@ -38,6 +55,22 @@ body.twofactor-body {
   font-weight: 500;
   transition: background 0.2s ease;
 }
+
+/* Responsive buttons para móviles */
+@media (max-width: 768px) {
+  .small-button {
+    padding: 0.35rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .small-button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
 .btn-outline-light.small-button {
   border: 1px solid rgba(255,255,255,0.7);
   color: white;

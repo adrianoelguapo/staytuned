@@ -156,7 +156,8 @@
                         @endif
                     </div>
                 </div>
-            @endif        </div>
+            @endif
+        </div>
     </div>
 </div>
 @endsection
@@ -229,3 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
 @push('styles')
 <link href="{{ asset('css/users.css') }}" rel="stylesheet">
 @endpush
+
+
+
+
+

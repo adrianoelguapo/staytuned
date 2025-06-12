@@ -1,6 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"            <a href="{{ route('explore.users.index') }                    <i class="fas fa-users me-2"></i> Explorar Usuarios
+                </a>
+                <a class="nav-link" href="{{ route('playlists.index') }}">
+                    <i class="fas fa-music me-2"></i> Mis Playlists
+                </a>
+                <a class="nav-link active" href="{{ route('posts.index') }}">
+                    <i class="fas fa-edit me-2"></i> Mis Publicaciones
+                </a>
+                <a class="nav-link" href="{{ route('communities.index') }}">
+                    <i class="fas fa-users me-2"></i> Mis Comunidadesnav-link-inline">Explorar Usuarios</a>
+            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis Playlists</a>
+            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
+            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis Comunidades</a>ead>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,10 +40,10 @@
 
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
+            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar Usuarios</a>
+            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis Playlists</a>
             <a href="{{ route('posts.index') }}" class="nav-link-inline active">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
+            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis Comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -81,16 +92,16 @@
                     <i class="fas fa-home me-2"></i> Dashboard
                 </a>
                 <a class="nav-link" href="{{ route('explore.users.index') }}">
-                    <i class="fas fa-users me-2"></i> Explorar usuarios
+                    <i class="fas fa-users me-2"></i> Explorar Usuarios
                 </a>
                 <a class="nav-link" href="{{ route('playlists.index') }}">
-                    <i class="fas fa-music me-2"></i> Mis playlists
+                    <i class="fas fa-music me-2"></i> Mis Playlists
                 </a>
                 <a class="nav-link active" href="{{ route('posts.index') }}">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
                 <a class="nav-link" href="{{ route('communities.index') }}">
-                    <i class="fas fa-users me-2"></i> Mis comunidades
+                    <i class="fas fa-users me-2"></i> Mis Comunidades
                 </a>
             </nav>
             <hr class="my-0">
@@ -369,3 +380,8 @@
 
 </body>
 </html>
+
+
+
+
+
