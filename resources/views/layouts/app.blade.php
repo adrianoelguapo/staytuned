@@ -16,6 +16,8 @@
 
         <!-- Styles -->
         @livewireStyles
+    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
+
     </head>
     <body class="font-sans antialiased">
         <x-banner />

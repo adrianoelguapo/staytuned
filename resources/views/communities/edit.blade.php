@@ -5,7 +5,8 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/community-fixed.css') }}">
 <link rel="stylesheet" href="{{ asset('css/playlists.css') }}">
-@endpush
+
+    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">@endpush
 
 @section('content')
 <div class="container-fluid py-5">

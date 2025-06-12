@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet"><link href="{{ asset('css/posts.css') }}" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">

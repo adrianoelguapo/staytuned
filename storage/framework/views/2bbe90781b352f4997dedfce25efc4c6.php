@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
 </head>
 

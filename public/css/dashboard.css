@@ -1032,3 +1032,110 @@ main {
 }
 
 /* === PAGINATION GLASSMORPHISM === */
+
+/* === CORRECCIONES PARA PLAYLISTS === */
+/* Asegurar que todas las playlists tengan el mismo ancho y espaciado */
+.playlists-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important; /* Más espacio vertical entre playlists */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.playlist-card-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.playlist-content-wrapper {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.playlist-info-container {
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Responsive adjustments para playlists */
+@media (max-width: 768px) {
+    .playlists-list {
+        gap: 1.5rem !important;
+    }
+    
+    .playlist-content-wrapper {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        padding: 1.5rem !important;
+    }
+    
+    .playlist-cover-container {
+        width: 100px !important;
+        height: 100px !important;
+        align-self: center !important;
+    }
+}
+
+/* === FORZAR ESTILOS CORRECTOS PARA PLAYLISTS === */
+/* Sobrescribir cualquier estilo conflictivo con máxima especificidad */
+body.dashboard-body .playlists-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body.dashboard-body .playlists-list .playlist-card-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: auto !important;
+}
+
+body.dashboard-body .playlist-content-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+body.dashboard-body .playlist-info-container {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    flex-grow: 1 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Reset cualquier transform o position que pueda estar afectando */
+body.dashboard-body .playlists-list * {
+    transform: none !important;
+    -webkit-transform: none !important;
+}
+
+/* Asegurar que no hay floats ni posicionamiento absoluto interfiriendo */
+body.dashboard-body .playlists-list .playlist-card-full-width {
+    float: none !important;
+    position: relative !important;
+    clear: both !important;
+}
