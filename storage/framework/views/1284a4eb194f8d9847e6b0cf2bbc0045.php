@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $playlist->name }} | StayTuned</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo e($playlist->name); ?> | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -25,16 +25,16 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">StayTuned</a>
+            <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('dashboard')); ?>">StayTuned</a>
         </div>
 
         <!-- Enlaces + usuario: solo ≥lg -->
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
+            <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
+            <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar usuarios</a>
+            <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline">Mis playlists</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline">Mis Publicaciones</a>
+            <a href="<?php echo e(route('communities.index')); ?>" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -43,23 +43,24 @@
                    role="button"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img src="{{ Auth::user()->profile_photo_url }}"
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
                              class="rounded-circle me-2 user-photo"
-                             alt="{{ Auth::user()->name }}" />
-                    @endif
-                    {{ Auth::user()->username }}
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit"
                                     class="dropdown-item d-flex align-items-center text-danger">
                                 <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -79,19 +80,19 @@
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
-                <a class="nav-link active" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link" href="{{ route('posts.index') }}">Mis Publicaciones</a>
-                <a class="nav-link" href="{{ route('communities.index') }}">Mis comunidades</a>
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">Explorar usuarios</a>
+                <a class="nav-link active" href="<?php echo e(route('playlists.index')); ?>">Mis playlists</a>
+                <a class="nav-link" href="<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
+                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">Mis comunidades</a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
+                <a class="nav-link d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -109,21 +110,22 @@
                 <nav aria-label="breadcrumb" class="mb-4">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('playlists.index') }}" class="text-white-50">
+                            <a href="<?php echo e(route('playlists.index')); ?>" class="text-white-50">
                                 <i class="bi bi-music-note-list me-1"></i>
                                 Mis Playlists
                             </a>
                         </li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">{{ $playlist->name }}</li>
+                        <li class="breadcrumb-item active text-white" aria-current="page"><?php echo e($playlist->name); ?></li>
                     </ol>
                 </nav>
 
-                @if (session('success'))
+                <?php if(session('success')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
+                        <?php echo e(session('success')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
-                @endif
+                <?php endif; ?>
 
                 <!-- Header de la playlist -->
                 <div class="playlist-header card dashboard-card mb-4">
@@ -131,55 +133,58 @@
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <!-- Imagen de la playlist -->
-                                <div class="playlist-cover-large">                                    @if($playlist->cover)
-                                        <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                             alt="{{ $playlist->name }}" 
+                                <div class="playlist-cover-large">                                    <?php if($playlist->cover): ?>
+                                        <img src="<?php echo e(asset('storage/' . $playlist->cover)); ?>" 
+                                             alt="<?php echo e($playlist->name); ?>" 
                                              class="playlist-header-cover"
                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                         <div class="playlist-header-cover d-none align-items-center justify-content-center">
                                             <i class="bi bi-music-note-beamed"></i>
                                         </div>
-                                    @else
+                                    <?php else: ?>
                                         <div class="playlist-header-cover d-flex align-items-center justify-content-center">
                                             <i class="bi bi-music-note-beamed"></i>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col">
                                 <!-- Info de la playlist -->
                                 <div class="playlist-header-info">
                                     <span class="badge bg-secondary mb-2">PLAYLIST</span>
-                                    <h1 class="playlist-title-large">{{ $playlist->name }}</h1>
+                                    <h1 class="playlist-title-large"><?php echo e($playlist->name); ?></h1>
                                     
-                                    @if($playlist->description)
-                                        <p class="playlist-description-large text-muted">{{ $playlist->description }}</p>
-                                    @endif
+                                    <?php if($playlist->description): ?>
+                                        <p class="playlist-description-large text-muted"><?php echo e($playlist->description); ?></p>
+                                    <?php endif; ?>
                                     
                                     <div class="playlist-meta-large">
                                         <span class="me-3">
-                                            <img src="{{ $playlist->user->profile_photo_url }}" 
+                                            <img src="<?php echo e($playlist->user->profile_photo_url); ?>" 
                                                  class="rounded-circle me-2 user-photo-small" 
-                                                 alt="{{ $playlist->user->name }}">
-                                            {{ $playlist->user->username }}
+                                                 alt="<?php echo e($playlist->user->name); ?>">
+                                            <?php echo e($playlist->user->username); ?>
+
                                         </span>
                                         <span class="me-3">
                                             <i class="bi bi-music-note me-1"></i>
-                                            {{ $playlist->songs->count() }} canciones
+                                            <?php echo e($playlist->songs->count()); ?> canciones
                                         </span>
                                         <span class="me-3">
-                                            <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
-                                            {{ $playlist->is_public ? 'Pública' : 'Privada' }}
+                                            <i class="bi bi-<?php echo e($playlist->is_public ? 'globe' : 'lock'); ?> me-1"></i>
+                                            <?php echo e($playlist->is_public ? 'Pública' : 'Privada'); ?>
+
                                         </span>
                                         <span class="text-muted">
-                                            Creada {{ $playlist->created_at->diffForHumans() }}
+                                            Creada <?php echo e($playlist->created_at->diffForHumans()); ?>
+
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <!-- Acciones (solo para el propietario) -->
-                                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                                     <div class="playlist-actions-header">
                                         <div class="dropdown d-inline">
                                             <button class="btn btn-options-large btn-purple" type="button" 
@@ -193,17 +198,17 @@
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
+                                                    <a class="dropdown-item" href="<?php echo e(route('playlists.edit', $playlist)); ?>">
                                                         <i class="bi bi-pencil me-2"></i>Editar playlist
                                                     </a>
                                                 </li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li>
-                                                    <form action="{{ route('playlists.destroy', $playlist) }}" 
+                                                    <form action="<?php echo e(route('playlists.destroy', $playlist)); ?>" 
                                                           method="POST" 
                                                           onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
                                                         <button type="submit" class="dropdown-item text-danger">
                                                             <i class="bi bi-trash me-2"></i>Eliminar playlist
                                                         </button>
@@ -212,14 +217,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Buscar canciones en Spotify (inicialmente oculto) - Solo para el propietario -->
-                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                     <div id="spotifySearch" class="card dashboard-card mb-4" style="display: none;">
                         <div class="card-body">
                             <h5 class="card-title">
@@ -250,12 +255,12 @@
                             <div id="searchResults" class="mt-4 search-results-container"></div>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
                 <!-- Lista de canciones -->
                 <div class="card dashboard-card">
                     <div class="card-body">
-                        @if($playlist->songs->count() > 0)
+                        <?php if($playlist->songs->count() > 0): ?>
                             <div class="songs-table">
                                 <div class="songs-header">
                                     <div class="song-number">#</div>
@@ -267,60 +272,62 @@
                                     <div class="song-actions"></div>
                                 </div>
                                 
-                                @foreach($playlist->songs as $index => $song)
+                                <?php $__currentLoopData = $playlist->songs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $song): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="song-row">
                                         <div class="song-number">
-                                            <span class="song-index">{{ $index + 1 }}</span>
+                                            <span class="song-index"><?php echo e($index + 1); ?></span>
                                             <button class="btn-play-song" 
-                                                    onclick="openSpotify('{{ $song->spotify_url }}')" 
+                                                    onclick="openSpotify('<?php echo e($song->spotify_url); ?>')" 
                                                     title="Abrir en Spotify"
-                                                    {{ !$song->spotify_url ? 'disabled style="opacity: 0.3; cursor: not-allowed;" title="No disponible en Spotify"' : '' }}>
+                                                    <?php echo e(!$song->spotify_url ? 'disabled style="opacity: 0.3; cursor: not-allowed;" title="No disponible en Spotify"' : ''); ?>>
                                                 <i class="bi bi-spotify"></i>
                                             </button>
                                         </div>
                                         <div class="song-title">
                                             <div class="song-info">
-                                                @if($song->album_image)
-                                                    <img src="{{ $song->album_image }}" 
-                                                         alt="{{ $song->title }}" 
+                                                <?php if($song->album_image): ?>
+                                                    <img src="<?php echo e($song->album_image); ?>" 
+                                                         alt="<?php echo e($song->title); ?>" 
                                                          class="song-cover-img"
                                                          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none'); this.nextElementSibling.classList.add('d-flex');">
                                                     <div class="song-cover-placeholder d-none align-items-center justify-content-center">
                                                         <i class="bi bi-music-note"></i>
                                                     </div>
-                                                @else
+                                                <?php else: ?>
                                                     <div class="song-cover-placeholder d-flex align-items-center justify-content-center">
                                                         <i class="bi bi-music-note"></i>
                                                     </div>
-                                                @endif
+                                                <?php endif; ?>
                                                 <div>
-                                                    <div class="song-name">{{ $song->title ?: $song->name ?: 'Canción sin título' }}</div>
-                                                    <div class="song-artist">{{ $song->artist ?: $song->author ?: 'Artista desconocido' }}</div>
+                                                    <div class="song-name"><?php echo e($song->title ?: $song->name ?: 'Canción sin título'); ?></div>
+                                                    <div class="song-artist"><?php echo e($song->artist ?: $song->author ?: 'Artista desconocido'); ?></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="song-album d-none d-md-block">
-                                            {{ $song->album ?? 'Desconocido' }}
+                                            <?php echo e($song->album ?? 'Desconocido'); ?>
+
                                         </div>
                                         <div class="song-duration">
-                                            {{ $song->duration_formatted ?? $song->duration ?? '--:--' }}
+                                            <?php echo e($song->duration_formatted ?? $song->duration ?? '--:--'); ?>
+
                                         </div>
                                         <div class="song-actions">
                                             <!-- Solo mostrar acciones si es el propietario -->
-                                            @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                            <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                                                 <div class="custom-dropdown-container">
                                                     <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
                                                             type="button" 
-                                                            data-song-id="{{ $song->id }}"
+                                                            data-song-id="<?php echo e($song->id); ?>"
                                                             onclick="toggleCustomDropdown(this)">
                                                         <i class="bi bi-three-dots"></i>
                                                     </button>
-                                                    <div class="custom-dropdown-menu" id="dropdown-{{ $song->id }}" style="display: none;">
+                                                    <div class="custom-dropdown-menu" id="dropdown-<?php echo e($song->id); ?>" style="display: none;">
                                                         <div class="custom-dropdown-item">
-                                                            <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
+                                                            <form action="<?php echo e(route('playlists.songs.remove', [$playlist, $song])); ?>" 
                                                                   method="POST" style="margin: 0;">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
                                                                 <button type="submit" class="custom-dropdown-btn text-danger">
                                                                     <i class="bi bi-trash me-2"></i>Quitar de la playlist
                                                                 </button>
@@ -328,37 +335,37 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
-                        @else
+                        <?php else: ?>
                             <!-- Estado vacío -->
                             <div class="text-center py-5">
                                 <i class="bi bi-music-note display-1 text-muted mb-3"></i>
                                 <h4 class="text-muted mb-3">
-                                    @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                    <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                                         Tu playlist está vacía
-                                    @else
+                                    <?php else: ?>
                                         Esta playlist está vacía
-                                    @endif
+                                    <?php endif; ?>
                                 </h4>
                                 <p class="text-muted mb-4">
-                                    @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                    <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                                         Busca y agrega tus canciones favoritas para comenzar a disfrutar tu música
-                                    @else
+                                    <?php else: ?>
                                         El propietario de esta playlist aún no ha agregado canciones
-                                    @endif
+                                    <?php endif; ?>
                                 </p>
-                                @if(Auth::check() && Auth::id() === $playlist->user_id)
+                                <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
                                     <button class="btn btn-primary-playlist" onclick="toggleSpotifySearch()">
                                         <i class="bi bi-search me-2"></i>
                                         Buscar canciones
                                     </button>
-                                @endif
+                                <?php endif; ?>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -418,7 +425,7 @@
             const resultsDiv = document.getElementById('searchResults');
             resultsDiv.innerHTML = '<div class="text-center p-4 dashboard-card loading-container"><div class="spinner-border" role="status"></div><div class="mt-2 text-white">Buscando canciones...</div></div>';
 
-            fetch(`{{ route('playlists.search') }}?q=${encodeURIComponent(query)}`)
+            fetch(`<?php echo e(route('playlists.search')); ?>?q=${encodeURIComponent(query)}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -499,13 +506,13 @@
         let existingSongsInPlaylist = new Set();
 
         // Cargar canciones existentes en la playlist
-        @if($playlist->songs->count() > 0)
-            @foreach($playlist->songs as $song)
-                @if($song->spotify_id)
-                    existingSongsInPlaylist.add('{{ $song->spotify_id }}');
-                @endif
-            @endforeach
-        @endif
+        <?php if($playlist->songs->count() > 0): ?>
+            <?php $__currentLoopData = $playlist->songs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $song): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($song->spotify_id): ?>
+                    existingSongsInPlaylist.add('<?php echo e($song->spotify_id); ?>');
+                <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
 
         function togglePlaylistSong(spotifyId) {
             const button = event.target.closest('.add-song-btn');
@@ -558,8 +565,8 @@
 
         function saveToDatabase(spotifyId, action) {
             const route = action === 'add' ? 
-                `{{ route('playlists.songs.add', $playlist) }}` : 
-                `{{ route('playlists.songs.removeBySpotifyId', $playlist) }}`;
+                `<?php echo e(route('playlists.songs.add', $playlist)); ?>` : 
+                `<?php echo e(route('playlists.songs.removeBySpotifyId', $playlist)); ?>`;
             
             fetch(route, {
                 method: 'POST',
@@ -680,3 +687,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\laragon\www\staytuned\resources\views/playlists/show.blade.php ENDPATH**/ ?>
