@@ -116,8 +116,8 @@
             <div class="col-12 col-lg-10">
                 
                 <!-- Header con botón de crear publicación -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center align-items-lg-center mb-4 text-center text-lg-start">
+                    <div class="w-100 w-lg-auto mb-3 mb-lg-0">
                         <h1 class="text-white mb-2" style="font-size: 2.5rem;">
                             Mis Publicaciones
                         </h1>

@@ -7,8 +7,8 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
             <!-- Encabezado -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
+            <div class="d-flex justify-content-between align-items-center mb-4 text-center text-md-start">
+                <div class="w-100 w-md-auto">
                     <h1 class="h2 text-white mb-1">Explorar Usuarios</h1>
                     <p class="text-light mb-0">Descubre nuevos usuarios y conecta con ellos</p>
                 </div>
