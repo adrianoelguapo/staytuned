@@ -66,19 +66,22 @@ class ExploreUsersController extends Controller
      */
     public function show(User $user)
     {
-        // Cargar relaciones necesarias
-        $user->load([
-            'playlists' => function($query) {
-                $query->where('is_public', true)
-                      ->withCount('songs')
-                      ->latest()
-                      ->take(6);
-            },
-            'posts' => function($query) {
-                $query->latest()
-                      ->take(10);
-            }
-        ]);
+        // Obtener página para playlists y posts
+        $playlistsPage = request('playlists_page', 1);
+        $postsPage = request('posts_page', 1);
+
+        // Cargar playlists con paginación
+        $playlists = $user->playlists()
+            ->where('is_public', true)
+            ->withCount('songs')
+            ->latest()
+            ->paginate(3, ['*'], 'playlists_page', $playlistsPage);
+
+        // Cargar posts con paginación
+        $posts = $user->posts()
+            ->with(['category', 'likes'])
+            ->latest()
+            ->paginate(3, ['*'], 'posts_page', $postsPage);
 
         // Obtener estadísticas del usuario
         $stats = [
@@ -94,7 +97,7 @@ class ExploreUsersController extends Controller
             $isFollowing = Auth::user()->isFollowing($user);
         }
 
-        return view('explore.users.show', compact('user', 'stats', 'isFollowing'));
+        return view('explore.users.show', compact('user', 'stats', 'isFollowing', 'playlists', 'posts'));
     }
 
     /**
@@ -170,5 +173,44 @@ class ExploreUsersController extends Controller
             ->paginate(20);
 
         return view('explore.users.following', compact('user', 'following'));
+    }
+
+    /**
+     * Obtener playlists paginadas via AJAX
+     */
+    public function getPlaylists(User $user, Request $request)
+    {
+        $playlistsPage = $request->get('playlists_page', 1);
+        
+        $playlists = $user->playlists()
+            ->where('is_public', true)
+            ->withCount('songs')
+            ->latest()
+            ->paginate(3, ['*'], 'playlists_page', $playlistsPage);
+
+        if ($request->ajax()) {
+            return view('explore.users.partials.playlists', compact('playlists', 'user'))->render();
+        }
+
+        return redirect()->route('explore.users.show', $user);
+    }
+
+    /**
+     * Obtener posts paginados via AJAX
+     */
+    public function getPosts(User $user, Request $request)
+    {
+        $postsPage = $request->get('posts_page', 1);
+        
+        $posts = $user->posts()
+            ->with(['category', 'likes'])
+            ->latest()
+            ->paginate(3, ['*'], 'posts_page', $postsPage);
+
+        if ($request->ajax()) {
+            return view('explore.users.partials.posts', compact('posts', 'user'))->render();
+        }
+
+        return redirect()->route('explore.users.show', $user);
     }
 }

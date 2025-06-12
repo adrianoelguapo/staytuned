@@ -58,6 +58,10 @@ Route::middleware([
         // Rutas AJAX para seguir/dejar de seguir
         Route::post('/users/{user}/follow', [ExploreUsersController::class, 'follow'])->name('users.follow');
         Route::delete('/users/{user}/unfollow', [ExploreUsersController::class, 'unfollow'])->name('users.unfollow');
+        
+        // Rutas AJAX para paginación
+        Route::get('/users/{user}/playlists', [ExploreUsersController::class, 'getPlaylists'])->name('users.playlists');
+        Route::get('/users/{user}/posts', [ExploreUsersController::class, 'getPosts'])->name('users.posts');
     });
 });
 

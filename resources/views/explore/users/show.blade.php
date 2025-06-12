@@ -65,7 +65,7 @@
                     <!-- Información adicional -->
                     <div class="mt-4 pt-3 border-top border-secondary">
                         <div class="text-light small">
-                            <i class="fas fa-calendar-alt me-1"></i>
+                            <i class="fas fa-calendar-alt me-1" style="font-size: 0.875rem;"></i>
                             Se unió en {{ $user->created_at->format('F Y') }}
                         </div>
                     </div>
@@ -103,170 +103,16 @@
             <div class="tab-content" id="userContentTabsContent">
                 <!-- Pestana de Playlists -->
                 <div class="tab-pane fade show active" id="playlists" role="tabpanel">
-                    @if($user->playlists->count() > 0)
-                        <div class="row">
-                            @foreach($user->playlists as $playlist)
-                                <div class="col-md-6 mb-4">
-                                    <div class="card dashboard-card h-100">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-start">
-                                                <!-- Imagen de la playlist -->
-                                                <div class="playlist-image me-3">
-                                                    @if($playlist->cover)
-                                                        <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                                             alt="{{ $playlist->name }}"
-                                                             class="rounded"
-                                                             style="width: 60px; height: 60px; object-fit: cover;">
-                                                    @else
-                                                        <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
-                                                             style="width: 60px; height: 60px;">
-                                                            <i class="fas fa-music text-light"></i>
-                                                        </div>
-                                                    @endif
-                                                </div>
-
-                                                <!-- Información de la playlist -->
-                                                <div class="flex-grow-1">
-                                                    <h6 class="text-white mb-1">{{ $playlist->name }}</h6>
-                                                    @if($playlist->description)
-                                                        <p class="text-light small mb-2">
-                                                            {{ Str::limit($playlist->description, 80) }}
-                                                        </p>
-                                                    @endif
-                                                    <div class="text-light small">
-                                                        <i class="fas fa-music me-1"></i>
-                                                        {{ $playlist->songs_count ?? 0 }} canciones
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Botón de ver playlist -->
-                                            <div class="mt-3">
-                                                <a href="{{ route('playlists.show', $playlist) }}" 
-                                                   class="btn btn-outline-light btn-sm w-100">
-                                                    <i class="fas fa-play me-1"></i>Ver Playlist
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        @if($stats['playlists_count'] > 6)
-                            <div class="text-center mt-3">
-                                <a href="{{ route('playlists.index', ['user' => $user->id]) }}" 
-                                   class="btn btn-outline-light">
-                                    Ver todas las playlists
-                                </a>
-                            </div>
-                        @endif
-                    @else
-                        <div class="card dashboard-card">
-                            <div class="card-body text-center py-5">
-                                <i class="fas fa-music fa-3x text-light mb-3"></i>
-                                <h5 class="text-white mb-2">Sin playlists públicas</h5>
-                                <p class="text-light">{{ $user->name }} aún no ha creado playlists públicas.</p>
-                            </div>
-                        </div>
-                    @endif
+                    <div id="playlists-content">
+                        @include('explore.users.partials.playlists')
+                    </div>
                 </div>
 
                 <!-- Pestana de Publicaciones -->
                 <div class="tab-pane fade" id="posts" role="tabpanel">
-                    @if($user->posts->count() > 0)
-                        <div class="space-y-4">
-                            @foreach($user->posts as $post)
-                                <div class="card dashboard-card mb-4 post-card-hover" onclick="window.location.href='{{ route('posts.show', $post) }}'" style="cursor: pointer;">
-                                    <div class="card-body">
-                                        <!-- Header del post -->
-                                        <div class="d-flex justify-content-between align-items-start mb-3 pb-3 border-bottom border-light border-opacity-25">
-                                            <div class="d-flex align-items-center">
-                                                <img src="{{ $user->profile_photo_url }}" 
-                                                     alt="{{ $user->username }}"
-                                                     class="rounded-circle me-3"
-                                                     style="width: 48px; height: 48px; object-fit: cover;">
-                                                <div>
-                                                    <h6 class="text-white fw-semibold mb-1">{{ $user->username }}</h6>
-                                                    <small class="text-white-50">{{ $post->created_at->diffForHumans() }}</small>
-                                                </div>
-                                            </div>
-                                            <span class="badge bg-primary bg-opacity-25 text-white border border-primary border-opacity-50 px-3 py-2">
-                                                {{ ucfirst($post->category->type) }}
-                                            </span>
-                                        </div>
-
-                                        <!-- Título del post -->
-                                        @if($post->title)
-                                            <h5 class="text-white fw-bold mb-3">{{ $post->title }}</h5>
-                                        @endif
-
-                                        <!-- Contenido del post -->
-                                        @if($post->description)
-                                            <div class="text-white-75 mb-3">
-                                                {{ Str::limit($post->description, 200) }}
-                                            </div>
-                                        @endif
-
-                                        <!-- Contenido de Spotify si existe -->
-                                        @if($post->spotify_data)
-                                            <div class="spotify-preview-card mb-3">
-                                                <div class="d-flex align-items-center gap-3">
-                                                    @if($post->spotify_image)
-                                                        <img src="{{ $post->spotify_image }}" 
-                                                             alt="{{ $post->spotify_name }}"
-                                                             class="rounded-3 flex-shrink-0"
-                                                             style="width: 60px; height: 60px; object-fit: cover;">
-                                                    @endif
-                                                    <div class="flex-grow-1 min-w-0">
-                                                        <div class="text-white fw-medium">{{ $post->spotify_name }}</div>
-                                                        @if($post->spotify_artist)
-                                                            <div class="text-white-50 small">{{ $post->spotify_artist }}</div>
-                                                        @endif
-                                                        <div class="d-flex align-items-center mt-1">
-                                                            <i class="fab fa-spotify text-success me-1"></i>
-                                                            <span class="text-white-50 small">Spotify</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        <!-- Estadísticas del post -->
-                                        <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light border-opacity-25">
-                                            <div class="d-flex gap-4">
-                                                <span class="text-light small d-flex align-items-center">
-                                                    <i class="fas fa-heart me-1 text-danger"></i>{{ $post->likes_count ?? 0 }} likes
-                                                </span>
-                                                <span class="text-light small d-flex align-items-center">
-                                                    <i class="fas fa-comment me-1 text-info"></i>{{ $post->comments_count ?? 0 }} comentarios
-                                                </span>
-                                            </div>
-                                            <div class="text-light small">
-                                                <i class="fas fa-eye me-1"></i>Ver completo
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        @if($stats['posts_count'] > 10)
-                            <div class="text-center mt-3">
-                                <button class="btn btn-outline-light">
-                                    Ver todas las publicaciones
-                                </button>
-                            </div>
-                        @endif
-                    @else
-                        <div class="card dashboard-card">
-                            <div class="card-body text-center py-5">
-                                <i class="fas fa-newspaper fa-3x text-light mb-3"></i>
-                                <h5 class="text-white mb-2">Sin publicaciones</h5>
-                                <p class="text-light">{{ $user->name }} aún no ha realizado ninguna publicación.</p>
-                            </div>
-                        </div>
-                    @endif
+                    <div id="posts-content">
+                        @include('explore.users.partials.posts')
+                    </div>
                 </div>
             </div>        </div>
             </div>
@@ -343,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
 @endpush
 
 @push('styles')
@@ -477,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Mejorar el aspecto de las badges */
+/* Estilos para las badges */
 .badge {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -485,6 +332,43 @@ document.addEventListener('DOMContentLoaded', function() {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
+}
+
+/* Paginación glassmorphism específica para perfil de usuario */
+.pagination-custom .page-link {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    padding: 0.5rem 0.75rem !important;
+}
+
+.pagination-custom .page-link:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.pagination-custom .page-item.active .page-link {
+    background: rgba(139, 92, 246, 0.8) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+    color: #fff !important;
+}
+
+.pagination-custom .page-item.disabled .page-link {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* Animaciones suaves para iconos */
@@ -530,4 +414,211 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const userId = {{ $user->id }};
+    
+    // Función para convertir URL de paginación normal a AJAX
+    function convertToAjaxUrl(originalUrl, contentType) {
+        try {
+            // Extraer el número de página de diferentes formas posibles
+            let page = 1;
+            
+            // Método 1: buscar en los parámetros de query
+            const urlObj = new URL(originalUrl, window.location.origin);
+            page = urlObj.searchParams.get(contentType + '_page') || 
+                   urlObj.searchParams.get('page') || 1;
+            
+            // Método 2: buscar en el path si es una URL relativa con ?page=
+            if (page === 1) {
+                const pageMatch = originalUrl.match(/[?&](?:page|playlists_page|posts_page)=(\d+)/);
+                if (pageMatch) {
+                    page = pageMatch[1];
+                }
+            }
+            
+            // Método 3: para URLs como /explore/users/1?playlists_page=2
+            if (page === 1) {
+                const pathMatch = originalUrl.match(/playlists_page=(\d+)|posts_page=(\d+)/);
+                if (pathMatch) {
+                    page = pathMatch[1] || pathMatch[2] || 1;
+                }
+            }
+            
+            let ajaxUrl;
+            if (contentType === 'playlists') {
+                ajaxUrl = `{{ route('explore.users.playlists', $user) }}?playlists_page=${page}`;
+            } else if (contentType === 'posts') {
+                ajaxUrl = `{{ route('explore.users.posts', $user) }}?posts_page=${page}`;
+            } else {
+                ajaxUrl = originalUrl;
+            }
+            
+            console.log(`${contentType}: ${originalUrl} → página ${page} → ${ajaxUrl}`);
+            return ajaxUrl;
+        } catch (error) {
+            console.error('Error al convertir URL:', error);
+            return originalUrl;
+        }
+    }
+    
+    // Función para manejar la paginación AJAX
+    function handleAjaxPagination() {
+        document.addEventListener('click', function(e) {
+            // Buscar cualquier enlace de paginación dentro de los contenedores específicos
+            const playlistsLink = e.target.closest('#playlists-content .page-link');
+            const postsLink = e.target.closest('#posts-content .page-link');
+            
+            if (!playlistsLink && !postsLink) return;
+            
+            e.preventDefault();
+            
+            const target = playlistsLink || postsLink;
+            const originalUrl = target.getAttribute('href');
+            
+            if (!originalUrl || originalUrl === '#') {
+                return;
+            }
+            
+            // Determinar el tipo de contenido y el contenedor
+            let contentType, containerId, ajaxUrl;
+            
+            if (playlistsLink) {
+                contentType = 'playlists';
+                containerId = 'playlists-content';
+                ajaxUrl = convertToAjaxUrl(originalUrl, 'playlists');
+            } else {
+                contentType = 'posts';
+                containerId = 'posts-content';
+                ajaxUrl = convertToAjaxUrl(originalUrl, 'posts');
+            }
+            
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error('Contenedor no encontrado:', containerId);
+                return;
+            }
+            
+            // Mostrar indicador de carga
+            container.style.opacity = '0.6';
+            container.style.pointerEvents = 'none';
+            
+            // Realizar petición AJAX
+            fetch(ajaxUrl, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Actualizar el contenido
+                container.innerHTML = html;
+                
+                // Restaurar estilos
+                container.style.opacity = '1';
+                container.style.pointerEvents = 'auto';
+                
+                // Configurar nuevamente los enlaces de paginación
+                setupPaginationLinks();
+                
+                // Hacer scroll suave hacia el contenido actualizado
+                container.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            })
+            .catch(error => {
+                console.error('Error en la paginación:', error);
+                
+                // Restaurar estilos en caso de error
+                container.style.opacity = '1';
+                container.style.pointerEvents = 'auto';
+                
+                // Mostrar mensaje de error
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger mt-3';
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Error al cargar el contenido. Por favor, intenta de nuevo.';
+                container.appendChild(errorDiv);
+                
+                // Remover mensaje de error después de 5 segundos
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.remove();
+                    }
+                }, 5000);
+            });
+        });
+    }
+    
+    // Función para configurar todos los enlaces de paginación
+    function setupPaginationLinks() {
+        // Configurar paginación de playlists
+        const playlistsPagination = document.querySelector('#playlists-content .pagination');
+        if (playlistsPagination) {
+            playlistsPagination.querySelectorAll('.page-link').forEach(link => {
+                const originalUrl = link.getAttribute('href');
+                if (originalUrl && originalUrl !== '#') {
+                    // Marcar como configurado para AJAX
+                    link.dataset.ajaxConfigured = 'true';
+                }
+            });
+        }
+        
+        // Configurar paginación de posts
+        const postsPagination = document.querySelector('#posts-content .pagination');
+        if (postsPagination) {
+            postsPagination.querySelectorAll('.page-link').forEach(link => {
+                const originalUrl = link.getAttribute('href');
+                if (originalUrl && originalUrl !== '#') {
+                    // Marcar como configurado para AJAX
+                    link.dataset.ajaxConfigured = 'true';
+                }
+            });
+        }
+    }
+    
+    // Función para observar cambios en el DOM y reconfigurar enlaces
+    function observeContentChanges() {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    // Reconfigurar enlaces cuando el contenido cambie
+                    setTimeout(setupPaginationLinks, 100);
+                }
+            });
+        });
+        
+        // Observar ambos contenedores
+        const playlistsContainer = document.getElementById('playlists-content');
+        const postsContainer = document.getElementById('posts-content');
+        
+        if (playlistsContainer) {
+            observer.observe(playlistsContainer, { childList: true, subtree: true });
+        }
+        
+        if (postsContainer) {
+            observer.observe(postsContainer, { childList: true, subtree: true });
+        }
+    }
+    
+    // Inicializar todo
+    handleAjaxPagination();
+    setupPaginationLinks();
+    observeContentChanges();
+    
+    // Configuración adicional después de un breve delay para asegurar que todo esté cargado
+    setTimeout(() => {
+        setupPaginationLinks();
+    }, 500);
+});
+</script>
+
 @endpush
