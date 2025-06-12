@@ -228,35 +228,29 @@
                                                     </button>
                                                     
                                                     <?php if($post->user_id === Auth::id()): ?>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" 
-                                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="bi bi-three-dots"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li>
-                                                                    <a class="dropdown-item" href="<?php echo e(route('posts.show', $post)); ?>">
-                                                                        <i class="bi bi-eye me-2"></i>Ver
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="<?php echo e(route('posts.edit', $post)); ?>">
-                                                                        <i class="bi bi-pencil me-2"></i>Editar
-                                                                    </a>
-                                                                </li>
-                                                                <li><hr class="dropdown-divider"></li>
-                                                                <li>
-                                                                    <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
-                                                                          method="POST" 
-                                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
-                                                                        <?php echo csrf_field(); ?>
-                                                                        <?php echo method_field('DELETE'); ?>
-                                                                        <button type="submit" class="dropdown-item text-danger">
-                                                                            <i class="bi bi-trash me-2"></i>Eliminar
-                                                                        </button>
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
+                                                        <div class="post-actions-buttons">
+                                                            <a href="<?php echo e(route('posts.show', $post)); ?>" 
+                                                               class="btn btn-glass-action" 
+                                                               title="Ver publicación">
+                                                                <i class="bi bi-eye me-1"></i>Ver
+                                                            </a>
+                                                            <a href="<?php echo e(route('posts.edit', $post)); ?>" 
+                                                               class="btn btn-glass-action" 
+                                                               title="Editar publicación">
+                                                                <i class="bi bi-pencil me-1"></i>Editar
+                                                            </a>
+                                                            <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
+                                                                  method="POST" 
+                                                                  style="display: inline;"
+                                                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
+                                                                <button type="submit" 
+                                                                        class="btn btn-glass-action btn-glass-danger" 
+                                                                        title="Eliminar publicación">
+                                                                    <i class="bi bi-trash me-1"></i>Eliminar
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     <?php endif; ?>
                                                 </div>
@@ -383,213 +377,6 @@
                 alert('Error al procesar el like');
             });
         }
-
-        // Solución DEFINITIVA para dropdowns - Mover fuera del contexto DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Crear contenedor global para dropdowns al final del body
-            let globalDropdownContainer = document.getElementById('global-dropdown-container');
-            if (!globalDropdownContainer) {
-                globalDropdownContainer = document.createElement('div');
-                globalDropdownContainer.id = 'global-dropdown-container';
-                globalDropdownContainer.style.position = 'fixed';
-                globalDropdownContainer.style.top = '0';
-                globalDropdownContainer.style.left = '0';
-                globalDropdownContainer.style.width = '100%';
-                globalDropdownContainer.style.height = '100%';
-                globalDropdownContainer.style.pointerEvents = 'none';
-                globalDropdownContainer.style.zIndex = '999999';
-                document.body.appendChild(globalDropdownContainer);
-            }
-
-            function createCustomDropdown(button, menuItems) {
-                // Crear el contenedor del menú
-                const dropdown = document.createElement('div');
-                dropdown.className = 'custom-dropdown-menu';
-                // Asegúrate de que la posición absolute venga de tu CSS (.custom-dropdown-menu)
-
-                // Recorrer cada item y montarlo dentro del dropdown
-                menuItems.forEach((item, index) => {
-                    // Si hay que meter un separador antes de este item
-                    if (item.addSeparator && index > 0) {
-                        const divider = document.createElement('hr');
-                        divider.className = 'custom-dropdown-divider';
-                        dropdown.appendChild(divider);
-                    }
-
-                    if (item.isForm) {
-                        // Botón que dispara un form
-                        const menuItem = document.createElement('button');
-                        menuItem.type = 'button';
-                        menuItem.className = `custom-dropdown-item${item.isDanger ? ' danger' : ''}`;
-                        menuItem.innerHTML = item.html;
-                        menuItem.onclick = function(e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            // confirm si hace falta
-                            if (item.confirmText && !confirm(item.confirmText)) return;
-                            // crear y enviar formulario
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = item.action;
-                            form.style.display = 'none';
-                            // token CSRF
-                            if (item.csrfToken) {
-                                const csrfInput = document.createElement('input');
-                                csrfInput.type = 'hidden';
-                                csrfInput.name = '_token';
-                                csrfInput.value = item.csrfToken;
-                                form.appendChild(csrfInput);
-                            }
-                            // método spoof (DELETE, PUT…)
-                            if (item.method && item.method !== 'POST') {
-                                const methodInput = document.createElement('input');
-                                methodInput.type = 'hidden';
-                                methodInput.name = '_method';
-                                methodInput.value = item.method;
-                                form.appendChild(methodInput);
-                            }
-                            document.body.appendChild(form);
-                            form.submit();
-                            hideDropdown();
-                        };
-                        dropdown.appendChild(menuItem);
-
-                    } else {
-                        // Enlace normal
-                        const menuItem = document.createElement('a');
-                        menuItem.href = item.href || '#';
-                        menuItem.className = `custom-dropdown-item${item.isDanger ? ' danger' : ''}`;
-                        menuItem.innerHTML = item.html;
-                        menuItem.onclick = function(e) {
-                            // opcional: e.preventDefault() si no quieres navigation
-                            hideDropdown();
-                        };
-                        dropdown.appendChild(menuItem);
-                    }
-                });
-
-                return dropdown;
-            }
-
-            function showDropdown(dropdown, button) {
-                // Posicionar dropdown
-                const rect = button.getBoundingClientRect();
-                dropdown.style.top = (rect.bottom + 5) + 'px';
-                dropdown.style.left = (rect.right - 180) + 'px'; // 180px es el min-width
-
-                // Verificar límites de pantalla
-                const dropdownRect = dropdown.getBoundingClientRect();
-                if (dropdownRect.right > window.innerWidth - 10) {
-                    dropdown.style.left = (window.innerWidth - 190) + 'px';
-                }
-                if (dropdownRect.left < 10) {
-                    dropdown.style.left = '10px';
-                }
-                if (dropdownRect.bottom > window.innerHeight - 20) {
-                    dropdown.style.top = (rect.top - dropdown.offsetHeight - 5) + 'px';
-                }
-
-                // Mostrar dropdown con animación CSS
-                dropdown.classList.add('show');
-            }
-
-            function hideDropdown() {
-                const existing = globalDropdownContainer.querySelector('.custom-dropdown-menu');
-                if (existing) {
-                    existing.classList.remove('show');
-                    setTimeout(() => existing.remove(), 200);
-                }
-            }
-
-
-            // Aplicar a todos los botones de dropdown de posts
-            const dropdownButtons = document.querySelectorAll('.post-card-full-width .dropdown-toggle');
-            
-            dropdownButtons.forEach(function(button) {
-                // Deshabilitar Bootstrap dropdown
-                button.removeAttribute('data-bs-toggle');
-                button.setAttribute('data-custom-dropdown', 'true');
-
-                // Obtener datos del post del botón
-                const postCard = button.closest('.post-card-full-width');
-                const postId = button.closest('.post-actions-section').querySelector('button[data-post-id]')?.getAttribute('data-post-id');
-                
-                // Crear items del menú basados en el DOM original
-                const originalDropdown = button.nextElementSibling;
-                const menuItems = [];
-
-                if (originalDropdown && originalDropdown.classList.contains('dropdown-menu')) {
-                    // Procesar cada <li> del dropdown para evitar duplicaciones
-                    const listItems = originalDropdown.querySelectorAll('li');
-                    listItems.forEach(li => {
-                        // Verificar si es un divisor
-                        if (li.querySelector('.dropdown-divider')) {
-                            // Agregar separador al siguiente item
-                            if (menuItems.length > 0) {
-                                menuItems[menuItems.length - 1].addSeparator = true;
-                            }
-                            return;
-                        }
-
-                        const form = li.querySelector('form');
-                        const link = li.querySelector('.dropdown-item');
-
-                        if (form) {
-                            // Es un formulario (eliminar)
-                            const submitButton = form.querySelector('button[type="submit"]');
-                            if (submitButton) {
-                                menuItems.push({
-                                    html: submitButton.innerHTML,
-                                    isForm: true,
-                                    action: form.action,
-                                    method: form.querySelector('input[name="_method"]')?.value || 'POST',
-                                    csrfToken: form.querySelector('input[name="_token"]')?.value,
-                                    confirmText: form.getAttribute('onsubmit')?.match(/'([^']+)'/)?.[1] || '¿Confirmar acción?',
-                                    isDanger: submitButton.classList.contains('text-danger'),
-                                    addSeparator: false
-                                });
-                            }
-                        } else if (link) {
-                            // Es un enlace normal
-                            menuItems.push({
-                                html: link.innerHTML,
-                                href: link.href,
-                                isDanger: link.classList.contains('text-danger'),
-                                addSeparator: false
-                            });
-                        }
-                    });
-
-                    // Ocultar dropdown original
-                    originalDropdown.style.display = 'none';
-                }
-
-                // Agregar evento click personalizado
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Cerrar dropdown existente
-                    hideDropdown();
-
-                    // Crear y mostrar nuevo dropdown
-                    const dropdown = createCustomDropdown(button, menuItems);
-                    globalDropdownContainer.appendChild(dropdown);
-                    showDropdown(dropdown, button);
-                });
-            });
-
-            // Cerrar dropdown al hacer click fuera
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.custom-dropdown-menu') && !e.target.closest('[data-custom-dropdown]')) {
-                    hideDropdown();
-                }
-            });
-
-            // Cerrar dropdown al hacer scroll
-            window.addEventListener('scroll', hideDropdown);
-            window.addEventListener('resize', hideDropdown);
-        });
     </script>
 </body>
 </html>
