@@ -842,7 +842,89 @@ body.dashboard-body {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Corregir z-index del dropdown para que aparezca por encima de las tarjetas - ELIMINADO */
+/* ================================================
+   BOTÓN DE ELIMINAR CANCIÓN SIMPLIFICADO
+   ================================================ */
+
+/* Botón de eliminar canción en la lista */
+.btn-delete-song {
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  padding: 0.5rem !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  font-size: 0.9rem !important;
+  opacity: 0;
+}
+
+.btn-delete-song:hover {
+  background: rgba(220, 38, 38, 0.2) !important;
+  color: #dc2626 !important;
+  transform: scale(1.1) !important;
+}
+
+.song-row:hover .btn-delete-song {
+  opacity: 1;
+}
+
+/* ================================================
+   CONSOLIDAR ESTILOS DE DROPDOWNS - SOLO PARA DROPDOWNS PRINCIPALES
+   ================================================ */
+
+/* Solo aplicar a dropdowns específicos de playlist header y navbar */
+.playlist-actions-header .dropdown-menu,
+.navbar .dropdown-menu {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  padding: 0.5rem 0 !important;
+  min-width: 180px !important;
+  z-index: 1050 !important;
+}
+
+.playlist-actions-header .dropdown-item,
+.navbar .dropdown-item {
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.playlist-actions-header .dropdown-item:hover,
+.navbar .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+}
+
+.playlist-actions-header .dropdown-item.text-danger,
+.navbar .dropdown-item.text-danger {
+  color: #dc2626 !important;
+}
+
+.playlist-actions-header .dropdown-item.text-danger:hover,
+.navbar .dropdown-item.text-danger:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+}
+
+/* Mejorar hover del botón de opciones principales */
+.btn-options-large:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: white !important;
+  transform: scale(1.05) !important;
+}
 
 /* ================================================
    ESTILOS PARA DURACIÓN Y BOTONES MEJORADOS
@@ -852,8 +934,8 @@ body.dashboard-body {
 .song-duration {
   font-family: 'Courier New', monospace;
   font-weight: 500;
-  color: #666;
-  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -1066,7 +1148,7 @@ body.dashboard-body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   font-weight: 600;
   font-size: 0.85rem;
-  color: #555;
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -1095,7 +1177,7 @@ body.dashboard-body {
 }
 
 .song-index {
-  color: #666;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -1146,7 +1228,7 @@ body.dashboard-body {
 }
 
 .song-name {
-  color: #000 !important;
+  color: #fff !important;
   font-weight: 500;
   font-size: 0.95rem;
   margin-bottom: 2px;
@@ -1154,14 +1236,14 @@ body.dashboard-body {
 }
 
 .song-artist {
-  color: #333 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   font-size: 0.85rem;
   line-height: 1.2;
 }
 
 /* Álbum */
 .song-album {
-  color: #444 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   font-size: 0.85rem;
   overflow: hidden;
   text-overflow: ellipsis;

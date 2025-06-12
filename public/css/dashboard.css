@@ -956,14 +956,16 @@ main {
   z-index: 999999 !important;
 }
 
+/* === Estilos custom-dropdown comentados === */
+/*
 .custom-dropdown-menu {
   position: absolute !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
   padding: 0.5rem 0 !important;
   min-width: 180px !important;
   max-width: 200px !important;
@@ -983,7 +985,7 @@ main {
   display: flex !important;
   align-items: center !important;
   padding: 0.5rem 1rem !important;
-  color: #374151 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
   text-decoration: none !important;
   font-weight: 500 !important;
   transition: all 0.2s ease !important;
@@ -1016,23 +1018,10 @@ main {
   margin: 0.25rem 0 !important;
 }
 
-/* === Asegurar z-index máximo para dropdowns === */
-.dropdown-menu.show {
-  z-index: 999999 !important;
-}
-
-/* === Glassmorphism overrides === */
 .custom-dropdown-menu * {
   pointer-events: auto !important;
 }
-
-/* === RESPONSIVE DROPDOWN ADJUSTMENTS === */
-@media (max-width: 768px) {
-  .custom-dropdown-menu {
-    min-width: 160px !important;
-    max-width: 180px !important;
-  }
-}
+*/
 
 /* === PAGINATION GLASSMORPHISM === */
 
@@ -1197,3 +1186,68 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
 /* ====================================================
    FIN BOTONES GLASSMORPHISM PARA DASHBOARD
    ==================================================== */
+
+/* === CUSTOM DROPDOWN STYLES (GLASSMORPHISM) - DESACTIVADO === */
+/*
+.custom-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-trigger {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  opacity: 0.7;
+}
+
+.custom-dropdown-trigger:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  opacity: 1;
+}
+
+.song-row:hover .custom-dropdown-trigger {
+  opacity: 1;
+}
+
+.custom-dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem 0 !important;
+  min-width: 180px !important;
+  z-index: 1000 !important;
+  margin-top: 5px !important;
+}
+
+.custom-dropdown-menu[style*="display: block"] {
+  display: block !important;
+}
+*/
+
+/* === Asegurar z-index máximo para dropdowns principales === */
+.dropdown-menu.show {
+  z-index: 999999 !important;
+}
+
+/* === RESPONSIVE DROPDOWN ADJUSTMENTS === */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    min-width: 160px !important;
+    max-width: 180px !important;
+  }
+}

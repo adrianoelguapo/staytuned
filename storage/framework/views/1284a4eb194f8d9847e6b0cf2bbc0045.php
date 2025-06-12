@@ -12,6 +12,7 @@
     <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dropdown-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -175,7 +176,7 @@
                                             <?php echo e($playlist->is_public ? 'Pública' : 'Privada'); ?>
 
                                         </span>
-                                        <span class="text-muted">
+                                        <span class="text-light">
                                             Creada <?php echo e($playlist->created_at->diffForHumans()); ?>
 
                                         </span>
@@ -191,7 +192,7 @@
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-three-dots"></i>
                                             </button>
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
                                                     <button class="dropdown-item" onclick="toggleSpotifySearch()">
                                                         <i class="bi bi-plus me-2"></i>Agregar canciones
@@ -315,26 +316,17 @@
                                         <div class="song-actions">
                                             <!-- Solo mostrar acciones si es el propietario -->
                                             <?php if(Auth::check() && Auth::id() === $playlist->user_id): ?>
-                                                <div class="custom-dropdown-container">
-                                                    <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
-                                                            type="button" 
-                                                            data-song-id="<?php echo e($song->id); ?>"
-                                                            onclick="toggleCustomDropdown(this)">
-                                                        <i class="bi bi-three-dots"></i>
+                                                <form action="<?php echo e(route('playlists.songs.remove', [$playlist, $song])); ?>" 
+                                                      method="POST" 
+                                                      style="margin: 0;">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" 
+                                                            class="btn btn-sm btn-delete-song" 
+                                                            title="Quitar de la playlist">
+                                                        <i class="bi bi-trash"></i>
                                                     </button>
-                                                    <div class="custom-dropdown-menu" id="dropdown-<?php echo e($song->id); ?>" style="display: none;">
-                                                        <div class="custom-dropdown-item">
-                                                            <form action="<?php echo e(route('playlists.songs.remove', [$playlist, $song])); ?>" 
-                                                                  method="POST" style="margin: 0;">
-                                                                <?php echo csrf_field(); ?>
-                                                                <?php echo method_field('DELETE'); ?>
-                                                                <button type="submit" class="custom-dropdown-btn text-danger">
-                                                                    <i class="bi bi-trash me-2"></i>Quitar de la playlist
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -641,35 +633,6 @@
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchSpotify();
-            }
-        });
-
-        // Función para manejar dropdown personalizado
-        function toggleCustomDropdown(trigger) {
-            const songId = trigger.getAttribute('data-song-id');
-            const dropdown = document.getElementById('dropdown-' + songId);
-            
-            // Cerrar todos los otros dropdowns
-            document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
-                if (menu !== dropdown) {
-                    menu.style.display = 'none';
-                }
-            });
-            
-            // Toggle del dropdown actual
-            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
-                dropdown.style.display = 'block';
-            } else {
-                dropdown.style.display = 'none';
-            }
-        }
-        
-        // Cerrar dropdowns al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.custom-dropdown-container')) {
-                document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
-                    menu.style.display = 'none';
-                });
             }
         });
 

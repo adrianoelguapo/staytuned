@@ -12,6 +12,7 @@
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/dropdown-fix.css') }}?v={{ time() }}" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -171,7 +172,7 @@
                                             <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
                                             {{ $playlist->is_public ? 'Pública' : 'Privada' }}
                                         </span>
-                                        <span class="text-muted">
+                                        <span class="text-light">
                                             Creada {{ $playlist->created_at->diffForHumans() }}
                                         </span>
                                     </div>
@@ -186,7 +187,7 @@
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-three-dots"></i>
                                             </button>
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
                                                     <button class="dropdown-item" onclick="toggleSpotifySearch()">
                                                         <i class="bi bi-plus me-2"></i>Agregar canciones
@@ -308,26 +309,17 @@
                                         <div class="song-actions">
                                             <!-- Solo mostrar acciones si es el propietario -->
                                             @if(Auth::check() && Auth::id() === $playlist->user_id)
-                                                <div class="custom-dropdown-container">
-                                                    <button class="btn btn-sm btn-link text-muted custom-dropdown-trigger" 
-                                                            type="button" 
-                                                            data-song-id="{{ $song->id }}"
-                                                            onclick="toggleCustomDropdown(this)">
-                                                        <i class="bi bi-three-dots"></i>
+                                                <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
+                                                      method="POST" 
+                                                      style="margin: 0;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" 
+                                                            class="btn btn-sm btn-delete-song" 
+                                                            title="Quitar de la playlist">
+                                                        <i class="bi bi-trash"></i>
                                                     </button>
-                                                    <div class="custom-dropdown-menu" id="dropdown-{{ $song->id }}" style="display: none;">
-                                                        <div class="custom-dropdown-item">
-                                                            <form action="{{ route('playlists.songs.remove', [$playlist, $song]) }}" 
-                                                                  method="POST" style="margin: 0;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="custom-dropdown-btn text-danger">
-                                                                    <i class="bi bi-trash me-2"></i>Quitar de la playlist
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             @endif
                                         </div>
                                     </div>
@@ -634,35 +626,6 @@
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchSpotify();
-            }
-        });
-
-        // Función para manejar dropdown personalizado
-        function toggleCustomDropdown(trigger) {
-            const songId = trigger.getAttribute('data-song-id');
-            const dropdown = document.getElementById('dropdown-' + songId);
-            
-            // Cerrar todos los otros dropdowns
-            document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
-                if (menu !== dropdown) {
-                    menu.style.display = 'none';
-                }
-            });
-            
-            // Toggle del dropdown actual
-            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
-                dropdown.style.display = 'block';
-            } else {
-                dropdown.style.display = 'none';
-            }
-        }
-        
-        // Cerrar dropdowns al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.custom-dropdown-container')) {
-                document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
-                    menu.style.display = 'none';
-                });
             }
         });
 
