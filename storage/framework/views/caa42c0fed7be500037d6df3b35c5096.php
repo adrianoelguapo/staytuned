@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Nueva Publicación | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
     
-    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet"><link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet"><link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -23,15 +23,15 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">StayTuned</a>
+            <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('dashboard')); ?>">StayTuned</a>
         </div>
 
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline active">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis comunidades</a>
+            <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
+            <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar usuarios</a>
+            <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline">Mis playlists</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline active">Mis Publicaciones</a>
+            <a href="<?php echo e(route('communities.index')); ?>" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -40,23 +40,24 @@
                    role="button"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img src="{{ Auth::user()->profile_photo_url }}"
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
                              class="rounded-circle me-2 user-photo"
-                             alt="{{ Auth::user()->name }}" />
-                    @endif
-                    {{ Auth::user()->username }}
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit"
                                     class="dropdown-item d-flex align-items-center text-danger">
                                 <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -76,19 +77,19 @@
         </div>
         <div class="offcanvas-body p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
-                <a class="nav-link" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link active" href="{{ route('posts.index') }}">Mis Publicaciones</a>
-                <a class="nav-link" href="{{ route('communities.index') }}">Mis comunidades</a>
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">Explorar usuarios</a>
+                <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">Mis playlists</a>
+                <a class="nav-link active" href="<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
+                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">Mis comunidades</a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
+                <a class="nav-link d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -105,7 +106,7 @@
                 <nav aria-label="breadcrumb" class="mb-4">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('posts.index') }}" class="text-white-50">
+                            <a href="<?php echo e(route('posts.index')); ?>" class="text-white-50">
                                 <i class="bi bi-chat-dots me-1"></i>
                                 Mis Publicaciones
                             </a>
@@ -120,17 +121,17 @@
                         <div class="d-flex align-items-center mb-4">
                             <i class="bi bi-plus-circle text-white me-3 fs-3"></i>
                             <h1 class="h3 mb-0 create-playlist-title">Crear Nueva Publicación</h1>
-                        </div>                        @if ($errors->any())
+                        </div>                        <?php if($errors->any()): ?>
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
-                            </div>                        @endif
+                            </div>                        <?php endif; ?>
 
-                        <form action="{{ route('posts.store') }}" method="POST" class="playlist-form">
-                            @csrf
+                        <form action="<?php echo e(route('posts.store')); ?>" method="POST" class="playlist-form">
+                            <?php echo csrf_field(); ?>
                             
                             <div class="row">
                                 <!-- Columna izquierda - Información principal -->
@@ -139,15 +140,29 @@
                                     <div class="mb-4">
                                         <label for="title" class="form-label">Título de la publicación</label>
                                         <input type="text" 
-                                               class="form-control @error('title') is-invalid @enderror" 
+                                               class="form-control <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
                                                id="title" 
                                                name="title" 
-                                               value="{{ old('title') }}" 
+                                               value="<?php echo e(old('title')); ?>" 
                                                placeholder="¿Qué quieres compartir?"
                                                required>
-                                        @error('title')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                        <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>                                    <!-- Categoría -->
                                     <div class="mb-4">
                                         <label for="category_id" class="form-label">Tipo de Publicación</label>
@@ -159,11 +174,18 @@
                                         </button>
                                         
                                         <!-- Input oculto para enviar el valor -->
-                                        <input type="hidden" id="category_id" name="category_id" value="{{ old('category_id') }}" required>
+                                        <input type="hidden" id="category_id" name="category_id" value="<?php echo e(old('category_id')); ?>" required>
                                         
-                                        @error('category_id')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
+                                        <?php $__errorArgs = ['category_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <!-- El modal se movió fuera del contenedor -->
@@ -229,7 +251,7 @@
                             <input type="hidden" name="spotify_external_url" id="spotify_external_url">
                             <input type="hidden" name="spotify_data" id="spotify_data">                            <!-- Botones de acción -->
                             <div class="d-flex gap-3 mt-4">
-                                <a href="{{ route('posts.index') }}" class="btn btn-secondary flex-fill">
+                                <a href="<?php echo e(route('posts.index')); ?>" class="btn btn-secondary flex-fill">
                                     <i class="bi bi-arrow-left me-2"></i>
                                     Cancelar
                                 </a>
@@ -263,20 +285,20 @@
                 </button>
             </div>
             <div class="category-options">
-                @foreach($categories as $category)
+                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="category-option" 
-                         data-value="{{ $category->id }}" 
-                         data-type="{{ $category->type }}"
-                         data-text="{{ $category->text }}">
+                         data-value="<?php echo e($category->id); ?>" 
+                         data-type="<?php echo e($category->type); ?>"
+                         data-text="<?php echo e($category->text); ?>">
                         <div>
-                            <div class="fw-semibold">{{ ucfirst($category->type) }}</div>
-                            <small class="text-muted">{{ $category->text }}</small>
+                            <div class="fw-semibold"><?php echo e(ucfirst($category->type)); ?></div>
+                            <small class="text-muted"><?php echo e($category->text); ?></small>
                         </div>
                         <div class="category-option-check">
                             <i class="bi bi-check" style="display: none;"></i>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
@@ -680,3 +702,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\staytuned\resources\views/posts/create.blade.php ENDPATH**/ ?>

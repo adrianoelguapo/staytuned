@@ -177,7 +177,7 @@ body.dashboard-body {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 0.75rem;
   font-weight: 500;
   font-size: 0.95rem;
@@ -185,6 +185,9 @@ body.dashboard-body {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  min-width: 200px;
+  white-space: nowrap;
+  justify-content: center;
 }
 
 .btn-new-playlist:hover {

@@ -14,19 +14,19 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'type' => 'Canción',
+                'type' => 'cancion',
                 'text' => 'Estoy escuchando esta canción y quería compartirla contigo.',
             ],
             [
-                'type' => 'Álbum',
+                'type' => 'album',
                 'text' => 'Acabo de descubrir este álbum y tengo que recomendarlo.',
             ],
             [
-                'type' => 'Artista',
+                'type' => 'artista',
                 'text' => 'Este artista me ha sorprendido últimamente. ¡Échale un vistazo!',
             ],
             [
-                'type' => 'Playlist',
+                'type' => 'playlist',
                 'text' => 'He creado una nueva lista de reproducción que creo que te gustará.',
             ]
         ];
