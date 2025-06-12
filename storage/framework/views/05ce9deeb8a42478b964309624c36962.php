@@ -247,7 +247,7 @@
     /* Estilos responsive para botones de acción del dashboard */
     @media (min-width: 992px) {
         .dashboard-action-btn {
-            max-width: 200px !important;
+            max-width: 250px !important;
             width: auto !important;
         }
     }
