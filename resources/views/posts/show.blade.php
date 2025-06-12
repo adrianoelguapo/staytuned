@@ -276,13 +276,9 @@
                                     
                                     <div class="d-flex align-items-center gap-2 text-white-50">
                                         <i class="fas fa-comment"></i>
-                                        <span>{{ $post->comments->count() }} comentarios</span>
+                                        <span class="comments-count-actions">{{ $post->comments->count() }} comentarios</span>
                                     </div>
                                 </div>
-                                
-                                <button class="btn btn-link text-white-50 p-2">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
                             </div>
                         </div>
                     </div>                    <!-- Sección de comentarios -->
@@ -290,7 +286,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h3 class="text-white fw-semibold mb-0">
-                                    Comentarios ({{ $post->comments->count() }})
+                                    <span class="comments-count-header">Comentarios ({{ $post->comments->count() }})</span>
                                 </h3>
                             </div>
                             
@@ -521,6 +517,24 @@
             });
         });
 
+        function updateCommentsCount() {
+            // Contar comentarios actuales en el DOM
+            const commentsList = document.getElementById('comments-list');
+            const commentsCount = commentsList.querySelectorAll('.comment-item').length;
+            
+            // Actualizar contador en la sección de acciones (arriba)
+            const actionsCounter = document.querySelector('.comments-count-actions');
+            if (actionsCounter) {
+                actionsCounter.textContent = `${commentsCount} comentarios`;
+            }
+            
+            // Actualizar contador en el encabezado de la sección de comentarios
+            const sectionHeader = document.querySelector('h3.text-white.fw-semibold');
+            if (sectionHeader) {
+                sectionHeader.textContent = `Comentarios (${commentsCount})`;
+            }
+        }
+
         function addCommentToList(comment) {
             const commentsList = document.getElementById('comments-list');
             const emptyState = commentsList.querySelector('.text-center');
@@ -638,7 +652,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Restaurar vista normal con nuevo texto
+                    // Restaurar vista normal with nuevo texto
                     restoreCommentView(commentId, newText);
                 } else {
                     alert(data.error || 'Error al actualizar el comentario');
@@ -727,10 +741,21 @@
         }
 
         function updateCommentsCount() {
+            // Contar comentarios actuales en el DOM
             const commentsList = document.getElementById('comments-list');
-            const count = commentsList.querySelectorAll('.comment-item').length;
-            const title = document.querySelector('h3');
-            title.textContent = `Comentarios (${count})`;
+            const commentsCount = commentsList.querySelectorAll('.comment-item').length;
+            
+            // Actualizar contador en la sección de acciones (arriba)
+            const actionsCounter = document.querySelector('.comments-count-actions');
+            if (actionsCounter) {
+                actionsCounter.textContent = `${commentsCount} comentarios`;
+            }
+            
+            // Actualizar contador en el encabezado de la sección de comentarios
+            const sectionHeader = document.querySelector('h3.text-white.fw-semibold');
+            if (sectionHeader) {
+                sectionHeader.textContent = `Comentarios (${commentsCount})`;
+            }
         }
 
         function showEmptyCommentsState() {
