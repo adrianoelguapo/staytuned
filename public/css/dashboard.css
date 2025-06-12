@@ -121,42 +121,46 @@ body.dashboard-body {
   background: rgba(124,58,237,0.1);
 }
 
-/* === OFFCANVAS STYLES (≤lg) === */
+/* === OFFCANVAS STYLES (≤lg) - BASE STYLES ONLY === */
+/* Nota: Los estilos glassmorphism están en navbar-fix.css */
 .offcanvas {
   width: 280px !important;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 8px 0 24px rgba(0,0,0,0.15);
 }
-.offcanvas-header {
-  padding: 1rem .75rem .5rem;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-.offcanvas-title {
-  font-weight: 600; color: #333;
-}
+
+/* Estilos básicos que no entran en conflicto con glassmorphism */
 .offcanvas-body {
-  padding: 0; display: flex; flex-direction: column; height: 100%;
+  padding: 0; 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%;
 }
-.offcanvas .nav-link {
-  display: block; width: 100%;
-  color: #444; font-weight: 500;
+
+/* Enlaces básicos sin glassmorphism - solo se aplicarán si navbar-fix.css no está cargado */
+.offcanvas .nav-link:not([style*="backdrop-filter"]) {
+  display: block; 
+  width: 100%;
+  color: #444; 
+  font-weight: 500;
   padding: .75rem 1rem;
   transition: background .2s ease;
 }
-.offcanvas .nav-link.active,
-.offcanvas .nav-link:hover {
+
+.offcanvas .nav-link:not([style*="backdrop-filter"]):hover,
+.offcanvas .nav-link:not([style*="backdrop-filter"]).active {
   background: rgba(124,58,237,0.1);
 }
 
-/* Logout link inside offcanvas */
-.offcanvas .btn-link {
-  display: block; width: 100%;
+/* Botón de logout básico sin glassmorphism */
+.offcanvas .btn-link:not([style*="backdrop-filter"]) {
+  display: block; 
+  width: 100%;
   padding: .75rem 1rem;
   color: #b91c1c;
   text-align: left;
   transition: background .2s ease;
 }
-.offcanvas .btn-link:hover {
+
+.offcanvas .btn-link:not([style*="backdrop-filter"]):hover {
   background: rgba(124,58,237,0.1);
 }
 
@@ -311,7 +315,6 @@ body.dashboard-body {
   font-weight: 900 !important;
   text-decoration: none !important;
   text-transform: none !important;
-  speak: none !important;
 }
 
 /* ====================================================

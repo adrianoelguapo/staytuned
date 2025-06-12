@@ -136,7 +136,7 @@
                     @csrf
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
-                        <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+                        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
                     </button>
                 </form>
             </nav>

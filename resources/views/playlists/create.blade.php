@@ -6,6 +6,8 @@
     <title>Nueva Playlist | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
@@ -71,16 +73,26 @@
     <!-- Offcanvas menu (para <lg) -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">StayTuned</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+            <h5 class="offcanvas-title text-white" id="offcanvasMenuLabel">StayTuned</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">Explorar usuarios</a>
-                <a class="nav-link active" href="{{ route('playlists.index') }}">Mis playlists</a>
-                <a class="nav-link" href="{{ route('posts.index') }}">Mis Publicaciones</a>
-                <a class="nav-link" href="{{ route('communities.index') }}">Mis comunidades</a>
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="fas fa-home me-2"></i> Dashboard
+                </a>
+                <a class="nav-link" href="{{ route('explore.users.index') }}">
+                    <i class="fas fa-users me-2"></i> Explorar usuarios
+                </a>
+                <a class="nav-link active" href="{{ route('playlists.index') }}">
+                    <i class="fas fa-music me-2"></i> Mis playlists
+                </a>
+                <a class="nav-link" href="{{ route('posts.index') }}">
+                    <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
+                </a>
+                <a class="nav-link" href="{{ route('communities.index') }}">
+                    <i class="fas fa-users me-2"></i> Mis comunidades
+                </a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
@@ -89,8 +101,7 @@
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit"
-                            class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
+                    <button type="submit" class="btn-link d-flex align-items-center">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
                     </button>
                 </form>

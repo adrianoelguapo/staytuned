@@ -106,6 +106,10 @@
                    href="{{ route('posts.index') }}">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
+                <a class="nav-link {{ request()->routeIs('communities.*') ? 'active' : '' }}" 
+                   href="{{ route('communities.index') }}">
+                    <i class="fas fa-users me-2"></i> Mis comunidades
+                </a>
             </nav>
             <hr class="my-0 border-secondary">
             <nav class="nav flex-column">
@@ -114,8 +118,7 @@
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit"
-                            class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
+                    <button type="submit" class="btn-link d-flex align-items-center">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
                     </button>
                 </form>

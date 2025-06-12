@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Nueva Publicación en {{ $community->name }} | StayTuned</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title>Nueva Publicación | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
     
-    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet"><link href="{{ asset('css/posts.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/community-fixed.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet"><link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -26,15 +23,15 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">StayTuned</a>
+            <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('dashboard')); ?>">StayTuned</a>
         </div>
 
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline active">Mis Comunidades</a>
+            <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
+            <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar usuarios</a>
+            <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline">Mis playlists</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline active">Mis Publicaciones</a>
+            <a href="<?php echo e(route('communities.index')); ?>" class="nav-link-inline">Mis comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -43,23 +40,24 @@
                    role="button"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img src="{{ Auth::user()->profile_photo_url }}"
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
                              class="rounded-circle me-2 user-photo"
-                             alt="{{ Auth::user()->name }}" />
-                    @endif
-                    {{ Auth::user()->username }}
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit"
                                     class="dropdown-item d-flex align-items-center text-danger">
                                 <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -79,29 +77,19 @@
         </div>
         <div class="offcanvas-body p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <i class="fas fa-home me-2"></i> Dashboard
-                </a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">
-                    <i class="fas fa-users me-2"></i> Explorar usuarios
-                </a>
-                <a class="nav-link" href="{{ route('playlists.index') }}">
-                    <i class="fas fa-music me-2"></i> Mis playlists
-                </a>
-                <a class="nav-link" href="{{ route('posts.index') }}">
-                    <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
-                </a>
-                <a class="nav-link active" href="{{ route('communities.index') }}">
-                    <i class="fas fa-users me-2"></i> Mis Comunidades
-                </a>
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">Explorar usuarios</a>
+                <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">Mis playlists</a>
+                <a class="nav-link active" href="<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
+                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">Mis comunidades</a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
+                <a class="nav-link d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -109,9 +97,7 @@
                 </form>
             </nav>
         </div>
-    </div>
-
-    <!-- Contenido principal -->
+    </div>    <!-- Contenido principal -->
     <div class="dashboard-container container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
@@ -120,36 +106,14 @@
                 <nav aria-label="breadcrumb" class="mb-4">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('communities.show', $community) }}" class="text-white-50">
-                                <i class="bi bi-people me-1"></i>
-                                {{ $community->name }}
+                            <a href="<?php echo e(route('posts.index')); ?>" class="text-white-50">
+                                <i class="bi bi-chat-dots me-1"></i>
+                                Mis Publicaciones
                             </a>
                         </li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Nueva Publicación</li>
                     </ol>
-                </nav>                <!-- Community Info Banner -->
-                <div class="mb-4 community-card">
-                    <div class="d-flex align-items-center">
-                        @if($community->cover_image)
-                            <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                 alt="{{ $community->name }}" 
-                                 class="rounded me-3" 
-                                 style="width: 60px; height: 60px; object-fit: cover;">
-                        @else
-                            <div class="rounded me-3 d-flex align-items-center justify-content-center" 
-                                 style="width: 60px; height: 60px; background: rgba(255,255,255,0.10);">
-                                <i class="fas fa-users" style="color: #fff;"></i>
-                            </div>
-                        @endif
-                        <div>
-                            <h5 class="mb-1" style="color: #fff;">Publicando en {{ $community->name }}</h5>
-                            <small style="color: #e0e0e0;">
-                                {{ $community->members_count }} miembros • 
-                                {{ $community->is_private ? 'Privada' : 'Pública' }}
-                            </small>
-                        </div>
-                    </div>
-                </div>
+                </nav>
 
                 <!-- Formulario de creación -->
                 <div class="card create-playlist-card">
@@ -157,25 +121,17 @@
                         <div class="d-flex align-items-center mb-4">
                             <i class="bi bi-plus-circle text-white me-3 fs-3"></i>
                             <h1 class="h3 mb-0 create-playlist-title">Crear Nueva Publicación</h1>
-                        </div>
-
-                        <!-- Alerta de contenido moderado -->
-                        @include('components.content-moderation-alert')
-
-                        @if ($errors->any())
+                        </div>                        <?php if($errors->any()): ?>
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
-                            </div>
-                        @endif
+                            </div>                        <?php endif; ?>
 
-                        <form action="{{ route('posts.store') }}" method="POST" class="playlist-form">
-                            @csrf
-                            <!-- Campo oculto para la comunidad -->
-                            <input type="hidden" name="community_id" value="{{ $community->id }}">
+                        <form action="<?php echo e(route('posts.store')); ?>" method="POST" class="playlist-form">
+                            <?php echo csrf_field(); ?>
                             
                             <div class="row">
                                 <!-- Columna izquierda - Información principal -->
@@ -184,18 +140,30 @@
                                     <div class="mb-4">
                                         <label for="title" class="form-label">Título de la publicación</label>
                                         <input type="text" 
-                                               class="form-control @error('title') is-invalid @enderror" 
+                                               class="form-control <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
                                                id="title" 
                                                name="title" 
-                                               value="{{ old('title') }}" 
-                                               placeholder="¿Qué quieres compartir con la comunidad?"
+                                               value="<?php echo e(old('title')); ?>" 
+                                               placeholder="¿Qué quieres compartir?"
                                                required>
-                                        @error('title')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Categoría -->
+                                        <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>                                    <!-- Categoría -->
                                     <div class="mb-4">
                                         <label for="category_id" class="form-label">Tipo de Publicación</label>
                                         
@@ -206,12 +174,21 @@
                                         </button>
                                         
                                         <!-- Input oculto para enviar el valor -->
-                                        <input type="hidden" id="category_id" name="category_id" value="{{ old('category_id') }}" required>
+                                        <input type="hidden" id="category_id" name="category_id" value="<?php echo e(old('category_id')); ?>" required>
                                         
-                                        @error('category_id')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
+                                        <?php $__errorArgs = ['category_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
+
+                                    <!-- El modal se movió fuera del contenedor -->
 
                                     <!-- Contenido automático basado en categoría -->
                                     <div class="mb-4">
@@ -223,10 +200,7 @@
                                         </div>
                                         <small class="text-muted">Este contenido se generará automáticamente según el tipo de publicación seleccionado.</small>
                                     </div>
-                                </div>
-
-                                <!-- Columna derecha - Contenido de Spotify -->
-                                <div class="col-md-4 mb-4">
+                                </div>                                <!-- Columna derecha - Contenido de Spotify -->                                <div class="col-md-4 mb-4">
                                     <div id="spotify-section" style="display: none;">
                                         <label class="form-label">
                                             Contenido de Spotify <span class="text-danger">*</span>
@@ -260,9 +234,7 @@
                                         <p class="mt-2 mb-0 text-muted">Selecciona un tipo de publicación que requiera contenido de Spotify</p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Resultados de búsqueda de Spotify -->
+                            </div>                            <!-- Resultados de búsqueda de Spotify -->
                             <div id="spotifyResults" class="spotify-results mt-3" style="display: none;"></div>
                             
                             <!-- Elemento seleccionado -->
@@ -277,17 +249,15 @@
                             <input type="hidden" name="spotify_id" id="spotify_id">
                             <input type="hidden" name="spotify_type" id="spotify_type">
                             <input type="hidden" name="spotify_external_url" id="spotify_external_url">
-                            <input type="hidden" name="spotify_data" id="spotify_data">
-
-                            <!-- Botones de acción -->
+                            <input type="hidden" name="spotify_data" id="spotify_data">                            <!-- Botones de acción -->
                             <div class="d-flex gap-3 mt-4">
-                                <a href="{{ route('communities.show', $community) }}" class="btn btn-secondary flex-fill">
+                                <a href="<?php echo e(route('posts.index')); ?>" class="btn btn-secondary flex-fill">
                                     <i class="bi bi-arrow-left me-2"></i>
                                     Cancelar
                                 </a>
-                                <button type="submit" class="btn btn-primary-playlist flex-fill" id="submitBtn">
+                                <button type="submit" class="btn btn-primary-playlist flex-fill text-align-center" id="submitBtn">
                                     <i class="bi bi-plus-lg me-2"></i>
-                                    Publicar en Comunidad
+                                    Crear Publicación
                                 </button>
                             </div>
 
@@ -302,7 +272,8 @@
                 </div>
 
             </div>
-        </div>    </div>
+        </div>
+    </div>
 
     <!-- Modal de selección de categorías (posicionado fuera de todos los contenedores) -->
     <div id="categoryModal" class="category-modal">
@@ -314,20 +285,20 @@
                 </button>
             </div>
             <div class="category-options">
-                @foreach($categories as $category)
+                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="category-option" 
-                         data-value="{{ $category->id }}" 
-                         data-type="{{ $category->type }}"
-                         data-text="{{ $category->text }}">
+                         data-value="<?php echo e($category->id); ?>" 
+                         data-type="<?php echo e($category->type); ?>"
+                         data-text="<?php echo e($category->text); ?>">
                         <div>
-                            <div class="fw-semibold">{{ ucfirst($category->type) }}</div>
-                            <small class="text-muted">{{ $category->text }}</small>
+                            <div class="fw-semibold"><?php echo e(ucfirst($category->type)); ?></div>
+                            <small class="text-muted"><?php echo e($category->text); ?></small>
                         </div>
                         <div class="category-option-check">
                             <i class="bi bi-check" style="display: none;"></i>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
@@ -719,3 +690,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\staytuned\resources\views/posts/create.blade.php ENDPATH**/ ?>
