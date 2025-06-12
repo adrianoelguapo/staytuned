@@ -256,9 +256,33 @@ body {
     opacity: 0.9 !important;
 }
 .btn-community-secondary {
-    background: rgba(255,255,255,0.13);
-    color: #a5b4fc;
-    border: none;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    font-size: 0.95rem !important;
+}
+
+.btn-community-secondary:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    text-decoration: none !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-community-secondary i {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
 }
 .btn-community-danger {
     background: rgba(239,68,68,0.13);
@@ -1154,9 +1178,6 @@ body {
 
 .modal .btn-purple:active {
     transform: translateY(0) !important;
-    box-shadow: 
-        0 4px 15px rgba(139, 92, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
 
 .modal .btn-purple:focus {
@@ -1747,4 +1768,52 @@ body {
         justify-content: flex-start !important;
         flex-wrap: wrap !important;
     }
+}
+
+/* ====================================================
+   CORRECCIÓN DE ALTURA DE BOTONES EN VISTA SHOW
+   ==================================================== */
+
+/* Sincronizar altura de botones "Solicitudes" y tres puntos */
+.btn-outline-purple,
+.btn-options-large.btn-purple {
+    min-height: 50px !important;
+    height: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.75rem 1.5rem !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+}
+
+/* Asegurar que el botón de tres puntos mantenga su forma cuadrada con altura consistente */
+.btn-options-large.btn-purple {
+    width: 50px !important;
+    min-width: 50px !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+}
+
+/* Override específico para cuando ambos botones estén en el mismo contenedor */
+.community-actions-header .btn-outline-purple,
+.community-actions-header .btn-options-large {
+    height: 50px !important;
+    min-height: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Botón "Solicitudes" con border-radius de 12px */
+.community-actions-header .btn-outline-purple {
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }

@@ -143,38 +143,42 @@ body.dashboard-body {
   margin: 0;
 }
 
-/* Botón crear playlist */
+/* Botón crear playlist con glassmorphism característico */
 .btn-create-playlist {
-  background: #fff;
-  color: #5b21b6;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  border-radius: 50px;
+  border-radius: 0.75rem;
   font-weight: 600;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .btn-create-playlist:hover {
-  background: #f3f4f6;
-  color: #4c1d95;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón de Nueva Playlist mejorado */
+/* Botón de Nueva Playlist con glassmorphism característico */
 .btn-new-playlist {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
   padding: 10px 20px;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.3s ease;
@@ -792,24 +796,29 @@ body.dashboard-body {
   transform: scale(1.05);
 }
 
-/* Dropdown menu personalizado */
+/* Dropdown menu con glassmorphism característico */
 .playlist-actions .dropdown-menu {
-  background-color: #2a2a2a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
   min-width: 160px;
 }
 
 .playlist-actions .dropdown-item {
   color: #fff;
   padding: 8px 16px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  margin: 0.25rem;
 }
 
 .playlist-actions .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15) !important;
   color: #fff;
+  transform: translateY(-1px);
 }
 
 /* Botón eliminar en el dropdown */
@@ -834,11 +843,12 @@ body.dashboard-body {
 .playlist-card .dropdown-menu {
   z-index: 99999 !important;
   position: fixed !important;
-  background: rgba(33, 37, 41, 0.98) !important;
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
   margin-top: 8px !important;
   min-width: 160px !important;
   transform: none !important;
@@ -1455,8 +1465,6 @@ body.dashboard-body {
   color: #fff !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-  text-decoration: none !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .playlist-form .btn-primary-playlist:active {
@@ -2189,348 +2197,308 @@ body.dashboard-body {
   display: block !important;
 }
 
-/* ESTILOS ESPECÍFICOS PARA SPOTIFY EN PUBLICACIONES */
+/* ================================================
+   FORZAR APLICACIÓN DE ESTILOS DE PLAYLISTS
+   ================================================ */
 
-/* Contenedor de búsqueda de Spotify */
-.spotify-search-container {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px dashed rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  padding: 1rem;
+/* Eliminar totalmente el grid de Bootstrap */
+.playlists-list .row {
+  display: none !important;
 }
 
-.spotify-search-container:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.4);
+.playlists-list [class*="col-"] {
+  display: none !important;
 }
 
-/* Vista previa de Spotify */
-.spotify-preview {
-  width: 100%;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-  border: 2px dashed rgba(255, 255, 255, 0.2);
+/* Forzar la aplicación del contenedor de lista */
+.playlists-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.spotify-preview.has-content {
-  height: auto;
-  min-height: 80px;
-  padding: 1rem;
-  border: 1px solid rgba(29, 185, 84, 0.3);
-  background: rgba(29, 185, 84, 0.05);
+/* Forzar tarjeta de ancho completo */
+.playlists-list > .playlist-card-full-width {
+  display: block !important;
+  width: 100% !important;
+  flex-basis: 100% !important;
+  flex-grow: 1 !important;
+  flex-shrink: 0 !important;
 }
 
-.spotify-preview-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
+/* Sobrescribir cualquier clase de Bootstrap */
+.playlists-list .col-12,
+.playlists-list .col-md-6,
+.playlists-list .col-lg-4,
+.playlists-list [class*="col-"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex-basis: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-.spotify-preview-image {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Forzar que el contenido interno sea horizontal */
+.playlist-content-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 2rem !important;
+  padding: 2rem !important;
+  width: 100% !important;
 }
 
-.spotify-preview-info {
-  flex: 1;
-  min-width: 0;
+/* Asegurar que la imagen mantenga su tamaño fijo */
+.playlist-cover-container {
+  flex-shrink:  0 !important;
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  position: relative !important;
 }
 
-.spotify-preview-title {
-  font-weight: 600;
-  color: #fff;
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  overflow: hidden;
+.playlist-cover-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.3s ease !important;
 }
 
-.spotify-preview-subtitle {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.8rem;
-  line-height: 1.1;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  line-clamp: 1;
-  overflow: hidden;
+.playlist-cover-image:hover {
+  transform: scale(1.05) !important;
 }
 
-.spotify-placeholder {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.spotify-placeholder i {
-  color: #1db954;
-  margin-bottom: 0.5rem;
-}
-
-.spotify-selected-preview img {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-/* Resultados de búsqueda de Spotify */
-.spotify-results {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.spotify-results-list {
-  padding: 0.5rem;
-}
-
-.spotify-result-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.spotify-result-item:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-}
-
-.spotify-result-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Elemento seleccionado de Spotify */
-.spotify-item.selected {
-  background: rgba(29, 185, 84, 0.15);
-  border: 1px solid rgba(29, 185, 84, 0.3);
-  border-radius: 8px;
-  padding: 0.75rem;
-}
-
-/* Mejoras para la vista previa cuando está seleccionada */
-.spotify-selected-preview {
-  width: 100%;
-  text-align: center;
-}
-
-.spotify-selected-preview img {
-  max-width: 100%;
-  max-height: 150px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/* Contenedor de búsqueda de Spotify mejorado */
-.spotify-search-container {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Scrollbar personalizado para resultados */
-.spotify-results::-webkit-scrollbar {
-  width: 6px;
-}
-
-.spotify-results::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-.spotify-results::-webkit-scrollbar-thumb {
-  background: rgba(29, 185, 84, 0.4);
-  border-radius: 3px;
-}
-
-.spotify-results::-webkit-scrollbar-thumb:hover {
-  background: rgba(29, 185, 84, 0.6);
-}
-
-/* Estilos responsivos para la vista previa de Spotify */
-@media (max-width: 768px) {
-  .spotify-preview {
-    height: 100px;
-  }
-  
-  .spotify-preview.has-content {
-    min-height: 70px;
-    padding: 0.75rem;
-  }
-  
-  .spotify-preview-image {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .spotify-preview-title {
-    font-size: 0.85rem;
-  }
-  
-  .spotify-preview-subtitle {
-    font-size: 0.75rem;
-  }
-}
-
-.spotify-results::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-}
-
-.spotify-results::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-/* Breadcrumb personalizado */
-.breadcrumb {
-  background: none;
-  padding: 0;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-  content: "›";
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: bold;
-}
-
-.breadcrumb-item a {
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.breadcrumb-item a:hover {
-  color: #fff !important;
-}
-
-/* Estilo para el botón de Spotify con glassmorphism */
-.spotify-btn {
+.playlist-cover-placeholder {
+  width: 100% !important;
+  height: 100% !important;
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: white !important;
-  transition: all 0.3s ease;
-}
-
-.spotify-btn:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: scale(1.05);
-  color: white !important;
-}
-
-/* Tamaño fijo para los botones de agregar/remover */
-.fixed-size-btn {
-  min-width: 100px !important;
-  height: 38px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  font-size: 2rem !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Asegurar que los botones de agregar/remover mantengan el mismo estilo sin importar el estado */
-.fixed-size-btn.btn-success {
-  background: rgba(139, 92, 246, 0.2) !important;
-  border: 1px solid rgba(139, 92, 246, 0.4) !important;
-  color: #fff !important;
-  border-radius: 20px !important;
+/* Contenedor de información */
+.playlist-info-container {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  position: relative !important;
+}
+
+/* Sección de header */
+.playlist-header-section {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 1rem !important;
+}
+
+.playlist-title-link {
+  text-decoration: none !important;
+  flex-grow: 1 !important;
+}
+
+.playlist-title {
+  font-size: 1.5rem !important;
   font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(8px) !important;
-  min-width: 100px !important;
-  height: 38px !important;
-}
-
-.fixed-size-btn.btn-success:hover {
-  background: rgba(139, 92, 246, 0.3) !important;
-  border-color: rgba(139, 92, 246, 0.5) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
   color: #fff !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-.fixed-size-btn.btn-primary-playlist {
-  border-radius: 20px !important;
+.playlist-title:hover {
+  color: #e0e7ff !important;
 }
 
-/* Estilos para dropdown personalizado de eliminar canción */
-.custom-dropdown-container {
-  position: relative;
-  display: inline-block;
-}
-
-.custom-dropdown-trigger {
+.playlist-privacy-badge {
   background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 20px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  white-space: nowrap !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.playlist-description {
+  color: rgba(255, 255, 255, 0.8) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Sección de footer */
+.playlist-footer-section {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+.playlist-meta-info {
+  display: flex !important;
+  gap: 1.5rem !important;
+  flex-wrap: wrap !important;
+}
+
+.playlist-meta-info span {
   color: rgba(255, 255, 255, 0.7) !important;
-  border-radius: 6px !important;
-  width: 32px !important;
-  height: 32px !important;
-  padding: 0 !important;
+  font-size: 0.875rem !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.2s ease !important;
+  gap: 0.25rem !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
-.custom-dropdown-trigger:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: white !important;
-  transform: scale(1.05) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-}
-
-.custom-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 4px);
-  right: 0;
-  z-index: 10001;
-  background: rgba(33, 37, 41, 0.95) !important;
-  backdrop-filter: blur(15px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-  min-width: 180px !important;
-  padding: 8px 0 !important;
-  display: none;
-}
-
-.custom-dropdown-item {
-  padding: 0 !important;
-}
-
-.custom-dropdown-btn {
-  background: none !important;
-  border: none !important;
-  color: #ff6b6b !important;
-  padding: 8px 16px !important;
-  width: 100% !important;
-  text-align: left !important;
-  font-size: 0.9rem !important;
-  transition: all 0.2s ease !important;
+.playlist-actions-section {
   display: flex !important;
+  gap: 0.75rem !important;
   align-items: center !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
-.custom-dropdown-btn:hover {
-  background: rgba(220, 53, 69, 0.1) !important;
-  color: #ff8a80 !important;
+/* Botones con efecto glass mejorado */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 0.5rem !important;
+  color: #fff !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.875rem !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ================================================
+   DROPDOWN MODAL CON GLASSMORPHISM Y POSICIONAMIENTO CORRECTO
+   ================================================ */
+
+/* Container del dropdown con posición relativa */
+.playlist-actions-section .dropdown,
+.dropdown.d-inline {
+    position: relative !important;
+    display: inline-block !important;
+}
+
+/* Dropdown con glassmorphism pero posicionado correctamente */
+.playlist-actions-section .dropdown-menu,
+.dropdown.d-inline .dropdown-menu,
+.dropdown-menu {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    padding: 0.5rem 0 !important;
+    min-width: 180px !important;
+    z-index: 9999 !important;
+    position: absolute !important; /* Cambiar de fixed a absolute */
+    top: 100% !important; /* Posicionar justo debajo del botón */
+    right: 0 !important; /* Alinear con el borde derecho del botón */
+    left: auto !important;
+    transform: translateY(0.25rem) !important; /* Pequeño espacio entre botón y dropdown */
+    margin: 0 !important;
+}
+
+/* Cuando el dropdown está visible */
+.playlist-actions-section .dropdown-menu.show,
+.dropdown.d-inline .dropdown-menu.show,
+.dropdown-menu.show {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    z-index: 99999 !important;
+}
+
+/* Forzar estilos de items del dropdown */
+.playlists-list .dropdown-item,
+.playlist-actions-section .dropdown-item,
+.dropdown.d-inline .dropdown-item {
+    color: rgba(255, 255, 255, 0.95) !important;
+    padding: 0.75rem 1rem !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.playlists-list .dropdown-item:hover,
+.playlist-actions-section .dropdown-item:hover,
+.dropdown.d-inline .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: translateX(3px) !important;
+}
+
+/* Glassmorphism característico de la página para tarjetas de playlist */
+.playlist-card-full-width {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Contenedor de la lista con posicionamiento correcto */
+.playlists-list {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Asegurar que Bootstrap no interfiera - usando el estilo dashboard característico */
+.playlists-list > div,
+.playlists-list > div.playlist-card-full-width,
+div.playlists-list > div.playlist-card-full-width {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    margin-bottom: 1.5rem !important;
+    width: 100% !important;
+    display: block !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
 }

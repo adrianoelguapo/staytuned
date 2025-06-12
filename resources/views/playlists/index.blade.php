@@ -6,8 +6,8 @@
     <title>Mis Playlists | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/playlists.css') }}?v={{ time() }}" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -41,7 +41,7 @@
                    aria-expanded="false">
                     @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <img src="{{ Auth::user()->profile_photo_url }}"
-                             class="rounded-circle me-2 user-photo-small"
+                             class="rounded-circle me-2 user-photo"
                              alt="{{ Auth::user()->name }}" />
                     @endif
                     {{ Auth::user()->username }}
@@ -130,82 +130,105 @@
                 @endif
 
                 @if($playlists->count() > 0)
-                    <!-- Grid de playlists -->
-                    <div class="row g-4">
+                    <!-- Lista de playlists de ancho completo -->
+                    <div class="playlists-list">
                         @foreach($playlists as $playlist)
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="playlist-card">
+                            <div class="playlist-card-full-width">
+                                <!-- Contenido principal -->
+                                <div class="playlist-content-wrapper">
                                     <!-- Imagen de la playlist -->
-                                    <div class="playlist-image">
+                                    <div class="playlist-cover-container">
                                         @if($playlist->cover)
                                             <img src="{{ asset('storage/' . $playlist->cover) }}" 
                                                  alt="{{ $playlist->name }}"
+                                                 class="playlist-cover-image"
                                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                            <div class="playlist-placeholder" style="display: none;">
+                                            <div class="playlist-cover-placeholder" style="display: none;">
                                                 <i class="bi bi-music-note-beamed"></i>
                                             </div>
                                         @else
-                                            <div class="playlist-placeholder">
+                                            <div class="playlist-cover-placeholder">
                                                 <i class="bi bi-music-note-beamed"></i>
                                             </div>
                                         @endif
+                                    </div>
                                         
-                                        <!-- Overlay con botones -->
-                                        <div class="playlist-overlay">
-                                            <div class="playlist-actions">
-                                                <a href="{{ route('playlists.show', $playlist) }}" 
-                                                   class="btn btn-play">
-                                                    <i class="bi bi-play-fill"></i>
+                                        <!-- Información de la playlist -->
+                                        <div class="playlist-info-container">
+                                            <div class="playlist-header-section">
+                                                <a href="{{ route('playlists.show', $playlist) }}" class="playlist-title-link">
+                                                    <h3 class="playlist-title">{{ $playlist->name }}</h3>
                                                 </a>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-options" type="button" 
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.show', $playlist) }}">
-                                                                <i class="bi bi-eye me-2"></i>Ver
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
-                                                                <i class="bi bi-pencil me-2"></i>Editar
-                                                            </a>
-                                                        </li>
-                                                        <li><hr class="dropdown-divider"></li>
-                                                        <li>
-                                                            <form action="{{ route('playlists.destroy', $playlist) }}" 
-                                                                  method="POST" 
-                                                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="dropdown-item text-danger">
-                                                                    <i class="bi bi-trash me-2"></i>Eliminar
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
+                                                <div class="d-flex gap-2">
+                                                    <span class="playlist-privacy-badge">
+                                                        <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
+                                                        {{ $playlist->is_public ? 'Pública' : 'Privada' }}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Info de la playlist -->
-                                    <div class="playlist-info">
-                                        <h5 class="playlist-title">{{ $playlist->name }}</h5>
-                                        @if($playlist->description)
-                                            <p class="playlist-description">{{ Str::limit($playlist->description, 80) }}</p>
-                                        @endif
-                                        <div class="playlist-meta">
-                                            <span class="playlist-songs">
-                                                <i class="bi bi-music-note me-1"></i>
-                                                {{ $playlist->songs->count() }} canciones
-                                            </span>
-                                            <span class="playlist-privacy">
-                                                <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
-                                                {{ $playlist->is_public ? 'Pública' : 'Privada' }}
-                                            </span>
+                                            
+                                            @if($playlist->description)
+                                                <p class="playlist-description">{{ Str::limit($playlist->description, 120) }}</p>
+                                            @endif
+                                            
+                                            <!-- Meta información y acciones -->
+                                            <div class="playlist-footer-section">
+                                                <div class="playlist-meta-info">
+                                                    <span class="playlist-author">
+                                                        <a href="{{ route('explore.users.show', Auth::user()) }}" class="d-flex align-items-center text-decoration-none">
+                                                            @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                                <img src="{{ Auth::user()->profile_photo_url }}"
+                                                                     class="rounded-circle me-2"
+                                                                     alt="{{ Auth::user()->name }}"
+                                                                     style="width: 20px; height: 20px; object-fit: cover;" />
+                                                            @else
+                                                                <i class="bi bi-person-circle me-2"></i>
+                                                            @endif
+                                                            <span class="playlist-author-name">{{ Auth::user()->username }}</span>
+                                                        </a>
+                                                    </span>
+                                                    <span class="playlist-date">
+                                                        <i class="bi bi-calendar me-1"></i>
+                                                        {{ $playlist->created_at->diffForHumans() }}
+                                                    </span>
+                                                    <span class="playlist-stat">
+                                                        <i class="bi bi-music-note me-1"></i>
+                                                        {{ $playlist->songs->count() }} canciones
+                                                    </span>
+                                                </div>
+                                                
+                                                <div class="playlist-actions-section">
+                                                    <a href="{{ route('playlists.show', $playlist) }}" class="btn-glass btn-sm">
+                                                        <i class="bi bi-play-fill me-1"></i>
+                                                        Ver
+                                                    </a>
+                                                    <div class="dropdown d-inline">
+                                                        <button class="btn-glass btn-sm dropdown-toggle" type="button" 
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bi bi-three-dots"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
+                                                                    <i class="bi bi-pencil me-2"></i>Editar
+                                                                </a>
+                                                            </li>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li>
+                                                                <form action="{{ route('playlists.destroy', $playlist) }}" 
+                                                                      method="POST" 
+                                                                      onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="dropdown-item text-danger">
+                                                                        <i class="bi bi-trash me-2"></i>Eliminar
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,55 +267,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Mejorar posicionamiento de dropdowns con z-index alto
+        // Script simplificado para dropdowns de Bootstrap
         document.addEventListener('DOMContentLoaded', function() {
-            const dropdowns = document.querySelectorAll('.playlist-card .dropdown-toggle');
+            // Usar eventos nativos de Bootstrap
+            const dropdownElements = document.querySelectorAll('.dropdown-toggle');
             
-            dropdowns.forEach(function(dropdown) {
-                dropdown.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+            dropdownElements.forEach(function(element) {
+                element.addEventListener('click', function(e) {
+                    // Permitir que Bootstrap maneje el toggle
+                    const parentDropdown = e.target.closest('.dropdown');
+                    const menu = parentDropdown.querySelector('.dropdown-menu');
                     
-                    // Cerrar otros dropdowns abiertos
-                    document.querySelectorAll('.playlist-card .dropdown-menu.show').forEach(function(menu) {
-                        if (menu !== dropdown.nextElementSibling) {
-                            menu.classList.remove('show');
-                        }
-                    });
-                    
-                    // Toggle del dropdown actual
-                    const menu = dropdown.nextElementSibling;
-                    if (menu && menu.classList.contains('dropdown-menu')) {
-                        setTimeout(function() {
+                    if (menu) {
+                        // Pequeño delay para permitir que Bootstrap procese primero
+                        setTimeout(() => {
                             if (menu.classList.contains('show')) {
-                                menu.classList.remove('show');
-                            } else {
-                                menu.classList.add('show');
-                                
-                                // Calcular posición fija para que aparezca encima de todo
-                                const rect = dropdown.getBoundingClientRect();
-                                menu.style.position = 'fixed';
+                                // Asegurar posicionamiento correcto cuando se abre
+                                menu.style.position = 'absolute';
+                                menu.style.top = '100%';
+                                menu.style.right = '0';
+                                menu.style.left = 'auto';
                                 menu.style.zIndex = '99999';
-                                menu.style.top = (rect.bottom + 5) + 'px';
-                                menu.style.left = (rect.right - menu.offsetWidth) + 'px';
-                                
-                                // Asegurar que no se salga de la pantalla
-                                if (menu.getBoundingClientRect().right > window.innerWidth) {
-                                    menu.style.left = (window.innerWidth - menu.offsetWidth - 10) + 'px';
-                                }
-                                if (menu.getBoundingClientRect().left < 0) {
-                                    menu.style.left = '10px';
-                                }
+                                menu.style.transform = 'translateY(0.25rem)';
                             }
-                        }, 10);
+                        }, 50);
                     }
                 });
             });
             
-            // Cerrar dropdowns al hacer clic fuera
+            // Cerrar dropdowns cuando se hace clic fuera
             document.addEventListener('click', function(e) {
-                if (!e.target.closest('.playlist-card .dropdown')) {
-                    document.querySelectorAll('.playlist-card .dropdown-menu.show').forEach(function(menu) {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
                         menu.classList.remove('show');
                     });
                 }

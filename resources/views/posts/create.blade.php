@@ -232,7 +232,7 @@
                                     <i class="bi bi-arrow-left me-2"></i>
                                     Cancelar
                                 </a>
-                                <button type="submit" class="btn btn-primary-playlist flex-fill" id="submitBtn">
+                                <button type="submit" class="btn btn-primary-playlist flex-fill text-align-center" id="submitBtn">
                                     <i class="bi bi-plus-lg me-2"></i>
                                     Crear Publicación
                                 </button>
