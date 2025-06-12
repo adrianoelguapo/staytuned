@@ -21,6 +21,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
+    // Rutas AJAX para dashboard
+    Route::get('/dashboard/following-posts', [DashboardController::class, 'getFollowingPosts'])->name('dashboard.following-posts');
+    Route::get('/dashboard/community-posts', [DashboardController::class, 'getCommunityPosts'])->name('dashboard.community-posts');
+    
     // Rutas de playlists
     Route::resource('playlists', PlaylistController::class);
     

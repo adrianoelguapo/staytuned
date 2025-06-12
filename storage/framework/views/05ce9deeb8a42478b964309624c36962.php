@@ -171,7 +171,8 @@
 
                 <!-- Sección de Publicaciones de Seguidos -->
                 <div class="mb-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">                        <h2 class="text-white mb-0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-white mb-0">
                             Publicaciones de Seguidos
                         </h2>
                         <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-outline-light btn-sm">
@@ -180,113 +181,15 @@
                         </a>
                     </div>
 
-                    <?php if($followingPosts && $followingPosts->count() > 0): ?>
-                        <div class="posts-list">
-                            <?php $__currentLoopData = $followingPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="post-card-full-width mb-4">
-                                    <div class="post-card-body">
-                                        <!-- Contenido principal -->
-                                        <div class="post-content-wrapper">
-                                            <!-- Imagen/Cover de la publicación -->
-                                            <div class="post-cover-container">
-                                                <?php if($post->cover || ($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0)): ?>
-                                                    <img src="<?php echo e($post->cover ?: $post->spotify_data['images'][0]['url']); ?>" 
-                                                         alt="<?php echo e($post->title); ?>"
-                                                         class="post-cover-image"
-                                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                    <div class="post-cover-placeholder" style="display: none;">
-                                                        <i class="fas fa-newspaper"></i>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <div class="post-cover-placeholder">
-                                                        <i class="fas fa-newspaper"></i>
-                                                    </div>
-                                                <?php endif; ?>
-                                            </div>
-                                            
-                                            <!-- Información del post -->
-                                            <div class="post-info-container">                                                <div class="post-header-section">
-                                                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
-                                                        <h3 class="post-title"><?php echo e($post->title); ?></h3>
-                                                    </a>
-                                                    <?php if($post->category): ?>
-                                                        <span class="post-category-badge"><?php echo e(ucfirst($post->category->type)); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
-                                                
-                                                <?php if($post->content || $post->description): ?>
-                                                    <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
-                                                <?php endif; ?>
-                                                
-                                                <?php if($post->spotify_data): ?>
-                                                    <div class="spotify-info-card">
-                                                        <i class="fab fa-spotify spotify-icon"></i>
-                                                        <div class="spotify-text">
-                                                            <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
-                                                            <?php if($post->spotify_artist): ?>
-                                                                <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                <?php endif; ?>
-                                                  <!-- Meta información y acciones -->
-                                                <div class="post-footer-section">
-                                                    <div class="post-meta-info">
-                                                        <span class="post-author">
-                                                            <a href="<?php echo e(route('explore.users.show', $post->user)); ?>" class="d-inline-flex align-items-center text-decoration-none">
-                                                                <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
-                                                                    <img src="<?php echo e($post->user->profile_photo_url); ?>"
-                                                                         class="rounded-circle me-2"
-                                                                         alt="<?php echo e($post->user->name); ?>"
-                                                                         style="width: 20px; height: 20px; object-fit: cover;" />
-                                                                <?php else: ?>
-                                                                    <i class="fas fa-user me-1"></i>
-                                                                <?php endif; ?>
-                                                                <span class="text-white"><?php echo e($post->user->username); ?></span>
-                                                            </a>
-                                                        </span>
-                                                        <span class="post-date">
-                                                            <i class="fas fa-calendar me-1"></i>
-                                                            <?php echo e($post->created_at->diffForHumans()); ?>
-
-                                                        </span>
-                                                        <span class="post-stat">
-                                                            <i class="fas fa-heart me-1"></i>
-                                                            <?php echo e($post->likes_count ?? 0); ?> likes
-                                                        </span>
-                                                    </div>
-                                                    
-                                                    <div class="post-actions-section">
-                                                        <a href="<?php echo e(route('posts.show', $post)); ?>" class="btn-glass btn-sm">
-                                                            <i class="fas fa-eye me-1"></i>
-                                                            Ver
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="card dashboard-card">
-                            <div class="card-body text-center py-5">
-                                <i class="fas fa-user-friends fa-3x text-muted mb-3"></i>
-                                <h5 class="text-white mb-2">Sin publicaciones de seguidos</h5>
-                                <p class="text-light mb-3">No sigues a ningún usuario aún o no han publicado contenido.</p>
-                                <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-outline-light">
-                                    <i class="fas fa-search me-2"></i>
-                                    Explorar usuarios
-                                </a>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                    <div id="following-posts-content">
+                        <?php echo $__env->make('dashboard.partials.following-posts', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    </div>
                 </div>
 
                 <!-- Sección de Publicaciones de Comunidades -->
                 <div class="mb-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">                        <h2 class="text-white mb-0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-white mb-0">
                             Publicaciones de Mis Comunidades
                         </h2>
                         <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light btn-sm">
@@ -295,127 +198,264 @@
                         </a>
                     </div>
 
-                    <?php if($communityPosts && $communityPosts->count() > 0): ?>
-                        <div class="posts-list">
-                            <?php $__currentLoopData = $communityPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="post-card-full-width mb-4">
-                                    <div class="post-card-body">
-                                        <!-- Contenido principal -->
-                                        <div class="post-content-wrapper">
-                                            <!-- Imagen/Cover de la publicación -->
-                                            <div class="post-cover-container">
-                                                <?php if($post->cover || ($post->spotify_data && isset($post->spotify_data['images']) && count($post->spotify_data['images']) > 0)): ?>
-                                                    <img src="<?php echo e($post->cover ?: $post->spotify_data['images'][0]['url']); ?>" 
-                                                         alt="<?php echo e($post->title); ?>"
-                                                         class="post-cover-image"
-                                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                    <div class="post-cover-placeholder" style="display: none;">
-                                                        <i class="fas fa-newspaper"></i>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <div class="post-cover-placeholder">
-                                                        <i class="fas fa-newspaper"></i>
-                                                    </div>
-                                                <?php endif; ?>
-                                            </div>
-                                            
-                                            <!-- Información del post -->
-                                            <div class="post-info-container">
-                                                <div class="post-header-section">
-                                                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
-                                                        <h3 class="post-title"><?php echo e($post->title); ?></h3>
-                                                    </a>                                                    <div class="d-flex gap-2">
-                                                        <?php if($post->category): ?>
-                                                            <span class="post-category-badge"><?php echo e(ucfirst($post->category->type)); ?></span>
-                                                        <?php endif; ?>
-                                                        <?php if($post->community): ?>
-                                                            <span class="community-badge community-badge-public">
-                                                                <i class="fas fa-users me-1"></i>
-                                                                <?php echo e($post->community->name); ?>
-
-                                                            </span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                                
-                                                <?php if($post->content || $post->description): ?>
-                                                    <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
-                                                <?php endif; ?>
-                                                
-                                                <?php if($post->spotify_data): ?>
-                                                    <div class="spotify-info-card">
-                                                        <i class="fab fa-spotify spotify-icon"></i>
-                                                        <div class="spotify-text">
-                                                            <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
-                                                            <?php if($post->spotify_artist): ?>
-                                                                <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                <?php endif; ?>
-                                                  <!-- Meta información y acciones -->
-                                                <div class="post-footer-section">
-                                                    <div class="post-meta-info">
-                                                        <span class="post-author">
-                                                            <a href="<?php echo e(route('explore.users.show', $post->user)); ?>" class="d-inline-flex align-items-center text-decoration-none">
-                                                                <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
-                                                                    <img src="<?php echo e($post->user->profile_photo_url); ?>"
-                                                                         class="rounded-circle me-2"
-                                                                         alt="<?php echo e($post->user->name); ?>"
-                                                                         style="width: 20px; height: 20px; object-fit: cover;" />
-                                                                <?php else: ?>
-                                                                    <i class="fas fa-user me-1"></i>
-                                                                <?php endif; ?>
-                                                                <span class="text-white"><?php echo e($post->user->username); ?></span>
-                                                            </a>
-                                                        </span>
-                                                        <span class="post-date">
-                                                            <i class="fas fa-calendar me-1"></i>
-                                                            <?php echo e($post->created_at->diffForHumans()); ?>
-
-                                                        </span>
-                                                        <span class="post-stat">
-                                                            <i class="fas fa-heart me-1"></i>
-                                                            <?php echo e($post->likes_count ?? 0); ?> likes
-                                                        </span>
-                                                    </div>
-                                                    
-                                                    <div class="post-actions-section">
-                                                        <a href="<?php echo e(route('posts.show', $post)); ?>" class="btn-glass btn-sm">
-                                                            <i class="fas fa-eye me-1"></i>
-                                                            Ver
-                                                        </a>
-                                                        <?php if($post->community): ?>
-                                                            <a href="<?php echo e(route('communities.show', $post->community)); ?>" class="btn-glass btn-sm">
-                                                                <i class="fas fa-users me-1"></i>
-                                                                Comunidad
-                                                            </a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="card dashboard-card">
-                            <div class="card-body text-center py-5">
-                                <i class="fas fa-users fa-3x text-muted mb-3"></i>
-                                <h5 class="text-white mb-2">Sin publicaciones de comunidades</h5>
-                                <p class="text-light mb-3">No perteneces a ninguna comunidad aún o no hay publicaciones nuevas.</p>
-                                <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light">
-                                    <i class="fas fa-users me-2"></i>
-                                    Explorar comunidades
-                                </a>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                    <div id="community-posts-content">
+                        <?php echo $__env->make('dashboard.partials.community-posts', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Estilos de paginación glassmorphism -->
+    <style>
+    .pagination-custom .page-link {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 8px !important;
+        color: #fff !important;
+        margin: 0 2px;
+        transition: all 0.3s ease;
+    }
+
+    .pagination-custom .page-link:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .pagination-custom .page-item.active .page-link {
+        background: rgba(138, 43, 226, 0.8) !important;
+        border-color: rgba(138, 43, 226, 0.9) !important;
+        box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+    }
+
+    .pagination-custom .page-item.disabled .page-link {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        color: rgba(255, 255, 255, 0.3) !important;
+    }
+    </style>
+
+    <!-- JavaScript para paginación AJAX -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Función para convertir URL de paginación normal a AJAX
+        function convertToAjaxUrl(originalUrl, contentType) {
+            try {
+                console.log('Convirtiendo URL:', originalUrl, 'para tipo:', contentType);
+                
+                // Extraer el número de página de diferentes formas posibles
+                let page = 1;
+                
+                // Método 1: buscar en los parámetros de query
+                const urlObj = new URL(originalUrl, window.location.origin);
+                page = urlObj.searchParams.get(contentType + '_page') || 
+                       urlObj.searchParams.get('page') || 1;
+                
+                // Método 2: buscar en el path si es una URL relativa con ?page=
+                if (page === 1) {
+                    const pageMatch = originalUrl.match(/[?&](?:page|following_page|community_page)=(\d+)/);
+                    if (pageMatch) {
+                        page = pageMatch[1];
+                    }
+                }
+                
+                // Método 3: para URLs específicas del dashboard
+                if (page === 1) {
+                    const pathMatch = originalUrl.match(/following_page=(\d+)|community_page=(\d+)/);
+                    if (pathMatch) {
+                        page = pathMatch[1] || pathMatch[2] || 1;
+                    }
+                }
+                
+                let ajaxUrl;
+                if (contentType === 'following') {
+                    ajaxUrl = `<?php echo e(route('dashboard.following-posts')); ?>?following_page=${page}`;
+                } else if (contentType === 'community') {
+                    ajaxUrl = `<?php echo e(route('dashboard.community-posts')); ?>?community_page=${page}`;
+                } else {
+                    ajaxUrl = originalUrl;
+                }
+                
+                console.log('Página extraída:', page);
+                console.log('URL convertida a:', ajaxUrl);
+                return ajaxUrl;
+            } catch (error) {
+                console.error('Error al convertir URL:', error);
+                return originalUrl;
+            }
+        }
+        
+        // Función para manejar la paginación AJAX
+        function handleAjaxPagination() {
+            document.addEventListener('click', function(e) {
+                // Buscar cualquier enlace de paginación dentro de los contenedores específicos
+                const followingLink = e.target.closest('#following-posts-content .page-link');
+                const communityLink = e.target.closest('#community-posts-content .page-link');
+                
+                if (!followingLink && !communityLink) return;
+                
+                console.log('Clic en enlace de paginación detectado');
+                console.log('Following link:', followingLink);
+                console.log('Community link:', communityLink);
+                
+                e.preventDefault();
+                
+                const target = followingLink || communityLink;
+                const originalUrl = target.getAttribute('href');
+                
+                console.log('URL original:', originalUrl);
+                
+                if (!originalUrl || originalUrl === '#') {
+                    console.log('URL inválida, cancelando');
+                    return;
+                }
+                
+                // Determinar el tipo de contenido y el contenedor
+                let contentType, containerId, ajaxUrl;
+                
+                if (followingLink) {
+                    contentType = 'following';
+                    containerId = 'following-posts-content';
+                    ajaxUrl = convertToAjaxUrl(originalUrl, 'following');
+                } else {
+                    contentType = 'community';
+                    containerId = 'community-posts-content';
+                    ajaxUrl = convertToAjaxUrl(originalUrl, 'community');
+                }
+                
+                console.log('Tipo de contenido:', contentType);
+                console.log('Contenedor:', containerId);
+                console.log('URL AJAX final:', ajaxUrl);
+                
+                const container = document.getElementById(containerId);
+                if (!container) {
+                    console.error('Contenedor no encontrado:', containerId);
+                    return;
+                }
+                
+                // Mostrar indicador de carga
+                container.style.opacity = '0.6';
+                container.style.pointerEvents = 'none';
+                
+                // Realizar petición AJAX
+                fetch(ajaxUrl, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // Actualizar el contenido
+                    container.innerHTML = html;
+                    
+                    // Restaurar estilos
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = 'auto';
+                    
+                    // Configurar nuevamente los enlaces de paginación
+                    setupPaginationLinks();
+                    
+                    // Hacer scroll suave hacia el contenido actualizado
+                    container.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                })
+                .catch(error => {
+                    console.error('Error en la paginación:', error);
+                    
+                    // Restaurar estilos en caso de error
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = 'auto';
+                    
+                    // Mostrar mensaje de error
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'alert alert-danger mt-3';
+                    errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Error al cargar el contenido. Por favor, intenta de nuevo.';
+                    container.appendChild(errorDiv);
+                    
+                    // Remover mensaje de error después de 5 segundos
+                    setTimeout(() => {
+                        if (errorDiv.parentNode) {
+                            errorDiv.remove();
+                        }
+                    }, 5000);
+                });
+            });
+        }
+        
+        // Función para configurar todos los enlaces de paginación
+        function setupPaginationLinks() {
+            // Configurar paginación de publicaciones de seguidos
+            const followingPagination = document.querySelector('#following-posts-content .pagination');
+            if (followingPagination) {
+                followingPagination.querySelectorAll('.page-link').forEach(link => {
+                    const originalUrl = link.getAttribute('href');
+                    if (originalUrl && originalUrl !== '#') {
+                        // Marcar como configurado para AJAX
+                        link.dataset.ajaxConfigured = 'true';
+                    }
+                });
+            }
+            
+            // Configurar paginación de publicaciones de comunidades
+            const communityPagination = document.querySelector('#community-posts-content .pagination');
+            if (communityPagination) {
+                communityPagination.querySelectorAll('.page-link').forEach(link => {
+                    const originalUrl = link.getAttribute('href');
+                    if (originalUrl && originalUrl !== '#') {
+                        // Marcar como configurado para AJAX
+                        link.dataset.ajaxConfigured = 'true';
+                    }
+                });
+            }
+        }
+        
+        // Función para observar cambios en el DOM y reconfigurar enlaces
+        function observeContentChanges() {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        // Reconfigurar enlaces cuando el contenido cambie
+                        setTimeout(setupPaginationLinks, 100);
+                    }
+                });
+            });
+            
+            // Observar ambos contenedores
+            const followingContainer = document.getElementById('following-posts-content');
+            const communityContainer = document.getElementById('community-posts-content');
+            
+            if (followingContainer) {
+                observer.observe(followingContainer, { childList: true, subtree: true });
+            }
+            
+            if (communityContainer) {
+                observer.observe(communityContainer, { childList: true, subtree: true });
+            }
+        }
+        
+        // Inicializar todo
+        handleAjaxPagination();
+        setupPaginationLinks();
+        observeContentChanges();
+        
+        // Configuración adicional después de un breve delay para asegurar que todo esté cargado
+        setTimeout(() => {
+            setupPaginationLinks();
+        }, 500);
+    });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

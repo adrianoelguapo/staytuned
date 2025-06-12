@@ -13,7 +13,7 @@ class DashboardController extends Controller
     /**
      * Display the dashboard.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         
@@ -25,22 +25,20 @@ class DashboardController extends Controller
         // Obtener IDs de comunidades del usuario
         $userCommunityIds = $user->communities()->pluck('communities.id');
         
-        // Obtener publicaciones de usuarios seguidos QUE NO ESTÉN EN COMUNIDADES
-        // (Solo publicaciones públicas individuales)
+        // Paginación de publicaciones de seguidos (2 por página)
+        $followingPostsPage = $request->get('following_page', 1);
         $followingPosts = Post::with(['user', 'category', 'likes'])
             ->whereIn('user_id', $followingUserIds)
             ->whereNull('community_id') // Solo publicaciones que NO están en comunidades
             ->orderBy('created_at', 'desc')
-            ->limit(10)
-            ->get();
+            ->paginate(2, ['*'], 'following_page', $followingPostsPage);
 
-        // Obtener publicaciones de comunidades a las que pertenece el usuario
-        // (Incluye publicaciones de cualquier usuario dentro de esas comunidades)
+        // Paginación de publicaciones de comunidades (2 por página)
+        $communityPostsPage = $request->get('community_page', 1);
         $communityPosts = Post::with(['user', 'category', 'likes', 'community'])
             ->whereIn('community_id', $userCommunityIds)
             ->orderBy('created_at', 'desc')
-            ->limit(10)
-            ->get();
+            ->paginate(2, ['*'], 'community_page', $communityPostsPage);
 
         // Estadísticas básicas
         $stats = [
@@ -50,5 +48,54 @@ class DashboardController extends Controller
         ];
 
         return view('dashboard', compact('followingPosts', 'communityPosts', 'stats'));
+    }
+
+    /**
+     * Obtener publicaciones de seguidos paginadas via AJAX
+     */
+    public function getFollowingPosts(Request $request)
+    {
+        $user = Auth::user();
+        $followingPostsPage = $request->get('following_page', 1);
+        
+        // Obtener IDs de usuarios seguidos
+        $followingUserIds = $user->following()
+            ->where('followable_type', User::class)
+            ->pluck('followable_id');
+        
+        $followingPosts = Post::with(['user', 'category', 'likes'])
+            ->whereIn('user_id', $followingUserIds)
+            ->whereNull('community_id') // Solo publicaciones que NO están en comunidades
+            ->orderBy('created_at', 'desc')
+            ->paginate(2, ['*'], 'following_page', $followingPostsPage);
+
+        if ($request->ajax()) {
+            return view('dashboard.partials.following-posts', compact('followingPosts'))->render();
+        }
+
+        return redirect()->route('dashboard');
+    }
+
+    /**
+     * Obtener publicaciones de comunidades paginadas via AJAX
+     */
+    public function getCommunityPosts(Request $request)
+    {
+        $user = Auth::user();
+        $communityPostsPage = $request->get('community_page', 1);
+        
+        // Obtener IDs de comunidades del usuario
+        $userCommunityIds = $user->communities()->pluck('communities.id');
+        
+        $communityPosts = Post::with(['user', 'category', 'likes', 'community'])
+            ->whereIn('community_id', $userCommunityIds)
+            ->orderBy('created_at', 'desc')
+            ->paginate(2, ['*'], 'community_page', $communityPostsPage);
+
+        if ($request->ajax()) {
+            return view('dashboard.partials.community-posts', compact('communityPosts'))->render();
+        }
+
+        return redirect()->route('dashboard');
     }
 }
