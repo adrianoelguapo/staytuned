@@ -172,9 +172,12 @@
                 <!-- Sección de Publicaciones de Seguidos -->
                 <div class="mb-5">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="text-white mb-0">
-                            Publicaciones de Seguidos
-                        </h2>
+                        <div>
+                            <h2 class="text-white mb-0">
+                                Publicaciones Recientes de Seguidos
+                            </h2>
+                            <small class="text-light">Últimas 24 horas</small>
+                        </div>
                         <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-outline-light btn-sm">
                             <i class="fas fa-search me-1"></i>
                             Explorar más usuarios
@@ -189,9 +192,12 @@
                 <!-- Sección de Publicaciones de Comunidades -->
                 <div class="mb-5">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="text-white mb-0">
-                            Publicaciones de Mis Comunidades
-                        </h2>
+                        <div>
+                            <h2 class="text-white mb-0">
+                                Publicaciones Recientes de Mis Comunidades
+                            </h2>
+                            <small class="text-light">Últimas 24 horas</small>
+                        </div>
                         <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light btn-sm">
                             <i class="fas fa-users me-1"></i>
                             Ver mis comunidades

@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $followingPosts = Post::with(['user', 'category', 'likes'])
             ->whereIn('user_id', $followingUserIds)
             ->whereNull('community_id') // Solo publicaciones que NO están en comunidades
+            ->where('created_at', '>=', now()->subHours(24)) // Solo últimas 24 horas
             ->orderBy('created_at', 'desc')
             ->paginate(2, ['*'], 'following_page', $followingPostsPage);
 
@@ -37,6 +38,7 @@ class DashboardController extends Controller
         $communityPostsPage = $request->get('community_page', 1);
         $communityPosts = Post::with(['user', 'category', 'likes', 'community'])
             ->whereIn('community_id', $userCommunityIds)
+            ->where('created_at', '>=', now()->subHours(24)) // Solo últimas 24 horas
             ->orderBy('created_at', 'desc')
             ->paginate(2, ['*'], 'community_page', $communityPostsPage);
 
@@ -66,6 +68,7 @@ class DashboardController extends Controller
         $followingPosts = Post::with(['user', 'category', 'likes'])
             ->whereIn('user_id', $followingUserIds)
             ->whereNull('community_id') // Solo publicaciones que NO están en comunidades
+            ->where('created_at', '>=', now()->subHours(24)) // Solo últimas 24 horas
             ->orderBy('created_at', 'desc')
             ->paginate(2, ['*'], 'following_page', $followingPostsPage);
 
@@ -89,6 +92,7 @@ class DashboardController extends Controller
         
         $communityPosts = Post::with(['user', 'category', 'likes', 'community'])
             ->whereIn('community_id', $userCommunityIds)
+            ->where('created_at', '>=', now()->subHours(24)) // Solo últimas 24 horas
             ->orderBy('created_at', 'desc')
             ->paginate(2, ['*'], 'community_page', $communityPostsPage);
 

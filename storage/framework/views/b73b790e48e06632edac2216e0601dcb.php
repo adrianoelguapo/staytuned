@@ -112,12 +112,11 @@
 
         </div>
     <?php endif; ?>
-<?php else: ?>
-    <div class="card dashboard-card">
+<?php else: ?>    <div class="card dashboard-card">
         <div class="card-body text-center py-5">
             <i class="fas fa-users fa-3x text-muted mb-3"></i>
-            <h5 class="text-white mb-2">Sin publicaciones de comunidades</h5>
-            <p class="text-light mb-3">No perteneces a ninguna comunidad aún o no hay publicaciones nuevas.</p>
+            <h5 class="text-white mb-2">Sin publicaciones recientes</h5>
+            <p class="text-light mb-3">No hay publicaciones recientes en tus comunidades en las últimas 24 horas.</p>
             <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-outline-light">
                 <i class="fas fa-users me-2"></i>
                 Explorar comunidades
