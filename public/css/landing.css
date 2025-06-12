@@ -28,6 +28,24 @@ body {
   font-size: 1.75rem;
 }
 
+/* Responsive navbar para móviles */
+@media (max-width: 768px) {
+    .navbar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        justify-content: space-between;
+    }
+    
+    .navbar .navbar-brand {
+        font-size: 1.5rem;
+    }
+    
+    /* En móviles, hacer que los botones estén en línea con el logo */
+    .navbar .ms-auto {
+        margin-left: 0 !important;
+    }
+}
+
 /* === HERO SECTION === */
 .hero {
     position: relative;
@@ -38,6 +56,50 @@ body {
     text-align: center;
     overflow: hidden;
     padding: 0 1rem;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Responsive hero para móviles */
+@media (max-width: 768px) {
+    .hero {
+        padding: 0 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
 }
 
 /* Difuminado estilo niebla en la parte inferior */
@@ -63,6 +125,13 @@ body {
     pointer-events: none;
     user-select: none;
     opacity: 0.35;
+}
+
+/* Ocultar imagen solo en móviles */
+@media (max-width: 768px) {
+    .hero .background-image {
+        display: none;
+    }
 }
 
 /* Contenido encima de la imagen */
@@ -107,6 +176,21 @@ body {
     border-radius: 9999px;
     font-weight: 500;
     transition: all 0.3s ease;
+}
+
+/* Responsive buttons para móviles */
+@media (max-width: 768px) {
+    .small-button {
+        padding: 0.35rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .small-button {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* Login / Dashboard */
