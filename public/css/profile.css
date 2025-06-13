@@ -1373,3 +1373,85 @@ body .dashboard-card .badge.post-category-badge {
     background: rgba(255, 255, 255, 0.1) !important;
     color: rgba(255, 255, 255, 0.9) !important;
 }
+
+/* ================================================
+   ESTADÍSTICAS DE PERFIL DE USUARIO - FORZAR HORIZONTAL EN MÓVILES
+   ================================================ */
+
+/* Forzar que las estadísticas se mantengan horizontales en dispositivos móviles */
+@media screen and (max-width: 768px) {
+    /* Contenedor de estadísticas - forzar grid horizontal */
+    .row.text-center.mb-4 {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 0 !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Cada columna de estadística */
+    .row.text-center.mb-4 .col-4 {
+        flex: 1 !important;
+        max-width: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.5rem !important;
+        text-align: center !important;
+        min-width: 0 !important; /* Prevenir overflow */
+    }
+    
+    /* Número principal de la estadística */
+    .row.text-center.mb-4 .col-4 .fw-bold.fs-5 {
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Texto descriptivo */
+    .row.text-center.mb-4 .col-4 .text-light.small {
+        font-size: 0.8rem !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    /* Links en las estadísticas */
+    .row.text-center.mb-4 .col-4 a {
+        color: inherit !important;
+        text-decoration: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    .row.text-center.mb-4 .col-4 a:hover {
+        opacity: 0.8 !important;
+        transform: scale(1.05) !important;
+        transition: all 0.2s ease !important;
+    }
+}
+
+/* Móviles muy pequeños - ajustar tamaños aún más */
+@media screen and (max-width: 376px) {
+    .row.text-center.mb-4 .col-4 .fw-bold.fs-5 {
+        font-size: 1.1rem !important;
+    }
+    
+    .row.text-center.mb-4 .col-4 .text-light.small {
+        font-size: 0.75rem !important;
+    }
+    
+    .row.text-center.mb-4 .col-4 {
+        padding: 0.25rem !important;
+    }
+}
