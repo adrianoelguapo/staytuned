@@ -848,3 +848,30 @@ html {
         min-width: 200px !important;
     }
 }
+
+/* ================================================
+   SECCIÓN DE BÚSQUEDA - OCULTAR SPINNER POR DEFECTO
+   ================================================ */
+
+/* Asegurar que el spinner de búsqueda esté oculto por defecto */
+#searchLoading {
+    display: none !important;
+}
+
+/* Solo mostrar cuando tenga la clase 'show' o cuando JavaScript lo active explícitamente */
+#searchLoading.show {
+    display: block !important;
+}
+
+/* Mejorar la apariencia del spinner en móviles */
+@media (max-width: 576px) {
+    #searchLoading {
+        padding: 1rem !important;
+        display: none !important;
+    }
+    
+    #searchLoading .spinner-border {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+}

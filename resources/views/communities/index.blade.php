@@ -463,10 +463,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para buscar comunidades
     function searchCommunities(query) {
         if (query.length < 2) {
+            searchLoading.classList.remove('show');
+            searchLoading.style.display = 'none';
             searchResults.style.display = 'none';
             return;
         }
 
+        searchLoading.classList.add('show');
         searchLoading.style.display = 'block';
         searchResults.style.display = 'none';
 
@@ -479,11 +482,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
+            searchLoading.classList.remove('show');
             searchLoading.style.display = 'none';
             displayResults(data.communities);
         })
         .catch(error => {
             console.error('Error:', error);
+            searchLoading.classList.remove('show');
             searchLoading.style.display = 'none';
             resultsContainer.innerHTML = '<div class="alert alert-danger">Error al buscar comunidades</div>';
             searchResults.style.display = 'block';
