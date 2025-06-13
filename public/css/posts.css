@@ -1686,7 +1686,7 @@ body.modal-open {
     rgba(255, 255, 255, 0.06) 100%) !important;
   border-color: rgba(139, 92, 246, 0.6) !important;
   box-shadow: 
-    0 0 0 3px rgba(139, 92, 246, 0.25),
+    0 0 0 3px rgba(255, 255, 255, 0.3) !important,
     0 4px 15px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px) !important;
@@ -1961,215 +1961,207 @@ body.modal-open {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .spotify-preview {
-    padding: 1.5rem !important;
-    min-height: 100px !important;
+@media (max-width: 576px) {
+  /* Modal de selección de categorías - ajustes para móviles */
+  .category-modal-content {
+    margin: 0 1rem !important;
+    border-radius: 1rem !important;
   }
   
-  .spotify-preview-content {
+  .category-modal-header {
+    padding: 1.5rem 1rem 1rem 1rem !important;
     flex-direction: column !important;
-    text-align: center !important;
-    gap: 0.75rem !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
   }
   
-  .spotify-preview-image {
-    width: 50px !important;
-    height: 50px !important;
+  .category-modal-title {
+    font-size: 1.5rem !important;
   }
   
-  .spotify-results {
-    max-height: 300px !important;
-    padding: 0.75rem !important;
+  .category-modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem !important;
+    padding: 0.375rem;
   }
   
-  .spotify-result-item {
-    padding: 0.5rem !important;
+  /* Opciones del dropdown en modal */
+  .category-option {
+    padding: 1rem 1.25rem !important;
+    margin-bottom: 0.5rem !important;
   }
   
-  .spotify-result-item img {
-    width: 35px !important;
-    height: 35px !important;
+  .category-option.selected {
+    background: rgba(139, 92, 246, 0.4) !important;
   }
   
-  .spotify-result-item .fw-bold {
-    font-size: 0.85rem !important;
+  /* Ajustes en botones de acción */
+  .btn-glass-action {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.9rem !important;
   }
   
-  .spotify-result-item .text-white-50 {
-    font-size: 0.75rem !important;
+  .btn-glass-danger {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
 /* ================================================
-   ESTILOS ESPECÍFICOS ADICIONALES PARA FORMULARIO CREATE
+   DISEÑO MÓVIL PARA TARJETAS DE PUBLICACIÓN
    ================================================ */
 
-/* Input group específico para búsqueda de Spotify */
-.input-group #spotifySearch {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-right: none !important;
-  color: #fff !important;
-  font-size: 0.95rem !important;
+/* Layout vertical para móviles - similar al diseño de playlists */
+@media screen and (max-width: 768px) {
+    /* Contenedor principal - cambiar a diseño vertical */
+    .post-content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        text-align: center !important;
+        align-items: center !important;
+    }
+    
+    /* Imagen en la parte superior */
+    .post-cover-container {
+        width: 160px !important;
+        height: 160px !important;
+        margin: 0 auto 1.5rem auto !important;
+        align-self: center !important;
+        flex-shrink: 0 !important;
+        order: 1 !important;
+    }
+    
+    /* Contenedor de información debajo de la imagen */
+    .post-info-container {
+        min-height: auto !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        order: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    /* Header section centrado */
+    .post-header-section {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    /* Título centrado */
+    .post-title {
+        font-size: 1.4rem !important;
+        text-align: center !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Badge de categoría centrado */
+    .post-category-badge {
+        align-self: center !important;
+        margin: 0 !important;
+    }
+    
+    /* Descripción centrada */
+    .post-description {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Información de Spotify centrada */
+    .spotify-info-card {
+        justify-content: center !important;
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Footer section responsive */
+    .post-footer-section {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+    
+    /* Meta información centrada */
+    .post-meta-info {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    /* Sección de acciones centrada */
+    .post-actions-section {
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 0.75rem !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+    }
+    
+    /* Botones de acción optimizados */
+    .post-actions-buttons {
+        gap: 0.5rem !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+    
+    /* Padding del body reducido */
+    .post-card-body {
+        padding: 1.5rem !important;
+    }
 }
 
-.input-group #spotifySearch:focus {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  color: #fff !important;
-  outline: none !important;
-}
-
-.input-group #spotifySearch::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Botón de búsqueda en input group específico */
-.input-group .btn-primary {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-left: none !important;
-  color: #fff !important;
-  transition: all 0.3s ease !important;
-}
-
-.input-group .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  border-left: none !important;
-  color: #fff !important;
-}
-
-/* Asegurar que los botones dentro de dashboard-card tengan el estilo correcto */
-.dashboard-card .input-group .btn-primary,
-.create-playlist-card .input-group .btn-primary {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  color: #fff !important;
-}
-
-.dashboard-card .input-group .btn-primary:hover,
-.create-playlist-card .input-group .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  color: #fff !important;
-}
-
-/* Estilos para asegurar que los resultados de Spotify aparezcan correctamente */
-#spotifyResults.spotify-results {
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 0.75rem !important;
-  padding: 1rem !important;
-  margin-top: 1rem !important;
-}
-
-/* Elementos seleccionados de Spotify */
-#selectedSpotify .spotify-item.selected {
-  background: rgba(30, 215, 96, 0.15) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(30, 215, 96, 0.3) !important;
-  border-radius: 0.75rem !important;
-  padding: 1rem !important;
-}
-
-/* Preview de Spotify específico */
-#spotifyPreview.spotify-preview {
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 1rem !important;
-  padding: 2rem !important;
-  min-height: 120px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-#spotifyPreview.spotify-preview.has-content {
-  background: rgba(30, 215, 96, 0.1) !important;
-  border-color: rgba(30, 215, 96, 0.3) !important;
-  padding: 1.5rem !important;
-}
-
-/* Mensaje cuando no hay contenido de Spotify */
-#no-spotify-section {
-  background: rgba(255, 255, 255, 0.03) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 0.75rem !important;
-  padding: 2rem !important;
-  text-align: center !important;
-}
-
-#no-spotify-section i {
-  color: rgba(255, 255, 255, 0.4) !important;
-}
-
-#no-spotify-section p {
-  color: rgba(255, 255, 255, 0.6) !important;
-  margin: 0 !important;
-}
-
-/* 1) Asegurarnos de que el padre no oculte el dropdown */
-.posts-list,
-.post-card-full-width {
-  overflow: visible !important;
-}
-
-/* 2) Convertimos cada tarjeta en un contexto de apilado */
-.post-card-full-width {
-  position: relative !important;
-}
-
-/* 3) Forzamos que el menú sea absoluto dentro de la tarjeta y por encima de todo */
-.post-card-full-width .dropdown-menu {
-  position: absolute !important;
-  top: calc(100% + 0.5rem) !important; /* justo debajo del botón */
-  right: 1rem !important;               /* o el valor que necesites */
-  z-index: 10000 !important;
-}
-
-.custom-dropdown-menu {
-  position: absolute;
-  min-width: 180px;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  pointer-events: auto; /* que reciba clicks */
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: opacity .2s, transform .2s;
-}
-.custom-dropdown-menu.show {
-  opacity: 1;
-  transform: translateY(0);
+/* Móviles pequeños - ajustes adicionales */
+@media screen and (max-width: 576px) {
+    /* Imagen más pequeña en pantallas muy pequeñas */
+    .post-cover-container {
+        width: 140px !important;
+        height: 140px !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    /* Título más pequeño */
+    .post-title {
+        font-size: 1.2rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* Padding más compacto */
+    .post-card-body {
+        padding: 1.25rem !important;
+    }
+    
+    /* Botones más pequeños */
+    .btn-glass-action {
+        padding: 0.375rem 0.5rem !important;
+        font-size: 0.8rem !important;
+    }
+    
+    /* Like button optimizado */
+    .like-btn {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    /* Placeholder icon más pequeño */
+    .post-cover-placeholder {
+        font-size: 1.8rem !important;
+    }
 }
 
 /* ================================================
-   BOTONES DE ACCIÓN GLASSMORPHISM PARA PUBLICACIONES
+   BOTONES GLASSMORPHISM PARA TARJETAS DE PUBLICACIÓN
    ================================================ */
-
-/* Contenedor de botones de acción */
-.post-actions-buttons {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
 
 /* Botón de acción glassmorphism */
 .btn-glass-action {
@@ -2201,57 +2193,51 @@ body.modal-open {
 
 .btn-glass-action:active {
   transform: translateY(0) !important;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Botón de peligro (eliminar) - Mismos estilos que btn-playlist-danger */
+.btn-glass-action:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Botón de eliminar con glassmorphism - MISMA TONALIDAD QUE PLAYLISTS */
 .btn-glass-danger {
-  background: rgba(239, 68, 68, 0.15) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(239, 68, 68, 0.3) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  padding: 0.5rem 1rem !important;
-  border-radius: 12px !important;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: auto !important;
-  line-height: normal !important;
+    background: rgba(239, 68, 68, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 12px !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: auto !important;
+    line-height: normal !important;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.1) !important;
+    white-space: nowrap !important;
 }
 
 .btn-glass-danger:hover {
-  background: rgba(239, 68, 68, 0.25) !important;
-  border-color: rgba(239, 68, 68, 0.5) !important;
-  color: rgba(255, 255, 255, 1) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3) !important;
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    color: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3) !important;
 }
 
 .btn-glass-danger:active {
-  transform: translateY(0) !important;
-  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2) !important;
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2) !important;
 }
 
 .btn-glass-danger:focus {
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
-}
-
-/* Responsive para móviles */
-@media (max-width: 576px) {
-  .post-actions-buttons {
-    gap: 0.375rem;
-    flex-wrap: wrap;
-  }
-  
-  .btn-glass-action {
-    padding: 0.375rem 0.5rem !important;
-    font-size: 0.8rem !important;
-  }
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
 }
