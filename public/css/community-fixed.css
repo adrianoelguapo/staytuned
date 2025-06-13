@@ -1945,3 +1945,121 @@ body {
     50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
+
+/* ====================================================
+   BADGES GLASSMORPHISM PARA RESULTADOS DE BÚSQUEDA
+   ==================================================== */
+
+/* Badge de advertencia (pendiente) con glassmorphism */
+.badge.glassmorphism-warning {
+    background: rgba(245, 158, 11, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #fbbf24 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 1rem !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.badge.glassmorphism-warning:hover {
+    background: rgba(245, 158, 11, 0.25) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Badge de éxito (miembro) con glassmorphism */
+.badge.glassmorphism-success {
+    background: rgba(34, 197, 94, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+    color: #10b981 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 1rem !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.badge.glassmorphism-success:hover {
+    background: rgba(34, 197, 94, 0.25) !important;
+    border-color: rgba(34, 197, 94, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
+}
+
+/* Badge de peligro (rechazada) con glassmorphism */
+.badge.glassmorphism-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #ef4444 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 1rem !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.badge.glassmorphism-danger:hover {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Asegurar que los iconos dentro de badges se vean bien */
+.badge.glassmorphism-warning i,
+.badge.glassmorphism-success i,
+.badge.glassmorphism-danger i {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)) !important;
+    font-size: inherit !important;
+}
+
+/* ====================================================
+   ESTILOS PARA TEXTO DE ESTADO EN RESULTADOS DE BÚSQUEDA
+   ==================================================== */
+
+/* Texto blanco para "Solicitud enviada" */
+.text-white.small {
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    opacity: 0.9 !important;
+}
+
+/* Estilos específicos para los resultados de búsqueda */
+#resultsContainer .card {
+    transition: all 0.3s ease !important;
+}
+
+#resultsContainer .card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Mejorar el gap entre badges en resultados de búsqueda */
+#resultsContainer .d-flex.align-items-center.gap-2 {
+    gap: 0.75rem !important;
+}
+
+/* Asegurar que los badges mantienen su forma en pantallas pequeñas */
+@media (max-width: 768px) {
+    .badge.glassmorphism-warning,
+    .badge.glassmorphism-success,
+    .badge.glassmorphism-danger {
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0.6rem !important;
+        white-space: nowrap !important;
+    }
+}

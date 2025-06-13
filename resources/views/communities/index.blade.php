@@ -526,11 +526,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function getStatusBadge(status) {
         switch(status) {
             case 'pending':
-                return '<span class="badge bg-warning text-dark"><i class="fas fa-clock me-1"></i>Pendiente</span>';
+                return '<span class="badge glassmorphism-warning"><i class="fas fa-clock me-1"></i>Pendiente</span>';
             case 'approved':
-                return '<span class="badge bg-success"><i class="fas fa-check me-1"></i>Miembro</span>';
+                return '<span class="badge glassmorphism-success"><i class="fas fa-check me-1"></i>Miembro</span>';
             case 'rejected':
-                return '<span class="badge bg-danger"><i class="fas fa-times me-1"></i>Rechazada</span>';
+                return '<span class="badge glassmorphism-danger"><i class="fas fa-times me-1"></i>Rechazada</span>';
             default:
                 return '';
         }
@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="fas fa-eye me-1"></i>Ver
                     </a>`;
         } else if (community.request_status === 'pending') {
-            return `<span class="text-muted small">Solicitud enviada</span>`;
+            return `<span class="text-white small">Solicitud enviada</span>`;
         } else if (community.request_status === 'rejected') {
             return `<button class="btn btn-sm btn-community-primary" onclick="requestMembership(${community.id}, '${community.name}')">
                         <i class="fas fa-paper-plane me-1"></i>Solicitar de nuevo
