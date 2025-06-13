@@ -523,7 +523,12 @@ unset($__errorArgs, $__bag); ?>
             spotifyPreview.className = 'spotify-preview has-content';
             spotifyPreview.innerHTML = `
                 <div class="spotify-preview-content">
-                    ${imageUrl ? `<img src="${imageUrl}" class="spotify-preview-image" alt="${item.name}">` : '<div class="spotify-preview-image d-flex align-items-center justify-content-center" style="background: rgba(255,255,255,0.1);"><i class="bi bi-spotify text-success"></i></div>'}
+                    ${imageUrl ? 
+                        `<img src="${imageUrl}" class="spotify-preview-image" alt="${item.name}">` : 
+                        `<div class="spotify-preview-image d-flex align-items-center justify-content-center" style="background: rgba(30, 215, 96, 0.2); color: #1db954;">
+                            <i class="bi bi-spotify"></i>
+                        </div>`
+                    }
                     <div class="spotify-preview-info">
                         <div class="spotify-preview-title">${item.name}</div>
                         <div class="spotify-preview-subtitle">${subtitle}</div>
@@ -554,7 +559,8 @@ unset($__errorArgs, $__bag); ?>
             document.getElementById('spotify_external_url').value = '';
             document.getElementById('spotify_data').value = '';
             document.getElementById('selectedSpotify').style.display = 'none';
-              // Restaurar placeholder
+            
+            // Restaurar placeholder
             const spotifySearchText = document.getElementById('spotify-search-text');
             const spotifyPreview = document.getElementById('spotifyPreview');
             spotifyPreview.className = 'spotify-preview';
