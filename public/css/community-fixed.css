@@ -874,6 +874,32 @@ body {
   margin-top: 1.5rem; /* Espacio adicional desde la imagen */
 }
 
+/* === CENTRAR BOTONES DE ACCIONES DE COMUNIDAD === */
+.community-actions-header {
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.75rem !important;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .community-actions-header {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1rem !important;
+  }
+  
+  .community-actions-header .btn,
+  .community-actions-header .btn-outline-purple,
+  .community-actions-header .btn-community-danger {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+  }
+}
+
 /* Responsive: ajustar tamaños en pantallas pequeñas */
 @media (max-width: 768px) {
   .community-header-cover {

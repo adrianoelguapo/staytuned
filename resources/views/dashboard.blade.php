@@ -150,10 +150,10 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <div class="card dashboard-card">
+                        <div class="card dashboard-card mt-sm-5">
                             <div class="card-body text-center">
                                 <i class="fas fa-users fs-1 text-success mb-2"></i>
-                                <h5 class="card-title text-white">Mis Comunidades</h5>
+                                <h5 class="card-title text-white mt-sm-5">Mis Comunidades</h5>
                                 <p class="card-text fs-4 fw-bold text-white">{{ $stats['communities_count'] ?? 0 }}</p>
                             </div>
                         </div>

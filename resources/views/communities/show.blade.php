@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-auto community-actions-col">
                     <!-- Acciones -->
-                    <div class="community-actions-header">
+                    <div class="community-actions-header d-flex justify-content-center align-items-center flex-wrap">
                         @if($isOwner)
                             <!-- Botón para ver miembros (solo para propietarios) -->
                             <a href="{{ route('communities.members', $community) }}" class="btn btn-outline-purple me-2">
