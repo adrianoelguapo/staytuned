@@ -98,7 +98,7 @@
                                   class="d-inline">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn-community btn-community-danger">
                                     <i class="fas fa-trash me-1"></i>
                                     Eliminar
                                 </button>

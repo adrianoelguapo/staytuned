@@ -821,12 +821,14 @@ body {
   gap: 0.5rem 1.5rem;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.9);
+  justify-content: flex-start;
 }
 
 .community-meta-large span {
   display: flex;
   align-items: center;
   white-space: nowrap;
+  min-width: 0; /* Permite que el texto se ajuste si es necesario */
 }
 
 /* Acciones del header de comunidad */
@@ -890,9 +892,11 @@ body {
   }
   
   .community-meta-large {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    flex-wrap: wrap;
   }
 }
 
@@ -1840,6 +1844,23 @@ body {
         justify-content: flex-start !important;
         flex-wrap: wrap !important;
     }
+}
+
+/* Pantallas extra pequeñas - mantener layout horizontal pero más compacto */
+@media (max-width: 400px) {
+  .community-meta-large {
+    gap: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .community-meta-large span {
+    font-size: 0.7rem;
+  }
+  
+  .user-photo-xs {
+    width: 18px !important;
+    height: 18px !important;
+  }
 }
 
 /* ====================================================
