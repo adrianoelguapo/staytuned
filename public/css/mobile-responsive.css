@@ -1298,3 +1298,88 @@ html {
         border-radius: 14px !important;
     }
 }
+
+/* ================================================
+   BOTONES DE ACCIONES DE POSTS EN VISTA COMUNIDAD
+   ================================================ */
+
+/* Contenedor de botones de acciones de posts */
+.post-actions-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+    justify-content: flex-end;
+}
+
+.post-actions-buttons .btn-glass-action,
+.post-actions-buttons .btn-glass-danger {
+    flex: 0 0 auto;
+    min-width: fit-content;
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    border-radius: 8px !important;
+    font-weight: 500;
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .post-actions-buttons {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        gap: 0.4rem !important;
+    }
+    
+    .post-actions-buttons .btn-glass-action,
+    .post-actions-buttons .btn-glass-danger {
+        flex: 1 1 auto;
+        min-width: 80px;
+        max-width: 100px;
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.8rem !important;
+        text-align: center;
+        justify-content: center !important;
+    }
+    
+    .post-actions-buttons form {
+        flex: 1 1 auto;
+        min-width: 80px;
+        max-width: 100px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 576px) {
+    .post-actions-buttons {
+        flex-direction: column;
+        gap: 0.4rem !important;
+    }
+    
+    .post-actions-buttons .btn-glass-action,
+    .post-actions-buttons .btn-glass-danger {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+        min-height: 38px !important;
+        border-radius: 10px !important;
+    }
+    
+    .post-actions-buttons form {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .post-actions-buttons .btn-glass-action,
+    .post-actions-buttons .btn-glass-danger {
+        padding: 0.7rem 1.2rem !important;
+        font-size: 0.9rem !important;
+        min-height: 42px !important;
+        border-radius: 12px !important;
+        font-weight: 600;
+    }
+}

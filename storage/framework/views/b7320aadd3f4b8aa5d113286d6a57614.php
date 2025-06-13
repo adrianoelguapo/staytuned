@@ -235,35 +235,27 @@
                                             </button>
                                             
                                             <?php if($post->user_id === Auth::id()): ?>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" 
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-h"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item" href="<?php echo e(route('posts.show', $post)); ?>">
-                                                                <i class="fas fa-eye me-2"></i>Ver
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="<?php echo e(route('posts.edit', $post)); ?>">
-                                                                <i class="fas fa-pencil-alt me-2"></i>Editar
-                                                            </a>
-                                                        </li>
-                                                        <li><hr class="dropdown-divider"></li>
-                                                        <li>
-                                                            <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
-                                                                  method="POST" 
-                                                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
-                                                                <?php echo csrf_field(); ?>
-                                                                <?php echo method_field('DELETE'); ?>
-                                                                <button type="submit" class="dropdown-item text-danger">
-                                                                    <i class="fas fa-trash me-2"></i>Eliminar
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
+                                                <!-- Botones de acción individuales -->
+                                                <div class="post-actions-buttons d-flex gap-2">
+                                                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="btn-glass-action">
+                                                        <i class="fas fa-eye me-1"></i>
+                                                        Ver
+                                                    </a>
+                                                    <a href="<?php echo e(route('posts.edit', $post)); ?>" class="btn-glass-action">
+                                                        <i class="fas fa-pencil-alt me-1"></i>
+                                                        Editar
+                                                    </a>
+                                                    <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
+                                                          method="POST" 
+                                                          class="d-inline"
+                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-glass-danger">
+                                                            <i class="fas fa-trash me-1"></i>
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             <?php endif; ?>
                                         </div>

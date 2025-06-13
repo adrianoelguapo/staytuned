@@ -1966,7 +1966,7 @@ body.modal-open {
 
 /* Scrollbar personalizada para las opciones */
 .category-options::-webkit-scrollbar {
-   width: 6px;
+     width: 6px;
 }
 
 .category-options::-webkit-scrollbar-track {
@@ -2520,4 +2520,54 @@ body.modal-open {
 
 .spotify-results::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* ================================================
+   BOTONES DE ACCIÓN EN TARJETAS DE COMUNIDAD
+   ================================================ */
+
+/* Botones de acciones de posts en tarjetas de comunidad */
+.post-actions-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+}
+
+.post-actions-buttons .btn-glass-action,
+.post-actions-buttons .btn-glass-danger {
+    flex: 0 0 auto;
+    min-width: fit-content;
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .post-actions-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.3rem !important;
+    }
+    
+    .post-actions-buttons .btn-glass-action,
+    .post-actions-buttons .btn-glass-danger {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .post-actions-buttons form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .post-actions-buttons .btn-glass-action,
+    .post-actions-buttons .btn-glass-danger {
+        padding: 0.6rem 1.2rem !important;
+        font-size: 0.9rem !important;
+        min-height: 40px !important;
+    }
 }
