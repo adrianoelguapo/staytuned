@@ -1068,3 +1068,175 @@ html {
         flex-direction: column !important;
     }
 }
+
+/* Optimización completa del header de comunidad para móvil */
+@media (max-width: 768px) {
+    .community-header .card-body {
+        padding: 1rem !important;
+    }
+    
+    .community-header-row {
+        flex-direction: column !important;
+        gap: 1rem;
+    }
+    
+    .community-cover-col {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        order: 1;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .community-info-col {
+        order: 2;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .community-actions-col {
+        order: 3;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Info de la comunidad centrada */
+    .community-header-info {
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .community-badge {
+        display: inline-block !important;
+        margin: 0 auto 0.5rem auto !important;
+    }
+    
+    .community-title-large {
+        text-align: center !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .community-description-large {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .community-meta-large {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem 1rem !important;
+    }
+    
+    /* Acciones del header optimizadas */
+    .community-actions-header {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        margin-top: 0 !important;
+    }
+    
+    .community-actions-header .btn,
+    .community-actions-header .btn-community {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+        max-width: 150px !important;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+    }
+    
+    .community-actions-header form {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+        max-width: 150px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .community-header .card-body {
+        padding: 0.75rem !important;
+    }
+    
+    /* Cover más pequeña en móvil */
+    .community-header-cover {
+        width: 80px !important;
+        height: 80px !important;
+        min-width: 80px !important;
+        min-height: 80px !important;
+    }
+    
+    .community-cover-large {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .community-header-cover i {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Título más pequeño */
+    .community-title-large {
+        font-size: 1.3rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* Meta información más compacta */
+    .community-meta-large {
+        font-size: 0.7rem !important;
+        gap: 0.25rem 0.75rem !important;
+    }
+    
+    .community-meta-large span {
+        font-size: 0.7rem !important;
+    }
+    
+    .user-photo-xs {
+        width: 16px !important;
+        height: 16px !important;
+    }
+    
+    /* Botones más compactos en móvil pequeño */
+    .community-actions-header {
+        gap: 0.4rem !important;
+    }
+    
+    .community-actions-header .btn,
+    .community-actions-header .btn-community {
+        min-width: 100px !important;
+        max-width: 130px !important;
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+    
+    /* Ajustar espaciado del badge */
+    .community-badge {
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    /* Para pantallas muy pequeñas, botones en columna pero más compactos */
+    .community-actions-header {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .community-actions-header .btn,
+    .community-actions-header .btn-community,
+    .community-actions-header form {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+    
+    .community-actions-header .btn,
+    .community-actions-header .btn-community {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+}

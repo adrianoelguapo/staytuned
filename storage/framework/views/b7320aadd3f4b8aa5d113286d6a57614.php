@@ -12,8 +12,8 @@
             <!-- Community Header -->
     <div class="community-header card dashboard-card mb-4">
         <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-auto">
+            <div class="row align-items-center community-header-row">
+                <div class="col-auto community-cover-col">
                     <!-- Imagen de la comunidad -->
                     <div class="community-cover-large">
                         <?php if($community->cover_image): ?>
@@ -31,7 +31,7 @@
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col community-info-col">
                     <!-- Info de la comunidad -->
                     <div class="community-header-info">
                         <?php if($community->is_private): ?>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto community-actions-col">
                     <!-- Acciones -->
                     <div class="community-actions-header">
                         <?php if($isOwner && $community->is_private): ?>
