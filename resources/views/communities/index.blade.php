@@ -173,8 +173,7 @@
                                     </a>
                                     <form action="{{ route('communities.destroy', $community) }}" 
                                           method="POST" 
-                                          class="d-inline"
-                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta comunidad? Esta acción no se puede deshacer.')">
+                                          class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-community btn-community-danger btn-sm">

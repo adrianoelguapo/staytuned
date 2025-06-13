@@ -59,7 +59,7 @@ class CommunityController extends Controller
         $community = new Community();
         $community->name = $request->name;
         $community->description = $request->description;
-        $community->is_private = $request->has('is_private');
+        $community->is_private = $request->boolean('is_private');
         $community->user_id = Auth::id();
 
         if ($request->hasFile('cover_image')) {
@@ -185,7 +185,7 @@ class CommunityController extends Controller
 
         $community->name = $request->name;
         $community->description = $request->description;
-        $community->is_private = $request->has('is_private');
+        $community->is_private = $request->boolean('is_private');
 
         if ($request->hasFile('cover_image')) {
             // Eliminar imagen anterior si existe
