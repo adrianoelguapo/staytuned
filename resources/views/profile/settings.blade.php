@@ -48,6 +48,8 @@
             <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
             <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar Usuarios</a>
             <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis Playlists</a>
+            <a href="{{ route('posts.index') }}" class="nav-link-inline">Mis Publicaciones</a>
+            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis Comunidades</a>
 
             <div class="dropdown">
                 <a

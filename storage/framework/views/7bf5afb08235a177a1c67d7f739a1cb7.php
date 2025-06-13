@@ -126,7 +126,7 @@
                     </div>
                     <a href="<?php echo e(route('playlists.create')); ?>" class="btn btn-new-playlist align-self-stretch align-self-lg-auto d-flex align-items-center justify-content-center">
                         <i class="bi bi-plus-circle me-2"></i>
-                        <span class="d-none d-sm-inline">Nueva </span>Playlist
+                        <span class="d-none d-sm-inline">Nueva Playlist
                     </a>
                 </div>
 
