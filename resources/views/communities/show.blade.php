@@ -116,8 +116,7 @@
                             </form>
                         @elseif($isMember)
                             <form action="{{ route('communities.leave', $community) }}" 
-                                  method="POST" 
-                                  onsubmit="return confirm('¿Estás seguro de que quieres salir de esta comunidad?')">
+                                  method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fas fa-sign-out-alt me-1"></i>

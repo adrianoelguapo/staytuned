@@ -16,7 +16,6 @@
             <div class="d-flex justify-content-between align-items-center mb-4 members-header">
                 <div>
                     <h1 class="text-white mb-2 members-title">
-                        <i class="fas fa-users me-2"></i>
                         Miembros de <?php echo e($community->name); ?>
 
                     </h1>
@@ -272,9 +271,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Cerrar modal
                 removeMemberModal.hide();
-                
-                // Mostrar mensaje de éxito
+                  // Mostrar mensaje de éxito
                 showAlert('success', data.success);
+                
+                // Limpiar cualquier caché relacionado con búsquedas de comunidades
+                if (typeof(Storage) !== "undefined") {
+                    // Limpiar localStorage relacionado con búsquedas de comunidades
+                    Object.keys(localStorage).forEach(key => {
+                        if (key.includes('community_search') || key.includes('search_results')) {
+                            localStorage.removeItem(key);
+                        }
+                    });
+                }
                 
                 // Recargar la página para actualizar la lista
                 setTimeout(() => {

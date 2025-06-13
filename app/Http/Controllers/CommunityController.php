@@ -122,10 +122,12 @@ class CommunityController extends Controller
             ->get()
             ->map(function ($community) {
                 $user = Auth::user();
-                $isMember = $community->hasMember($user);
+                
+                // Usar verificación fresca para asegurar datos actualizados
+                $isMember = $community->hasMemberFresh($user);
                 $isOwner = $community->isOwner($user);
                 
-                // Verificar estado de solicitud
+                // Verificar estado de solicitud solo si no es miembro ni owner
                 $requestStatus = null;
                 if (!$isMember && !$isOwner) {
                     $request = $community->requests()
@@ -329,6 +331,10 @@ class CommunityController extends Controller
 
         // Remover al miembro
         $community->removeMember($user);
+        
+        // Limpiar caché de relaciones para asegurar que los cambios se reflejen inmediatamente
+        $community->load('members');
+        $user->load('communities');
 
         if (request()->expectsJson()) {
             return response()->json(['success' => 'Miembro removido exitosamente.']);

@@ -264,9 +264,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Cerrar modal
                 removeMemberModal.hide();
-                
-                // Mostrar mensaje de éxito
+                  // Mostrar mensaje de éxito
                 showAlert('success', data.success);
+                
+                // Limpiar cualquier caché relacionado con búsquedas de comunidades
+                if (typeof(Storage) !== "undefined") {
+                    // Limpiar localStorage relacionado con búsquedas de comunidades
+                    Object.keys(localStorage).forEach(key => {
+                        if (key.includes('community_search') || key.includes('search_results')) {
+                            localStorage.removeItem(key);
+                        }
+                    });
+                }
                 
                 // Recargar la página para actualizar la lista
                 setTimeout(() => {

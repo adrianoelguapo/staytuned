@@ -70,7 +70,20 @@ class Community extends Model
      */
     public function hasMember(User $user)
     {
+        // Usar fresh() para asegurar que obtenemos datos actualizados de la base de datos
         return $this->members()->where('user_id', $user->id)->exists();
+    }
+
+    /**
+     * Verificar si un usuario es miembro de la comunidad (con datos frescos)
+     */
+    public function hasMemberFresh(User $user)
+    {
+        // Consultar directamente la base de datos sin usar caché de relaciones
+        return \DB::table('community_user')
+            ->where('community_id', $this->id)
+            ->where('user_id', $user->id)
+            ->exists();
     }
 
     /**
@@ -100,7 +113,15 @@ class Community extends Model
      */
     public function removeMember(User $user)
     {
-        return $this->members()->detach($user->id);
+        $result = $this->members()->detach($user->id);
+        
+        // Limpiar caché de relaciones después de la eliminación
+        if ($result) {
+            $this->unsetRelation('members');
+            $user->unsetRelation('communities');
+        }
+        
+        return $result;
     }
 
     /**

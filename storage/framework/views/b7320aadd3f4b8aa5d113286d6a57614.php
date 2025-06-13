@@ -116,8 +116,7 @@
                             </form>
                         <?php elseif($isMember): ?>
                             <form action="<?php echo e(route('communities.leave', $community)); ?>" 
-                                  method="POST" 
-                                  onsubmit="return confirm('¿Estás seguro de que quieres salir de esta comunidad?')">
+                                  method="POST">
                                 <?php echo csrf_field(); ?>
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fas fa-sign-out-alt me-1"></i>

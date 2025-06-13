@@ -241,8 +241,7 @@
                                     </a>
                                     <form action="<?php echo e(route('communities.leave', $community)); ?>" method="POST" class="d-inline">
                                         <?php echo csrf_field(); ?>
-                                        <button type="submit" class="btn-community btn-community-danger btn-sm" 
-                                                onclick="return confirm('¿Estás seguro de que quieres salir de esta comunidad?')">
+                                        <button type="submit" class="btn-community btn-community-danger btn-sm">
                                             <i class="fas fa-sign-out-alt me-1"></i>
                                             Salir
                                         </button>
@@ -488,7 +487,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             let html = '';
             communities.forEach(community => {
-                const statusBadge = getStatusBadge(community.request_status);
                 const actionButton = getActionButton(community);
                 
                 html += `
@@ -507,7 +505,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="community-badge community-badge-private">
                                             <i class="fas fa-lock me-1"></i>Privada
                                         </span>
-                                        ${statusBadge}
                                     </div>
                                     ${community.description ? `<p class="text-muted small mb-0 mt-1">${community.description}</p>` : ''}
                                 </div>
@@ -522,20 +519,6 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsContainer.innerHTML = html;
         }
         searchResults.style.display = 'block';
-    }
-
-    // Función para obtener el badge de estado
-    function getStatusBadge(status) {
-        switch(status) {
-            case 'pending':
-                return '<span class="badge glassmorphism-warning"><i class="fas fa-clock me-1"></i>Pendiente</span>';
-            case 'approved':
-                return '<span class="badge glassmorphism-success"><i class="fas fa-check me-1"></i>Miembro</span>';
-            case 'rejected':
-                return '<span class="badge glassmorphism-danger"><i class="fas fa-times me-1"></i>Rechazada</span>';
-            default:
-                return '';
-        }
     }
 
     // Función para obtener el botón de acción
