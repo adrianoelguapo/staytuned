@@ -46,6 +46,10 @@ Route::middleware([
     Route::patch('/community-requests/{request}/approve', [CommunityRequestController::class, 'approve'])->name('community-requests.approve');
     Route::patch('/community-requests/{request}/reject', [CommunityRequestController::class, 'reject'])->name('community-requests.reject');
     
+    // Rutas para gestión de miembros de comunidades
+    Route::get('/communities/{community}/members', [CommunityController::class, 'members'])->name('communities.members');
+    Route::delete('/communities/{community}/members/{user}', [CommunityController::class, 'removeMember'])->name('communities.members.remove');
+    
     // Rutas adicionales para funcionalidad de Spotify
     Route::get('/playlists/search/spotify', [PlaylistController::class, 'searchSpotify'])->name('playlists.search');
     Route::post('/playlists/{playlist}/songs/add', [PlaylistController::class, 'addSong'])->name('playlists.songs.add');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Community;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -285,5 +286,54 @@ class CommunityController extends Controller
         $categories = Category::all();
 
         return view('communities.create-post', compact('community', 'categories'));
+    }
+
+    /**
+     * Show members of a community (only for owners)
+     */
+    public function members(Community $community)
+    {
+        // Solo el propietario puede ver los miembros
+        if (!$community->isOwner(Auth::user())) {
+            abort(403, 'No tienes permisos para ver los miembros de esta comunidad.');
+        }
+
+        // Obtener todos los miembros con paginación
+        $members = $community->members()
+            ->withPivot('role', 'joined_at')
+            ->orderBy('community_user.joined_at', 'desc')
+            ->paginate(12);
+
+        return view('communities.members', compact('community', 'members'));
+    }
+
+    /**
+     * Remove a member from the community (only for owners)
+     */
+    public function removeMember(Community $community, User $user)
+    {
+        // Solo el propietario puede remover miembros
+        if (!$community->isOwner(Auth::user())) {
+            return response()->json(['error' => 'No tienes permisos para remover miembros.'], 403);
+        }
+
+        // No se puede remover al propietario
+        if ($community->isOwner($user)) {
+            return response()->json(['error' => 'No puedes remover al propietario de la comunidad.'], 400);
+        }
+
+        // Verificar que el usuario sea miembro
+        if (!$community->hasMember($user)) {
+            return response()->json(['error' => 'Este usuario no es miembro de la comunidad.'], 400);
+        }
+
+        // Remover al miembro
+        $community->removeMember($user);
+
+        if (request()->expectsJson()) {
+            return response()->json(['success' => 'Miembro removido exitosamente.']);
+        }
+
+        return redirect()->back()->with('success', 'Miembro removido exitosamente.');
     }
 }

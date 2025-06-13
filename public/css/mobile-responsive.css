@@ -1542,3 +1542,216 @@ html {
         border-radius: 18px !important;
     }
 }
+
+/* ====================================================
+   RESPONSIVE PARA VISTA DE MIEMBROS DE COMUNIDAD
+   ==================================================== */
+
+/* Móviles */
+@media (max-width: 768px) {
+    /* Header de miembros en móviles */
+    .members-page .members-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .members-page .members-title {
+        font-size: 1.75rem !important;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .members-page .members-subtitle {
+        font-size: 0.95rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    /* Botón volver */
+    .members-page .btn.btn-new-playlist {
+        width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 1rem !important;
+        justify-content: center !important;
+        border-radius: 12px !important;
+    }
+    
+    /* Información de comunidad en móviles */
+    .members-page .community-info-card .row {
+        text-align: center;
+    }
+    
+    .members-page .community-info-card .d-flex.align-items-center.gap-3 {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 1rem !important;
+    }
+    
+    /* Grid de miembros responsive */
+    .members-page .members-grid {
+        margin-bottom: 1.5rem;
+    }
+    
+    .members-page .members-grid .col-md-6,
+    .members-page .members-grid .col-lg-4 {
+        margin-bottom: 1rem;
+    }
+    
+    /* Tarjetas de miembros en móviles */
+    .members-page .member-card {
+        margin-bottom: 1rem;
+    }
+    
+    .members-page .member-card .card-body {
+        padding: 1.25rem !important;
+    }
+    
+    .members-page .member-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1rem !important;
+    }
+    
+    .members-page .member-avatar {
+        margin-right: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .members-page .member-info {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .members-page .member-info .d-flex.justify-content-between {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        text-align: center !important;
+    }
+    
+    /* Acciones de miembro en móviles */
+    .members-page .member-actions {
+        justify-content: center !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+    
+    .members-page .member-actions .btn {
+        flex: 1 !important;
+        min-width: 120px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.9rem !important;
+        border-radius: 10px !important;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 576px) {
+    /* Header más compacto */
+    .members-page .members-header {
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+    }
+    
+    .members-page .members-title {
+        font-size: 1.5rem !important;
+        flex-direction: column !important;
+        gap: 0.25rem !important;
+    }
+    
+    .members-page .members-title i {
+        font-size: 1.25rem;
+    }
+    
+    /* Info card más compacta */
+    .members-page .community-info-card {
+        margin-bottom: 1rem;
+    }
+    
+    .members-page .community-info-card .card-body {
+        padding: 1rem !important;
+    }
+    
+    .members-page .community-info-card .row {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    /* Miembros en columna única */
+    .members-page .members-grid .col-12 {
+        margin-bottom: 0.75rem;
+    }
+    
+    .members-page .member-card .card-body {
+        padding: 1rem !important;
+    }
+    
+    /* Acciones en columna */
+    .members-page .member-actions {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .members-page .member-actions .btn {
+        width: 100% !important;
+        min-width: auto !important;
+        padding: 0.875rem 1rem !important;
+        font-size: 0.95rem !important;
+        justify-content: center !important;
+    }
+    
+    /* Modal responsive */
+    .members-page .modal-dialog {
+        margin: 0.5rem !important;
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+    
+    .members-page .modal-footer {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+    
+    .members-page .modal-footer .btn {
+        width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+    }
+}
+
+/* Mejoras para badges en móviles */
+@media (max-width: 768px) {
+    .members-page .badge {
+        font-size: 0.75rem !important;
+        padding: 0.4rem 0.8rem !important;
+        border-radius: 12px !important;
+        white-space: nowrap !important;
+    }
+    
+    .members-page .badge i {
+        font-size: 0.7em !important;
+    }
+}
+
+/* Paginación responsive para miembros */
+@media (max-width: 768px) {
+    .members-page .pagination-custom {
+        justify-content: center !important;
+        gap: 0.25rem !important;
+    }
+    
+    .members-page .pagination-custom .page-link {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        min-width: 40px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .members-page .pagination-custom .page-link {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.8rem !important;
+        min-width: 36px !important;
+    }
+}

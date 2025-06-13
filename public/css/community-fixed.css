@@ -2063,3 +2063,300 @@ body {
         white-space: nowrap !important;
     }
 }
+
+/* ====================================================
+   ESTILOS PARA VISTA DE MIEMBROS DE COMUNIDAD
+   ==================================================== */
+
+/* Página de miembros */
+.members-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header de miembros */
+.members-header {
+    margin-bottom: 2rem;
+}
+
+.members-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.members-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+/* Información de la comunidad mini */
+.community-info-card {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.community-cover-mini {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.community-cover-mini-placeholder {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Grid de miembros */
+.members-grid {
+    margin-bottom: 2rem;
+}
+
+/* Tarjetas de miembros */
+.member-card {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    transition: all 0.3s ease !important;
+    height: 100%;
+}
+
+.member-card:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Contenido del miembro */
+.member-content {
+    width: 100%;
+}
+
+.member-avatar {
+    flex-shrink: 0;
+}
+
+.member-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.member-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.member-username {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+}
+
+/* Acciones de miembro */
+.member-actions {
+    gap: 0.5rem;
+}
+
+.member-actions .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Badges de rol */
+.badge.glassmorphism-success {
+    background: rgba(34, 197, 94, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+    color: #10b981 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 1rem !important;
+}
+
+.badge.glassmorphism-white {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 1rem !important;
+}
+
+/* Botones glassmorphism para miembros */
+.btn.glassmorphism-white {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.btn.glassmorphism-white:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1) !important;
+    text-decoration: none !important;
+}
+
+.btn.glassmorphism-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #ef4444 !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.btn.glassmorphism-danger:hover {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+    text-decoration: none !important;
+}
+
+/* Modal de confirmación */
+.modal .glassmorphism-white,
+.modal .glassmorphism-danger {
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+}
+
+/* Responsive para miembros */
+@media (max-width: 768px) {
+    .members-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .members-title {
+        font-size: 2rem;
+        text-align: left;
+    }
+    
+    .members-subtitle {
+        font-size: 1rem;
+    }
+    
+    .btn.btn-new-playlist {
+        align-self: stretch;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .member-card .card-body {
+        padding: 1.25rem;
+    }
+    
+    .member-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .member-avatar {
+        margin-right: 0 !important;
+    }
+    
+    .member-info {
+        width: 100%;
+    }
+    
+    .member-actions {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .member-actions .btn {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .members-title {
+        font-size: 1.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .community-info-card .row {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .community-info-card .col-auto {
+        align-self: center;
+    }
+    
+    .member-card .card-body {
+        padding: 1rem;
+    }
+    
+    .member-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .member-actions .btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mejoras para iconos en badges */
+.badge i {
+    font-size: 0.8em;
+    opacity: 0.9;
+}
+
+/* Animaciones suaves */
+.member-card,
+.btn.glassmorphism-white,
+.btn.glassmorphism-danger,
+.badge {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Estados de carga para botones */
+.btn:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    pointer-events: none !important;
+}

@@ -76,6 +76,17 @@
                 <div class="col-auto community-actions-col">
                     <!-- Acciones -->
                     <div class="community-actions-header">
+                        @if($isOwner)
+                            <!-- Botón para ver miembros (solo para propietarios) -->
+                            <a href="{{ route('communities.members', $community) }}" class="btn btn-outline-purple me-2">
+                                <i class="fas fa-users me-1"></i>
+                                Miembros
+                                @if($community->members_count > 0)
+                                    <span class="badge bg-primary ms-1">{{ $community->members_count }}</span>
+                                @endif
+                            </a>
+                        @endif
+                        
                         @if($isOwner && $community->is_private)
                             <!-- Botón para ver solicitudes pendientes (solo para comunidades privadas) -->
                             <a href="{{ route('communities.requests', $community) }}" class="btn btn-outline-purple me-2">

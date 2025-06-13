@@ -76,6 +76,17 @@
                 <div class="col-auto community-actions-col">
                     <!-- Acciones -->
                     <div class="community-actions-header">
+                        <?php if($isOwner): ?>
+                            <!-- Botón para ver miembros (solo para propietarios) -->
+                            <a href="<?php echo e(route('communities.members', $community)); ?>" class="btn btn-outline-purple me-2">
+                                <i class="fas fa-users me-1"></i>
+                                Miembros
+                                <?php if($community->members_count > 0): ?>
+                                    <span class="badge bg-primary ms-1"><?php echo e($community->members_count); ?></span>
+                                <?php endif; ?>
+                            </a>
+                        <?php endif; ?>
+                        
                         <?php if($isOwner && $community->is_private): ?>
                             <!-- Botón para ver solicitudes pendientes (solo para comunidades privadas) -->
                             <a href="<?php echo e(route('communities.requests', $community)); ?>" class="btn btn-outline-purple me-2">
