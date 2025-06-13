@@ -1383,3 +1383,162 @@ html {
         font-weight: 600;
     }
 }
+
+/* ================================================
+   VISTA DE SOLICITUDES DE COMUNIDAD - MOBILE RESPONSIVE
+   ================================================ */
+
+/* Tarjetas de solicitudes responsive */
+@media (max-width: 768px) {
+    .requests-page .request-card {
+        margin-bottom: 1rem !important;
+        border-radius: 16px !important;
+    }
+    
+    .requests-page .card-body {
+        padding: 1rem !important;
+    }
+    
+    /* Layout móvil para la información del usuario */
+    .requests-page .request-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1rem;
+    }
+    
+    /* Avatar centrado en móvil */
+    .requests-page .request-avatar {
+        margin-right: 0 !important;
+        margin-bottom: 1rem !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    
+    /* Información del usuario centrada */
+    .requests-page .request-info {
+        width: 100% !important;
+    }
+    
+    .requests-page .d-flex.justify-content-between.align-items-start {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 0.5rem;
+    }
+    
+    /* Badge centrado */
+    .requests-page .badge.glassmorphism-warning {
+        align-self: center !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Información del tiempo centrada */
+    .requests-page .text-white-50.small {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Mensaje del usuario con mejor espaciado */
+    .requests-page .mb-3 {
+        text-align: left !important;
+        width: 100% !important;
+    }
+    
+    /* Botones de acción en columna para móvil */
+    .requests-page .request-actions {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+        margin-top: 1rem !important;
+    }
+    
+    .requests-page .request-btn-approve,
+    .requests-page .request-btn-reject,
+    .requests-page .request-btn-profile {
+        width: 100% !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1rem !important;
+        min-height: 48px !important;
+        justify-content: center !important;
+        border-radius: 14px !important;
+    }
+    
+    /* Formularios de acción ocupan todo el ancho */
+    .requests-page .request-action-form {
+        width: 100% !important;
+        display: block !important;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Ajustes para pantallas muy pequeñas */
+    .requests-page .card-body {
+        padding: 0.75rem !important;
+    }
+    
+    /* Avatar más pequeño en móviles pequeños */
+    .requests-page .request-avatar img,
+    .requests-page .request-avatar .rounded-circle {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    /* Títulos más compactos */
+    .requests-page h5.mb-1.text-white {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .requests-page .text-white-50 {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Botones más prominentes en móviles pequeños */
+    .requests-page .request-btn-approve,
+    .requests-page .request-btn-reject,
+    .requests-page .request-btn-profile {
+        padding: 1.1rem 2rem !important;
+        font-size: 1.05rem !important;
+        min-height: 52px !important;
+        font-weight: 700 !important;
+        border-radius: 16px !important;
+    }
+    
+    /* Espaciado mayor entre botones */
+    .requests-page .request-actions {
+        gap: 1rem !important;
+    }
+    
+    /* Mensaje del usuario más compacto */
+    .requests-page .p-3.rounded {
+        padding: 0.75rem !important;
+        border-radius: 12px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    /* Para pantallas extra pequeñas */
+    .requests-page .card-body {
+        padding: 0.5rem !important;
+    }
+    
+    /* Header más compacto */
+    .requests-page h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .requests-page p.mb-0 {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Botones aún más prominentes */
+    .requests-page .btn.btn-sm.glassmorphism-success,
+    .requests-page .btn.btn-sm.glassmorphism-danger,
+    .requests-page .btn.btn-sm.glassmorphism-white {
+        padding: 1.2rem 2.5rem !important;
+        font-size: 1.1rem !important;
+        min-height: 56px !important;
+        border-radius: 18px !important;
+    }
+}

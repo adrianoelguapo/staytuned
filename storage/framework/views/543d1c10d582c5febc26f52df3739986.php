@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="text-white mb-2" style="font-size: 2.5rem;">
-                        Solicitudes de Membresía
+                        Solicitudes de Acceso
                     </h1>
                     <p class="text-white mb-0">Gestiona las solicitudes para unirse a <strong><?php echo e($community->name); ?></strong></p>
                 </div>
@@ -45,11 +45,11 @@
                 <div class="row g-4">
                     <?php $__currentLoopData = $pendingRequests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-12">
-                            <div class="card dashboard-card">
+                            <div class="card dashboard-card request-card">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-start">
+                                    <div class="d-flex align-items-start request-content">
                                         <!-- Avatar del usuario -->
-                                        <div class="me-3">
+                                        <div class="me-3 request-avatar">
                                             <?php if($request->user->profile_photo_path): ?>
                                                 <img src="<?php echo e(asset('storage/' . $request->user->profile_photo_path)); ?>" 
                                                      alt="<?php echo e($request->user->name); ?>"
@@ -64,7 +64,7 @@
                                         </div>
 
                                         <!-- Información del usuario y solicitud -->
-                                        <div class="flex-grow-1">
+                                        <div class="flex-grow-1 request-info">
                                             <div class="d-flex justify-content-between align-items-start mb-2">
                                                 <div>
                                                     <h5 class="mb-1 text-white"><?php echo e($request->user->name); ?></h5>
@@ -95,12 +95,12 @@
                                             <?php endif; ?>
 
                                             <!-- Acciones -->
-                                            <div class="d-flex gap-2 flex-wrap">
+                                            <div class="d-flex gap-2 flex-wrap request-actions">
                                                 <!-- Botón Aprobar -->
-                                                <form action="<?php echo e(route('community-requests.approve', $request)); ?>" method="POST" class="d-inline">
+                                                <form action="<?php echo e(route('community-requests.approve', $request)); ?>" method="POST" class="d-inline request-action-form">
                                                     <?php echo csrf_field(); ?>
                                                     <?php echo method_field('PATCH'); ?>
-                                                    <button type="submit" class="btn btn-sm glassmorphism-success">
+                                                    <button type="submit" class="btn btn-sm glassmorphism-success request-btn-approve">
                                                         <i class="bi bi-check-lg me-1"></i>
                                                         Aprobar
                                                     </button>
@@ -108,7 +108,7 @@
 
                                                 <!-- Botón Rechazar -->
                                                 <button type="button" 
-                                                        class="btn btn-sm glassmorphism-danger" 
+                                                        class="btn btn-sm glassmorphism-danger request-btn-reject" 
                                                         data-bs-toggle="modal" 
                                                         data-bs-target="#rejectModal<?php echo e($request->id); ?>">
                                                     <i class="bi bi-x-lg me-1"></i>
@@ -117,7 +117,7 @@
 
                                                 <!-- Ver perfil del usuario -->
                                                 <a href="<?php echo e(route('explore.users.show', $request->user)); ?>" 
-                                                   class="btn btn-sm glassmorphism-white">
+                                                   class="btn btn-sm glassmorphism-white request-btn-profile">
                                                     <i class="bi bi-person me-1"></i>
                                                     Ver Perfil
                                                 </a>
