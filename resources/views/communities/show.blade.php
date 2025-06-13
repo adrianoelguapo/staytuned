@@ -246,8 +246,7 @@
                                                     </a>
                                                     <form action="{{ route('posts.destroy', $post) }}" 
                                                           method="POST" 
-                                                          class="d-inline"
-                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                          class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn-glass-danger">

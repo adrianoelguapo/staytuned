@@ -247,8 +247,7 @@
                                                     </a>
                                                     <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
                                                           method="POST" 
-                                                          class="d-inline"
-                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                                          class="d-inline">
                                                         <?php echo csrf_field(); ?>
                                                         <?php echo method_field('DELETE'); ?>
                                                         <button type="submit" class="btn-glass-danger">
