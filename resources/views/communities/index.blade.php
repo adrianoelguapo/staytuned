@@ -24,32 +24,6 @@
                 </a>
             </div>
 
-            <!-- Notificaciones de solicitudes pendientes -->
-            @if(isset($pendingCommunityRequests) && $pendingCommunityRequests > 0)
-            <div class="alert alert-info mb-4">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <i class="fas fa-bell fa-2x text-primary"></i>
-                    </div>
-                    <div class="col">
-                        <h6 class="mb-1">
-                            <strong>{{ $pendingCommunityRequests }}</strong> 
-                            {{ $pendingCommunityRequests == 1 ? 'solicitud pendiente' : 'solicitudes pendientes' }}
-                        </h6>
-                        <p class="mb-0 small">
-                            Tienes {{ $pendingCommunityRequests == 1 ? 'una solicitud' : 'solicitudes' }} de membresía esperando tu aprobación.
-                        </p>
-                    </div>
-                    <div class="col-auto">
-                        <a href="#mis-comunidades" class="btn btn-sm btn-primary">
-                            <i class="fas fa-eye me-1"></i>
-                            Revisar
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @endif
-
             <!-- Buscar Comunidades Privadas -->
             <div class="card dashboard-card mb-4">
                 <div class="card-body">
