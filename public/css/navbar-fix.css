@@ -1,59 +1,34 @@
-/* 
- * NAVBAR GLASSMORPHISM - CSS con efecto glassmorphism avanzado para el navbar
- * CORREGIDO: No afecta el layout del navbar
- */
-
-/* ================================================
-   DROPDOWN DEL NAVBAR CON GLASSMORPHISM AVANZADO
-   ================================================ */
-
-/* Asegurar que el contenedor dropdown no afecte el layout */
 .navbar .dropdown {
     position: relative !important;
 }
 
-/* Dropdown principal del navbar con glassmorphism */
 .navbar .dropdown-menu {
-    /* CRÍTICO: Posicionamiento absoluto para no afectar layout */
     position: absolute !important;
     top: 100% !important;
     right: 0 !important;
     left: auto !important;
     z-index: 1050 !important;
-    
-    /* Dimensiones fijas */
     min-width: 220px !important;
     max-width: 280px !important;
     width: auto !important;
-    
-    /* Reset completo de layout */
     float: none !important;
     margin: 0.25rem 0 0 0 !important;
     padding: 0.75rem 0 !important;
     display: none !important;
-    
-    /* Glassmorphism avanzado */
     background: rgba(255, 255, 255, 0.08) !important;
     backdrop-filter: blur(25px) !important;
     -webkit-backdrop-filter: blur(25px) !important;
-    
-    /* Bordes y sombras glassmorphism */
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     border-radius: 16px !important;
     box-shadow: 
         0 12px 40px rgba(0, 0, 0, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 -1px 0 rgba(255, 255, 255, 0.1) !important;
-    
-    /* Reset de transforms que pueden causar problemas */
     transform: translateY(0) !important;
     transform-origin: top right !important;
-    
-    /* Overflow para el efecto de reflejo */
     overflow: hidden !important;
 }
 
-/* Efecto de reflejo superior glassmorphism (simplificado) */
 .navbar .dropdown-menu::before {
     content: '' !important;
     position: absolute !important;
@@ -72,23 +47,17 @@
     z-index: 1 !important;
 }
 
-/* Estado visible del dropdown */
 .navbar .dropdown-menu.show {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
-    
-    /* Mantener el posicionamiento correcto */
     position: absolute !important;
     top: 100% !important;
     right: 0 !important;
     left: auto !important;
-    
-    /* Animación suave sin afectar layout */
     animation: dropdownGlassAppear 0.2s ease-out !important;
 }
 
-/* Animación de aparición glassmorphism (más suave) */
 @keyframes dropdownGlassAppear {
     0% {
         opacity: 0;
@@ -107,11 +76,6 @@
     }
 }
 
-/* ================================================
-   ITEMS DEL DROPDOWN CON GLASSMORPHISM
-   ================================================ */
-
-/* Items individuales del dropdown */
 .navbar .dropdown-item {
     display: flex !important;
     align-items: center !important;
@@ -119,24 +83,17 @@
     padding: 0.875rem 1.25rem !important;
     margin: 0.125rem 0.5rem !important;
     border-radius: 10px !important;
-    
-    /* Colores y tipografía */
     color: rgba(255, 255, 255, 0.95) !important;
     font-weight: 500 !important;
     font-size: 0.9rem !important;
     text-decoration: none !important;
-    
-    /* Transiciones suaves */
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     background: transparent !important;
     border: none !important;
-    
-    /* Z-index para estar sobre el reflejo */
     position: relative !important;
     z-index: 2 !important;
 }
 
-/* Estado hover de los items */
 .navbar .dropdown-item:hover {
     background: rgba(255, 255, 255, 0.12) !important;
     backdrop-filter: blur(15px) !important;
@@ -146,14 +103,12 @@
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Estado activo de los items */
 .navbar .dropdown-item:active {
     background: rgba(255, 255, 255, 0.08) !important;
     transform: translateY(0) !important;
     box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05) !important;
 }
 
-/* Items de peligro (cerrar sesión) - CORREGIDO: color blanco */
 .navbar .dropdown-item.text-danger {
     color: #ffffff !important;
 }
@@ -165,7 +120,6 @@
     box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2) !important;
 }
 
-/* Íconos en los items */
 .navbar .dropdown-item i {
     margin-right: 0.75rem !important;
     font-size: 1rem !important;
@@ -177,10 +131,6 @@
     opacity: 1 !important;
     transform: translateX(2px) !important;
 }
-
-/* ================================================
-   SEPARADOR CON GLASSMORPHISM
-   ================================================ */
 
 .navbar .dropdown-divider {
     border: none !important;
@@ -198,11 +148,6 @@
     z-index: 2 !important;
 }
 
-/* ================================================
-   TOGGLE BUTTON DEL DROPDOWN
-   ================================================ */
-
-/* Botón toggle del dropdown */
 .navbar .dropdown-toggle {
     border: none !important;
     background: transparent !important;
@@ -233,10 +178,6 @@
     transform: rotate(180deg) !important;
 }
 
-/* ================================================
-   FOTO DE PERFIL CON GLASSMORPHISM
-   ================================================ */
-
 .navbar .user-photo {
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
@@ -249,7 +190,6 @@
     transform: scale(1.05) !important;
 }
 
-/* Asegurar que el toggle funcione correctamente */
 .navbar .dropdown-toggle {
     border: none !important;
     background: transparent !important;
@@ -265,11 +205,6 @@
     margin-left: 0.5rem;
 }
 
-/* ================================================
-   OFFCANVAS CON GLASSMORPHISM AVANZADO
-   ================================================ */
-
-/* Offcanvas principal con glassmorphism - MÁXIMA ESPECIFICIDAD */
 body.dashboard-body .offcanvas.offcanvas-start,
 .offcanvas.offcanvas-start {
     background: rgba(139, 92, 246, 0.25) !important;
@@ -290,13 +225,11 @@ body.dashboard-body .offcanvas.offcanvas-start,
     will-change: transform !important;
 }
 
-/* Estado mostrado del offcanvas */
 body.dashboard-body .offcanvas.offcanvas-start.show,
 .offcanvas.offcanvas-start.show {
     transform: translateX(0) !important;
 }
 
-/* Efecto de reflejo para el offcanvas */
 body.dashboard-body .offcanvas::before,
 .offcanvas::before {
     content: '' !important;
@@ -315,7 +248,6 @@ body.dashboard-body .offcanvas::before,
     z-index: 1 !important;
 }
 
-/* Header del offcanvas */
 body.dashboard-body .offcanvas-header,
 .offcanvas-header {
     padding: 1.5rem 1.25rem 1rem !important;
@@ -335,7 +267,6 @@ body.dashboard-body .offcanvas-title,
     margin: 0 !important;
 }
 
-/* Botón de cerrar con glassmorphism - CORREGIDO */
 body.dashboard-body .offcanvas .btn-close,
 body.dashboard-body .offcanvas .btn-close-white,
 .offcanvas .btn-close,
@@ -371,7 +302,6 @@ body.dashboard-body .offcanvas .btn-close-white:hover,
     border-radius: 50% !important;
 }
 
-/* Body del offcanvas */
 body.dashboard-body .offcanvas-body,
 .offcanvas-body {
     padding: 0 !important;
@@ -382,11 +312,6 @@ body.dashboard-body .offcanvas-body,
     z-index: 2 !important;
 }
 
-/* ================================================
-   NAVEGACIÓN DEL OFFCANVAS CON GLASSMORPHISM
-   ================================================ */
-
-/* Enlaces de navegación principales */
 body.dashboard-body .offcanvas .nav,
 .offcanvas .nav {
     padding: 0 !important;
@@ -419,14 +344,12 @@ body.dashboard-body .offcanvas .nav-link,
     background: transparent !important;
 }
 
-/* Primer nav-link con borde superior redondeado */
 body.dashboard-body .offcanvas .nav-link:first-child,
 .offcanvas .nav-link:first-child {
     border-top-left-radius: 12px !important;
     border-top-right-radius: 12px !important;
 }
 
-/* Último nav-link con borde inferior redondeado y sin borde bottom */
 body.dashboard-body .offcanvas .nav-link:last-child,
 .offcanvas .nav-link:last-child {
     border-bottom-left-radius: 12px !important;
@@ -434,7 +357,6 @@ body.dashboard-body .offcanvas .nav-link:last-child,
     border-bottom: none !important;
 }
 
-/* Efecto hover para nav-links - SIN MOVIMIENTO */
 body.dashboard-body .offcanvas .nav-link:hover,
 .offcanvas .nav-link:hover {
     background: rgba(255, 255, 255, 0.15) !important;
@@ -445,7 +367,6 @@ body.dashboard-body .offcanvas .nav-link:hover,
     box-shadow: none !important;
 }
 
-/* Estado activo */
 body.dashboard-body .offcanvas .nav-link.active,
 .offcanvas .nav-link.active {
     background: rgba(255, 255, 255, 0.12) !important;
@@ -456,14 +377,9 @@ body.dashboard-body .offcanvas .nav-link.active,
     box-shadow: none !important;
 }
 
-/* Desactivar el efecto shimmer que puede interferir */
 .offcanvas .nav-link::before {
     display: none !important;
 }
-
-/* ================================================
-   SEPARADOR GLASSMORPHISM
-   ================================================ */
 
 body.dashboard-body .offcanvas hr,
 .offcanvas hr {
@@ -482,11 +398,6 @@ body.dashboard-body .offcanvas hr,
     z-index: 2 !important;
 }
 
-/* ================================================
-   BOTONES DEL OFFCANVAS
-   ================================================ */
-
-/* Botón de cerrar sesión - CORREGIDO: mejor alineación */
 body.dashboard-body .offcanvas .btn-link,
 .offcanvas .btn-link {
     display: flex !important;
@@ -518,11 +429,6 @@ body.dashboard-body .offcanvas .btn-link:hover,
     box-shadow: none !important;
 }
 
-/* ================================================
-   ÍCONOS DEL OFFCANVAS
-   ================================================ */
-
-/* Todos los íconos en blanco */
 body.dashboard-body .offcanvas i,
 .offcanvas i {
     color: rgba(255, 255, 255, 0.95) !important;
@@ -550,11 +456,6 @@ body.dashboard-body .offcanvas .btn-link:hover i,
     transform: scale(1.05) !important;
 }
 
-/* ================================================
-   DROPDOWNS DENTRO DEL OFFCANVAS
-   ================================================ */
-
-/* Dropdown dentro del offcanvas */
 body.dashboard-body .offcanvas .dropdown-menu,
 .offcanvas .dropdown-menu {
     position: static !important;
@@ -570,7 +471,6 @@ body.dashboard-body .offcanvas .dropdown-menu,
     margin: 0.5rem 0.75rem !important;
 }
 
-/* Items del dropdown en offcanvas */
 body.dashboard-body .offcanvas .dropdown-item,
 .offcanvas .dropdown-item {
     padding: 0.75rem 1.25rem !important;
@@ -604,11 +504,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     border-color: rgba(220, 38, 38, 0.9) !important;
 }
 
-/* ================================================
-   ANIMACIONES DEL OFFCANVAS OPTIMIZADAS
-   ================================================ */
-
-/* Animación de entrada del offcanvas más fluida */
 .offcanvas.show {
     animation: offcanvasSlideIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
 }
@@ -631,7 +526,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     }
 }
 
-/* Animación escalonada más suave para los elementos internos */
 .offcanvas.show .nav-link {
     animation: slideInFromLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
     opacity: 1 !important;
@@ -655,11 +549,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     }
 }
 
-/* ================================================
-   OPTIMIZACIONES DE RENDIMIENTO PARA ANIMACIONES
-   ================================================ */
-
-/* Habilitar aceleración por hardware para el offcanvas */
 .offcanvas.offcanvas-start {
     transform: translateX(-100%) !important;
     will-change: transform !important;
@@ -671,74 +560,56 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     transform: translateX(0) !important;
 }
 
-/* Optimización para nav-links */
 .offcanvas .nav-link {
     will-change: transform, background-color !important;
     backface-visibility: hidden !important;
     transform: translateZ(0) !important;
 }
 
-/* Optimización para dropdowns del navbar */
 .navbar .dropdown-menu {
     will-change: opacity, transform !important;
     backface-visibility: hidden !important;
     transform: translateZ(0) !important;
 }
 
-/* Reducir repaints durante las animaciones */
 .offcanvas .nav-link:hover,
 .navbar .dropdown-item:hover {
     will-change: transform, background-color !important;
 }
 
-/* Restaurar will-change después de las animaciones */
 .offcanvas .nav-link:not(:hover),
 .navbar .dropdown-item:not(:hover) {
     will-change: auto !important;
 }
 
-/* ================================================
-   CORRECCIÓN ESPECÍFICA DEL LAYOUT DEL NAVBAR
-   ================================================ */
-
-/* Asegurar que el navbar mantenga su estructura */
 .navbar {
     position: relative !important;
     z-index: 1040 !important;
 }
 
-/* Contenedor principal del navbar */
 .navbar .d-flex,
 .navbar .d-none.d-lg-flex {
     position: relative !important;
     z-index: auto !important;
 }
 
-/* Enlaces del navbar no deben verse afectados */
 .navbar .nav-link-inline {
     position: relative !important;
     z-index: auto !important;
 }
 
-/* Contenedor del dropdown de usuario */
 .navbar .dropdown {
     position: relative !important;
     display: inline-block !important;
     vertical-align: top !important;
 }
 
-/* Toggle button del dropdown */
 .navbar .dropdown-toggle {
     position: relative !important;
     z-index: auto !important;
     display: inline-flex !important;
 }
 
-/* ================================================
-   CORRECCIONES FINALES DE VISIBILIDAD DEL OFFCANVAS
-   ================================================ */
-
-/* Forzar visibilidad máxima para elementos específicos del offcanvas */
 .offcanvas .nav-link,
 .offcanvas .offcanvas-title,
 .offcanvas .btn-close,
@@ -749,7 +620,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     visibility: visible !important;
 }
 
-/* Mejorar contraste de texto */
 .offcanvas .nav-link,
 .offcanvas .offcanvas-title {
     color: #ffffff !important;
@@ -757,7 +627,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* Fondo más visible para los nav-links */
 .offcanvas .nav-link {
     background: transparent !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -775,13 +644,11 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     color: #ffffff !important;
 }
 
-/* Íconos más visibles */
 .offcanvas i {
     color: #ffffff !important;
     opacity: 1 !important;
 }
 
-/* Header más visible */
 .offcanvas-header {
     background: transparent !important;
 }
@@ -791,17 +658,14 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     font-weight: 700 !important;
 }
 
-/* Los elementos son visibles pero mantienen sus animaciones */
 .offcanvas .nav-link {
     transition: all 0.3s ease !important;
 }
 
-/* Desactivar el efecto shimmer que puede interferir */
 .offcanvas .nav-link::before {
     display: none !important;
 }
 
-/* Separador más visible */
 .offcanvas hr {
     background: linear-gradient(
         90deg,
@@ -813,7 +677,6 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     ) !important;
 }
 
-/* Botón de logout más visible - CORREGIDO */
 .offcanvas .btn-link {
     color: #ffffff !important;
     font-weight: 600 !important;
@@ -824,16 +687,10 @@ body.dashboard-body .offcanvas .dropdown-item.text-danger:hover,
     background: rgba(220, 38, 38, 0.85) !important;
 }
 
-/* Prevenir saltos durante la animación del offcanvas */
 body.offcanvas-open {
     overflow-x: hidden !important;
 }
 
-/* Smooth opening para el backdrop */
 .offcanvas-backdrop {
     transition: opacity 0.35s ease !important;
 }
-
-/* ================================================
-   CORRECCIONES FINALES DE VISIBILIDAD DEL OFFCANVAS
-   ================================================ */

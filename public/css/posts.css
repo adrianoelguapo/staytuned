@@ -1,13 +1,5 @@
-/* posts.css */
-
-/* ================================================
-   IMPORTA LA TIPOGRAFÍA
-   ================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-/* ================================================
-   RESET GLOBAL Y FONDO PRINCIPAL
-   ================================================ */
 body.dashboard-body {
   margin: 0;
   padding: 0;
@@ -18,20 +10,20 @@ body.dashboard-body {
   min-height: 100vh;
 }
 
-/* ================================================
-   NAVBAR (IGUAL QUE DASHBOARD)
-   ================================================ */
 .navbar {
   background: transparent !important;
 }
+
 .btn-offcanvas {
   border: none;
   background: transparent;
 }
+
 .navbar .navbar-brand {
   font-size: 1.75rem;
   color: #fff;
 }
+
 .nav-link-inline {
   position: relative;
   font-size: 1.15rem;
@@ -41,6 +33,7 @@ body.dashboard-body {
   padding: 0.25rem 0;
   transition: color 0.3s ease;
 }
+
 .nav-link-inline::before {
   content: '';
   position: absolute;
@@ -51,10 +44,12 @@ body.dashboard-body {
   background: #fff;
   transition: width 0.3s ease, left 0.3s ease;
 }
+
 .nav-link-inline:hover::before {
   width: 100%;
   left: 0;
 }
+
 .user-photo {
   width: 2rem;
   height: 2rem;
@@ -62,7 +57,6 @@ body.dashboard-body {
   border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Dropdown (LG+) */
 .dropdown-menu {
   background: rgba(255, 255, 255, 0.95);
   border: none;
@@ -79,7 +73,6 @@ body.dashboard-body {
   background: rgba(124, 58, 237, 0.1);
 }
 
-/* Offcanvas (≤LG) */
 .offcanvas {
   width: 280px !important;
   background: rgba(255, 255, 255, 0.95);
@@ -124,18 +117,12 @@ body.dashboard-body {
   background: rgba(124, 58, 237, 0.1);
 }
 
-/* ================================================
-   POSTS CARDS - DISEÑO DE ANCHO COMPLETO
-   ================================================ */
-
-/* Contenedor de lista de posts */
 .posts-list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Tarjeta de post de ancho completo */
 .post-card-full-width {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
@@ -153,19 +140,16 @@ body.dashboard-body {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* Cuerpo de la tarjeta */
 .post-card-body {
   padding: 2rem;
 }
 
-/* Contenedor principal del contenido */
 .post-content-wrapper {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
 }
 
-/* Contenedor de la imagen/cover */
 .post-cover-container {
   flex-shrink: 0;
   width: 120px;
@@ -197,7 +181,6 @@ body.dashboard-body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Contenedor de información del post */
 .post-info-container {
   flex: 1;
   min-width: 0;
@@ -205,7 +188,6 @@ body.dashboard-body {
   overflow: hidden;
 }
 
-/* Sección de cabecera del post */
 .post-header-section {
   display: flex;
   align-items: flex-start;
@@ -258,7 +240,6 @@ body.dashboard-body {
   flex-shrink: 0;
 }
 
-/* Descripción del post */
 .post-description {
   color: rgba(255, 255, 255, 0.85);
   font-size: 1rem;
@@ -266,7 +247,6 @@ body.dashboard-body {
   margin: 0 0 1.5rem 0;
 }
 
-/* Información de Spotify */
 .spotify-info-card {
   background: rgba(30, 215, 96, 0.15);
   border: 1px solid rgba(30, 215, 96, 0.3);
@@ -307,7 +287,6 @@ body.dashboard-body {
   white-space: nowrap;
 }
 
-/* Sección de footer del post */
 .post-footer-section {
   display: flex;
   justify-content: space-between;
@@ -317,7 +296,6 @@ body.dashboard-body {
   gap: 1rem;
 }
 
-/* Meta información */
 .post-meta-info {
   display: flex;
   align-items: center;
@@ -341,15 +319,12 @@ body.dashboard-body {
   font-size: 0.8rem;
 }
 
-/* Sección de acciones */
 .post-actions-section {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-/* Botón de like mejorado */
-/* Estilos para el botón de like con Bootstrap icons */
 .like-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -377,7 +352,6 @@ body.dashboard-body {
   color: #ff6b6b;
 }
 
-/* Dropdown de acciones */
 .dropdown .btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -393,11 +367,6 @@ body.dashboard-body {
   color: #fff;
 }
 
-/* ================================================
-   ENLACES DE PERFIL DE USUARIO
-   ================================================ */
-
-/* Estilos para autor de publicación */
 .post-author-photo {
   transition: all 0.3s ease;
   cursor: pointer;
@@ -412,7 +381,6 @@ body.dashboard-body {
   color: #e5e7eb !important;
 }
 
-/* Estilos para autor de comentarios */
 .comment-author-photo {
   transition: all 0.3s ease;
   cursor: pointer;
@@ -431,16 +399,10 @@ body.dashboard-body {
   color: #d1d5db !important;
 }
 
-/* Enlaces de perfil en general */
 a[href*="/explore/users/"] {
   transition: all 0.3s ease;
 }
 
-/* ================================================
-   POSTS SHOW PAGE ESPECÍFICOS
-   ================================================ */
-
-/* Spotify content específico para show */
 .spotify-content {
   background: rgba(30, 215, 96, 0.1);
   border: 1px solid rgba(30, 215, 96, 0.2);
@@ -477,7 +439,6 @@ a[href*="/explore/users/"] {
   margin-bottom: 0;
 }
 
-/* Like button mejorado */
 .like-btn {
   background: transparent !important;
   border: none !important;
@@ -510,10 +471,6 @@ a[href*="/explore/users/"] {
   stroke: #ff6b6b;
 }
 
-/* ================================================
-   COMENTARIOS ESPECÍFICOS BOOTSTRAP
-   ================================================ */
-
 .comment-item {
   transition: all 0.2s ease;
 }
@@ -529,15 +486,10 @@ a[href*="/explore/users/"] {
   line-height: 1.6;
 }
 
-/* Estado vacío para comentarios */
 .empty-state-icon i {
   font-size: 3rem;
   opacity: 0.5;
 }
-
-/* ================================================
-   FORMULARIOS MEJORADOS
-   ================================================ */
 
 .form-container {
   background: rgba(255, 255, 255, 0.05);
@@ -567,7 +519,6 @@ a[href*="/explore/users/"] {
   color: #fff;
 }
 
-/* Invalid feedback */
 .invalid-feedback {
   color: #ff6b6b;
   font-size: 0.875rem;
@@ -580,20 +531,12 @@ a[href*="/explore/users/"] {
   box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25) !important;
 }
 
-/* ================================================
-   ALERTS MEJORADOS
-   ================================================ */
-
 .alert-info {
   background: rgba(59, 130, 246, 0.1) !important;
   border: 1px solid rgba(59, 130, 246, 0.2) !important;
   color: rgba(147, 197, 253, 1) !important;
   border-radius: 8px;
 }
-
-/* ================================================
-   BOTONES ESPECÍFICOS
-   ================================================ */
 
 .btn-success {
   background: rgba(34, 197, 94, 0.8);
@@ -620,10 +563,6 @@ a[href*="/explore/users/"] {
   text-decoration: none;
 }
 
-/* ================================================
-   UTILIDADES DE TEXTO
-   ================================================ */
-
 .text-white-50 {
   color: rgba(255, 255, 255, 0.5) !important;
 }
@@ -631,10 +570,6 @@ a[href*="/explore/users/"] {
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75) !important;
 }
-
-/* ================================================
-   RESPONSIVE MEJORADO
-   ================================================ */
 
 @media (max-width: 768px) {
   .dashboard-container {
@@ -686,11 +621,6 @@ a[href*="/explore/users/"] {
   }
 }
 
-/* ================================================
-   BOTÓN NUEVA PUBLICACIÓN - RESPONSIVE MÓVIL
-   ================================================ */
-
-/* Estilos base para el botón de nueva publicación */
 .btn-new-playlist {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -726,12 +656,7 @@ a[href*="/explore/users/"] {
     margin-right: 0.5rem !important;
 }
 
-/* ================================================
-   RESPONSIVE MÓVIL - BOTÓN NUEVA PUBLICACIÓN
-   ================================================ */
-
 @media (max-width: 768px) {
-    /* Botón de crear publicación optimizado para móviles */
     .btn-new-playlist {
         width: 100% !important;
         justify-content: center !important;
@@ -740,19 +665,16 @@ a[href*="/explore/users/"] {
         border-radius: 0.75rem !important;
         margin-bottom: 1rem !important;
     }
-    
-    /* Texto del botón - asegurar visibilidad */
+
     .btn-new-playlist span {
         display: inline !important;
         font-size: 0.85rem !important;
     }
     
-    /* Header más compacto en móviles */
     .d-flex.flex-column.flex-lg-row {
         margin-bottom: 1.5rem !important;
     }
     
-    /* Título principal responsive - mantener tamaño original */
     .text-white[style*="font-size: 2.5rem"] {
         font-size: 2.5rem !important;
         margin-bottom: 0.5rem !important;
@@ -760,7 +682,6 @@ a[href*="/explore/users/"] {
         text-align: center !important;
     }
     
-    /* Subtítulo responsive - mantener tamaño original */
     .text-white.mb-0 {
         font-size: 1rem !important;
         line-height: 1.3 !important;
@@ -771,7 +692,6 @@ a[href*="/explore/users/"] {
 }
 
 @media (max-width: 576px) {
-    /* Móviles pequeños - ajustes adicionales */
     .btn-new-playlist {
         font-size: 0.85rem !important;
         padding: 0.7rem 0.9rem !important;
@@ -783,11 +703,6 @@ a[href*="/explore/users/"] {
     }
 }
 
-/* ================================================
-   GLASSMORPHISM PARA TEXTAREA Y FORM CONTROLS
-   ================================================ */
-
-/* Form controls con efecto glassmorphism */
 .dashboard-card .form-control {
   background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(20px) !important;
@@ -814,7 +729,6 @@ a[href*="/explore/users/"] {
   font-weight: 400 !important;
 }
 
-/* Textarea específico con glassmorphism mejorado */
 .dashboard-card textarea.form-control {
   background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: blur(25px) !important;
@@ -845,7 +759,6 @@ a[href*="/explore/users/"] {
   font-weight: 300 !important;
 }
 
-/* Textarea dinámico para editar comentarios */
 .comment-item textarea.form-control {
   background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(15px) !important;
@@ -871,11 +784,6 @@ a[href*="/explore/users/"] {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* ================================================
-   GLASSMORPHISM GLOBAL PARA TEXTAREAS
-   ================================================ */
-
-/* Estilos glassmorphism para todos los textareas */
 textarea.form-control {
   background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(20px) !important;
@@ -909,7 +817,6 @@ textarea.form-control::placeholder {
   font-weight: 300 !important;
 }
 
-/* Textarea en modales y formularios especiales */
 .modal textarea.form-control,
 .form-container textarea.form-control,
 .create-post-container textarea.form-control {
@@ -934,7 +841,6 @@ textarea.form-control::placeholder {
   transform: translateY(-3px) !important;
 }
 
-/* Textarea en playlist forms */
 .playlist-form textarea.form-control {
   background: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(30px) !important;
@@ -955,7 +861,6 @@ textarea.form-control::placeholder {
   transform: translateY(-2px) !important;
 }
 
-/* Asegurar que el texto sea blanco en todos los casos */
 textarea.form-control,
 textarea.form-control:focus,
 textarea.form-control:active,
@@ -963,7 +868,6 @@ textarea.form-control:hover {
   color: #ffffff !important;
 }
 
-/* Estilos especiales para textarea en comentarios dinámicos */
 .edit-comment-form textarea.form-control {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(15px) !important;
@@ -983,11 +887,6 @@ textarea.form-control:hover {
   transform: translateY(-1px) !important;
 }
 
-/* ================================================
-   GLASSMORPHISM PARA INPUTS Y SELECTS
-   ================================================ */
-
-/* Inputs con glassmorphism */
 input.form-control,
 select.form-control,
 .form-select {
@@ -1024,7 +923,6 @@ select.form-control::placeholder,
   font-weight: 300 !important;
 }
 
-/* Asegurar texto blanco en inputs y selects */
 input.form-control,
 input.form-control:focus,
 input.form-control:active,
@@ -1040,7 +938,6 @@ select.form-control:hover,
   color: #ffffff !important;
 }
 
-/* Options en selects */
 select.form-control option,
 .form-select option {
   background: rgba(79, 70, 229, 0.95) !important;
@@ -1048,7 +945,6 @@ select.form-control option,
   padding: 0.5rem !important;
 }
 
-/* Labels con mejor contraste */
 .form-label {
   color: #fff !important;
   font-weight: 500 !important;
@@ -1057,7 +953,6 @@ select.form-control option,
   letter-spacing: 0.3px !important;
 }
 
-/* Small text y help text */
 .text-muted,
 small.text-muted {
   color: rgba(255, 255, 255, 0.6) !important;
@@ -1065,7 +960,6 @@ small.text-muted {
   font-weight: 400 !important;
 }
 
-/* Estado vacío específico para dashboard cards */
 .dashboard-card h4 {
   color: #fff !important;
 }
@@ -1086,7 +980,6 @@ small.text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* Invalid feedback con glassmorphism */
 .invalid-feedback {
   background: rgba(220, 53, 69, 0.15) !important;
   backdrop-filter: blur(10px) !important;
@@ -1098,7 +991,6 @@ small.text-muted {
   font-weight: 500 !important;
 }
 
-/* Valid feedback con glassmorphism */
 .valid-feedback {
   background: rgba(25, 135, 84, 0.15) !important;
   backdrop-filter: blur(10px) !important;
@@ -1110,11 +1002,6 @@ small.text-muted {
   font-weight: 500 !important;
 }
 
-/* ================================================
-   BOTONES CON GLASSMORPHISM
-   ================================================ */
-
-/* Botones primarios con glassmorphism */
 .btn-primary {
   background: rgba(255, 255, 255, 0.15) !important;
   backdrop-filter: blur(25px) !important;
@@ -1148,7 +1035,6 @@ small.text-muted {
               0 6px 25px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Botones secundarios */
 .btn-secondary,
 .btn-outline-primary {
   background: rgba(255, 255, 255, 0.08) !important;
@@ -1173,14 +1059,12 @@ small.text-muted {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Botones de acción pequeños */
 .btn-sm {
   padding: 0.5rem 1rem !important;
   font-size: 0.85rem !important;
   border-radius: 8px !important;
 }
 
-/* Botones de iconos */
 .btn-icon {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(15px) !important;
@@ -1202,7 +1086,6 @@ small.text-muted {
   transform: scale(1.05) !important;
 }
 
-/* Asegurar que los botones mantengan el texto blanco */
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:focus,
@@ -1218,16 +1101,10 @@ small.text-muted {
   color: #ffffff !important;
 }
 
-/* Efectos especiales para botones con iconos */
 .btn i {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) !important;
 }
 
-/* ================================================
-   GLASSMORPHISM PARA MODALES Y ELEMENTOS ESPECIALES
-   ================================================ */
-
-/* Modales con glassmorphism */
 .modal-content {
   background: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(30px) !important;
@@ -1255,7 +1132,6 @@ small.text-muted {
   background: transparent !important;
 }
 
-/* Cerrar modal */
 .btn-close {
   filter: invert(1) !important;
   opacity: 0.8 !important;
@@ -1265,7 +1141,6 @@ small.text-muted {
   opacity: 1 !important;
 }
 
-/* Cards especiales con glassmorphism */
 .card {
   background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(25px) !important;
@@ -1293,7 +1168,6 @@ small.text-muted {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* Alertas con glassmorphism */
 .alert {
   backdrop-filter: blur(20px) !important;
   border-radius: 12px !important;
@@ -1321,7 +1195,6 @@ small.text-muted {
   border-color: rgba(13, 202, 240, 0.3) !important;
 }
 
-/* Dropdowns con glassmorphism */
 .dropdown-menu {
   background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(25px) !important;
@@ -1341,7 +1214,6 @@ small.text-muted {
   color: #fff !important;
 }
 
-/* Progress bars con glassmorphism */
 .progress {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px) !important;
@@ -1354,7 +1226,6 @@ small.text-muted {
   backdrop-filter: blur(5px) !important;
 }
 
-/* Navegación pills/tabs con glassmorphism */
 .nav-pills .nav-link {
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -1375,11 +1246,6 @@ small.text-muted {
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* ================================================
-   ESTILOS GLASSMORPHISM ESPECÍFICOS PARA DESPLEGABLE DE CATEGORÍAS
-   ================================================ */
-
-/* Mejorar el efecto glassmorphism para el select de categorías - Consistente con otros form-control */
 #category_id,
 .category-select {
   background: rgba(255, 255, 255, 0.08) !important;
@@ -1400,7 +1266,6 @@ small.text-muted {
   -moz-appearance: none !important;
 }
 
-/* Opciones del dropdown con la misma tonalidad que el input */
 #category_id option,
 .category-select option {
   background: rgba(255, 255, 255, 0.08) !important;
@@ -1415,14 +1280,12 @@ small.text-muted {
   transition: all 0.3s ease !important;
 }
 
-/* Estado hover para las opciones */
 #category_id option:hover,
 .category-select option:hover {
   background: rgba(255, 255, 255, 0.12) !important;
   color: #fff !important;
 }
 
-/* Estado seleccionado para las opciones */
 #category_id option:checked,
 #category_id option:selected,
 .category-select option:checked,
@@ -1432,14 +1295,12 @@ small.text-muted {
   font-weight: 500 !important;
 }
 
-/* Estilo especial para la primera opción (placeholder) */
 #category_id option:first-child,
 .category-select option:first-child {
   color: rgba(255, 255, 255, 0.6) !important;
   font-style: italic !important;
 }
 
-/* Efecto hover para el select de categorías */
 #category_id:hover,
 .category-select:hover {
   background: rgba(255, 255, 255, 0.18) !important;
@@ -1450,7 +1311,6 @@ small.text-muted {
     inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
 }
 
-/* Efecto focus para el select de categorías mejorado */
 #category_id:focus,
 .category-select:focus {
   background: rgba(255, 255, 255, 0.15) !important;
@@ -1463,7 +1323,6 @@ small.text-muted {
   outline: none !important;
 }
 
-/* Icono personalizado para el dropdown */
 #category_id,
 .category-select {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
@@ -1473,7 +1332,6 @@ small.text-muted {
   padding-right: 3rem !important;
 }
 
-/* Modal de selección de categorías con glassmorphism */
 .category-modal {
   position: fixed;
   top: 0;
@@ -1494,7 +1352,6 @@ small.text-muted {
   align-items: center;
   justify-content: center;
   animation: modalGlassAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Asegurar que cubra toda la pantalla */
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -1504,18 +1361,15 @@ small.text-muted {
   height: 100vh !important;
 }
 
-/* Asegurar que el contenido del modal esté centrado */
 .category-modal-content {
   margin: auto;
   position: relative;
 }
 
-/* Prevenir scroll del body cuando el modal está abierto */
 body.modal-open {
   overflow: hidden !important;
 }
 
-/* Mejoras para el fondo glassmorphism */
 .category-modal::before {
   content: '';
   position: absolute;
@@ -1527,7 +1381,6 @@ body.modal-open {
   z-index: -1;
 }
 
-/* Asegurar que no haya espacios blancos en el fondo */
 .category-modal::after {
   content: '';
   position: absolute;
@@ -1543,12 +1396,10 @@ body.modal-open {
   z-index: -2;
 }
 
-/* Estilo adicional para el overlay principal */
 .category-modal {
-  background: rgba(0, 0, 0, 0.8) !important; /* Fondo más oscuro para mayor contraste */
+  background: rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Animaciones adicionales para mejor UX */
 .category-option {
   position: relative;
   overflow: hidden;
@@ -1572,7 +1423,6 @@ body.modal-open {
   left: 100%;
 }
 
-/* Efecto de partículas en el fondo del modal (opcional) */
 .category-modal::before {
   content: '';
   position: absolute;
@@ -1588,7 +1438,6 @@ body.modal-open {
   z-index: -1;
 }
 
-/* Estados de accesibilidad mejorados */
 .category-option:focus {
   outline: 2px solid rgba(139, 92, 246, 0.6);
   outline-offset: 2px;
@@ -1599,7 +1448,6 @@ body.modal-open {
   outline-offset: 2px;
 }
 
-/* Mejoras para modo de alto contraste */
 @media (prefers-contrast: high) {
   .category-modal-content {
     border-width: 2px;
@@ -1615,7 +1463,6 @@ body.modal-open {
   }
 }
 
-/* Soporte para animaciones reducidas */
 @media (prefers-reduced-motion: reduce) {
   .category-modal,
   .category-modal-content,
@@ -1630,11 +1477,6 @@ body.modal-open {
   }
 }
 
-/* ================================================
-   MODAL GLASSMORPHISM COMPLETO PARA CATEGORÍAS
-   ================================================ */
-
-/* Botón selector de categorías con glassmorphism */
 .category-selector-btn {
   width: 100%;
   display: flex;
@@ -1711,7 +1553,6 @@ body.modal-open {
   transform: rotate(180deg);
 }
 
-/* Modal overlay con glassmorphism - Posicionamiento absoluto para cubrir toda la pantalla */
 .category-modal {
   display: none;
   position: fixed !important;
@@ -1739,7 +1580,6 @@ body.modal-open {
   justify-content: center !important;
 }
 
-/* Contenido del modal */
 .category-modal-content {
   background: linear-gradient(135deg, 
     rgba(255, 255, 255, 0.15) 0%, 
@@ -1769,7 +1609,6 @@ body.modal-open {
   transform: scale(1);
 }
 
-/* Header del modal */
 .category-modal-header {
   display: flex;
   align-items: center;
@@ -1819,14 +1658,12 @@ body.modal-open {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor de opciones */
 .category-options {
   padding: 1rem;
   max-height: 60vh;
   overflow-y: auto;
 }
 
-/* Opciones individuales */
 .category-option {
   display: flex;
   align-items: center;
@@ -1915,7 +1752,6 @@ body.modal-open {
   font-size: 0.875rem;
 }
 
-/* Mejoras adicionales para el estado sin contenido */
 .spotify-preview:not(.has-content) {
   background: rgba(30, 215, 96, 0.08) !important;
   border: 2px dashed rgba(30, 215, 96, 0.3) !important;
@@ -1928,21 +1764,18 @@ body.modal-open {
   text-align: center;
 }
 
-/* Asegurar que el contenido seleccionado se vea bien */
 .spotify-preview.has-content .spotify-preview-content {
   display: flex !important;
   align-items: center !important;
   gap: 1rem !important;
 }
 
-/* Mejorar el aspecto del icono cuando no hay imagen */
 .spotify-preview-image.d-flex {
   background: rgba(30, 215, 96, 0.2) !important;
   color: #1db954 !important;
   font-size: 1.5rem !important;
 }
 
-/* Animación de aparición del modal */
 @keyframes modalGlassAppear {
   0% {
     opacity: 0;
@@ -1956,7 +1789,6 @@ body.modal-open {
   }
 }
 
-/* Prevenir scroll del body */
 body.modal-open {
   overflow: hidden !important;
   position: fixed !important;
@@ -1964,7 +1796,6 @@ body.modal-open {
   height: 100% !important;
 }
 
-/* Scrollbar personalizada para las opciones */
 .category-options::-webkit-scrollbar {
      width: 6px;
 }
@@ -1983,9 +1814,7 @@ body.modal-open {
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Responsive */
 @media (max-width: 576px) {
-  /* Modal de selección de categorías - ajustes para móviles */
   .category-modal-content {
     margin: 0 1rem !important;
     border-radius: 1rem !important;
@@ -2009,7 +1838,6 @@ body.modal-open {
     padding: 0.375rem;
   }
   
-  /* Opciones del dropdown en modal */
   .category-option {
     padding: 1rem 1.25rem !important;
     margin-bottom: 0.5rem !important;
@@ -2018,21 +1846,14 @@ body.modal-open {
   .category-option.selected {
     background: rgba(139, 92, 246, 0.4) !important;
   }
-  
-  /* Ajustes en botones de acción */
+
   .btn-glass-action {
     padding: 0.5rem 0.75rem !important;
     font-size: 0.9rem !important;
   }
 }
 
-/* ================================================
-   DISEÑO MÓVIL PARA TARJETAS DE PUBLICACIÓN
-   ================================================ */
-
-/* Layout vertical para móviles - similar al diseño de playlists */
 @media screen and (max-width: 768px) {
-    /* Contenedor principal - cambiar a diseño vertical */
     .post-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
@@ -2041,7 +1862,6 @@ body.modal-open {
         align-items: center !important;
     }
     
-    /* Imagen en la parte superior */
     .post-cover-container {
         width: 160px !important;
         height: 160px !important;
@@ -2051,7 +1871,6 @@ body.modal-open {
         order: 1 !important;
     }
     
-    /* Contenedor de información debajo de la imagen */
     .post-info-container {
         min-height: auto !important;
         gap: 1rem !important;
@@ -2062,8 +1881,7 @@ body.modal-open {
         align-items: center !important;
         text-align: center !important;
     }
-    
-    /* Header section centrado */
+
     .post-header-section {
         flex-direction: column !important;
         align-items: center !important;
@@ -2073,7 +1891,6 @@ body.modal-open {
         justify-content: center !important;
     }
     
-    /* Título centrado */
     .post-title {
         font-size: 1.4rem !important;
         text-align: center !important;
@@ -2081,27 +1898,23 @@ body.modal-open {
         margin-bottom: 0.5rem !important;
     }
     
-    /* Badge de categoría centrado */
     .post-category-badge {
         align-self: center !important;
         margin: 0 !important;
     }
-    
-    /* Descripción centrada */
+
     .post-description {
         text-align: center !important;
         margin-bottom: 1rem !important;
         line-height: 1.4 !important;
     }
     
-    /* Información de Spotify centrada */
     .spotify-info-card {
         justify-content: center !important;
         text-align: center !important;
         margin-bottom: 1rem !important;
     }
-    
-    /* Footer section responsive */
+
     .post-footer-section {
         flex-direction: column !important;
         gap: 1rem !important;
@@ -2109,15 +1922,13 @@ body.modal-open {
         align-items: center !important;
     }
     
-    /* Meta información centrada */
     .post-meta-info {
         flex-direction: column !important;
         gap: 0.5rem !important;
         align-items: center !important;
         text-align: center !important;
     }
-    
-    /* Sección de acciones centrada */
+
     .post-actions-section {
         flex-direction: row !important;
         justify-content: center !important;
@@ -2125,63 +1936,49 @@ body.modal-open {
         flex-wrap: wrap !important;
         width: 100% !important;
     }
-    
-    /* Botones de acción optimizados */
+
     .post-actions-buttons {
         gap: 0.5rem !important;
         justify-content: center !important;
         flex-wrap: wrap !important;
     }
     
-    /* Padding del body reducido */
     .post-card-body {
         padding: 1.5rem !important;
     }
 }
 
-/* Móviles pequeños - ajustes adicionales */
 @media screen and (max-width: 576px) {
-    /* Imagen más pequeña en pantallas muy pequeñas */
     .post-cover-container {
         width: 140px !important;
         height: 140px !important;
         margin-bottom: 1.25rem !important;
     }
     
-    /* Título más pequeño */
     .post-title {
         font-size: 1.2rem !important;
         line-height: 1.3 !important;
     }
     
-    /* Padding más compacto */
     .post-card-body {
         padding: 1.25rem !important;
     }
-    
-    /* Botones más pequeños */
+
     .btn-glass-action {
         padding: 0.375rem 0.5rem !important;
         font-size: 0.8rem !important;
     }
     
-    /* Like button optimizado */
     .like-btn {
         padding: 0.4rem 0.6rem !important;
         font-size: 0.85rem !important;
     }
     
-    /* Placeholder icon más pequeño */
     .post-cover-placeholder {
         font-size: 1.8rem !important;
     }
 }
 
-/* ================================================
-   BOTONES GLASSMORPHISM PARA TARJETAS DE PUBLICACIÓN
-   ================================================ */
-
-/* Botón de acción glassmorphism */
 .btn-glass-action {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(12px) !important;
@@ -2219,7 +2016,6 @@ body.modal-open {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Botón de eliminar con glassmorphism - MISMA TONALIDAD QUE PLAYLISTS */
 .btn-glass-danger {
     background: rgba(239, 68, 68, 0.15) !important;
     backdrop-filter: blur(10px) !important;
@@ -2260,11 +2056,6 @@ body.modal-open {
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
 }
 
-/* ================================================
-   FORMULARIO DE CREACIÓN - CONTENEDOR DE SPOTIFY
-   ================================================ */
-
-/* Contenedor principal de búsqueda de Spotify */
 .spotify-search-container {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2274,7 +2065,6 @@ body.modal-open {
   -webkit-backdrop-filter: blur(15px);
 }
 
-/* Preview del contenido de Spotify */
 .spotify-preview {
   background: rgba(30, 215, 96, 0.08);
   border: 2px dashed rgba(30, 215, 96, 0.3);
@@ -2323,7 +2113,6 @@ body.modal-open {
   font-size: 0.95rem;
 }
 
-/* Contenido del preview cuando hay selección */
 .spotify-preview-content {
   display: flex;
   align-items: center;
@@ -2364,7 +2153,6 @@ body.modal-open {
   line-height: 1.2;
 }
 
-/* Input de búsqueda de Spotify */
 .spotify-search-container .input-group .form-control {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -2386,7 +2174,6 @@ body.modal-open {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Botón de búsqueda de Spotify */
 .spotify-search-container .input-group .btn-primary {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -2405,7 +2192,6 @@ body.modal-open {
   transform: none !important;
 }
 
-/* Resultados de búsqueda de Spotify */
 .spotify-results {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2423,7 +2209,6 @@ body.modal-open {
   gap: 0.75rem;
 }
 
-/* Items de resultados de búsqueda */
 .spotify-result-item {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2472,7 +2257,6 @@ body.modal-open {
   white-space: nowrap;
 }
 
-/* Item seleccionado */
 .spotify-item.selected {
   background: rgba(30, 215, 96, 0.15);
   border: 1px solid rgba(30, 215, 96, 0.3);
@@ -2502,7 +2286,6 @@ body.modal-open {
   font-size: 0.85rem;
 }
 
-/* Scrollbar personalizada para resultados */
 .spotify-results::-webkit-scrollbar {
   width: 8px;
 }
@@ -2522,11 +2305,6 @@ body.modal-open {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* ================================================
-   BOTONES DE ACCIÓN EN TARJETAS DE COMUNIDAD
-   ================================================ */
-
-/* Botones de acciones de posts en tarjetas de comunidad */
 .post-actions-buttons {
     display: flex;
     align-items: center;
@@ -2542,7 +2320,6 @@ body.modal-open {
     padding: 0.4rem 0.6rem !important;
 }
 
-/* Responsive para móviles */
 @media (max-width: 768px) {
     .post-actions-buttons {
         flex-direction: column;

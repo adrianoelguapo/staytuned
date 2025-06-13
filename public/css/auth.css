@@ -1,14 +1,11 @@
-/* auth.css */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-/* === RESET GLOBAL === */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* === BASE PARA LOGIN/REGISTER Y TWO-FACTOR === */
 body.login-body,
 body.twofactor-body {
   display: flex;
@@ -20,7 +17,6 @@ body.twofactor-body {
   color: white;
 }
 
-/* === NAVBAR COMÚN === */
 .navbar {
   background: transparent;
   flex: none;
@@ -30,7 +26,6 @@ body.twofactor-body {
   font-size: 1.75rem;
 }
 
-/* Responsive navbar para móviles */
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
@@ -41,13 +36,11 @@ body.twofactor-body {
     font-size: 1.5rem;
   }
   
-  /* En móviles, hacer que los botones estén en línea con el logo */
   .navbar .ms-auto {
     margin-left: 0 !important;
   }
 }
 
-/* === BOTONES PEQUEÑOS DEL NAVBAR === */
 .small-button {
   padding: 0.4rem 1.2rem;
   font-size: 0.95rem;
@@ -56,7 +49,6 @@ body.twofactor-body {
   transition: background 0.2s ease;
 }
 
-/* Responsive buttons para móviles */
 @media (max-width: 768px) {
   .small-button {
     padding: 0.35rem 1rem;
@@ -76,27 +68,26 @@ body.twofactor-body {
   color: white;
   background: transparent;
 }
+
 .btn-outline-light.small-button:hover {
   background: rgba(255,255,255,0.15);
 }
+
 .btn-light.small-button {
   background: #ffffff;
   color: #5b21b6;
   border: none;
 }
+
 .btn-light.small-button:hover {
   background: #ede9fe;
 }
 
-/* =========================================================================
-   LOGIN & REGISTER
-   ========================================================================= */
 body.login-body .login-container {
   flex: 1;
   display: flex;
   width: 100%;
   overflow: hidden;
-  /* ajustamos altura máxima para que no desborde */
   max-height: 100vh;
 }
 
@@ -125,18 +116,17 @@ body.login-body .login-box p {
   margin-bottom: 1rem;
 }
 
-/* === ERRORES DE VALIDACIÓN === */
 body.login-body .validation-errors p {
   color: #fff;
   margin: 0.25rem 0;
   font-size: 0.9rem;
 }
 
-/* === CAMPOS DE FORMULARIO === */
 body.login-body .form-label {
   font-weight: 500;
   color: #f0f0f0;
 }
+
 body.login-body .form-control {
   background: transparent !important;
   border: none !important;
@@ -148,6 +138,7 @@ body.login-body .form-control {
   line-height: 1.2 !important;
   transition: border-color 0.3s ease;
 }
+
 body.login-body .form-control:focus {
   border-bottom-color: #c1aff8 !important;
   box-shadow: none !important;
@@ -155,12 +146,10 @@ body.login-body .form-control:focus {
   background: transparent !important;
 }
 
-/* reducimos el espacio entre campos */
 body.login-body .mb-3 {
   margin-bottom: 0.75rem !important;
 }
 
-/* === IZQUIERDA/DERECHA === */
 body.login-body .login-right {
   flex: 1;
   display: flex;
@@ -169,7 +158,6 @@ body.login-body .login-right {
   padding: 2rem 3rem;
 }
 
-/* === BOTÓN SUBMIT === */
 body.login-body .submit-btn {
   padding: 0.75rem 1rem;
   font-size: 1.05rem;
@@ -177,14 +165,13 @@ body.login-body .submit-btn {
   letter-spacing: 0.5px;
   transition: all 0.5s ease;
 }
+
 body.login-body .submit-btn:hover {
   background: rgba(255,255,255) !important;
   color: #5b21b6 !important;
 }
 
-/* =========================================================================
-   TWO-FACTOR CHALLENGE
-   ========================================================================= */
+
 body.twofactor-body .twofactor-container {
   flex: 1;
   display: flex;
@@ -192,19 +179,23 @@ body.twofactor-body .twofactor-container {
   align-items: center;
   padding: 0 1rem;
 }
+
 body.twofactor-body .twofactor-box {
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
   transition: max-width 0.3s ease;
 }
+
 body.twofactor-body .twofactor-box h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
+
 body.twofactor-body .twofactor-box .text-white-50 {
   margin-bottom: 1rem;
 }
+
 body.twofactor-body .twofactor-box .form-control {
   background: transparent !important;
   border: none !important;
@@ -215,24 +206,27 @@ body.twofactor-body .twofactor-box .form-control {
   font-size: 1rem !important;
   transition: border-color 0.3s ease;
 }
+
 body.twofactor-body .twofactor-box .form-control:focus {
   border-bottom-color: #c1aff8 !important;
   box-shadow: none !important;
   outline: none !important;
   background: transparent !important;
 }
+
 body.twofactor-body .twofactor-box .submit-btn {
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: background 0.2s ease;
 }
+
 body.twofactor-body .twofactor-box .submit-btn:hover {
   background: rgba(255,255,255,0.15) !important;
   color: #5b21b6 !important;
 }
 
-/* === RESPONSIVE LOGIN/REGISTER & TWO-FACTOR === */
+
 @media (max-width: 991px) {
   body.login-body .login-container,
   body.twofactor-body .twofactor-container {
@@ -249,9 +243,7 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
   }
 }
 
-/* === AJUSTES PARA PANTALLAS <1440px === */
 @media (max-width: 1439.98px) {
-  /* aún más compactos: sin padding vertical y line-height muy justo */
   body.login-body .form-control {
     padding: 0 !important;
     font-size: 0.9rem !important;
@@ -259,10 +251,10 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
     height: auto !important;
   }
 
-  /* reducimos aún más los márgenes */
   body.login-body .mb-3 {
     margin-bottom: 0.5rem !important;
   }
+
   body.login-body .login-box p {
     margin-bottom: 0.6rem !important;
   }
@@ -271,7 +263,6 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
     max-width: 575px;
   }
 
-  /* título y botón ligerísimamente más compactos */
   body.login-body .login-box h1 {
     font-size: 1.6rem;
     margin-bottom: 0.6rem;
@@ -281,13 +272,11 @@ body.twofactor-body .twofactor-box .submit-btn:hover {
     padding: 0.5rem 0.7rem;
   }
 
-  /* ajusta el padding del contenedor para ganar unos pixels */
   body.login-body .login-left {
     padding: 2rem 1.5rem !important;
   }
 }
 
-/* === ESTILOS PARA EL FILE INPUT === */
 body.login-body .form-control[type="file"] {
   border: none !important;
   background: transparent !important;
@@ -295,6 +284,7 @@ body.login-body .form-control[type="file"] {
   color: #fff;
   font-size: 0.95rem;
 }
+
 body.login-body .form-control[type="file"]::-webkit-file-upload-button,
 body.login-body .form-control[type="file"]::file-selector-button {
   all: unset;
@@ -310,6 +300,7 @@ body.login-body .form-control[type="file"]::file-selector-button {
   cursor: pointer;
   transition: background 0.2s ease;
 }
+
 body.login-body .form-control[type="file"]::-webkit-file-upload-button:hover,
 body.login-body .form-control[type="file"]::file-selector-button:hover {
   background: #ede9fe;

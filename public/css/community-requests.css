@@ -1,23 +1,14 @@
-/* Estilos específicos para solicitudes de comunidad */
-/* Color característico de la página: #7c3aed (violeta) */
-
-/* === RESET Y PREVENCIÓN DE CONFLICTOS === */
-
 .requests-page {
     position: relative;
     z-index: 1;
 }
 
-/* Eliminar cualquier estilo problemático que pueda interferir */
 .requests-page *,
 .requests-page *::before,
 .requests-page *::after {
     box-sizing: border-box;
 }
 
-/* === ESTILOS PARA BOTONES GLASSMORPHISM === */
-
-/* Botones principales con glassmorphism */
 .requests-page .btn.glassmorphism-success,
 .requests-page .btn.glassmorphism-danger,
 .requests-page .btn.glassmorphism-white {
@@ -43,7 +34,6 @@
     z-index: 10 !important;
 }
 
-/* Estados hover para botones */
 .requests-page .btn.glassmorphism-success:hover,
 .requests-page .btn.glassmorphism-danger:hover,
 .requests-page .btn.glassmorphism-white:hover {
@@ -55,7 +45,6 @@
     text-decoration: none !important;
 }
 
-/* Estados focus y active para botones */
 .requests-page .btn.glassmorphism-success:focus,
 .requests-page .btn.glassmorphism-success:active,
 .requests-page .btn.glassmorphism-danger:focus,
@@ -71,8 +60,6 @@
     outline: none !important;
 }
 
-/* === AJUSTES PARA BOTONES PEQUEÑOS === */
-
 .requests-page .btn.btn-sm.glassmorphism-success,
 .requests-page .btn.btn-sm.glassmorphism-danger,
 .requests-page .btn.btn-sm.glassmorphism-white {
@@ -81,8 +68,6 @@
     min-height: 42px !important;
     line-height: 1.2 !important;
 }
-
-/* === BADGE GLASSMORPHISM === */
 
 .requests-page .badge.glassmorphism-warning {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -94,15 +79,10 @@
     font-weight: 500 !important;
 }
 
-/* === ESPACIADO Y LAYOUT === */
-
 .requests-page .d-flex.gap-2.flex-wrap {
     gap: 0.5rem !important;
 }
 
-/* === MODALES - ASEGURAR FUNCIONAMIENTO CORRECTO === */
-
-/* Asegurar que los modales funcionen correctamente */
 .modal {
     z-index: 1055 !important;
     position: fixed !important;
@@ -136,9 +116,6 @@
     pointer-events: auto !important;
 }
 
-/* === PREVENCIÓN DE PROBLEMAS DE POSICIONAMIENTO === */
-
-/* Asegurar que no hay elementos que cubran toda la página incorrectamente */
 .requests-page .card,
 .requests-page .card-body,
 .requests-page .d-flex,
@@ -148,25 +125,8 @@
     z-index: auto !important;
 }
 
-/* Asegurar que los formularios inline no causen problemas */
 .requests-page form.d-inline {
     display: inline-block !important;
     margin: 0 !important;
     padding: 0 !important;
 }
-
-/* === DEBUGGING - TEMPORAL === */
-/* Estas reglas se pueden habilitar para debug si es necesario */
-/*
-.requests-page .btn {
-    outline: 2px solid red !important;
-}
-
-.requests-page .modal {
-    outline: 3px solid blue !important;
-}
-
-.requests-page .card {
-    outline: 1px solid green !important;
-}
-*/

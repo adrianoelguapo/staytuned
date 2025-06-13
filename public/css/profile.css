@@ -1,13 +1,5 @@
-/* profile.css */
-
-/* ================================================
-   0) IMPORTA LA TIPOGRAFÍA
-   ================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-/* ================================================
-   1) RESET GLOBAL Y FONDO PRINCIPAL
-   ================================================ */
 body.dashboard-body {
   margin: 0;
   padding: 0;
@@ -20,24 +12,24 @@ body.dashboard-body {
     #8b5cf6 60%,
     #6366f1 100%
   );
-  color: #fff;               /* color base del texto */
+  color: #fff;
   min-height: 100vh;
 }
 
-/* ================================================
-   2) NAVBAR (sin cambios respecto a tu CSS anterior)
-   ================================================ */
 .navbar {
   background: transparent !important;
 }
+
 .btn-offcanvas {
   border: none;
   background: transparent;
 }
+
 .navbar .navbar-brand {
   font-size: 1.75rem;
   color: #fff;
 }
+
 .nav-link-inline {
   position: relative;
   font-size: 1.15rem;
@@ -47,6 +39,7 @@ body.dashboard-body {
   padding: 0.25rem 0;
   transition: color 0.3s ease;
 }
+
 .nav-link-inline::before {
   content: '';
   position: absolute;
@@ -62,6 +55,7 @@ body.dashboard-body {
   width: 100%;
   left: 0;
 }
+
 .user-photo {
   width: 2rem;
   height: 2rem;
@@ -69,12 +63,12 @@ body.dashboard-body {
   border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Dropdown (LG+) */
 .dropdown-menu {
   background: rgba(255, 255, 255, 0.95);
   border: none;
   border-radius: 0.75rem;
 }
+
 .dropdown-item {
   display: flex;
   align-items: center;
@@ -82,24 +76,27 @@ body.dashboard-body {
   padding: 0.75rem 1rem;
   transition: background 0.2s ease;
 }
+
 .dropdown-item:hover {
   background: rgba(124, 58, 237, 0.1);
 }
 
-/* Offcanvas (≤LG) */
 .offcanvas {
   width: 280px !important;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 8px 0 24px rgba(0, 0, 0, 0.15);
 }
+
 .offcanvas-header {
   padding: 1rem 0.75rem 0.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .offcanvas-title {
   font-weight: 600;
   color: #333;
 }
+
 .offcanvas-body {
   padding: 0;
   display: flex;
@@ -131,9 +128,6 @@ body.dashboard-body {
   background: rgba(124, 58, 237, 0.1);
 }
 
-/* ================================================
-   3) CABECERA "INSTAGRAM PROFILE" CON HOVER EFFECT
-   ================================================ */
 .profile-header {
   display: flex;
   flex-direction: column;
@@ -141,7 +135,6 @@ body.dashboard-body {
   margin-bottom: 2rem;
 }
 
-/* Contenedor de la foto de perfil con hover effect */
 .profile-photo-container {
   position: relative;
   width: 150px;
@@ -177,7 +170,6 @@ body.dashboard-body {
   filter: brightness(0.7);
 }
 
-/* Overlay que aparece al hacer hover */
 .profile-photo-overlay {
   position: absolute;
   top: 0;
@@ -215,7 +207,6 @@ body.dashboard-body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilos originales de la foto sin hover effect (para elementos que no tengan el contenedor) */
 .profile-header-img-original {
   width: 150px;
   height: 150px;
@@ -238,17 +229,6 @@ body.dashboard-body {
   text-transform: capitalize;
 }
 
-/* ================================================
-   4) OVERRIDES PARA LOS COMPONENTES JETSTREAM / LIVEWIRE
-   ================================================
-
-   Cada formulario que insertas con <x-form-section> o <x-action-section>
-   va dentro de un <div class="profile-form-section">…</div>. Esta sección
-   se encarga de anular cualquier "bg-white", "shadow", "rounded-lg", etc.,
-   que Jetstream inyecte por defecto, y forzar inputs/transparencias/texto blanco.
-*/
-
-/* 4.1) Cualquier .bg-white, .bg-gray-50 o .bg-gray-100 dentro de profile-form-section se hace transparente */
 .profile-form-section .bg-white,
 .profile-form-section .bg-gray-50,
 .profile-form-section .bg-gray-100 {
@@ -256,13 +236,11 @@ body.dashboard-body {
   box-shadow: none         !important;
 }
 
-/* 4.2) Eliminar esquinas redondeadas (rounded-lg, rounded-xl…) */
 .profile-form-section .rounded-lg,
 .profile-form-section .rounded-xl {
   border-radius: 0 !important;
 }
 
-/* 4.3) Eliminar sombras (shadow, shadow-sm, etc.) */
 .profile-form-section .shadow,
 .profile-form-section .shadow-sm,
 .profile-form-section .shadow-md,
@@ -270,7 +248,6 @@ body.dashboard-body {
   box-shadow: none !important;
 }
 
-/* 4.4) Quitar padding de Jetstream (px-6, py-6, p-6, sm:p-6…) */
 .profile-form-section .px-6,
 .profile-form-section .py-6,
 .profile-form-section .p-6,
@@ -279,24 +256,19 @@ body.dashboard-body {
   padding: 0 !important;
 }
 
-/* 4.5) Ocultar cualquier <h2> o <p> interno que inyecte x-form-section / x-action-section */
 .profile-form-section h2,
 .profile-form-section p {
   display: none !important;
 }
 
-/* 4.6) Forzar que todos los <label> estén en blanco */
 .profile-form-section label {
   color: #fff !important;
 }
 
-/* 4.7) Quitar cualquier border inferior tipo border-b que Jetstream pudiera agregar */
 .profile-form-section .border-b {
   border-bottom: none !important;
 }
 
-/* 4.8) Inputs y textareas dentro de profile-form-section 
-      (fondo transparente, línea inferior blanca, texto blanco, etc.) */
 .profile-form-section input,
 .profile-form-section textarea {
   background: transparent       !important;
@@ -311,7 +283,6 @@ body.dashboard-body {
   width: 100%                   !important;
 }
 
-/* 4.8.1) Focus de inputs/textareas */
 .profile-form-section input:focus,
 .profile-form-section textarea:focus {
   border-bottom-color: #c1aff8 !important;
@@ -320,12 +291,10 @@ body.dashboard-body {
   background: transparent     !important;
 }
 
-/* 4.8.2) Placeholder en gris claro */
 .profile-form-section ::placeholder {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* 4.9) Mensajes de error (texto en rojo suave) */
 .profile-form-section .text-danger,
 .profile-form-section .invalid-feedback, 
 .profile-form-section .validation-errors p {
@@ -334,7 +303,6 @@ body.dashboard-body {
   margin-top: 0.25rem;
 }
 
-/* 4.10) Botones tipo "Guardar", "Confirmar", etc. (btn-primary) */
 .profile-form-section .btn-primary {
   background: #ffffff      !important;
   color: #5b21b6          !important;
@@ -350,7 +318,6 @@ body.dashboard-body {
   color: #5b21b6     !important;
 }
 
-/* 4.11) Botones secundarios (btn-outline-light reinterpretado) */
 .profile-form-section .btn-outline-light {
   border: 1px solid rgba(255, 255, 255, 0.7) !important;
   color: #fff                !important;
@@ -365,7 +332,6 @@ body.dashboard-body {
   color: #5b21b6                     !important;
 }
 
-/* 4.12) Botones "danger" (para eliminar cuenta) */
 .profile-form-section .btn-danger {
   background: #dc2626  !important;
   color: #fff          !important;
@@ -380,14 +346,12 @@ body.dashboard-body {
   background: #b91c1c !important;
 }
 
-/* 4.13) Iconos y textos de "text-white-50" (usar color semitransparente) */
 .profile-form-section .text-white-50 {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* 4.14) Cualquier <x-action-message> que salga en verde (ej. "Guardado.", "Hecho.") */
 .profile-form-section .action-message {
-  color: #fff !important; /* Cambio a blanco en lugar de verde */
+  color: #fff !important;
   font-weight: 500 !important;
   opacity: 1;
   transition: opacity 0.5s ease-out;
@@ -409,13 +373,11 @@ body.dashboard-body {
   display: inline-block !important;
 }
 
-/* Para cualquier otro mensaje de acción en otros componentes */
 .profile-form-section .text-success {
   color: #fff !important;
   margin-left: 1.5rem;
 }
 
-/* 4.15) Si quedan elementos .bg-white o .shadow en modales (<x-dialog-modal>), los hacemos transparentes */
 .profile-form-section .modal-content,
 .profile-form-section .modal-body,
 .profile-form-section .modal-header,
@@ -426,7 +388,6 @@ body.dashboard-body {
   border: none !important;
 }
 
-/* Estilos específicos para elementos dentro de modales */
 .profile-form-section .modal-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
@@ -445,12 +406,10 @@ body.dashboard-body {
   max-width: 500px !important;
 }
 
-/* Esto arregla el problema de superposición de modales con el fondo */
 .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-/* --- ALINEACIÓN PERFECTA DE BOTONES Y CAMPOS EN FORMULARIOS DE PERFIL --- */
 .profile-form-section .d-flex.align-items-center {
   justify-content: flex-start !important;
   padding-left: 0 !important;
@@ -463,12 +422,11 @@ body.dashboard-body {
   margin-left: 0 !important;
   margin-right: 0 !important;
   display: inline-block;
-  /* Elimina cualquier desplazamiento */
   box-shadow: none !important;
   position: relative;
   left: 0 !important;
 }
-/* Elimina padding/margin de los contenedores de campos y acciones */
+
 .profile-form-section .mb-4,
 .profile-form-section label,
 .profile-form-section input {
@@ -477,21 +435,16 @@ body.dashboard-body {
   text-align: left !important;
 }
 
-/* Si el formulario está dentro de un .container, elimina el padding solo para formularios */
 main.container > .profile-wform-section {
   padding-left: 0 !important;
   margin-left: 0 !important;
 }
 
-/* ================================================
-   5) AJUSTES RESPONSIVOS
-   ================================================ */
 @media (max-width: 991.98px) {
   main.container {
     padding: 0 1rem;
   }
   
-  /* Ajustes para la foto de perfil en móviles */
   .profile-photo-container {
     width: 120px;
     height: 120px;
@@ -522,7 +475,6 @@ main.container > .profile-wform-section {
   }
 }
 
-/* Soporte para touch en dispositivos móviles */
 @media (hover: none) and (pointer: coarse) {
   .profile-photo-container:active {
     transform: scale(1.02);
@@ -537,19 +489,12 @@ main.container > .profile-wform-section {
   }
 }
 
-/* ================================================
-   DIVISOR DECORATIVO PARA SEPARAR SECCIONES
-   ================================================ */
 .profile-divider {
   border: none;
   border-top: 2.5px solid rgba(255,255,255,0.5);
   margin: 2.5rem 0 2.5rem 0;
   width: 100%;
 }
-
-/* ================================================
-   ESTILOS ESPECÍFICOS PARA EL PERFIL DE USUARIO
-   ================================================ */
 
 .dashboard-card {
     background: rgba(255, 255, 255, 0.1);
@@ -558,7 +503,6 @@ main.container > .profile-wform-section {
     color: white;
 }
 
-/* Estilos para las tabs con glassmorphism */
 .nav-pills-custom {
     border-bottom: none;
     margin-bottom: 2rem;
@@ -604,7 +548,6 @@ main.container > .profile-wform-section {
     border-radius: inherit;
 }
 
-/* Estilos para las tarjetas de publicación */
 .post-card-hover {
     transition: all 0.3s ease;
     border-radius: 1rem;
@@ -617,7 +560,6 @@ main.container > .profile-wform-section {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Tarjeta de preview de Spotify */
 .spotify-preview-card {
     background: rgba(30, 215, 96, 0.1);
     border: 1px solid rgba(30, 215, 96, 0.3);
@@ -659,7 +601,6 @@ main.container > .profile-wform-section {
     box-shadow: none !important;
 }
 
-/* Asegurar que tanto btn-primary como btn-secondary tengan el mismo estilo */
 .follow-btn.btn-primary,
 .follow-btn.btn-secondary {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -681,7 +622,6 @@ main.container > .profile-wform-section {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Estilos para las badges */
 .badge {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -691,7 +631,6 @@ main.container > .profile-wform-section {
     border-radius: 0.5rem;
 }
 
-/* Paginación glassmorphism específica para perfil de usuario */
 .pagination-custom .page-link {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -728,7 +667,6 @@ main.container > .profile-wform-section {
     box-shadow: none !important;
 }
 
-/* Animaciones suaves para iconos */
 .fas, .fab {
     transition: transform 0.2s ease;
 }
@@ -738,7 +676,6 @@ main.container > .profile-wform-section {
     transform: scale(1.1);
 }
 
-/* Efecto glassmorphism para botones outline */
 .btn-outline-light {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -753,10 +690,6 @@ main.container > .profile-wform-section {
     transform: translateY(-1px);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
-
-/* ================================================
-   ESTILOS ESPECÍFICOS PARA PLAYLISTS EN PERFIL
-   ================================================ */
 
 .playlists-list {
     display: flex;
@@ -923,7 +856,7 @@ main.container > .profile-wform-section {
     -webkit-backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
-    border-radius: 12px !important; /* Border radius de 12px */
+    border-radius: 12px !important;
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
@@ -933,8 +866,8 @@ main.container > .profile-wform-section {
     padding: 0.5rem 1rem !important;
     font-size: 0.875rem !important;
     box-shadow: none !important;
-    min-height: auto !important; /* Asegurar altura consistente */
-    line-height: normal !important; /* Línea consistente */
+    min-height: auto !important;
+    line-height: normal !important;
 }
 
 .btn-playlist:hover,
@@ -965,11 +898,6 @@ main.container > .profile-wform-section {
     color: #fff !important;
 }
 
-/* ================================================
-   RESPONSIVE PARA PLAYLISTS EN MÓVILES
-   ================================================ */
-
-/* FORZAR LAYOUT VERTICAL EN MÓVILES - OVERRIDE COMPLETO */
 @media screen and (max-width: 768px) {
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper {
         flex-direction: column !important;
@@ -1058,7 +986,6 @@ main.container > .profile-wform-section {
     }
 }
 
-/* MÓVILES PEQUEÑOS */
 @media screen and (max-width: 576px) {
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container {
         width: 140px !important;
@@ -1109,15 +1036,12 @@ main.container > .profile-wform-section {
     }
 }
 
-/* BACKUP: CSS DIRECTO PARA FORZAR LAYOUT */
 @media screen and (max-width: 768px) {
-    /* Forzar flexbox vertical */
     .playlists-list .playlist-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
     }
     
-    /* Forzar imagen arriba */
     .playlists-list .playlist-cover-container {
         display: block !important;
         margin: 0 auto 1.5rem auto !important;
@@ -1125,18 +1049,12 @@ main.container > .profile-wform-section {
         height: 160px !important;
     }
     
-    /* Forzar contenido abajo */
     .playlists-list .playlist-info-container {
         width: 100% !important;
         text-align: center !important;
     }
 }
 
-/* ================================================
-   DISEÑO CONSOLIDADO DE PLAYLISTS - MÁXIMA ESPECIFICIDAD
-   ================================================ */
-
-/* REGLAS BASE PARA ESCRITORIO - DISEÑO HORIZONTAL */
 html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
 body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
 .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper {
@@ -1150,9 +1068,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
     margin: 0 !important;
 }
 
-/* DISEÑO MÓVIL - LAYOUT VERTICAL CON MÁXIMA ESPECIFICIDAD */
 @media screen and (max-width: 768px) {
-    /* WRAPPER PRINCIPAL - FORZAR DISEÑO VERTICAL */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
@@ -1169,7 +1085,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         margin: 0 !important;
     }
     
-    /* COVER - IMAGEN ARRIBA Y CENTRADA */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
@@ -1185,7 +1100,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         overflow: hidden !important;
     }
     
-    /* INFO CONTAINER - CONTENIDO ABAJO Y CENTRADO */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
@@ -1203,8 +1117,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         margin: 0 !important;
         padding: 0 !important;
     }
-    
-    /* HEADER SECTION - CENTRADO */
+
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-header-section,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-header-section,
     .playlists-list .playlist-card-full-width .playlist-header-section {
@@ -1216,7 +1129,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         margin-bottom: 1rem !important;
     }
     
-    /* TITLE WRAPPER - CENTRADO */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title-wrapper,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title-wrapper,
     .playlists-list .playlist-card-full-width .playlist-title-wrapper {
@@ -1224,8 +1136,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         width: 100% !important;
         margin-bottom: 0.5rem !important;
     }
-    
-    /* TÍTULO - CENTRADO Y TAMAÑO OPTIMIZADO */
+
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title,
     .playlists-list .playlist-card-full-width .playlist-title {
@@ -1236,7 +1147,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         width: 100% !important;
     }
     
-    /* BADGES - CENTRADOS */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-badges,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-badges,
     .playlists-list .playlist-card-full-width .playlist-badges {
@@ -1247,7 +1157,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         width: 100% !important;
     }
     
-    /* DESCRIPCIÓN - CENTRADA */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-description,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-description,
     .playlists-list .playlist-card-full-width .playlist-description {
@@ -1257,8 +1166,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         line-height: 1.5 !important;
         width: 100% !important;
     }
-    
-    /* FOOTER SECTION - CENTRADO EN COLUMNA */
+
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-footer-section,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-footer-section,
     .playlists-list .playlist-card-full-width .playlist-footer-section {
@@ -1269,8 +1177,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         width: 100% !important;
         display: flex !important;
     }
-    
-    /* META INFO - CENTRADA EN FILA */
+
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-meta-info,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-meta-info,
     .playlists-list .playlist-card-full-width .playlist-meta-info {
@@ -1284,7 +1191,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         display: flex !important;
     }
     
-    /* ACCIONES - CENTRADAS EN FILA */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section,
     .playlists-list .playlist-card-full-width .playlist-actions-section {
@@ -1297,7 +1203,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         flex-wrap: wrap !important;
     }
     
-    /* BOTONES - OPTIMIZADOS PARA MÓVIL */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
     .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist {
@@ -1306,7 +1211,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         max-width: 120px !important;
         padding: 0.6rem 0.8rem !important;
         font-size: 0.85rem !important;
-        border-radius: 12px !important; /* Border radius de 12px para móviles */
+        border-radius: 12px !important;
         text-align: center !important;
         display: flex !important;
         align-items: center !important;
@@ -1315,9 +1220,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
     }
 }
 
-/* MÓVILES MUY PEQUEÑOS */
 @media screen and (max-width: 576px) {
-    /* COVER MÁS PEQUEÑO */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
     .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container {
@@ -1326,7 +1229,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         margin-bottom: 1rem !important;
     }
     
-    /* BOTONES MÁS PEQUEÑOS */
     html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
     body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
     .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist {
@@ -1334,11 +1236,10 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         max-width: 100px !important;
         font-size: 0.75rem !important;
         padding: 0.5rem 0.6rem !important;
-        border-radius: 12px !important; /* Border radius de 12px para móviles pequeños */
+        border-radius: 12px !important;
     }
 }
 
-/* Estilos para badges de categoría de publicaciones (glassmorphism como playlists) */
 .card .post-category-badge,
 .card .badge.post-category-badge,
 .card span.badge.post-category-badge,
@@ -1366,7 +1267,6 @@ div.card span.badge.post-category-badge {
     display: inline-block !important;
 }
 
-/* Sobrescribir estilos de posts.css con máxima especificidad */
 body .card .badge.post-category-badge,
 body div.card .badge.post-category-badge,
 body .dashboard-card .badge.post-category-badge {
@@ -1374,13 +1274,7 @@ body .dashboard-card .badge.post-category-badge {
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* ================================================
-   ESTADÍSTICAS DE PERFIL DE USUARIO - FORZAR HORIZONTAL EN MÓVILES
-   ================================================ */
-
-/* Forzar que las estadísticas se mantengan horizontales en dispositivos móviles */
 @media screen and (max-width: 768px) {
-    /* Contenedor de estadísticas - forzar grid horizontal */
     .row.text-center.mb-4 {
         display: flex !important;
         flex-direction: row !important;
@@ -1390,8 +1284,7 @@ body .dashboard-card .badge.post-category-badge {
         align-items: center !important;
         margin-bottom: 1.5rem !important;
     }
-    
-    /* Cada columna de estadística */
+
     .row.text-center.mb-4 .col-4 {
         flex: 1 !important;
         max-width: none !important;
@@ -1401,10 +1294,9 @@ body .dashboard-card .badge.post-category-badge {
         justify-content: center !important;
         padding: 0.5rem !important;
         text-align: center !important;
-        min-width: 0 !important; /* Prevenir overflow */
+        min-width: 0 !important;
     }
     
-    /* Número principal de la estadística */
     .row.text-center.mb-4 .col-4 .fw-bold.fs-5 {
         font-size: 1.25rem !important;
         font-weight: 700 !important;
@@ -1414,7 +1306,6 @@ body .dashboard-card .badge.post-category-badge {
         white-space: nowrap !important;
     }
     
-    /* Texto descriptivo */
     .row.text-center.mb-4 .col-4 .text-light.small {
         font-size: 0.8rem !important;
         color: rgba(255, 255, 255, 0.8) !important;
@@ -1423,8 +1314,7 @@ body .dashboard-card .badge.post-category-badge {
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
-    
-    /* Links en las estadísticas */
+
     .row.text-center.mb-4 .col-4 a {
         color: inherit !important;
         text-decoration: none !important;
@@ -1441,7 +1331,6 @@ body .dashboard-card .badge.post-category-badge {
     }
 }
 
-/* Móviles muy pequeños - ajustar tamaños aún más */
 @media screen and (max-width: 376px) {
     .row.text-center.mb-4 .col-4 .fw-bold.fs-5 {
         font-size: 1.1rem !important;

@@ -1,20 +1,11 @@
-/* ====================================================
-   0) IMPORTA LA TIPOGRAFÍA
-   ==================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-/* ====================================================
-   1) RESET Y FONDO GLOBAL
-   ==================================================== */
 body {
     font-family: 'Instrument Sans', sans-serif;
     font-weight: 500;
     color: #fff;
 }
 
-/* ====================================================
-   2) ENCABEZADO DE COMUNIDADES (Glassmorphism)
-   ==================================================== */
 .communities-header {
     background: rgba(255,255,255,0.10);
     backdrop-filter: blur(12px);
@@ -35,9 +26,6 @@ body {
     font-size: 1.1rem;
 }
 
-/* ====================================================
-   3) ENCABEZADOS DE SECCIÓN
-   ==================================================== */
 .section-header {
     color: #fff;
     font-weight: 600;
@@ -47,14 +35,13 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
+
 .section-header i {
     color: #a5b4fc;
     font-size: 1.3rem;
 }
 
-/* ====================================================
-   4) TARJETAS DE COMUNIDAD (Glassmorphism)
-   ==================================================== */
+
 .community-card {
     background: rgba(255,255,255,0.10);
     backdrop-filter: blur(15px);
@@ -75,9 +62,7 @@ body {
     border-color: rgba(255,255,255,0.28);
 }
 
-/* ====================================================
-   5) PORTADA DE COMUNIDAD
-   ==================================================== */
+
 .community-cover {
     height: 120px;
     background: rgba(120,120,255,0.10);
@@ -114,9 +99,6 @@ body {
     position: relative;
 }
 
-/* ====================================================
-   6) INFORMACIÓN DE COMUNIDAD
-   ==================================================== */
 .community-info {
     background: transparent;
     flex: 1 1 auto;
@@ -153,9 +135,6 @@ body {
     overflow: hidden;
 }
 
-/* ====================================================
-   7) ESTADÍSTICAS
-   ==================================================== */
 .community-stats {
     display: flex;
     align-items: center;
@@ -175,9 +154,7 @@ body {
     font-size: 0.85rem;
 }
 
-/* ====================================================
-   8) BADGES DE TIPO DE COMUNIDAD
-   ==================================================== */
+
 .community-badge {
     display: inline-flex;
     align-items: center;
@@ -234,9 +211,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* ====================================================
-   9) ACCIONES DE TARJETA
-   ==================================================== */
 .community-actions {
     display: flex;
     gap: 0.5rem;
@@ -257,6 +231,7 @@ body {
     font-size: 1rem;
     box-shadow: none;
 }
+
 .btn-community-primary {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -286,6 +261,7 @@ body {
     font-size: 1rem !important;
     opacity: 0.9 !important;
 }
+
 .btn-community-secondary {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -315,6 +291,7 @@ body {
     font-size: 1rem !important;
     opacity: 0.9 !important;
 }
+
 .btn-community-danger {
     background: rgba(239, 68, 68, 0.15) !important;
     backdrop-filter: blur(10px) !important;
@@ -382,7 +359,6 @@ body {
     color: #fff;
 }
 
-/* Botón de Nueva Comunidad mejorado */
 .btn-new-playlist {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
@@ -416,9 +392,6 @@ body {
     opacity: 0.9;
 }
 
-/* ====================================================
-   10) LAYOUT DE GRID (Full Width)
-   ==================================================== */
 .communities-grid, .community-grid {
     display: flex;
     flex-direction: column;
@@ -426,9 +399,6 @@ body {
     margin-bottom: 3rem;
 }
 
-/* ====================================================
-   11) ESTADO VACÍO
-   ==================================================== */
 .community-empty, .empty-state {
     text-align: center;
     padding: 3rem 2rem;
@@ -465,9 +435,6 @@ body {
     border: none;
 }
 
-/* ====================================================
-   12) FORMULARIOS DE COMUNIDAD
-   ==================================================== */
 .community-form {
     background: rgba(255,255,255,0.10);
     border: 1.5px solid rgba(255,255,255,0.18);
@@ -502,9 +469,6 @@ body {
     box-shadow: 0 0 0 2px rgba(124,58,237,0.18);
 }
 
-/* ====================================================
-   SECCIÓN DE POSTS EN COMUNIDADES
-   ==================================================== */
 .community-posts {
     margin-top: 3rem;
 }
@@ -533,7 +497,6 @@ body {
     font-size: 1.5rem;
 }
 
-/* Responsive ajustes para la sección de posts */
 @media (max-width: 768px) {
     .community-posts-header {
         flex-direction: column;
@@ -548,7 +511,6 @@ body {
         width: 100%;
     }
     
-    /* Botón de nueva publicación ocupa todo el ancho */
     .community-posts-header .btn-community {
         width: 100% !important;
         max-width: 100% !important;
@@ -559,7 +521,6 @@ body {
     }
 }
 
-/* Ajustes adicionales para móviles pequeños */
 @media (max-width: 576px) {
     .community-posts-header {
         padding: 0 1rem;
@@ -571,7 +532,6 @@ body {
         line-height: 1.3;
     }
     
-    /* Botón aún más prominente en móviles pequeños */
     .community-posts-header .btn-community {
         padding: 1rem 2rem !important;
         font-size: 1.1rem !important;
@@ -581,18 +541,12 @@ body {
     }
 }
 
-/* ====================================================
-   DISEÑO HORIZONTAL DE COMUNIDADES (Similar a posts)
-   ==================================================== */
-
-/* Contenedor de lista de comunidades */
 .communities-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-/* Tarjeta de comunidad de ancho completo */
 .community-card-full-width {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
@@ -610,19 +564,16 @@ body {
     background: rgba(255, 255, 255, 0.12);
 }
 
-/* Cuerpo de la tarjeta de comunidad */
 .community-card-body {
     padding: 2rem;
 }
 
-/* Contenedor principal del contenido de comunidad */
 .community-content-wrapper {
     display: flex;
     gap: 2rem;
     align-items: flex-start;
 }
 
-/* Contenedor de la imagen/cover de comunidad */
 .community-cover-container {
     flex-shrink: 0;
     width: 120px;
@@ -654,13 +605,11 @@ body {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Contenedor de información de la comunidad */
 .community-info-container {
     flex: 1;
     min-width: 0;
 }
 
-/* Sección de cabecera de la comunidad */
 .community-header-section {
     display: flex;
     align-items: flex-start;
@@ -688,7 +637,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Descripción de la comunidad */
 .community-description {
     color: rgba(255, 255, 255, 0.85);
     font-size: 1rem;
@@ -696,7 +644,6 @@ body {
     margin: 0 0 1.5rem 0;
 }
 
-/* Sección de footer de la comunidad */
 .community-footer-section {
     display: flex;
     justify-content: space-between;
@@ -706,7 +653,6 @@ body {
     gap: 1rem;
 }
 
-/* Meta información de la comunidad */
 .community-meta-info {
     display: flex;
     align-items: center;
@@ -742,7 +688,6 @@ body {
     white-space: nowrap;
 }
 
-/* Sección de acciones de la comunidad */
 .community-actions-section {
     display: flex;
     align-items: center;
@@ -750,7 +695,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Responsive para comunidades horizontales */
 @media (max-width: 768px) {
     .community-content-wrapper {
         flex-direction: column;
@@ -797,11 +741,6 @@ body {
     }
 }
 
-/* ================================================
-   HEADER HORIZONTAL DE COMUNIDADES (COMO PLAYLISTS)
-   ================================================ */
-
-/* Contenedor de imagen de comunidad para mantener proporciones */
 .community-cover-large {
   width: 180px;
   height: 180px;
@@ -813,7 +752,6 @@ body {
   background-color: #6c757d;
 }
 
-/* Imagen de header de comunidad */
 .community-header-cover {
   width: 180px !important;
   height: 180px !important;
@@ -825,13 +763,11 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos para placeholders de imágenes de comunidades */
 .community-header-cover i {
   font-size: 3rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Título grande de comunidad */
 .community-title-large {
   font-size: 2.5rem !important;
   font-weight: 700;
@@ -840,7 +776,6 @@ body {
   line-height: 1.1;
 }
 
-/* Descripción grande de comunidad */
 .community-description-large {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.8) !important;
@@ -848,7 +783,6 @@ body {
   line-height: 1.4;
 }
 
-/* Meta información grande de comunidad */
 .community-meta-large {
   display: flex;
   align-items: center;
@@ -863,18 +797,16 @@ body {
   display: flex;
   align-items: center;
   white-space: nowrap;
-  min-width: 0; /* Permite que el texto se ajuste si es necesario */
+  min-width: 0;
 }
 
-/* Acciones del header de comunidad */
 .community-actions-header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.5rem; /* Espacio adicional desde la imagen */
+  margin-top: 1.5rem;
 }
 
-/* === CENTRAR BOTONES DE ACCIONES DE COMUNIDAD === */
 .community-actions-header {
   justify-content: center !important;
   align-items: center !important;
@@ -882,7 +814,6 @@ body {
   gap: 0.75rem !important;
 }
 
-/* Responsive para móviles */
 @media (max-width: 768px) {
   .community-actions-header {
     flex-direction: column !important;
@@ -900,7 +831,6 @@ body {
   }
 }
 
-/* Responsive: ajustar tamaños en pantallas pequeñas */
 @media (max-width: 768px) {
   .community-header-cover {
     width: 120px !important;
@@ -962,7 +892,6 @@ body {
   }
 }
 
-/* Foto de perfil extra pequeña para headers */
 .user-photo-xs {
   width: 20px !important;
   height: 20px !important;
@@ -971,11 +900,6 @@ body {
   object-fit: cover;
 }
 
-/* ====================================================
-   ESTILOS PARA SOLICITUDES DE MEMBRESÍA
-   ==================================================== */
-
-/* Botón púrpura principal */
 .btn-purple {
     background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
     border: none;
@@ -996,7 +920,6 @@ body {
     color: white;
 }
 
-/* Botón púrpura outline con glassmorphism */
 .btn-outline-purple {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -1027,7 +950,6 @@ body {
     opacity: 0.9 !important;
 }
 
-/* Badge de notificación */
 .btn-outline-purple .badge {
     background: #ef4444 !important;
     color: white;
@@ -1043,12 +965,6 @@ body {
     100% { opacity: 1; }
 }
 
-/* ====================================================
-   GLASSMORPHISM PARA MODALES DE SOLICITUD DE MEMBRESÍA
-   ESTILOS IDÉNTICOS AL MODAL DE CATEGORÍAS
-   ==================================================== */
-
-/* Modal backdrop con glassmorphism súper suave */
 .modal.fade {
     background: rgba(0, 0, 0, 0.25) !important;
     backdrop-filter: blur(6px) !important;
@@ -1061,7 +977,6 @@ body {
     -webkit-backdrop-filter: blur(6px) !important;
 }
 
-/* Modal dialog centrado exactamente como el modal de categorías */
 .modal-dialog {
     display: flex !important;
     align-items: center !important;
@@ -1074,7 +989,6 @@ body {
     position: relative !important;
 }
 
-/* Modal content con glassmorphism más claro y tonos más blancos */
 .modal-content,
 .modal-content.bg-dark {
     background: linear-gradient(135deg, 
@@ -1102,12 +1016,10 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Animación de entrada idéntica al modal de categorías */
 .modal.show .modal-content {
     transform: scale(1) !important;
 }
 
-/* Header del modal con tonos más blancos y mayor opacidad */
 .modal-header {
     display: flex !important;
     align-items: center !important;
@@ -1123,7 +1035,6 @@ body {
     margin: 0 !important;
 }
 
-/* Body del modal */
 .modal-body {
     padding: 1rem 2rem !important;
     background: transparent !important;
@@ -1131,7 +1042,6 @@ body {
     overflow-y: auto !important;
 }
 
-/* Footer del modal con tonos más blancos y mayor opacidad */
 .modal-footer {
     display: flex !important;
     align-items: center !important;
@@ -1148,7 +1058,6 @@ body {
     margin: 0 !important;
 }
 
-/* Título del modal idéntico al modal de categorías */
 .modal-title {
     color: #fff !important;
     font-size: 1.25rem !important;
@@ -1156,7 +1065,6 @@ body {
     margin: 0 !important;
 }
 
-/* Botón cerrar con tonalidades más claras y icono X visible */
 .modal .btn-close,
 .modal .btn-close-white {
     background: linear-gradient(135deg, 
@@ -1182,7 +1090,6 @@ body {
     position: relative !important;
 }
 
-/* Crear el icono X usando CSS puro */
 .modal .btn-close::before,
 .modal .btn-close-white::before {
     content: "×" !important;
@@ -1217,7 +1124,6 @@ body {
     color: #fff !important;
 }
 
-/* Botones con glassmorphism más claro y transparente */
 .modal .btn {
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
@@ -1277,7 +1183,6 @@ body {
     border-color: rgba(139, 92, 246, 0.4) !important;
 }
 
-/* Estilo específico para btn-purple en modales (glassmorphism) */
 .modal .btn-purple {
     background: linear-gradient(135deg, 
         rgba(139, 92, 246, 0.15) 0%, 
@@ -1343,7 +1248,6 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Form controls con glassmorphism más blanco y mayor opacidad */
 .modal .form-control,
 .modal textarea.form-control {
     background: linear-gradient(135deg, 
@@ -1383,14 +1287,12 @@ body {
     font-style: italic !important;
 }
 
-/* Labels en modales */
 .modal .form-label {
     color: #fff !important;
     font-weight: 500 !important;
     margin-bottom: 0.75rem !important;
 }
 
-/* Alertas con glassmorphism más claro y transparente */
 .modal .alert {
     background: linear-gradient(135deg, 
         rgba(255, 255, 255, 0.06) 0%, 
@@ -1425,7 +1327,6 @@ body {
     color: #fbbf24 !important;
 }
 
-/* Scrollbar personalizado para el modal body */
 .modal-body::-webkit-scrollbar {
     width: 6px;
 }
@@ -1444,7 +1345,6 @@ body {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* Animación de aparición con blur súper suave */
 @keyframes modalGlassAppear {
     0% {
         opacity: 0;
@@ -1458,7 +1358,6 @@ body {
     }
 }
 
-/* Animación para el contenido del modal */
 .modal.fade .modal-content {
     animation: modalContentAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1474,7 +1373,6 @@ body {
     }
 }
 
-/* Responsive para diferentes tamaños de pantalla */
 @media (max-width: 768px) {
     .modal-dialog {
         padding: 1rem !important;
@@ -1501,14 +1399,12 @@ body {
     }
 }
 
-/* Asegurar que el modal esté siempre centrado */
 .modal.show {
     display: flex !important;
     align-items: center;
     justify-content: center;
 }
 
-/* Alert para comunidades privadas */
 .alert-warning {
     background: rgba(245, 158, 11, 0.15);
     border: 1px solid rgba(245, 158, 11, 0.3);
@@ -1521,11 +1417,6 @@ body {
     opacity: 0.8;
 }
 
-/* ====================================================
-   GLASSMORPHISM PARA BUSCADOR DE COMUNIDADES PRIVADAS
-   ==================================================== */
-
-/* Input de búsqueda de comunidades con glassmorphism */
 #searchCommunityInput.form-control {
     background: rgba(255, 255, 255, 0.10) !important;
     backdrop-filter: blur(15px) !important;
@@ -1559,7 +1450,6 @@ body {
     font-weight: 400 !important;
 }
 
-/* Botón de búsqueda con mismo estilo que btn-new-playlist */
 #searchPrivateCommunitiesForm .btn-purple {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -1594,7 +1484,6 @@ body {
     opacity: 0.9 !important;
 }
 
-/* Estilos para formularios en modales */
 .form-control.bg-secondary {
     background: rgba(55, 65, 81, 0.8) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -1612,7 +1501,6 @@ body {
     color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Mejoras para acciones del header */
 .community-actions-header {
     display: flex;
     align-items: center;
@@ -1636,11 +1524,6 @@ body {
     }
 }
 
-/* ====================================================
-   RESPONSIVE STYLES PARA MODALES DE SOLICITUD
-   ==================================================== */
-
-/* Pantallas grandes */
 @media (min-width: 992px) {
     .modal-dialog {
         width: 650px !important;
@@ -1649,7 +1532,6 @@ body {
     }
 }
 
-/* Pantallas medianas */
 @media (min-width: 768px) and (max-width: 991px) {
     .modal-dialog {
         width: 85vw !important;
@@ -1658,7 +1540,6 @@ body {
     }
 }
 
-/* Pantallas pequeñas */
 @media (max-width: 767px) {
     .modal-dialog {
         width: 95vw !important;
@@ -1695,7 +1576,6 @@ body {
     }
 }
 
-/* Pantallas muy pequeñas */
 @media (max-width: 480px) {
     .modal-dialog {
         width: 100vw !important;
@@ -1720,679 +1600,38 @@ body {
     }
 }
 
-/* ====================================================
-   ESTILOS ESPECÍFICOS PARA VISTA DE SOLICITUDES DE MEMBRESÍA
-   ==================================================== */
-
-/* Tarjetas de solicitud con glassmorphism específico */
-.requests-list .community-card-full-width {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    margin-bottom: 2rem;
-}
-
-.requests-list .community-card-full-width:hover {
-    background: rgba(255, 255, 255, 0.12) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-}
-
-/* Avatar personalizado para solicitudes */
-.requests-list .community-cover-container {
-    flex-shrink: 0;
-    width: 80px !important;
-    height: 80px !important;
-    border-radius: 50% !important;
-    overflow: hidden;
-    position: relative;
-    border: 2px solid rgba(255, 255, 255, 0.15) !important;
-}
-
-.requests-list .community-cover-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    border-radius: 50% !important;
-}
-
-.requests-list .community-cover-placeholder {
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-radius: 50% !important;
-    display: flex !important;
+.card.dashboard-card .d-flex.flex-column.flex-md-row {
     align-items: center !important;
     justify-content: center !important;
-    font-size: 1.5rem !important;
-    color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Badge de estado personalizado para solicitudes */
-.requests-list .community-badge {
-    background: rgba(245, 158, 11, 0.15) !important;
-    color: #fbbf24 !important;
-    border: 1px solid rgba(245, 158, 11, 0.3) !important;
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
-    padding: 0.4rem 0.8rem !important;
+@media (min-width: 768px) {
+    .card.dashboard-card .d-flex.flex-column.flex-md-row {
+        flex-direction: row !important;
+        gap: 1.5rem !important;
+    }
+    
+    .card.dashboard-card .d-flex.flex-column.flex-md-row .btn {
+        flex: 0 0 auto !important;
+        min-width: 200px !important;
+        max-width: none !important;
+    }
 }
 
-/* Mensaje del usuario con glassmorphism */
-.requests-list .message-container {
-    background: rgba(255, 255, 255, 0.06) !important;
-    backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 0.75rem !important;
-    padding: 1rem !important;
-    margin: 0.5rem 0 1rem 0 !important;
-}
-
-.requests-list .message-container p {
-    color: #fff !important;
-    margin-bottom: 0 !important;
-    line-height: 1.5 !important;
-}
-
-/* Botones de acción con glassmorphism mejorado */
-.requests-list .btn-community {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 0.75rem !important;
-    transition: all 0.3s ease !important;
-    font-size: 0.875rem !important;
-}
-
-.requests-list .btn-community:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-    color: #fff !important;
-}
-
-/* Botón aprobar (éxito) */
-.requests-list .btn-community-primary {
-    background: linear-gradient(135deg, 
-        rgba(34, 197, 94, 0.15) 0%, 
-        rgba(16, 185, 129, 0.12) 100%) !important;
-    border-color: rgba(34, 197, 94, 0.25) !important;
-    color: #10b981 !important;
-}
-
-.requests-list .btn-community-primary:hover {
-    background: linear-gradient(135deg, 
-        rgba(34, 197, 94, 0.25) 0%, 
-        rgba(16, 185, 129, 0.20) 100%) !important;
-    border-color: rgba(34, 197, 94, 0.4) !important;
-    color: #10b981 !important;
-}
-
-/* Botón rechazar (peligro) */
-.requests-list .btn-community-danger {
-    background: linear-gradient(135deg, 
-        rgba(239, 68, 68, 0.15) 0%, 
-        rgba(220, 38, 38, 0.12) 100%) !important;
-    border-color: rgba(239, 68, 68, 0.25) !important;
-    color: #ef4444 !important;
-}
-
-.requests-list .btn-community-danger:hover {
-    background: linear-gradient(135deg, 
-        rgba(239, 68, 68, 0.25) 0%, 
-        rgba(220, 38, 38, 0.20) 100%) !important;
-    border-color: rgba(239, 68, 68, 0.4) !important;
-    color: #ef4444 !important;
-}
-
-/* Botón secundario (ver perfil) */
-.requests-list .btn-community-secondary {
-    background: rgba(139, 92, 246, 0.1) !important;
-    border-color: rgba(139, 92, 246, 0.2) !important;
-    color: #a5b4fc !important;
-}
-
-.requests-list .btn-community-secondary:hover {
-    background: rgba(139, 92, 246, 0.15) !important;
-    border-color: rgba(139, 92, 246, 0.3) !important;
-    color: #a5b4fc !important;
-}
-
-/* Alertas personalizadas con glassmorphism */
-.requests-alert {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 1rem !important;
-    padding: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.requests-alert.success {
-    background: rgba(34, 197, 94, 0.1) !important;
-    border-color: rgba(34, 197, 94, 0.25) !important;
-}
-
-.requests-alert.error {
-    background: rgba(239, 68, 68, 0.1) !important;
-    border-color: rgba(239, 68, 68, 0.25) !important;
-}
-
-/* Responsive para vista de solicitudes */
-@media (max-width: 768px) {
-    .requests-list .community-content-wrapper {
+@media (max-width: 767.98px) {
+    .card.dashboard-card .d-flex.flex-column.flex-md-row {
         flex-direction: column !important;
         gap: 1rem !important;
     }
     
-    .requests-list .community-cover-container {
-        width: 60px !important;
-        height: 60px !important;
-        align-self: center !important;
-    }
-    
-    .requests-list .community-footer-section {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 1rem !important;
-    }
-    
-    .requests-list .community-actions-section {
-        align-self: stretch !important;
-        justify-content: flex-start !important;
-        flex-wrap: wrap !important;
+    .card.dashboard-card .d-flex.flex-column.flex-md-row .btn {
+        width: 100% !important;
+        max-width: 300px !important;
+        justify-content: center !important;
     }
 }
 
-/* Pantallas extra pequeñas - mantener layout horizontal pero más compacto */
-@media (max-width: 400px) {
-  .community-meta-large {
-    gap: 0.2rem 0.5rem;
-    font-size: 0.7rem;
-  }
-  
-  .community-meta-large span {
-    font-size: 0.7rem;
-  }
-  
-  .user-photo-xs {
-    width: 18px !important;
-    height: 18px !important;
-  }
-}
-
-/* ====================================================
-   CORRECCIÓN DE ALTURA DE BOTONES EN VISTA SHOW
-   ==================================================== */
-
-/* Sincronizar altura de botones "Solicitudes" y tres puntos */
-.btn-outline-purple,
-.btn-options-large.btn-purple {
-    min-height: 50px !important;
-    height: 50px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0.75rem 1.5rem !important;
-    box-sizing: border-box !important;
-    border-radius: 12px !important;
-}
-
-/* Asegurar que el botón de tres puntos mantenga su forma cuadrada con altura consistente */
-.btn-options-large.btn-purple {
-    width: 50px !important;
-    min-width: 50px !important;
-    border-radius: 12px !important;
-    padding: 0 !important;
-}
-
-/* Override específico para cuando ambos botones estén en el mismo contenedor */
-.community-actions-header .btn-outline-purple,
-.community-actions-header .btn-options-large,
-.community-actions-header .btn-community-danger {
-    height: 50px !important;
-    min-height: 50px !important;
-    min-width: 140px !important; /* Ancho mínimo para acomodar badges */
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0.75rem 1.75rem !important; /* Padding más amplio */
-}
-
-/* Botón "Solicitudes" con border-radius de 12px */
-.community-actions-header .btn-outline-purple {
-    border-radius: 12px !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-}
-
-/* Asegurar que el botón de eliminar tenga el mismo tamaño */
-.community-actions-header .btn-community-danger {
-    min-width: 140px !important; /* Mismo ancho que los otros botones */
-    padding: 0.75rem 1.75rem !important; /* Mismo padding */
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
-/* ====================================================
-   BADGES GLASSMORPHISM PARA RESULTADOS DE BÚSQUEDA
-   ==================================================== */
-
-/* Badge de advertencia (pendiente) con glassmorphism */
-.badge.glassmorphism-warning {
-    background: rgba(245, 158, 11, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(245, 158, 11, 0.3) !important;
-    color: #fbbf24 !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 1rem !important;
-    transition: all 0.3s ease !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
-}
-
-.badge.glassmorphism-warning:hover {
-    background: rgba(245, 158, 11, 0.25) !important;
-    border-color: rgba(245, 158, 11, 0.4) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2) !important;
-}
-
-/* Badge de éxito (miembro) con glassmorphism */
-.badge.glassmorphism-success {
-    background: rgba(34, 197, 94, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(34, 197, 94, 0.3) !important;
-    color: #10b981 !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 1rem !important;
-    transition: all 0.3s ease !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
-}
-
-.badge.glassmorphism-success:hover {
-    background: rgba(34, 197, 94, 0.25) !important;
-    border-color: rgba(34, 197, 94, 0.4) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
-}
-
-/* Badge de peligro (rechazada) con glassmorphism */
-.badge.glassmorphism-danger {
-    background: rgba(239, 68, 68, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(239, 68, 68, 0.3) !important;
-    color: #ef4444 !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 1rem !important;
-    transition: all 0.3s ease !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
-}
-
-.badge.glassmorphism-danger:hover {
-    background: rgba(239, 68, 68, 0.25) !important;
-    border-color: rgba(239, 68, 68, 0.4) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
-}
-
-/* Asegurar que los iconos dentro de badges se vean bien */
-.badge.glassmorphism-warning i,
-.badge.glassmorphism-success i,
-.badge.glassmorphism-danger i {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)) !important;
-    font-size: inherit !important;
-}
-
-/* ====================================================
-   ESTILOS PARA TEXTO DE ESTADO EN RESULTADOS DE BÚSQUEDA
-   ==================================================== */
-
-/* Texto blanco para "Solicitud enviada" */
-.text-white.small {
-    color: #fff !important;
-    font-weight: 500 !important;
-    font-size: 0.875rem !important;
-    opacity: 0.9 !important;
-}
-
-/* Estilos específicos para los resultados de búsqueda */
-#resultsContainer .card {
-    transition: all 0.3s ease !important;
-}
-
-#resultsContainer .card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Mejorar el gap entre badges en resultados de búsqueda */
-#resultsContainer .d-flex.align-items-center.gap-2 {
-    gap: 0.75rem !important;
-}
-
-/* Asegurar que los badges mantienen su forma en pantallas pequeñas */
-@media (max-width: 768px) {
-    .badge.glassmorphism-warning,
-    .badge.glassmorphism-success,
-    .badge.glassmorphism-danger {
-        font-size: 0.7rem !important;
-        padding: 0.3rem 0.6rem !important;
-        white-space: nowrap !important;
-    }
-}
-
-/* ====================================================
-   ESTILOS PARA VISTA DE MIEMBROS DE COMUNIDAD
-   ==================================================== */
-
-/* Página de miembros */
-.members-page {
-    position: relative;
-    z-index: 1;
-}
-
-/* Header de miembros */
-.members-header {
-    margin-bottom: 2rem;
-}
-
-.members-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.members-subtitle {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-}
-
-/* Información de la comunidad mini */
-.community-info-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-}
-
-.community-cover-mini {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.community-cover-mini-placeholder {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Grid de miembros */
-.members-grid {
-    margin-bottom: 2rem;
-}
-
-/* Tarjetas de miembros */
-.member-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    transition: all 0.3s ease !important;
-    height: 100%;
-}
-
-.member-card:hover {
-    background: rgba(255, 255, 255, 0.12) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
-}
-
-/* Contenido del miembro */
-.member-content {
-    width: 100%;
-}
-
-.member-avatar {
-    flex-shrink: 0;
-}
-
-.member-info {
-    min-width: 0;
-    flex: 1;
-}
-
-.member-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 0.25rem;
-    line-height: 1.3;
-}
-
-.member-username {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0;
-}
-
-/* Acciones de miembro */
-.member-actions {
-    gap: 0.5rem;
-}
-
-.member-actions .btn {
-    font-size: 0.875rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-/* Badges de rol */
-.badge.glassmorphism-success {
-    background: rgba(34, 197, 94, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(34, 197, 94, 0.3) !important;
-    color: #10b981 !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 1rem !important;
-}
-
-.badge.glassmorphism-white {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-    padding: 0.35rem 0.75rem !important;
-    border-radius: 1rem !important;
-}
-
-/* Botones glassmorphism para miembros */
-.btn.glassmorphism-white {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-    transition: all 0.3s ease !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
-}
-
-.btn.glassmorphism-white:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: #fff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1) !important;
-    text-decoration: none !important;
-}
-
-.btn.glassmorphism-danger {
-    background: rgba(239, 68, 68, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(239, 68, 68, 0.3) !important;
-    color: #ef4444 !important;
-    transition: all 0.3s ease !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
-}
-
-.btn.glassmorphism-danger:hover {
-    background: rgba(239, 68, 68, 0.25) !important;
-    border-color: rgba(239, 68, 68, 0.4) !important;
-    color: #fff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
-    text-decoration: none !important;
-}
-
-/* Modal de confirmación */
-.modal .glassmorphism-white,
-.modal .glassmorphism-danger {
-    padding: 0.75rem 1.5rem !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-}
-
-/* Responsive para miembros */
-@media (max-width: 768px) {
-    .members-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    .members-title {
-        font-size: 2rem;
-        text-align: left;
-    }
-    
-    .members-subtitle {
-        font-size: 1rem;
-    }
-    
-    .btn.btn-new-playlist {
-        align-self: stretch;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-    }
-    
-    .member-card .card-body {
-        padding: 1.25rem;
-    }
-    
-    .member-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .member-avatar {
-        margin-right: 0 !important;
-    }
-    
-    .member-info {
-        width: 100%;
-    }
-    
-    .member-actions {
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .member-actions .btn {
-        flex: 1;
-        min-width: 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .members-title {
-        font-size: 1.75rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-    }
-    
-    .community-info-card .row {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .community-info-card .col-auto {
-        align-self: center;
-    }
-    
-    .member-card .card-body {
-        padding: 1rem;
-    }
-    
-    .member-actions {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    .member-actions .btn {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* Mejoras para iconos en badges */
-.badge i {
-    font-size: 0.8em;
-    opacity: 0.9;
-}
-
-/* Animaciones suaves */
-.member-card,
-.btn.glassmorphism-white,
-.btn.glassmorphism-danger,
-.badge {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Estados de carga para botones */
-.btn:disabled {
-    opacity: 0.6 !important;
-    cursor: not-allowed !important;
-    transform: none !important;
-    pointer-events: none !important;
+.card.dashboard-card .d-flex.flex-column.flex-md-row .btn i {
+    margin-right: 0.5rem !important;
+    flex-shrink: 0 !important;
 }

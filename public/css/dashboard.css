@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
-/* === GLOBAL === */
 body.dashboard-body {
   margin: 0; padding: 0;
   min-height: 100vh;
@@ -11,22 +10,18 @@ body.dashboard-body {
   color: #1f1f1f;
 }
 
-/* === NAVBAR === */
 .navbar {
   background: transparent;
 }
 
-/* Offcanvas toggle button */
 .btn-offcanvas {
   border: none; background: transparent;
 }
 
-/* Branding */
 .navbar .navbar-brand {
   font-size: 1.75rem;
 }
 
-/* Nav-link inline (≥lg) */
 .nav-link-inline {
   position: relative;
   font-size: 1.15rem;
@@ -52,7 +47,6 @@ body.dashboard-body {
   left: 0;
 }
 
-/* Nav-link active state */
 .nav-link-inline.active {
   color: #fff !important;
   font-weight: 600 !important;
@@ -64,7 +58,6 @@ body.dashboard-body {
   background: #fff !important;
 }
 
-/* Nav-link hover state */
 .nav-link-inline:hover {
   color: #fff !important;
 }
@@ -74,13 +67,11 @@ body.dashboard-body {
   left: 0;
 }
 
-/* === USER PHOTO === */
 .user-photo {
   width: 2rem; height: 2rem; object-fit: cover;
   border: 2px solid rgba(255,255,255,0.6);
 }
 
-/* === POST AUTHOR LINKS === */
 .post-author a {
   color: #ffffff !important;
   text-decoration: none !important;
@@ -96,7 +87,6 @@ body.dashboard-body {
   color: #e0e7ff !important;
 }
 
-/* Profile photo in posts */
 .post-author img {
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: border-color 0.3s ease;
@@ -106,7 +96,6 @@ body.dashboard-body {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* === DROPDOWN ITEMS (lg+) === */
 .dropdown-menu {
   background: rgba(255, 255, 255, 0.95);
   border: none; border-radius: .75rem;
@@ -121,13 +110,10 @@ body.dashboard-body {
   background: rgba(124,58,237,0.1);
 }
 
-/* === OFFCANVAS STYLES (≤lg) - BASE STYLES ONLY === */
-/* Nota: Los estilos glassmorphism están en navbar-fix.css */
 .offcanvas {
   width: 280px !important;
 }
 
-/* Estilos básicos que no entran en conflicto con glassmorphism */
 .offcanvas-body {
   padding: 0; 
   display: flex; 
@@ -135,7 +121,6 @@ body.dashboard-body {
   height: 100%;
 }
 
-/* Enlaces básicos sin glassmorphism - solo se aplicarán si navbar-fix.css no está cargado */
 .offcanvas .nav-link:not([style*="backdrop-filter"]) {
   display: block; 
   width: 100%;
@@ -150,7 +135,6 @@ body.dashboard-body {
   background: rgba(124,58,237,0.1);
 }
 
-/* Botón de logout básico sin glassmorphism */
 .offcanvas .btn-link:not([style*="backdrop-filter"]) {
   display: block; 
   width: 100%;
@@ -164,12 +148,10 @@ body.dashboard-body {
   background: rgba(124,58,237,0.1);
 }
 
-/* === MAIN CONTENT === */
 .dashboard-container {
   flex: 1;
 }
 
-/* Dashboard títulos estandarizados */
 .dashboard-container h1 {
   font-size: 2.5rem !important;
   font-weight: 700;
@@ -182,9 +164,7 @@ body.dashboard-body {
   line-height: 1.3;
 }
 
-/* === RESPONSIVE DASHBOARD SECTION TITLES === */
 @media (max-width: 768px) {
-  /* Títulos de sección más grandes en tablets */
   .dashboard-section-title {
     font-size: 2.25rem !important;
     line-height: 1.3 !important;
@@ -193,13 +173,11 @@ body.dashboard-body {
     text-align: center !important;
   }
   
-  /* Centrar el contenedor de títulos en móviles */
   .d-flex.flex-column.flex-lg-row.justify-content-between.align-items-start.align-items-lg-center {
     text-align: center !important;
     align-items: center !important;
   }
   
-  /* Subtítulo "Últimas 24 horas" - mantener tamaño normal */
   .dashboard-section-title + small.text-light {
     font-size: 0.875rem !important;
     margin-bottom: 1rem !important;
@@ -210,7 +188,6 @@ body.dashboard-body {
 }
 
 @media (max-width: 576px) {
-  /* Títulos muy grandes y prominentes en móviles pequeños */
   .dashboard-section-title {
     font-size: 2rem !important;
     line-height: 1.2 !important;
@@ -220,15 +197,13 @@ body.dashboard-body {
     font-weight: 800 !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   }
-  
-  /* Subtítulo "Últimas 24 horas" - tamaño apropiado para móvil */
+
   .dashboard-section-title + small.text-light {
     font-size: 0.8rem !important;
     margin-bottom: 1.25rem !important;
     opacity: 0.7 !important;
   }
   
-  /* Botones de acción en ancho completo en móviles pequeños */
   .dashboard-action-btn {
     width: 100% !important;
     max-width: 280px !important;
@@ -240,7 +215,6 @@ body.dashboard-body {
 }
 
 @media (max-width: 400px) {
-  /* Para pantallas muy pequeñas, mantener legibilidad */
   .dashboard-section-title {
     font-size: 1.75rem !important;
     line-height: 1.1 !important;
@@ -252,7 +226,6 @@ body.dashboard-body {
   }
 }
 
-/* Dashboard card */
 .dashboard-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
@@ -260,21 +233,20 @@ body.dashboard-body {
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   color: #fff;
-  height: 100%; /* Asegurar que todas las tarjetas tengan la misma altura */
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .dashboard-card .card-body {
   padding: 2rem;
-  flex: 1; /* Permitir que el contenido se expanda */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrar verticalmente el contenido */
-  align-items: center; /* Centrar horizontalmente el contenido */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Asegurar alineación consistente de las estadísticas */
 .dashboard-card .card-body .fas {
   margin-bottom: 1rem !important;
 }
@@ -291,31 +263,28 @@ body.dashboard-body {
   font-weight: 700 !important;
 }
 
-/* Fila de estadísticas del dashboard */
 .dashboard-container .row.mb-5 {
-  align-items: stretch; /* Asegurar que todas las columnas tengan la misma altura */
+  align-items: stretch;
 }
 
 .dashboard-container .row.mb-5 .col-md-4 {
-  display: flex; /* Hacer que las columnas sean flex containers */
+  display: flex;
 }
 
 .dashboard-container .row.mb-5 .col-md-4 .dashboard-card {
-  width: 100%; /* Asegurar que las tarjetas ocupen todo el ancho disponible */
+  width: 100%;
 }
 
-/* Responsive adjustments para las estadísticas */
 @media (max-width: 767.98px) {
   .dashboard-card .card-body {
-    padding: 1.5rem; /* Reducir padding en móviles */
+    padding: 1.5rem;
   }
   
   .dashboard-card .card-text {
-    font-size: 1.5rem !important; /* Reducir tamaño de número en móviles */
+    font-size: 1.5rem !important;
   }
 }
 
-/* === LIKE BUTTON === */
 .like-btn {
   background: none;
   border: none;
@@ -349,11 +318,6 @@ body.dashboard-body {
   transform: scale(1.1);
 }
 
-/* ====================================================
-   ICONOS DE ESTADO VACÍO - SELECTORES ESPECÍFICOS
-   ==================================================== */
-
-/* SOLO iconos de estado vacío principales - NO afectar botones */
 .dashboard-card .text-center > i.fa-user-friends:not(.btn i),
 .dashboard-card .text-center > i.fa-users:not(.btn i),
 .dashboard-card .text-center > i.fa-newspaper:not(.btn i),
@@ -369,12 +333,6 @@ body.dashboard-body {
   visibility: visible !important;
   line-height: 1 !important;
 }
-
-/* ====================================================
-   ASEGURAR CARGA DE ICONOS FONT AWESOME - SIN AFECTAR BOTONES
-   ==================================================== */
-
-/* Force visibility for FontAwesome icons SOLO para estados vacíos */
 .dashboard-card .text-center .fas:not(.btn .fas),
 .dashboard-card .text-center .fa:not(.btn .fa),
 .dashboard-card .text-center .fab:not(.btn .fab),
@@ -388,7 +346,6 @@ body.dashboard-body {
   line-height: 1 !important;
 }
 
-/* Specific fixes for dashboard empty state icons - SIN AFECTAR BOTONES */
 .dashboard-card .text-center .fas.fa-user-friends:not(.btn .fas)::before {
   content: "\f500" !important;
   font-family: "Font Awesome 6 Free" !important;
@@ -407,7 +364,6 @@ body.dashboard-body {
   font-weight: 900 !important;
 }
 
-/* Force display for all empty state icons - SIN AFECTAR BOTONES */
 .dashboard-card .text-center i.fas:not(.btn i),
 .dashboard-card .text-center i.fa:not(.btn i),
 .dashboard-card .text-center i.fab:not(.btn i),
@@ -422,14 +378,12 @@ body.dashboard-body {
   height: auto !important;
 }
 
-/* Override any competing styles - SIN AFECTAR BOTONES */
 .dashboard-card .text-center .fa-3x:not(.btn .fa-3x) {
   font-size: 3em !important;
   line-height: 1 !important;
   vertical-align: baseline !important;
 }
 
-/* Ensure Font Awesome CDN styles don't get overridden - SIN AFECTAR BOTONES */
 .dashboard-card .text-center i[class*="fa-"]:not(.btn i) {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 900 !important;
@@ -437,11 +391,6 @@ body.dashboard-body {
   text-transform: none !important;
 }
 
-/* ====================================================
-   ESTILOS PARA OFFCANVAS ENLACES ACTIVOS
-   ==================================================== */
-
-/* Nav links activos en offcanvas */
 .offcanvas .nav-link.active {
   background: rgba(124, 58, 237, 0.2) !important;
   color: #8b5cf6 !important;
@@ -453,11 +402,6 @@ body.dashboard-body {
   color: #7c3aed !important;
 }
 
-/* ====================================================
-   CORRECCIONES ADICIONALES PARA NAVEGACIÓN
-   ==================================================== */
-
-/* Asegurar que los enlaces del navbar principal funcionen */
 .navbar .nav-link-inline {
   color: rgba(255, 255, 255, 0.8) !important;
   transition: all 0.3s ease !important;
@@ -472,7 +416,6 @@ body.dashboard-body {
   font-weight: 600 !important;
 }
 
-/* Dropdown toggle activo */
 .navbar .dropdown-toggle.nav-link-inline {
   color: rgba(255, 255, 255, 0.9) !important;
 }
@@ -481,11 +424,6 @@ body.dashboard-body {
   color: #fff !important;
 }
 
-/* ====================================================
-   ICONOS DE ESTADO VACÍO - SOLUCIÓN ESPECIFICA SIN AFECTAR BOTONES
-   ==================================================== */
-
-/* Estados vacíos específicos con iconos forzados - SOLO para iconos directos, NO para botones */
 .dashboard-card .text-center.py-5 > i:not(.btn i),
 .dashboard-card .text-center.py-4 > i:not(.btn i) {
   color: rgba(255, 255, 255, 0.5) !important;
@@ -498,7 +436,6 @@ body.dashboard-body {
   visibility: visible !important;
 }
 
-/* Iconos específicos para cada tipo de estado vacío - SOLO iconos directos */
 .dashboard-card .card-body.text-center > i.fa-user-friends:not(.btn i),
 .dashboard-card .card-body.text-center > i.fa-users:not(.btn i),
 .dashboard-card .card-body.text-center > i.fa-newspaper:not(.btn i),
@@ -516,7 +453,6 @@ body.dashboard-body {
   line-height: 1 !important;
 }
 
-/* Iconos con clase fa-3x específicamente para estados vacíos - NO para botones */
 .dashboard-card .text-center > i.fa-3x:not(.btn i) {
   color: rgba(255, 255, 255, 0.4) !important;
   font-size: 3rem !important;
@@ -529,7 +465,6 @@ body.dashboard-body {
   line-height: 1 !important;
 }
 
-/* Bootstrap Icons específicos - SOLO iconos directos */
 .dashboard-card .card-body.text-center > .bi:not(.btn .bi) {
   font-family: "bootstrap-icons" !important;
   font-style: normal !important;
@@ -540,7 +475,6 @@ body.dashboard-body {
   vertical-align: -.125em !important;
 }
 
-/* Font Awesome icons específicos - SOLO iconos directos */
 .dashboard-card .card-body.text-center > .fas:not(.btn .fas) {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 900 !important;
@@ -550,7 +484,6 @@ body.dashboard-body {
   line-height: 1 !important;
 }
 
-/* Classes display específicas - SOLO para iconos principales */
 .dashboard-card .text-center > .display-1:not(.btn .display-1) {
   font-size: 4rem !important;
   line-height: 1 !important;
@@ -558,7 +491,6 @@ body.dashboard-body {
   margin-bottom: 1.5rem !important;
 }
 
-/* Estados específicos del dashboard - textos */
 .dashboard-card h4.text-white,
 .dashboard-card h4.text-light,
 .dashboard-card h4.text-muted,
@@ -573,11 +505,6 @@ body.dashboard-body {
   margin-bottom: 1.5rem !important;
 }
 
-/* ====================================================
-   GLASSMORPHISM PARA BOTONES DEL DASHBOARD - MEJORADO
-   ==================================================== */
-
-/* TODOS los botones en dashboard cards con glassmorphism */
 .dashboard-card .btn,
 .dashboard-card button,
 .dashboard-card a.btn {
@@ -601,7 +528,6 @@ body.dashboard-body {
   overflow: hidden !important;
 }
 
-/* Específicamente para btn-outline-light */
 .dashboard-card .btn-outline-light {
   background: rgba(255, 255, 255, 0.15) !important;
   backdrop-filter: blur(20px) !important;
@@ -617,11 +543,6 @@ body.dashboard-body {
     inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ====================================================
-   GLASSMORPHISM GLOBAL PARA TODOS LOS BOTONES BTN-OUTLINE-LIGHT
-   ==================================================== */
-
-/* Aplicar glassmorphism a TODOS los botones btn-outline-light en el dashboard */
 .dashboard-container .btn-outline-light,
 .btn-outline-light {
   background: rgba(255, 255, 255, 0.15) !important;
@@ -646,7 +567,6 @@ body.dashboard-body {
   overflow: hidden !important;
 }
 
-/* Específicos para botones pequeños btn-sm */
 .dashboard-container .btn-outline-light.btn-sm,
 .btn-outline-light.btn-sm {
   padding: 0.6rem 1.2rem !important;
@@ -654,7 +574,6 @@ body.dashboard-body {
   border-radius: 12px !important;
 }
 
-/* Estados hover para TODOS los btn-outline-light */
 .dashboard-container .btn-outline-light:hover,
 .btn-outline-light:hover {
   background: rgba(255, 255, 255, 0.25) !important;
@@ -667,7 +586,6 @@ body.dashboard-body {
   text-decoration: none !important;
 }
 
-/* Estados focus para TODOS los btn-outline-light */
 .dashboard-container .btn-outline-light:focus,
 .btn-outline-light:focus {
   background: rgba(255, 255, 255, 0.25) !important;
@@ -681,7 +599,6 @@ body.dashboard-body {
   outline: none !important;
 }
 
-/* Estados active para TODOS los btn-outline-light */
 .dashboard-container .btn-outline-light:active,
 .btn-outline-light:active {
   transform: translateY(0px) !important;
@@ -690,7 +607,6 @@ body.dashboard-body {
     inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Iconos dentro de botones btn-outline-light globales */
 .dashboard-container .btn-outline-light i,
 .btn-outline-light i {
   font-size: 1em !important;
@@ -704,7 +620,6 @@ body.dashboard-body {
   vertical-align: middle !important;
 }
 
-/* Asegurar que NO se apliquen estilos de iconos vacíos a botones */
 .dashboard-card .btn *,
 .dashboard-card .btn-outline-light *,
 .dashboard-card .btn-glass *,
@@ -715,17 +630,11 @@ body.dashboard-body {
   display: inline !important;
 }
 
-/* ====================================================
-   ESTILOS GLASSMORPHISM PARA PAGINACIÓN
-   ==================================================== */
-
-/* Contenedor de paginación */
 .pagination {
   gap: 0.5rem !important;
   margin-bottom: 0 !important;
 }
 
-/* Enlaces y botones de paginación con glassmorphism */
 .pagination .page-link {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(12px) !important;
@@ -762,7 +671,6 @@ body.dashboard-body {
   text-decoration: none !important;
 }
 
-/* Página activa */
 .pagination .page-item.active .page-link {
   background: rgba(124, 58, 237, 0.3) !important;
   border-color: rgba(124, 58, 237, 0.5) !important;
@@ -777,7 +685,6 @@ body.dashboard-body {
   transform: translateY(-1px) !important;
 }
 
-/* Enlaces deshabilitados */
 .pagination .page-item.disabled .page-link {
   background: rgba(255, 255, 255, 0.05) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
@@ -795,18 +702,12 @@ body.dashboard-body {
   box-shadow: none !important;
 }
 
-/* Botones de navegación (anterior/siguiente) */
 .pagination .page-link[aria-label="Previous"],
 .pagination .page-link[aria-label="Next"] {
   font-size: 0.9rem !important;
   padding: 0.5rem 1rem !important;
 }
 
-/* ====================================================
-   ESTILOS DE PAGINACIÓN GLASSMORPHISM MEJORADOS
-   ==================================================== */
-
-/* Estilos específicos para paginación custom */
 .pagination-custom {
   margin-bottom: 0 !important;
 }
@@ -859,7 +760,6 @@ body.dashboard-body {
   box-shadow: none !important;
 }
 
-/* Información de paginación debajo de los controles */
 .pagination-info {
   margin-top: 1rem !important;
   text-align: center !important;
@@ -878,15 +778,6 @@ body.dashboard-body {
   display: inline-block !important;
 }
 
-/* ====================================================
-   FIN DE ESTILOS DE PAGINACIÓN
-   ==================================================== */
-
-/* ====================================================
-   DROPDOWNS ESPECÍFICOS PARA POSTS
-   ==================================================== */
-
-/* Dropdowns en post cards */
 .post-card-full-width .dropdown {
   position: relative !important;
 }
@@ -962,14 +853,12 @@ body.dashboard-body {
   position: fixed !important;
 }
 
-/* Específicamente para dropdowns de posts */
 .post-card-full-width .dropdown-menu.show {
   z-index: 999999 !important;
   position: fixed !important;
   transform: none !important;
 }
 
-/* Resetear cualquier z-index conflictivo en elementos padre */
 .post-card-full-width,
 .post-card-body,
 .post-content-wrapper,
@@ -978,7 +867,6 @@ body.dashboard-body {
   position: relative !important;
 }
 
-/* Asegurar que el dropdown no sea afectado por overflow hidden */
 .posts-list {
   overflow: visible !important;
 }
@@ -987,11 +875,6 @@ body.dashboard-body {
   overflow: visible !important;
 }
 
-/* ====================================================
-   FORZAR Z-INDEX MÁXIMO PARA DROPDOWNS - SOLUCIÓN DEFINITIVA
-   ==================================================== */
-
-/* Asegurar que NADA pueda estar por encima de los dropdowns */
 .dropdown-menu.show,
 .post-card-full-width .dropdown-menu.show {
   z-index: 999999 !important;
@@ -1001,7 +884,6 @@ body.dashboard-body {
   will-change: transform !important;
 }
 
-/* Resetear cualquier contexto de apilamiento que pueda interferir */
 .posts-list,
 .post-card-full-width,
 .post-card-body,
@@ -1016,7 +898,6 @@ body.dashboard-body {
   isolation: auto !important;
 }
 
-/* Asegurar que no hay overflow hidden que pueda cortar el dropdown */
 .posts-list,
 .post-card-full-width,
 .post-card-body,
@@ -1025,23 +906,16 @@ main {
   overflow: visible !important;
 }
 
-/* Estilo específico para el contenedor padre del dropdown */
 .post-card-full-width .dropdown {
   position: static !important;
   z-index: auto !important;
 }
 
-/* Asegurar que el botón del dropdown no interfiera */
 .post-card-full-width .dropdown-toggle {
   z-index: auto !important;
   position: relative !important;
 }
 
-/* ====================================================
-   FIN DE FORZADO DE Z-INDEX
-   ==================================================== */
-
-/* === CUSTOM DROPDOWN STYLES (GLASSMORPHISM) === */
 #global-dropdown-container {
   position: fixed !important;
   top: 0 !important;
@@ -1052,81 +926,10 @@ main {
   z-index: 999999 !important;
 }
 
-/* === Estilos custom-dropdown comentados === */
-/*
-.custom-dropdown-menu {
-  position: absolute !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  padding: 0.5rem 0 !important;
-  min-width: 180px !important;
-  max-width: 200px !important;
-  pointer-events: auto !important;
-  z-index: 999999 !important;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.custom-dropdown-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.custom-dropdown-item {
-  display: flex !important;
-  align-items: center !important;
-  padding: 0.5rem 1rem !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  text-decoration: none !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease !important;
-  border: none !important;
-  background: transparent !important;
-  width: 100% !important;
-  text-align: left !important;
-  cursor: pointer !important;
-  font-size: 0.875rem !important;
-}
-
-.custom-dropdown-item:hover {
-  background: rgba(124, 58, 237, 0.1) !important;
-  color: #7c3aed !important;
-  text-decoration: none !important;
-}
-
-.custom-dropdown-item.danger {
-  color: #dc2626 !important;
-}
-
-.custom-dropdown-item.danger:hover {
-  background: rgba(220, 38, 38, 0.1) !important;
-  color: #dc2626 !important;
-}
-
-.custom-dropdown-divider {
-  border: none !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
-  margin: 0.25rem 0 !important;
-}
-
-.custom-dropdown-menu * {
-  pointer-events: auto !important;
-}
-*/
-
-/* === PAGINATION GLASSMORPHISM === */
-
-/* === CORRECCIONES PARA PLAYLISTS === */
-/* Asegurar que todas las playlists tengan el mismo ancho y espaciado */
 .playlists-list {
     display: flex !important;
     flex-direction: column !important;
-    gap: 2rem !important; /* Más espacio vertical entre playlists */
+    gap: 2rem !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1142,15 +945,10 @@ main {
     flex-shrink: 0 !important;
 }
 
-/* NOTA: Estilos de playlist-content-wrapper consolidados en profile.css */
-
-/* Responsive adjustments para playlists */
 @media (max-width: 768px) {
     .playlists-list {
         gap: 1.5rem !important;
     }
-    
-    /* NOTA: Estilos de playlist-content-wrapper consolidados en profile.css */
     
     .playlist-cover-container {
         width: 100px !important;
@@ -1159,8 +957,6 @@ main {
     }
 }
 
-/* === FORZAR ESTILOS CORRECTOS PARA PLAYLISTS === */
-/* Sobrescribir cualquier estilo conflictivo con máxima especificidad */
 body.dashboard-body .playlists-list {
     display: flex !important;
     flex-direction: column !important;
@@ -1185,26 +981,17 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
     flex-basis: auto !important;
 }
 
-/* NOTA: Estilos de playlist consolidados en profile.css para evitar conflictos */
-
-/* Reset cualquier transform o position que pueda estar afectando */
 body.dashboard-body .playlists-list * {
     transform: none !important;
     -webkit-transform: none !important;
 }
 
-/* Asegurar que no hay floats ni posicionamiento absoluto interfiriendo */
 body.dashboard-body .playlists-list .playlist-card-full-width {
     float: none !important;
     position: relative !important;
     clear: both !important;
 }
 
-/* ====================================================
-   BOTONES GLASSMORPHISM PARA DASHBOARD
-   ==================================================== */
-
-/* Botones glassmorphism principales */
 .btn-glass {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(12px) !important;
@@ -1239,80 +1026,20 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Botones pequeños glassmorphism */
 .btn-glass.btn-sm {
     padding: 0.5rem 1rem !important;
     font-size: 0.875rem !important;
 }
 
-/* Asegurar que los iconos dentro de botones glassmorphism se vean bien */
 .btn-glass i {
     color: inherit !important;
     font-size: 0.875em !important;
 }
 
-/* ====================================================
-   FIN BOTONES GLASSMORPHISM PARA DASHBOARD
-   ==================================================== */
-
-/* === CUSTOM DROPDOWN STYLES (GLASSMORPHISM) - DESACTIVADO === */
-/*
-.custom-dropdown-container {
-  position: relative;
-  display: inline-block;
-}
-
-.custom-dropdown-trigger {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: none !important;
-  border-radius: 0.5rem !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  width: 32px !important;
-  height: 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.2s ease !important;
-  opacity: 0.7;
-}
-
-.custom-dropdown-trigger:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  opacity: 1;
-}
-
-.song-row:hover .custom-dropdown-trigger {
-  opacity: 1;
-}
-
-.custom-dropdown-menu {
-  position: absolute !important;
-  top: 100% !important;
-  right: 0 !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  padding: 0.5rem 0 !important;
-  min-width: 180px !important;
-  z-index: 1000 !important;
-  margin-top: 5px !important;
-}
-
-.custom-dropdown-menu[style*="display: block"] {
-  display: block !important;
-}
-*/
-
-/* === Asegurar z-index máximo para dropdowns principales === */
 .dropdown-menu.show {
   z-index: 999999 !important;
 }
 
-/* === RESPONSIVE DROPDOWN ADJUSTMENTS === */
 @media (max-width: 768px) {
   .dropdown-menu {
     min-width: 160px !important;
@@ -1320,7 +1047,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
   }
 }
 
-/* === BUTTON ICON ALIGNMENT === */
 .btn.d-inline-flex.align-items-center {
   display: inline-flex !important;
   align-items: center !important;
@@ -1342,7 +1068,6 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
   margin-left: 0 !important;
 }
 
-/* Empty state buttons specific styling */
 .card-body .btn.d-inline-flex.align-items-center {
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -1353,4 +1078,107 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
 .card-body .btn.d-inline-flex.align-items-center:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.dashboard-card.mb-4 .card-body {
+  padding: 1.25rem !important;
+}
+
+.dashboard-card.mb-4 .card-body h5 {
+  margin-bottom: 0.75rem !important;
+  font-size: 1.1rem !important;
+}
+
+.dashboard-card.mb-4 .card-body p.text-light.small {
+  margin-bottom: 1rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+.dashboard-card.mb-4 .card-body form.row.g-3 {
+  margin-bottom: 0 !important;
+}
+
+.dashboard-card.mb-4 .card-body #searchResults {
+  margin-top: 1rem !important;
+}
+
+.dashboard-card.mb-4 .card-body #searchLoading {
+  margin-top: 1rem !important;
+}
+
+.dashboard-card.mb-4 {
+    max-height: none !important;
+    height: auto !important;
+}
+
+.dashboard-card.mb-4 .card-body {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    text-align: left !important;
+}
+
+.container-fluid .row .col-12 .dashboard-card.mb-4 {
+    height: auto !important;
+    min-height: auto !important;
+    flex: none !important;
+}
+
+.dashboard-card.mb-4 + .community-section {
+    margin-top: 1.5rem !important;
+}
+
+.dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
+    align-items: center !important;
+}
+
+@media (min-width: 768px) {
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
+        flex-direction: row !important;
+        gap: 1rem !important;
+    }
+    
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
+        flex: 0 0 auto !important;
+        min-width: 180px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+    
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
+        width: 100% !important;
+        max-width: 280px !important;
+    }
+}
+
+.dashboard-card .card-body .d-flex.gap-2 {
+    margin-top: 0 !important;
+}
+
+.dashboard-card .card-body .d-flex.gap-2 .btn {
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    border-radius: 8px !important;
+}
+
+.dashboard-card .card-body .d-flex.gap-2 .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
+        gap: 1rem !important;
+    }
+    
+    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
+        min-width: 160px !important;
+        font-size: 0.9rem !important;
+    }
 }

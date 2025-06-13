@@ -1,27 +1,14 @@
-/* mobile-responsive.css - Mejoras específicas para dispositivos móviles */
-
-/* ================================================
-   MEJORAS GLOBALES PARA MÓVILES
-   ================================================ */
-
-/* Asegurar que el viewport se comporte correctamente */
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
 
-/* Mejorar el rendimiento en móviles */
 * {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 }
 
-/* ================================================
-   NAVBAR MÓVIL MEJORADA
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Navbar más compacta en móvil */
     .navbar {
         padding: 0.75rem 1rem !important;
     }
@@ -30,28 +17,20 @@ html {
         font-size: 1.4rem !important;
     }
     
-    /* Botón de hamburguesa más grande */
     .btn-offcanvas i {
         font-size: 1.5rem !important;
     }
-    
-    /* Offcanvas optimizado para móvil */
+
     .offcanvas {
         width: 85vw !important;
         max-width: 300px !important;
     }
     
-    /* ================================================
-       HEADER DE PLAYLISTS MÓVIL MEJORADO
-       ================================================ */
-    
-    /* Header más compacto */
     .header-text-section {
         margin-bottom: 1rem !important;
         text-align: center !important;
     }
     
-    /* Título principal más pequeño pero legible */
     .playlist-main-title {
         font-size: 1.75rem !important;
         margin-bottom: 0.5rem !important;
@@ -59,7 +38,6 @@ html {
         text-align: center !important;
     }
     
-    /* Subtítulo visible en móviles con tamaño reducido */
     .playlist-subtitle {
         display: block !important;
         font-size: 0.8rem !important;
@@ -68,8 +46,7 @@ html {
         opacity: 0.9 !important;
         text-align: center !important;
     }
-    
-    /* Botón de crear playlist optimizado */
+
     .btn-new-playlist {
         width: 100% !important;
         justify-content: center !important;
@@ -78,31 +55,22 @@ html {
         border-radius: 0.75rem !important;
     }
     
-    /* Botón de crear playlist - mostrar texto siempre en móviles */
     .btn-new-playlist span {
         display: inline !important;
         font-size: 0.85rem !important;
     }
     
-    /* Espaciado entre header y contenido */
     .d-flex.flex-column.flex-lg-row {
         margin-bottom: 1.5rem !important;
     }
     
-    /* NOTA: Estilos de playlist consolidados en profile.css para evitar conflictos */
 }
 
-/* ================================================
-   CONTAINER PRINCIPAL RESPONSIVO
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Container principal con padding optimizado */
     .dashboard-container {
         padding: 0.75rem !important;
     }
     
-    /* Columnas responsivas */
     .col-12,
     .col-lg-10 {
         padding-left: 0.5rem !important;
@@ -110,18 +78,12 @@ html {
     }
 }
 
-/* ================================================
-   HEADER DE PLAYLISTS MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Header más compacto */
     .header-text-section {
         margin-bottom: 1rem;
         text-align: center !important;
     }
-    
-    /* Título principal más pequeño */
+
     .playlist-main-title {
         font-size: 1.75rem !important;
         margin-bottom: 0.5rem !important;
@@ -129,7 +91,6 @@ html {
         text-align: center !important;
     }
     
-    /* Subtítulo visible en móviles con tamaño reducido */
     .playlist-subtitle {
         display: block !important;
         font-size: 0.8rem !important;
@@ -139,7 +100,6 @@ html {
         text-align: center !important;
     }
     
-    /* Botón de crear playlist optimizado */
     .btn-new-playlist {
         width: 100% !important;
         justify-content: center !important;
@@ -147,64 +107,43 @@ html {
         font-size: 0.9rem !important;
         border-radius: 0.75rem !important;
     }
-    
-    /* Botón de crear playlist - mostrar texto siempre en móviles */
+
     .btn-new-playlist span {
         display: inline !important;
         font-size: 0.85rem !important;
     }
     
-    /* Espaciado entre header y contenido */
     .d-flex.flex-column.flex-lg-row {
         margin-bottom: 1.5rem !important;
     }
 }
 
-/* ================================================
-   TARJETAS DE PLAYLIST MÓVIL OPTIMIZADAS
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Tarjeta principal */
     .playlist-card-full-width {
         border-radius: 0.75rem !important;
         margin-bottom: 1rem !important;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
     }
-    
-    /* Body de la tarjeta más compacto */
+
     .playlist-card-body {
         padding: 1rem !important;
     }
-    
-    /* NOTA: Estilos de playlist content wrapper consolidados en profile.css */
 }
 
-/* ================================================
-   MENSAJES Y ALERTAS MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Alertas más compactas */
     .alert {
         padding: 0.75rem !important;
         font-size: 0.85rem !important;
         border-radius: 0.5rem !important;
         margin-bottom: 1rem !important;
     }
-    
-    /* Botón de cerrar alerta */
+
     .alert .btn-close {
         padding: 0.5rem !important;
     }
 }
 
-/* ================================================
-   ESTADO VACÍO MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Card de estado vacío */
     .dashboard-card {
         margin: 0.5rem 0 !important;
         border-radius: 0.75rem !important;
@@ -215,26 +154,22 @@ html {
         text-align: center !important;
     }
     
-    /* Ícono */
     .dashboard-card .display-1 {
         font-size: 3rem !important;
         margin-bottom: 1rem !important;
     }
     
-    /* Título */
     .dashboard-card h4 {
         font-size: 1.2rem !important;
         margin-bottom: 0.75rem !important;
     }
     
-    /* Descripción */
     .dashboard-card p {
         font-size: 0.9rem !important;
         margin-bottom: 1.5rem !important;
         line-height: 1.4 !important;
     }
     
-    /* Botón */
     .dashboard-card .btn-new-playlist {
         width: 100% !important;
         max-width: 250px !important;
@@ -242,30 +177,22 @@ html {
     }
 }
 
-/* ================================================
-   PAGINACIÓN MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Contenedor de paginación */
     .pagination-custom {
         scale: 0.85 !important;
         margin: 0 !important;
     }
-    
-    /* Items de paginación */
+
     .pagination-custom .page-link {
         padding: 0.5rem 0.6rem !important;
         font-size: 0.8rem !important;
     }
     
-    /* Información de paginación */
     .pagination-info {
         font-size: 0.75rem !important;
         margin-top: 0.5rem !important;
     }
-    
-    /* Centrar paginación */
+
     .text-center {
         display: flex !important;
         flex-direction: column !important;
@@ -273,32 +200,24 @@ html {
     }
 }
 
-/* ================================================
-   INTERACCIONES TÁCTILES
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Mejorar el área de toque */
     .playlist-title-link {
         padding: 0.25rem 0 !important;
         display: block !important;
         touch-action: manipulation !important;
     }
-    
-    /* Botones más grandes para tocar */
+
     .btn-glass,
     .dropdown-toggle {
         min-height: 2.2rem !important;
         touch-action: manipulation !important;
     }
-    
-    /* Enlaces más accesibles */
+
     .playlist-author {
         padding: 0.25rem 0 !important;
         touch-action: manipulation !important;
     }
     
-    /* Prevenir zoom en inputs (si los hay) */
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -308,12 +227,7 @@ html {
     }
 }
 
-/* ================================================
-   OPTIMIZACIONES DE RENDIMIENTO MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Reducir efectos costosos en móvil */
     .playlist-card-full-width:hover {
         transform: none !important;
     }
@@ -325,13 +239,11 @@ html {
     .btn-glass:hover {
         transform: none !important;
     }
-    
-    /* Simplificar sombras */
+
     .playlist-card-full-width {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
     }
     
-    /* Reducir blur en elementos con backdrop-filter */
     .playlist-card-full-width {
         backdrop-filter: blur(8px) !important;
         -webkit-backdrop-filter: blur(8px) !important;
@@ -343,18 +255,11 @@ html {
     }
 }
 
-/* ================================================
-   MEJORAS PARA PANTALLAS MUY PEQUEÑAS (320px)
-   ================================================ */
-
 @media (max-width: 320px) {
-    /* Ajustes para iPhone SE y similares */
     .playlist-main-title {
         font-size: 1.5rem !important;
     }
-    
-    /* NOTA: playlist-content-wrapper consolidado en profile.css */
-    
+
     .playlist-cover-container {
         width: 60px !important;
         height: 60px !important;
@@ -374,14 +279,7 @@ html {
     }
 }
 
-/* ================================================
-   MEJORAS PARA TABLETS (768px - 991px)
-   ================================================ */
-
-@media (min-width: 577px) and (max-width: 991px) {
-    /* Ajustes para tablets */
-    /* NOTA: playlist-content-wrapper consolidado en profile.css */
-    
+@media (min-width: 577px) and (max-width: 991px) {  
     .playlist-cover-container {
         width: 90px !important;
         height: 90px !important;
@@ -396,44 +294,11 @@ html {
     }
 }
 
-/* ================================================
-   DISEÑO VERTICAL PARA TABLETS (768px)
-   ================================================ */
-
-@media screen and (max-width: 768px) {
-    /* NOTA: Diseño vertical de playlists consolidado en profile.css */
-}
-
-/* ================================================
-   DARK MODE ESPECÍFICO PARA MÓVIL
-   ================================================ */
-
-@media (max-width: 576px) and (prefers-color-scheme: dark) {
-    /* Ajustar contraste para pantallas pequeñas */
-    .playlist-title {
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .playlist-privacy-badge {
-        background: rgba(255, 255, 255, 0.15) !important;
-    }
-    
-    .playlist-description {
-        color: rgba(255, 255, 255, 0.85) !important;
-    }
-}
-
-/* ================================================
-   ORIENTACIÓN LANDSCAPE EN MÓVIL
-   ================================================ */
 
 @media (max-width: 896px) and (orientation: landscape) {
-    /* Ajustes para móviles en horizontal */
     .playlist-main-title {
         font-size: 1.6rem !important;
     }
-    
-    /* NOTA: playlist-content-wrapper consolidado en profile.css */
     
     .playlist-cover-container {
         width: 80px !important;
@@ -453,28 +318,23 @@ html {
     }
 }
 
-/* Media query específica para móviles muy pequeños - igual al perfil */
 @media screen and (max-width: 576px) {
-    /* Imagen más pequeña en móviles muy pequeños */
     .playlist-cover-container {
         width: 140px !important;
         height: 140px !important;
         margin-bottom: 1rem !important;
     }
     
-    /* Título más pequeño */
     .playlist-title {
         font-size: 1.2rem !important;
         margin-bottom: 0.75rem !important;
     }
     
-    /* Meta información en columna en móviles pequeños */
     .playlist-meta-info {
         flex-direction: column !important;
         gap: 0.5rem !important;
     }
     
-    /* Botones stack en móviles pequeños - ajustado para tres botones */
     .playlist-actions-section {
         flex-direction: row !important;
         gap: 0.4rem !important;
@@ -490,20 +350,13 @@ html {
     }
 }
 
-/* ================================================
-   CORRECCIÓN PARA CENTRAR HEADER EN MÓVILES
-   ================================================ */
-
-/* Centrar título y subtítulo en todos los dispositivos móviles */
 @media (max-width: 768px) {
-    /* Container del header con flexbox centrado */
     body.dashboard-body .d-flex.flex-column.flex-lg-row,
     .d-flex.flex-column.flex-lg-row {
         text-align: center !important;
         align-items: center !important;
     }
-    
-    /* Header text section centrado */
+
     body.dashboard-body .header-text-section,
     .header-text-section {
         text-align: center !important;
@@ -512,13 +365,12 @@ html {
         display: block !important;
     }
     
-    /* Título principal centrado con mayor especificidad - TAMAÑO ORIGINAL */
     body.dashboard-body .header-text-section .playlist-main-title,
     .header-text-section .playlist-main-title,
     body.dashboard-body .playlist-main-title,
     .playlist-main-title {
         text-align: center !important;
-        font-size: 2.5rem !important; /* Tamaño original mantenido */
+        font-size: 2.5rem !important;
         margin-bottom: 0.5rem !important;
         line-height: 1.2 !important;
         width: 100% !important;
@@ -526,13 +378,12 @@ html {
         font-weight: bold !important;
     }
     
-    /* Subtítulo centrado con mayor especificidad - TAMAÑO ORIGINAL */
     body.dashboard-body .header-text-section .playlist-subtitle,
     .header-text-section .playlist-subtitle,
     body.dashboard-body .playlist-subtitle,
     .playlist-subtitle {
         text-align: center !important;
-        font-size: 1rem !important; /* Tamaño original mantenido */
+        font-size: 1rem !important;
         line-height: 1.4 !important;
         margin-bottom: 0 !important;
         opacity: 0.9 !important;
@@ -541,20 +392,13 @@ html {
     }
 }
 
-/* ================================================
-   CORRECCIÓN ADICIONAL - MÁXIMA ESPECIFICIDAD
-   ================================================ */
-
-/* Forzar centrado con la máxima especificidad posible */
 @media (max-width: 768px) {
-    /* Contenedor principal del header */
     html body.dashboard-body main.dashboard-container .d-flex.flex-column.flex-lg-row {
         text-align: center !important;
         align-items: center !important;
         justify-content: center !important;
     }
     
-    /* Header text section con máxima especificidad */
     html body.dashboard-body main.dashboard-container .header-text-section {
         text-align: center !important;
         width: 100% !important;
@@ -563,35 +407,28 @@ html {
         padding: 0 !important;
     }
     
-    /* Título con máxima especificidad - MANTENER TAMAÑO ORIGINAL */
     html body.dashboard-body main.dashboard-container .header-text-section h1.playlist-main-title {
         text-align: center !important;
         margin: 0 auto 0.5rem auto !important;
         width: 100% !important;
         display: block !important;
-        font-size: 2.5rem !important; /* Tamaño original mantenido */
+        font-size: 2.5rem !important;
         line-height: 1.2 !important;
         font-weight: bold !important;
     }
     
-    /* Párrafo subtítulo con máxima especificidad - MANTENER TAMAÑO ORIGINAL */
     html body.dashboard-body main.dashboard-container .header-text-section p.playlist-subtitle {
         text-align: center !important;
         margin: 0 auto !important;
         width: 100% !important;
         display: block !important;
-        font-size: 1rem !important; /* Tamaño original mantenido */
+        font-size: 1rem !important;
         line-height: 1.4 !important;
         opacity: 0.9 !important;
     }
 }
 
-/* ================================================
-   VISTA EXPLORAR USUARIOS - CORRECCIÓN MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Contenedor de estadísticas en fila horizontal */
     .card.dashboard-card .row.text-center {
         display: flex !important;
         flex-direction: row !important;
@@ -601,7 +438,6 @@ html {
         padding: 0.75rem 0 !important;
     }
     
-    /* Cada columna de estadística */
     .card.dashboard-card .row.text-center .col-4 {
         display: flex !important;
         flex-direction: column !important;
@@ -612,7 +448,6 @@ html {
         min-width: 0 !important;
     }
     
-    /* Números de estadísticas */
     .card.dashboard-card .row.text-center .col-4 .text-white.fw-bold {
         white-space: nowrap !important;
         word-break: keep-all !important;
@@ -623,7 +458,6 @@ html {
         text-align: center !important;
     }
     
-    /* Etiquetas de estadísticas */
     .card.dashboard-card .row.text-center .col-4 .text-light.small {
         white-space: nowrap !important;
         word-break: keep-all !important;
@@ -634,7 +468,6 @@ html {
         text-align: center !important;
     }
     
-    /* Botones de acción en fila horizontal */
     .card.dashboard-card .d-flex.gap-2.justify-content-center {
         flex-direction: row !important;
         gap: 0.5rem !important;
@@ -654,9 +487,7 @@ html {
     }
 }
 
-/* Correcciones adicionales para tablets */
 @media (max-width: 768px) and (min-width: 577px) {
-    /* Mantener layout horizontal también en tablets */
     .card.dashboard-card .row.text-center .col-4 .text-white.fw-bold,
     .card.dashboard-card .row.text-center .col-4 .text-light.small {
         white-space: nowrap !important;
@@ -664,7 +495,6 @@ html {
         text-align: center !important;
     }
     
-    /* Botones en tablets - menos anchos que en móvil */
     .card.dashboard-card .d-flex.gap-2.justify-content-center {
         flex-direction: row !important;
         gap: 0.5rem !important;
@@ -676,9 +506,7 @@ html {
     }
 }
 
-/* Prevenir texto vertical en todas las estadísticas de usuario */
 @media (max-width: 576px) {
-    /* Aplicar a cualquier contenedor de estadísticas de usuario */
     .text-center .col-4 div,
     .text-center .col-4 span,
     .text-center .col-4 p {
@@ -690,27 +518,22 @@ html {
         -ms-hyphens: none !important;
     }
     
-    /* Específicamente para números grandes */
     .fw-bold, .font-weight-bold {
         letter-spacing: normal !important;
         word-spacing: normal !important;
     }
     
-    /* Específicamente para texto pequeño */
     .small, .text-small {
         letter-spacing: normal !important;
         word-spacing: normal !important;
     }
 }
 
-/* Estilos adicionales para mejorar la experiencia en móvil */
 @media (max-width: 576px) {
-    /* Mejorar el espaciado general de las tarjetas de usuario */
     .card.dashboard-card .card-body {
         padding: 1.25rem !important;
     }
     
-    /* Asegurar que el contenedor de estadísticas tenga el ancho completo */
     .card.dashboard-card .row.text-center.mb-3 {
         width: 100% !important;
         margin-left: 0 !important;
@@ -720,13 +543,11 @@ html {
         border-bottom: none !important;
     }
     
-    /* Eliminar cualquier línea divisoria en estadísticas */
     .card.dashboard-card .row.text-center.mb-3::before,
     .card.dashboard-card .row.text-center.mb-3::after {
         display: none !important;
     }
     
-    /* Contenedor de botones en fila horizontal */
     .card.dashboard-card .d-flex.gap-2.justify-content-center {
         display: flex !important;
         flex-direction: row !important;
@@ -735,8 +556,7 @@ html {
         align-items: center !important;
         width: 100% !important;
     }
-    
-    /* Botones más anchos en móvil */
+
     .card.dashboard-card .d-flex.gap-2.justify-content-center .btn {
         flex: 1 !important;
         min-width: 120px !important;
@@ -744,13 +564,11 @@ html {
         white-space: nowrap !important;
         text-align: center !important;
     }
-    
-    /* Texto de botones siempre visible en móvil si hay espacio */
+
     .card.dashboard-card .d-flex.gap-2.justify-content-center .btn .d-none.d-sm-inline {
         display: inline !important;
     }
     
-    /* Mejorar el espaciado entre secciones */
     .card.dashboard-card .position-relative.mb-3 {
         margin-bottom: 1rem !important;
     }
@@ -762,20 +580,14 @@ html {
     .card.dashboard-card p.text-light.small.mb-2 {
         margin-bottom: 1rem !important;
     }
-    
-    /* Si hay biografía, agregar más espacio */
+
     .card.dashboard-card p.text-light.small.mb-3 {
         margin-bottom: 1rem !important;
         padding: 0 0.5rem !important;
     }
 }
 
-/* ================================================
-   VISTA COMUNIDADES INDEX - HEADER MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Contenedor principal del header de comunidades */
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 {
         flex-direction: column !important;
         text-align: center !important;
@@ -783,14 +595,12 @@ html {
         gap: 1.5rem !important;
     }
     
-    /* Contenedor del texto (título y descripción) */
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 > div:first-child {
         width: 100% !important;
         text-align: center !important;
         margin-bottom: 0 !important;
     }
     
-    /* Título principal centrado - mantener tamaño original */
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 h1 {
         text-align: center !important;
         font-size: 2.5rem !important;
@@ -798,8 +608,7 @@ html {
         width: 100% !important;
         display: block !important;
     }
-    
-    /* Descripción centrada - mantener tamaño original */
+
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 p {
         text-align: center !important;
         font-size: 1rem !important;
@@ -809,7 +618,6 @@ html {
         line-height: 1.4 !important;
     }
     
-    /* Botón de crear comunidad - ancho completo debajo del texto */
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 .btn-new-playlist {
         width: 100% !important;
         max-width: 100% !important;
@@ -820,13 +628,11 @@ html {
         margin: 0 !important;
     }
     
-    /* Asegurar que el icono y texto estén centrados */
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 .btn-new-playlist i {
         margin-right: 0.5rem !important;
     }
 }
 
-/* Tablets - mantener layout responsive pero no tan extremo */
 @media (max-width: 768px) and (min-width: 577px) {
     .container-fluid .d-flex.justify-content-between.align-items-center.mb-4 {
         flex-direction: column !important;
@@ -849,21 +655,14 @@ html {
     }
 }
 
-/* ================================================
-   SECCIÓN DE BÚSQUEDA - OCULTAR SPINNER POR DEFECTO
-   ================================================ */
-
-/* Asegurar que el spinner de búsqueda esté oculto por defecto */
 #searchLoading {
     display: none !important;
 }
 
-/* Solo mostrar cuando tenga la clase 'show' o cuando JavaScript lo active explícitamente */
 #searchLoading.show {
     display: block !important;
 }
 
-/* Mejorar la apariencia del spinner en móviles */
 @media (max-width: 576px) {
     #searchLoading {
         padding: 1rem !important;
@@ -876,12 +675,7 @@ html {
     }
 }
 
-/* ================================================
-   BOTONES DE COMUNIDADES RESPONSIVOS
-   ================================================ */
-
 @media (max-width: 768px) {
-    /* Contenedor de acciones de comunidad en móvil */
     .community-actions-section {
         display: flex !important;
         flex-direction: column !important;
@@ -889,8 +683,7 @@ html {
         width: 100% !important;
         padding: 0 1rem !important;
     }
-    
-    /* Botones de comunidad más anchos en móvil */
+
     .btn-community-primary.btn-sm,
     .btn-community-secondary.btn-sm,
     .btn-community-danger.btn-sm {
@@ -903,28 +696,25 @@ html {
         font-weight: 600 !important;
     }
     
-    /* Header de acciones en móvil */
     .community-actions-header {
         display: flex !important;
         flex-direction: column !important;
         gap: 0.75rem !important;
         width: 100% !important;
-        margin-top: 1.5rem !important; /* Espacio adicional desde la imagen en móvil */
+        margin-top: 1.5rem !important;
     }
     
-    /* Botones del header más pequeños */
     .community-actions-header .btn,
     .community-actions-header .btn-community-danger {
         padding: 0.6rem 1.2rem !important;
         font-size: 0.875rem !important;
         width: 100% !important;
         justify-content: center !important;
-        min-width: 140px !important; /* Ancho mínimo consistente */
+        min-width: 140px !important;
     }
 }
 
 @media (max-width: 576px) {
-    /* Botones aún más prominentes en móviles pequeños */
     .btn-community-primary.btn-sm,
     .btn-community-secondary.btn-sm,
     .btn-community-danger.btn-sm {
@@ -935,7 +725,6 @@ html {
         font-weight: 700 !important;
     }
     
-    /* Espaciado mayor entre botones */
     .community-actions-section {
         gap: 1rem !important;
         padding: 0 1.5rem !important;
@@ -943,10 +732,9 @@ html {
     
     .community-actions-header {
         gap: 1rem !important;
-        margin-top: 1.5rem !important; /* Espacio adicional desde la imagen en tablet */
+        margin-top: 1.5rem !important;
     }
     
-    /* Header de acciones con botones más grandes */
     .community-actions-header .btn,
     .community-actions-header .btn-community-danger {
         padding: 0.8rem 2.5rem !important;
@@ -955,11 +743,10 @@ html {
         justify-content: center !important;
         min-height: 44px !important;
         border-radius: 14px !important;
-        min-width: 140px !important; /* Ancho mínimo consistente */
+        min-width: 140px !important;
     }
 }
 
-/* Títulos de secciones de comunidades centrados en móvil */
 @media (max-width: 768px) {
     .community-section .d-flex.justify-content-between.align-items-center.mb-4 {
         text-align: center !important;
@@ -983,17 +770,11 @@ html {
     }
 }
 
-/* ================================================
-   CONTENIDO DE COMUNIDADES CENTRADO EN MÓVIL
-   ================================================ */
-
 @media (max-width: 576px) {
-    /* Centrar todo el contenido de la tarjeta de comunidad */
     .community-card-body {
         text-align: center !important;
     }
     
-    /* Contenedor de información centrado */
     .community-info-container {
         text-align: center !important;
         display: flex !important;
@@ -1001,7 +782,6 @@ html {
         align-items: center !important;
     }
     
-    /* Header de la comunidad centrado */
     .community-header-section {
         justify-content: center !important;
         align-items: center !important;
@@ -1010,33 +790,28 @@ html {
         text-align: center !important;
     }
     
-    /* Título centrado */
     .community-title {
         text-align: center !important;
         margin: 0 auto !important;
     }
     
-    /* Link del título centrado */
     .community-title-link {
         text-align: center !important;
         display: block !important;
         width: 100% !important;
     }
-    
-    /* Badge centrado */
+
     .community-badge {
         margin: 0 auto !important;
         display: inline-flex !important;
     }
-    
-    /* Descripción centrada */
+
     .community-description {
         text-align: center !important;
         margin: 1rem auto !important;
         padding: 0 1rem !important;
     }
     
-    /* Footer section centrado */
     .community-footer-section {
         flex-direction: column !important;
         align-items: center !important;
@@ -1044,15 +819,13 @@ html {
         gap: 1rem !important;
     }
     
-    /* Meta información centrada */
     .community-meta-info {
         justify-content: center !important;
         flex-wrap: wrap !important;
         text-align: center !important;
         gap: 0.5rem 1rem !important;
     }
-    
-    /* Estadísticas centradas */
+
     .community-stat,
     .community-date {
         text-align: center !important;
@@ -1061,13 +834,11 @@ html {
         align-items: center !important;
     }
     
-    /* Contenedor de imagen centrado */
     .community-cover-container {
         margin: 0 auto 1.5rem auto !important;
         display: block !important;
     }
     
-    /* Wrapper de contenido centrado */
     .community-content-wrapper {
         text-align: center !important;
         align-items: center !important;
@@ -1075,7 +846,6 @@ html {
     }
 }
 
-/* Optimización completa del header de comunidad para móvil */
 @media (max-width: 768px) {
     .community-header .card-body {
         padding: 1rem !important;
@@ -1108,7 +878,6 @@ html {
         max-width: 100% !important;
     }
     
-    /* Info de la comunidad centrada */
     .community-header-info {
         text-align: center !important;
         width: 100% !important;
@@ -1135,27 +904,25 @@ html {
         gap: 0.5rem 1rem !important;
     }
     
-    /* Acciones del header optimizadas */
     .community-actions-header {
         flex-direction: row !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
         gap: 0.5rem !important;
-        margin-top: 1rem !important; /* Mantener espacio desde la imagen */
+        margin-top: 1rem !important;
     }
     
     .community-actions-header .btn,
     .community-actions-header .btn-community,
     .community-actions-header .btn-community-danger {
         flex: 1 1 auto !important;
-        min-width: 140px !important; /* Aumentado para acomodar badges */
-        max-width: 170px !important; /* Aumentado también el máximo */
+        min-width: 140px !important;
+        max-width: 170px !important;
         padding: 0.6rem 1rem !important;
         font-size: 0.85rem !important;
         white-space: nowrap !important;
     }
     
-    /* Asegurar que el botón de eliminar tenga el mismo tamaño */
     .community-actions-header .btn-community-danger {
         flex: 1 1 auto !important;
         min-width: 120px !important;
@@ -1177,7 +944,6 @@ html {
         padding: 0.75rem !important;
     }
     
-    /* Cover más pequeña en móvil */
     .community-header-cover {
         width: 80px !important;
         height: 80px !important;
@@ -1194,13 +960,11 @@ html {
         font-size: 1.5rem !important;
     }
     
-    /* Título más pequeño */
     .community-title-large {
         font-size: 1.3rem !important;
         line-height: 1.2 !important;
     }
     
-    /* Meta información más compacta */
     .community-meta-large {
         font-size: 0.7rem !important;
         gap: 0.25rem 0.75rem !important;
@@ -1215,22 +979,20 @@ html {
         height: 16px !important;
     }
     
-    /* Botones más compactos en móvil pequeño */
     .community-actions-header {
         gap: 0.4rem !important;
-        margin-top: 1rem !important; /* Mantener espacio desde la imagen en móvil pequeño */
+        margin-top: 1rem !important;
     }
     
     .community-actions-header .btn,
     .community-actions-header .btn-community,
     .community-actions-header .btn-community-danger {
-        min-width: 120px !important; /* Aumentado para acomodar badges */
+        min-width: 120px !important;
         max-width: 140px !important;
         padding: 0.5rem 0.75rem !important;
         font-size: 0.8rem !important;
     }
     
-    /* Ajustar espaciado del badge */
     .community-badge {
         font-size: 0.7rem !important;
         padding: 0.25rem 0.5rem !important;
@@ -1239,7 +1001,6 @@ html {
 }
 
 @media (max-width: 400px) {
-    /* Para pantallas muy pequeñas, botones en columna pero más compactos */
     .community-actions-header {
         flex-direction: column !important;
         gap: 0.5rem !important;
@@ -1259,7 +1020,6 @@ html {
         font-size: 0.85rem !important;
     }
     
-    /* Asegurar que el botón de eliminar tenga el mismo tamaño en pantallas muy pequeñas */
     .community-actions-header .btn-community-danger {
         width: 100% !important;
         max-width: 100% !important;
@@ -1269,9 +1029,7 @@ html {
     }
 }
 
-/* Sección de publicaciones de comunidad en móvil */
 @media (max-width: 768px) {
-    /* Centrar el header de publicaciones de comunidad */
     .community-posts-header {
         text-align: center !important;
         align-items: center !important;
@@ -1281,8 +1039,7 @@ html {
         text-align: center !important;
         justify-content: center !important;
     }
-    
-    /* Botón de nueva publicación de ancho completo */
+
     .community-posts-header .btn-community-primary {
         width: 100% !important;
         max-width: 100% !important;
@@ -1300,11 +1057,6 @@ html {
     }
 }
 
-/* ================================================
-   BOTONES DE ACCIONES DE POSTS EN VISTA COMUNIDAD
-   ================================================ */
-
-/* Contenedor de botones de acciones de posts */
 .post-actions-buttons {
     display: flex;
     align-items: center;
@@ -1323,7 +1075,6 @@ html {
     font-weight: 500;
 }
 
-/* Responsive para tablets */
 @media (max-width: 768px) {
     .post-actions-buttons {
         flex-direction: row;
@@ -1350,7 +1101,6 @@ html {
     }
 }
 
-/* Responsive para móviles */
 @media (max-width: 576px) {
     .post-actions-buttons {
         flex-direction: column;
@@ -1373,7 +1123,6 @@ html {
     }
 }
 
-/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 400px) {
     .post-actions-buttons .btn-glass-action,
     .post-actions-buttons .btn-glass-danger {
@@ -1385,11 +1134,6 @@ html {
     }
 }
 
-/* ================================================
-   VISTA DE SOLICITUDES DE COMUNIDAD - MOBILE RESPONSIVE
-   ================================================ */
-
-/* Tarjetas de solicitudes responsive */
 @media (max-width: 768px) {
     .requests-page .request-card {
         margin-bottom: 1rem !important;
@@ -1400,7 +1144,6 @@ html {
         padding: 1rem !important;
     }
     
-    /* Layout móvil para la información del usuario */
     .requests-page .request-content {
         flex-direction: column !important;
         align-items: center !important;
@@ -1408,15 +1151,13 @@ html {
         gap: 1rem;
     }
     
-    /* Avatar centrado en móvil */
     .requests-page .request-avatar {
         margin-right: 0 !important;
         margin-bottom: 1rem !important;
         display: flex !important;
         justify-content: center !important;
     }
-    
-    /* Información del usuario centrada */
+
     .requests-page .request-info {
         width: 100% !important;
     }
@@ -1428,25 +1169,21 @@ html {
         gap: 0.5rem;
     }
     
-    /* Badge centrado */
     .requests-page .badge.glassmorphism-warning {
         align-self: center !important;
         margin-bottom: 0.5rem !important;
     }
     
-    /* Información del tiempo centrada */
     .requests-page .text-white-50.small {
         text-align: center !important;
         margin-bottom: 1rem !important;
     }
     
-    /* Mensaje del usuario con mejor espaciado */
     .requests-page .mb-3 {
         text-align: left !important;
         width: 100% !important;
     }
     
-    /* Botones de acción en columna para móvil */
     .requests-page .request-actions {
         flex-direction: column !important;
         gap: 0.75rem !important;
@@ -1465,7 +1202,6 @@ html {
         border-radius: 14px !important;
     }
     
-    /* Formularios de acción ocupan todo el ancho */
     .requests-page .request-action-form {
         width: 100% !important;
         display: block !important;
@@ -1473,19 +1209,16 @@ html {
 }
 
 @media (max-width: 576px) {
-    /* Ajustes para pantallas muy pequeñas */
     .requests-page .card-body {
         padding: 0.75rem !important;
     }
     
-    /* Avatar más pequeño en móviles pequeños */
     .requests-page .request-avatar img,
     .requests-page .request-avatar .rounded-circle {
         width: 50px !important;
         height: 50px !important;
     }
     
-    /* Títulos más compactos */
     .requests-page h5.mb-1.text-white {
         font-size: 1.1rem !important;
         margin-bottom: 0.25rem !important;
@@ -1495,7 +1228,6 @@ html {
         font-size: 0.9rem !important;
     }
     
-    /* Botones más prominentes en móviles pequeños */
     .requests-page .request-btn-approve,
     .requests-page .request-btn-reject,
     .requests-page .request-btn-profile {
@@ -1505,13 +1237,11 @@ html {
         font-weight: 700 !important;
         border-radius: 16px !important;
     }
-    
-    /* Espaciado mayor entre botones */
+
     .requests-page .request-actions {
         gap: 1rem !important;
     }
     
-    /* Mensaje del usuario más compacto */
     .requests-page .p-3.rounded {
         padding: 0.75rem !important;
         border-radius: 12px !important;
@@ -1519,12 +1249,10 @@ html {
 }
 
 @media (max-width: 400px) {
-    /* Para pantallas extra pequeñas */
     .requests-page .card-body {
         padding: 0.5rem !important;
     }
-    
-    /* Header más compacto */
+
     .requests-page h1 {
         font-size: 1.8rem !important;
     }
@@ -1533,7 +1261,6 @@ html {
         font-size: 0.9rem !important;
     }
     
-    /* Botones aún más prominentes */
     .requests-page .btn.btn-sm.glassmorphism-success,
     .requests-page .btn.btn-sm.glassmorphism-danger,
     .requests-page .btn.btn-sm.glassmorphism-white {
@@ -1544,13 +1271,7 @@ html {
     }
 }
 
-/* ====================================================
-   RESPONSIVE PARA VISTA DE MIEMBROS DE COMUNIDAD
-   ==================================================== */
-
-/* Móviles */
 @media (max-width: 768px) {
-    /* Header de miembros en móviles */
     .members-page .members-header {
         text-align: center;
         margin-bottom: 1.5rem;
@@ -1569,7 +1290,6 @@ html {
         margin-bottom: 1rem;
     }
     
-    /* Botón volver */
     .members-page .btn.btn-new-playlist {
         width: 100% !important;
         padding: 0.875rem 1.5rem !important;
@@ -1578,7 +1298,6 @@ html {
         border-radius: 12px !important;
     }
     
-    /* Información de comunidad en móviles */
     .members-page .community-info-card .row {
         text-align: center;
     }
@@ -1589,7 +1308,6 @@ html {
         gap: 1rem !important;
     }
     
-    /* Grid de miembros responsive */
     .members-page .members-grid {
         margin-bottom: 1.5rem;
     }
@@ -1599,7 +1317,6 @@ html {
         margin-bottom: 1rem;
     }
     
-    /* Tarjetas de miembros en móviles */
     .members-page .member-card {
         margin-bottom: 1rem;
     }
@@ -1632,7 +1349,6 @@ html {
         text-align: center !important;
     }
     
-    /* Acciones de miembro en móviles */
     .members-page .member-actions {
         justify-content: center !important;
         width: 100% !important;
@@ -1648,9 +1364,7 @@ html {
     }
 }
 
-/* Móviles pequeños */
 @media (max-width: 576px) {
-    /* Header más compacto */
     .members-page .members-header {
         margin-bottom: 1rem;
         padding: 0 0.5rem;
@@ -1666,7 +1380,6 @@ html {
         font-size: 1.25rem;
     }
     
-    /* Info card más compacta */
     .members-page .community-info-card {
         margin-bottom: 1rem;
     }
@@ -1680,7 +1393,6 @@ html {
         gap: 1rem !important;
     }
     
-    /* Miembros en columna única */
     .members-page .members-grid .col-12 {
         margin-bottom: 0.75rem;
     }
@@ -1689,7 +1401,6 @@ html {
         padding: 1rem !important;
     }
     
-    /* Acciones en columna */
     .members-page .member-actions {
         flex-direction: column !important;
         gap: 0.5rem !important;
@@ -1702,8 +1413,7 @@ html {
         font-size: 0.95rem !important;
         justify-content: center !important;
     }
-    
-    /* Modal responsive */
+
     .members-page .modal-dialog {
         margin: 0.5rem !important;
         width: calc(100vw - 1rem) !important;
@@ -1721,7 +1431,6 @@ html {
     }
 }
 
-/* Mejoras para badges en móviles */
 @media (max-width: 768px) {
     .members-page .badge {
         font-size: 0.75rem !important;
@@ -1735,7 +1444,6 @@ html {
     }
 }
 
-/* Paginación responsive para miembros */
 @media (max-width: 768px) {
     .members-page .pagination-custom {
         justify-content: center !important;
