@@ -121,7 +121,7 @@ class CommunityRequestController extends Controller
             'responded_at' => now()
         ]);
 
-        return redirect()->back()->with('success', 'Solicitud rechazada.');
+        return redirect()->back();
     }
 
     /**

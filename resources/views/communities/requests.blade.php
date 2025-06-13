@@ -133,7 +133,7 @@
                 <div class="card dashboard-card text-center py-5">
                     <div class="card-body">
                         <i class="bi bi-inbox display-1 text-light mb-3"></i>
-                        <h4 class="text-light mb-3">No hay solicitudes pendientes</h4>
+                        <h4 class="text-light text-center mb-3">No hay solicitudes pendientes</h4>
                         <p class="text-light mb-4">
                             No tienes solicitudes de membresía pendientes para esta comunidad.
                         </p>
