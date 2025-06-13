@@ -183,6 +183,8 @@ class CommunityController extends Controller
             'is_private' => 'boolean'
         ]);
 
+        $wasPrivate = $community->is_private;
+        
         $community->name = $request->name;
         $community->description = $request->description;
         $community->is_private = $request->boolean('is_private');
@@ -198,6 +200,16 @@ class CommunityController extends Controller
         }
 
         $community->save();
+
+        // Si la comunidad era privada y ahora es pública, aprobar automáticamente todas las solicitudes pendientes
+        if ($wasPrivate && !$community->is_private) {
+            $pendingRequests = $community->requests()->where('status', 'pending')->get();
+            
+            foreach ($pendingRequests as $request) {
+                $request->update(['status' => 'approved']);
+                $community->addMember($request->user, 'member');
+            }
+        }
 
         return redirect()->route('communities.show', $community)
             ->with('success', '¡Comunidad actualizada exitosamente!');

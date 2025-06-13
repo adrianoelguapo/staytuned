@@ -76,8 +76,8 @@
                 <div class="col-auto">
                     <!-- Acciones -->
                     <div class="community-actions-header">
-                        <?php if($isOwner): ?>
-                            <!-- Botón para ver solicitudes pendientes -->
+                        <?php if($isOwner && $community->is_private): ?>
+                            <!-- Botón para ver solicitudes pendientes (solo para comunidades privadas) -->
                             <a href="<?php echo e(route('communities.requests', $community)); ?>" class="btn btn-outline-purple me-2">
                                 <i class="fas fa-user-clock me-1"></i>
                                 Solicitudes
