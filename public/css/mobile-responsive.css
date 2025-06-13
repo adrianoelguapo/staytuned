@@ -585,3 +585,187 @@ html {
         opacity: 0.9 !important;
     }
 }
+
+/* ================================================
+   VISTA EXPLORAR USUARIOS - CORRECCIÓN MÓVIL
+   ================================================ */
+
+@media (max-width: 576px) {
+    /* Contenedor de estadísticas en fila horizontal */
+    .card.dashboard-card .row.text-center {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0.75rem 0 !important;
+    }
+    
+    /* Cada columna de estadística */
+    .card.dashboard-card .row.text-center .col-4 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.5rem 0.25rem !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+    
+    /* Números de estadísticas */
+    .card.dashboard-card .row.text-center .col-4 .text-white.fw-bold {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        font-size: 1.1rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.25rem !important;
+        display: block !important;
+        text-align: center !important;
+    }
+    
+    /* Etiquetas de estadísticas */
+    .card.dashboard-card .row.text-center .col-4 .text-light.small {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        font-size: 0.75rem !important;
+        line-height: 1.1 !important;
+        margin: 0 !important;
+        display: block !important;
+        text-align: center !important;
+    }
+    
+    /* Botones de acción en fila horizontal */
+    .card.dashboard-card .d-flex.gap-2.justify-content-center {
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .card.dashboard-card .d-flex.gap-2.justify-content-center .btn {
+        flex: 1 !important;
+        min-width: 0 !important;
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.85rem !important;
+        border-radius: 0.75rem !important;
+    }
+    
+    .card.dashboard-card .d-flex.gap-2.justify-content-center .btn span {
+        display: inline !important;
+    }
+}
+
+/* Correcciones adicionales para tablets */
+@media (max-width: 768px) and (min-width: 577px) {
+    /* Mantener layout horizontal también en tablets */
+    .card.dashboard-card .row.text-center .col-4 .text-white.fw-bold,
+    .card.dashboard-card .row.text-center .col-4 .text-light.small {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        text-align: center !important;
+    }
+    
+    /* Botones en tablets - menos anchos que en móvil */
+    .card.dashboard-card .d-flex.gap-2.justify-content-center {
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+    }
+    
+    .card.dashboard-card .d-flex.gap-2.justify-content-center .btn {
+        flex: 1 !important;
+        max-width: none !important;
+    }
+}
+
+/* Prevenir texto vertical en todas las estadísticas de usuario */
+@media (max-width: 576px) {
+    /* Aplicar a cualquier contenedor de estadísticas de usuario */
+    .text-center .col-4 div,
+    .text-center .col-4 span,
+    .text-center .col-4 p {
+        word-break: keep-all !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        hyphens: none !important;
+        -webkit-hyphens: none !important;
+        -ms-hyphens: none !important;
+    }
+    
+    /* Específicamente para números grandes */
+    .fw-bold, .font-weight-bold {
+        letter-spacing: normal !important;
+        word-spacing: normal !important;
+    }
+    
+    /* Específicamente para texto pequeño */
+    .small, .text-small {
+        letter-spacing: normal !important;
+        word-spacing: normal !important;
+    }
+}
+
+/* Estilos adicionales para mejorar la experiencia en móvil */
+@media (max-width: 576px) {
+    /* Mejorar el espaciado general de las tarjetas de usuario */
+    .card.dashboard-card .card-body {
+        padding: 1.25rem !important;
+    }
+    
+    /* Asegurar que el contenedor de estadísticas tenga el ancho completo */
+    .card.dashboard-card .row.text-center.mb-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+    }
+    
+    /* Eliminar cualquier línea divisoria en estadísticas */
+    .card.dashboard-card .row.text-center.mb-3::before,
+    .card.dashboard-card .row.text-center.mb-3::after {
+        display: none !important;
+    }
+    
+    /* Contenedor de botones en fila horizontal */
+    .card.dashboard-card .d-flex.gap-2.justify-content-center {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* Botones más anchos en móvil */
+    .card.dashboard-card .d-flex.gap-2.justify-content-center .btn {
+        flex: 1 !important;
+        min-width: 120px !important;
+        max-width: none !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+    }
+    
+    /* Texto de botones siempre visible en móvil si hay espacio */
+    .card.dashboard-card .d-flex.gap-2.justify-content-center .btn .d-none.d-sm-inline {
+        display: inline !important;
+    }
+    
+    /* Mejorar el espaciado entre secciones */
+    .card.dashboard-card .position-relative.mb-3 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .card.dashboard-card h5.text-white.mb-1 {
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .card.dashboard-card p.text-light.small.mb-2 {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Si hay biografía, agregar más espacio */
+    .card.dashboard-card p.text-light.small.mb-3 {
+        margin-bottom: 1rem !important;
+        padding: 0 0.5rem !important;
+    }
+}
