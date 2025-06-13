@@ -1,0 +1,71 @@
+/* Corrección específica para el toggle del offcanvas */
+
+/* FORZAR que el botón del offcanvas se oculte en desktop - ULTRA ESPECÍFICO */
+@media (min-width: 992px) {
+    /* Selectores múltiples para máxima cobertura */
+    .btn-offcanvas,
+    button[data-bs-toggle="offcanvas"],
+    .d-lg-none,
+    .navbar .btn-offcanvas,
+    .navbar button[data-bs-toggle="offcanvas"],
+    .navbar .d-lg-none,
+    nav .btn-offcanvas,
+    nav button[data-bs-toggle="offcanvas"],
+    nav .d-lg-none {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+/* Asegurar que se muestre correctamente en móvil/tablet */
+@media (max-width: 991.98px) {
+    .btn-offcanvas,
+    button[data-bs-toggle="offcanvas"],
+    .navbar .btn-offcanvas,
+    .navbar button[data-bs-toggle="offcanvas"],
+    nav .btn-offcanvas,
+    nav button[data-bs-toggle="offcanvas"] {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        left: auto !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+}
+
+/* Específicamente para el layout del dashboard */
+.navbar .btn-offcanvas {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+/* Específico para vistas de playlists y usuarios */
+@media (min-width: 992px) {
+    .dashboard-body .btn-offcanvas,
+    .dashboard-body button[data-bs-toggle="offcanvas"],
+    body .navbar .btn-offcanvas,
+    body .navbar button[data-bs-toggle="offcanvas"] {
+        display: none !important;
+    }
+}
+
+/* Override de cualquier otro CSS que pueda estar interfiriendo */
+@media (min-width: 992px) {
+    .btn-offcanvas {
+        display: none !important;
+    }
+    
+    button[data-bs-toggle="offcanvas"] {
+        display: none !important;
+    }
+}

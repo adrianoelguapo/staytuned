@@ -14,6 +14,7 @@
         <link href = "{{ asset('css/profile.css') }}" rel = "stylesheet" />
         <link href = "{{ asset('css/navbar-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
         <link href = "{{ asset('css/livewire-modal-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
+        <link href = "{{ asset('css/offcanvas-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
 
     </head>
 

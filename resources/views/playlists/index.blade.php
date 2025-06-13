@@ -13,6 +13,7 @@
     <link href="{{ asset('css/playlists.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/mobile-responsive.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/offcanvas-fix.css') }}?v={{ time() }}" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">

@@ -1624,7 +1624,6 @@ body {
     backdrop-filter: blur(15px);
     border: 1.5px solid rgba(255,255,255,0.18);
     border-radius: 1.25rem;
-    overflow: visible;
 }
 
 .card.dashboard-card.search-section .card-body {
@@ -1657,13 +1656,68 @@ body {
     display: block !important;
 }
 
-/* Override específico para prevenir que otros estilos interfieran */
-.card.dashboard-card.search-section * {
-    text-align: inherit !important;
-}
-
 .card.dashboard-card.search-section .col-md-8,
 .card.dashboard-card.search-section .col-md-4 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
+}
+
+/* Responsividad específica para el formulario de búsqueda */
+@media (min-width: 768px) {
+    .card.dashboard-card.search-section #searchPrivateCommunitiesForm.row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-end !important;
+        margin-left: -0.75rem !important;
+        margin-right: -0.75rem !important;
+    }
+    
+    .card.dashboard-card.search-section .col-md-8,
+    .card.dashboard-card.search-section .col-md-4 {
+        flex: none !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .card.dashboard-card.search-section .col-md-8 {
+        width: 66.666667% !important;
+    }
+    
+    .card.dashboard-card.search-section .col-md-4 {
+        width: 33.333333% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .card.dashboard-card.search-section #searchPrivateCommunitiesForm.row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    .card.dashboard-card.search-section .col-md-8,
+    .card.dashboard-card.search-section .col-md-4 {
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* ====================================================
+   CORRECCIÓN URGENTE: OFFCANVAS TOGGLE
+   ==================================================== */
+
+/* Asegurar que el botón del offcanvas se oculte en desktop */
+@media (min-width: 992px) {
+    .btn-offcanvas,
+    .d-lg-none {
+        display: none !important;
+    }
+}
+
+/* Asegurar que se muestre solo en móvil */
+@media (max-width: 991.98px) {
+    .btn-offcanvas {
+        display: inline-block !important;
+    }
 }

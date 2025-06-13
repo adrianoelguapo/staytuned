@@ -1,0 +1,107 @@
+/* 
+   ARCHIVO CSS ESPECÍFICO PARA FORMULARIO DE BÚSQUEDA
+   Solo para solucionar el problema del botón que sale debajo
+*/
+
+/* Estilos específicos SOLO para la sección de búsqueda */
+.search-section-container {
+    background: rgba(255,255,255,0.10) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1.5px solid rgba(255,255,255,0.18) !important;
+    border-radius: 1.25rem !important;
+    padding: 1.25rem !important;
+}
+
+/* Forzar layout horizontal en desktop */
+@media (min-width: 768px) {
+    #searchPrivateCommunitiesForm {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-end !important;
+        gap: 1rem !important;
+        width: 100% !important;
+    }
+    
+    #searchPrivateCommunitiesForm .col-md-8 {
+        flex: 1 !important;
+        width: auto !important;
+        margin-bottom: 0 !important;
+    }
+    
+    #searchPrivateCommunitiesForm .col-md-4 {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 120px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    #searchPrivateCommunitiesForm .btn {
+        width: 100% !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Layout vertical en mobile */
+@media (max-width: 767px) {
+    #searchPrivateCommunitiesForm {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    #searchPrivateCommunitiesForm .col-md-8,
+    #searchPrivateCommunitiesForm .col-md-4 {
+        width: 100% !important;
+    }
+}
+
+/* Estilos para el input de búsqueda */
+#searchCommunityInput {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+}
+
+#searchCommunityInput:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    outline: none !important;
+}
+
+#searchCommunityInput::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic !important;
+}
+
+/* Estilos para el botón de búsqueda */
+#searchPrivateCommunitiesForm .btn-purple {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    font-size: 0.95rem !important;
+    justify-content: center !important;
+}
+
+#searchPrivateCommunitiesForm .btn-purple:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}

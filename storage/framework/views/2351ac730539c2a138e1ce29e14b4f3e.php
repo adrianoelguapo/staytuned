@@ -2,6 +2,7 @@
 
 <?php $__env->startPush('styles'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/community-fixed.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/search-form-fix.css')); ?>">
 <style>
 .hover-text-white:hover {
     color: white !important;
@@ -34,43 +35,41 @@
             </div>
 
             <!-- Buscar Comunidades Privadas -->
-            <div class="card dashboard-card search-section mb-4">
-                <div class="card-body">
-                    <h5 class="text-white mb-3">
-                        <i class="fas fa-search me-2"></i>
-                        Buscar Comunidades Privadas
-                    </h5>
-                    <p class="text-light small mb-3">
-                        ¿Conoces el nombre de una comunidad privada? Búscala aquí para solicitar membresía.
-                    </p>
-                    
-                    <form id="searchPrivateCommunitiesForm" class="row g-3">
-                        <div class="col-md-8">
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="searchCommunityInput"
-                                   placeholder="Buscar por nombre de comunidad..."
-                                   autocomplete="off">
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-purple w-100 d-inline-flex align-items-center justify-content-center">
-                                <i class="fas fa-search me-2"></i>
-                                Buscar
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Resultados de búsqueda -->
-                    <div id="searchResults" class="mt-3" style="display: none;">
-                        <h6 class="text-white mb-2">Resultados:</h6>
-                        <div id="resultsContainer"></div>
+            <div class="search-section-container mb-4">
+                <h5 class="text-white mb-3">
+                    <i class="fas fa-search me-2"></i>
+                    Buscar Comunidades Privadas
+                </h5>
+                <p class="text-light small mb-3">
+                    ¿Conoces el nombre de una comunidad privada? Búscala aquí para solicitar membresía.
+                </p>
+                
+                <form id="searchPrivateCommunitiesForm">
+                    <div class="col-md-8">
+                        <input type="text" 
+                               class="form-control" 
+                               id="searchCommunityInput"
+                               placeholder="Buscar por nombre de comunidad..."
+                               autocomplete="off">
                     </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-purple">
+                            <i class="fas fa-search me-2"></i>
+                            Buscar
+                        </button>
+                    </div>
+                </form>
 
-                    <!-- Loading spinner -->
-                    <div id="searchLoading" class="text-center mt-3" style="display: none;">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Buscando...</span>
-                        </div>
+                <!-- Resultados de búsqueda -->
+                <div id="searchResults" class="mt-3" style="display: none;">
+                    <h6 class="text-white mb-2">Resultados:</h6>
+                    <div id="resultsContainer"></div>
+                </div>
+
+                <!-- Loading spinner -->
+                <div id="searchLoading" class="text-center mt-3" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Buscando...</span>
                     </div>
                 </div>
             </div>
