@@ -1969,7 +1969,7 @@ body.modal-open {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 0.5rem !important;
-  }
+ }
   
   .category-modal-title {
     font-size: 1.5rem !important;
@@ -2232,3 +2232,256 @@ body.modal-open {
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
 }
+
+/* ================================================
+   FORMULARIO DE CREACIÓN - CONTENEDOR DE SPOTIFY
+   ================================================ */
+
+/* Contenedor principal de búsqueda de Spotify */
+.spotify-search-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* Preview del contenido de Spotify */
+.spotify-preview {
+  background: rgba(30, 215, 96, 0.08);
+  border: 2px dashed rgba(30, 215, 96, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotify-preview:hover {
+  background: rgba(30, 215, 96, 0.12);
+  border-color: rgba(30, 215, 96, 0.4);
+}
+
+.spotify-preview.has-content {
+  background: rgba(30, 215, 96, 0.1);
+  border: 1px solid rgba(30, 215, 96, 0.3);
+  border-style: solid;
+  padding: 1rem;
+  text-align: left;
+}
+
+.spotify-placeholder i {
+  color: #1db954;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.spotify-placeholder p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Contenido del preview cuando hay selección */
+.spotify-preview-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spotify-preview-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.spotify-preview-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.spotify-preview-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spotify-preview-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Input de búsqueda de Spotify */
+.spotify-search-container .input-group .form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-right: none !important;
+  border-radius: 12px 0 0 12px !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.spotify-search-container .input-group .form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.spotify-search-container .input-group .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Botón de búsqueda de Spotify */
+.spotify-search-container .input-group .btn-primary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-left: none !important;
+  border-radius: 0 12px 12px 0 !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.spotify-search-container .input-group .btn-primary:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  border-left: none !important;
+  color: #fff !important;
+  transform: none !important;
+}
+
+/* Resultados de búsqueda de Spotify */
+.spotify-results {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.spotify-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Items de resultados de búsqueda */
+.spotify-result-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.spotify-result-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.spotify-result-item .d-flex {
+  align-items: center;
+}
+
+.spotify-result-item i {
+  color: #1db954;
+  font-size: 1.1rem;
+  margin-right: 0.75rem;
+}
+
+.spotify-result-item .flex-grow-1 {
+  min-width: 0;
+}
+
+.spotify-result-item .fw-bold {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spotify-result-item .text-white-50 {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Item seleccionado */
+.spotify-item.selected {
+  background: rgba(30, 215, 96, 0.15);
+  border: 1px solid rgba(30, 215, 96, 0.3);
+  border-radius: 10px;
+  padding: 0.75rem;
+  backdrop-filter: blur(10px);
+}
+
+.spotify-item.selected .d-flex {
+  align-items: center;
+}
+
+.spotify-item.selected i {
+  color: #1db954;
+  font-size: 1.1rem;
+  margin-right: 0.75rem;
+}
+
+.spotify-item.selected .fw-bold {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.spotify-item.selected .text-white-50 {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.85rem;
+}
+
+/* Scrollbar personalizada para resultados */
+.spotify-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+.spotify-results::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.spotify-results::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.spotify-results::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ================================================
+   FIN - FORMULARIO DE CREACIÓN SPOTIFY
+   ================================================ */
