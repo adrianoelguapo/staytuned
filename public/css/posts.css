@@ -571,6 +571,40 @@ a[href*="/explore/users/"] {
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
+/* Utility classes for responsive design */
+.min-width-0 {
+    min-width: 0;
+}
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Post header responsive improvements */
+.post-header-actions {
+    flex-shrink: 0;
+    max-width: 100%;
+}
+
+/* Button improvements for mobile */
+@media (max-width: 575.98px) {
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .post-category-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .gap-2 {
+        gap: 0.375rem !important;
+    }
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 1rem;
@@ -2337,14 +2371,5 @@ body.modal-open {
     
     .post-actions-buttons form {
         width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .post-actions-buttons .btn-glass-action,
-    .post-actions-buttons .btn-glass-danger {
-        padding: 0.6rem 1.2rem !important;
-        font-size: 0.9rem !important;
-        min-height: 40px !important;
     }
 }

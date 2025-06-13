@@ -46,7 +46,7 @@
                     ¿Conoces el nombre de una comunidad privada? Búscala aquí para solicitar membresía.
                 </p>
                 
-                <form id="searchPrivateCommunitiesForm">
+                <form id="searchPrivateCommunitiesForm" class="row g-3">
                     <div class="col-md-8">
                         <input type="text" 
                                class="form-control" 
@@ -55,7 +55,7 @@
                                autocomplete="off">
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-purple">
+                        <button type="submit" class="btn btn-purple w-100">
                             <i class="fas fa-search me-2"></i>
                             Buscar
                         </button>

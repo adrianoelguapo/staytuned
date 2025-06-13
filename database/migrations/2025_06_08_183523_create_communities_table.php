@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->boolean('is_private')->default(false);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // owner
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('songs', function (Blueprint $table) {
-            // Agregar campos faltantes para Spotify
             $table->string('spotify_id')->unique()->nullable()->after('id');
             $table->string('title')->nullable()->after('spotify_id');
             $table->string('artist')->nullable()->after('title');
@@ -20,10 +19,6 @@ return new class extends Migration
             $table->string('album_image')->nullable()->after('album');
             $table->string('spotify_url')->nullable()->after('album_image');
             $table->string('preview_url')->nullable()->after('spotify_url');
-            
-            // Renombrar campos existentes si es necesario
-            // Como no podemos renombrar directamente, vamos a crear los nuevos campos
-            // y luego actualizaremos la columna duration para que sea string en lugar de time
             $table->string('duration_formatted')->nullable()->after('duration');
         });
     }

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('community_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->text('message')->nullable(); // Mensaje opcional del usuario al solicitar
-            $table->text('admin_message')->nullable(); // Mensaje opcional del admin al aprobar/rechazar
-            $table->timestamp('responded_at')->nullable(); // Cuándo respondió el admin
+            $table->text('message')->nullable();
+            $table->text('admin_message')->nullable();
+            $table->timestamp('responded_at')->nullable();
             $table->timestamps();
             
             // Evitar solicitudes duplicadas

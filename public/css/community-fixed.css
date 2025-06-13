@@ -1721,3 +1721,262 @@ body {
         display: inline-block !important;
     }
 }
+
+/* ====================================================
+   MIEMBROS DE COMUNIDAD - IMAGEN MINI
+   ==================================================== */
+
+.community-avatar-container {
+    width: 60px !important;
+    height: 60px !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}
+
+.community-cover-mini {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 12px !important;
+    object-fit: cover !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}
+
+.community-cover-mini:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.community-cover-mini-placeholder {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.3) 0%, 
+        rgba(124, 58, 237, 0.2) 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    flex-shrink: 0 !important;
+}
+
+.community-cover-mini-placeholder:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.4) 0%, 
+        rgba(124, 58, 237, 0.3) 100%);
+}
+
+.community-cover-mini-placeholder i {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+}
+
+/* Información de la comunidad en página de miembros */
+.community-info-card {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+}
+
+.community-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.community-badge-private {
+    background: linear-gradient(135deg, 
+        rgba(239, 68, 68, 0.2) 0%, 
+        rgba(220, 38, 38, 0.1) 100%);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.community-badge-public {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.2) 0%, 
+        rgba(22, 163, 74, 0.1) 100%);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Estilos para la página de miembros */
+.members-page .members-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.members-page .members-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.member-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+}
+
+.member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.member-avatar {
+    flex-shrink: 0;
+}
+
+.member-info {
+    min-width: 0;
+}
+
+.member-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.member-username {
+    opacity: 0.8;
+}
+
+.member-actions {
+    margin-top: auto;
+}
+
+/* Badges para roles de miembros */
+.glassmorphism-success {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.25) 0%, 
+        rgba(22, 163, 74, 0.15) 100%);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.glassmorphism-white {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 100%);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.glassmorphism-white:hover {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.12) 100%);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    color: #fff;
+}
+
+.glassmorphism-danger {
+    background: linear-gradient(135deg, 
+        rgba(239, 68, 68, 0.25) 0%, 
+        rgba(220, 38, 38, 0.15) 100%);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.glassmorphism-danger:hover {
+    background: linear-gradient(135deg, 
+        rgba(239, 68, 68, 0.35) 0%, 
+        rgba(220, 38, 38, 0.25) 100%);
+    border-color: rgba(239, 68, 68, 0.4);
+    transform: translateY(-1px);
+    color: #fff;
+}
+
+/* Responsive para la página de miembros */
+@media (max-width: 768px) {
+    .members-page .members-title {
+        font-size: 2rem;
+    }
+    
+    .member-card .member-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .member-card .member-avatar {
+        margin-bottom: 1rem;
+        align-self: center;
+    }
+    
+    .member-card .member-actions {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .community-avatar-container {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .community-cover-mini,
+    .community-cover-mini-placeholder {
+        width: 50px !important;
+        height: 50px !important;
+        max-width: 50px !important;
+        max-height: 50px !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
+    }
+    
+    .community-cover-mini-placeholder i {
+        font-size: 1.2rem !important;
+    }
+    
+    .members-page .members-title {
+        font-size: 1.75rem;
+    }
+    
+    .members-page .members-subtitle {
+        font-size: 1rem;
+    }
+}
