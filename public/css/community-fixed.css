@@ -871,6 +871,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: 1.5rem; /* Espacio adicional desde la imagen */
 }
 
 /* Responsive: ajustar tamaños en pantallas pequeñas */
@@ -1925,12 +1926,15 @@ body {
 
 /* Override específico para cuando ambos botones estén en el mismo contenedor */
 .community-actions-header .btn-outline-purple,
-.community-actions-header .btn-options-large {
+.community-actions-header .btn-options-large,
+.community-actions-header .btn-community-danger {
     height: 50px !important;
     min-height: 50px !important;
+    min-width: 140px !important; /* Ancho mínimo para acomodar badges */
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 0.75rem 1.75rem !important; /* Padding más amplio */
 }
 
 /* Botón "Solicitudes" con border-radius de 12px */
@@ -1938,6 +1942,12 @@ body {
     border-radius: 12px !important;
     font-weight: 600 !important;
     font-size: 0.95rem !important;
+}
+
+/* Asegurar que el botón de eliminar tenga el mismo tamaño */
+.community-actions-header .btn-community-danger {
+    min-width: 140px !important; /* Mismo ancho que los otros botones */
+    padding: 0.75rem 1.75rem !important; /* Mismo padding */
 }
 
 @keyframes pulse {

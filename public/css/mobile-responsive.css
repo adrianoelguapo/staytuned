@@ -909,14 +909,17 @@ html {
         flex-direction: column !important;
         gap: 0.75rem !important;
         width: 100% !important;
+        margin-top: 1.5rem !important; /* Espacio adicional desde la imagen en móvil */
     }
     
     /* Botones del header más pequeños */
-    .community-actions-header .btn {
+    .community-actions-header .btn,
+    .community-actions-header .btn-community-danger {
         padding: 0.6rem 1.2rem !important;
         font-size: 0.875rem !important;
         width: 100% !important;
         justify-content: center !important;
+        min-width: 140px !important; /* Ancho mínimo consistente */
     }
 }
 
@@ -940,16 +943,19 @@ html {
     
     .community-actions-header {
         gap: 1rem !important;
+        margin-top: 1.5rem !important; /* Espacio adicional desde la imagen en tablet */
     }
     
     /* Header de acciones con botones más grandes */
-    .community-actions-header .btn {
+    .community-actions-header .btn,
+    .community-actions-header .btn-community-danger {
         padding: 0.8rem 2.5rem !important;
         font-size: 1rem !important;
         width: 100% !important;
         justify-content: center !important;
         min-height: 44px !important;
         border-radius: 14px !important;
+        min-width: 140px !important; /* Ancho mínimo consistente */
     }
 }
 
@@ -1135,14 +1141,15 @@ html {
         flex-wrap: wrap !important;
         justify-content: center !important;
         gap: 0.5rem !important;
-        margin-top: 0 !important;
+        margin-top: 1rem !important; /* Mantener espacio desde la imagen */
     }
     
     .community-actions-header .btn,
-    .community-actions-header .btn-community {
+    .community-actions-header .btn-community,
+    .community-actions-header .btn-community-danger {
         flex: 1 1 auto !important;
-        min-width: 120px !important;
-        max-width: 150px !important;
+        min-width: 140px !important; /* Aumentado para acomodar badges */
+        max-width: 170px !important; /* Aumentado también el máximo */
         padding: 0.6rem 1rem !important;
         font-size: 0.85rem !important;
         white-space: nowrap !important;
@@ -1211,20 +1218,14 @@ html {
     /* Botones más compactos en móvil pequeño */
     .community-actions-header {
         gap: 0.4rem !important;
+        margin-top: 1rem !important; /* Mantener espacio desde la imagen en móvil pequeño */
     }
     
     .community-actions-header .btn,
-    .community-actions-header .btn-community {
-        min-width: 100px !important;
-        max-width: 130px !important;
-        padding: 0.5rem 0.75rem !important;
-        font-size: 0.8rem !important;
-    }
-    
-    /* Asegurar que el botón de eliminar tenga el mismo tamaño en móvil pequeño */
+    .community-actions-header .btn-community,
     .community-actions-header .btn-community-danger {
-        min-width: 100px !important;
-        max-width: 130px !important;
+        min-width: 120px !important; /* Aumentado para acomodar badges */
+        max-width: 140px !important;
         padding: 0.5rem 0.75rem !important;
         font-size: 0.8rem !important;
     }
