@@ -174,7 +174,7 @@
                 <div class="mb-5">
                     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
                         <div class="mb-3 mb-lg-0">
-                            <h2 class="text-white mb-0">
+                            <h2 class="text-white mb-0 dashboard-section-title">
                                 Publicaciones Recientes de Seguidos
                             </h2>
                             <small class="text-light">Últimas 24 horas</small>
@@ -194,7 +194,7 @@
                 <div class="mb-5">
                     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
                         <div class="mb-3 mb-lg-0">
-                            <h2 class="text-white mb-0">
+                            <h2 class="text-white mb-0 dashboard-section-title">
                                 Publicaciones Recientes de Mis Comunidades
                             </h2>
                             <small class="text-light">Últimas 24 horas</small>

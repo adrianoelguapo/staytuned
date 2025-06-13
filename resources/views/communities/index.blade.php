@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para mostrar resultados
     function displayResults(communities) {
         if (communities.length === 0) {
-            resultsContainer.innerHTML = '<div class="alert alert-info">No se encontraron comunidades con ese nombre</div>';
+            resultsContainer.innerHTML = '';
         } else {
             let html = '';
             communities.forEach(community => {

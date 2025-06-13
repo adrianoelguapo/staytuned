@@ -96,8 +96,7 @@
             <h5 class="text-white mb-3">No te has unido a ninguna comunidad</h5>
             <p class="text-white-50 mb-4">
                 Explora las comunidades públicas disponibles y únete para conectar con otros melómanos.
-            </p>
-            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+            </p>            <div class="d-flex flex-column gap-2 justify-content-center">
                 <a href="#descubrir-comunidades" class="btn btn-outline-primary">
                     <i class="fas fa-compass me-2"></i>
                     Explorar Comunidades
