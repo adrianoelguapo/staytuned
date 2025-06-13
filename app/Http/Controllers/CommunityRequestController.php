@@ -114,14 +114,10 @@ class CommunityRequestController extends Controller
             return redirect()->back()->with('error', 'Esta solicitud ya ha sido procesada.');
         }
 
-        $httpRequest->validate([
-            'admin_message' => 'nullable|string|max:500'
-        ]);
-
-        // Rechazar la solicitud
+        // Rechazar la solicitud sin mensaje del admin
         $request->update([
             'status' => 'rejected',
-            'admin_message' => $httpRequest->admin_message,
+            'admin_message' => null,
             'responded_at' => now()
         ]);
 

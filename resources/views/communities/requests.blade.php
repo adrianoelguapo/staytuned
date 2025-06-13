@@ -105,13 +105,14 @@
                                                 </form>
 
                                                 <!-- Botón Rechazar -->
-                                                <button type="button" 
-                                                        class="btn btn-sm glassmorphism-danger request-btn-reject" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#rejectModal{{ $request->id }}">
-                                                    <i class="bi bi-x-lg me-1"></i>
-                                                    Rechazar
-                                                </button>
+                                                <form action="{{ route('community-requests.reject', $request) }}" method="POST" class="d-inline request-action-form">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-sm glassmorphism-danger request-btn-reject">
+                                                        <i class="bi bi-x-lg me-1"></i>
+                                                        Rechazar
+                                                    </button>
+                                                </form>
 
                                                 <!-- Ver perfil del usuario -->
                                                 <a href="{{ route('explore.users.show', $request->user) }}" 
@@ -148,49 +149,6 @@
 </div>
 
 <!-- Modales para rechazar solicitudes -->
-@foreach($pendingRequests as $request)
-    <div class="modal fade" id="rejectModal{{ $request->id }}" tabindex="-1" aria-labelledby="rejectModalLabel{{ $request->id }}" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="rejectModalLabel{{ $request->id }}">
-                        <i class="bi bi-x-circle me-2"></i>
-                        Rechazar solicitud de {{ $request->user->name }}
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <form action="{{ route('community-requests.reject', $request) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="admin_message{{ $request->id }}" class="form-label">Mensaje para el usuario (opcional)</label>
-                            <textarea 
-                                class="form-control" 
-                                id="admin_message{{ $request->id }}" 
-                                name="admin_message" 
-                                rows="3" 
-                                placeholder="Explica el motivo del rechazo (opcional)..."
-                            ></textarea>
-                        </div>
-                        <div class="alert alert-warning mb-0">
-                            <i class="bi bi-exclamation-triangle me-2"></i>
-                            ¿Estás seguro de que quieres rechazar esta solicitud? Esta acción no se puede deshacer.
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn glassmorphism-white" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn glassmorphism-danger">
-                            <i class="bi bi-x-lg me-1"></i>
-                            Rechazar Solicitud
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endforeach
-
 @endsection
 
 @push('scripts')

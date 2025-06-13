@@ -107,13 +107,14 @@
                                                 </form>
 
                                                 <!-- Botón Rechazar -->
-                                                <button type="button" 
-                                                        class="btn btn-sm glassmorphism-danger request-btn-reject" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#rejectModal<?php echo e($request->id); ?>">
-                                                    <i class="bi bi-x-lg me-1"></i>
-                                                    Rechazar
-                                                </button>
+                                                <form action="<?php echo e(route('community-requests.reject', $request)); ?>" method="POST" class="d-inline request-action-form">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('PATCH'); ?>
+                                                    <button type="submit" class="btn btn-sm glassmorphism-danger request-btn-reject">
+                                                        <i class="bi bi-x-lg me-1"></i>
+                                                        Rechazar
+                                                    </button>
+                                                </form>
 
                                                 <!-- Ver perfil del usuario -->
                                                 <a href="<?php echo e(route('explore.users.show', $request->user)); ?>" 
@@ -150,50 +151,6 @@
 </div>
 
 <!-- Modales para rechazar solicitudes -->
-<?php $__currentLoopData = $pendingRequests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="modal fade" id="rejectModal<?php echo e($request->id); ?>" tabindex="-1" aria-labelledby="rejectModalLabel<?php echo e($request->id); ?>" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="rejectModalLabel<?php echo e($request->id); ?>">
-                        <i class="bi bi-x-circle me-2"></i>
-                        Rechazar solicitud de <?php echo e($request->user->name); ?>
-
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <form action="<?php echo e(route('community-requests.reject', $request)); ?>" method="POST">
-                    <?php echo csrf_field(); ?>
-                    <?php echo method_field('PATCH'); ?>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="admin_message<?php echo e($request->id); ?>" class="form-label">Mensaje para el usuario (opcional)</label>
-                            <textarea 
-                                class="form-control" 
-                                id="admin_message<?php echo e($request->id); ?>" 
-                                name="admin_message" 
-                                rows="3" 
-                                placeholder="Explica el motivo del rechazo (opcional)..."
-                            ></textarea>
-                        </div>
-                        <div class="alert alert-warning mb-0">
-                            <i class="bi bi-exclamation-triangle me-2"></i>
-                            ¿Estás seguro de que quieres rechazar esta solicitud? Esta acción no se puede deshacer.
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn glassmorphism-white" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn glassmorphism-danger">
-                            <i class="bi bi-x-lg me-1"></i>
-                            Rechazar Solicitud
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
