@@ -151,7 +151,7 @@
                             <div class="col">
                                 <!-- Info de la playlist -->
                                 <div class="playlist-header-info">
-                                    <span class="badge bg-secondary mb-2">PLAYLIST</span>
+                                    <span class="badge playlist-badge-glassmorphism mb-2">PLAYLIST</span>
                                     <h1 class="playlist-title-large">{{ $playlist->name }}</h1>
                                     
                                     @if($playlist->description)
@@ -182,37 +182,26 @@
                             <div class="col-auto">
                                 <!-- Acciones (solo para el propietario) -->
                                 @if(Auth::check() && Auth::id() === $playlist->user_id)
-                                    <div class="playlist-actions-header">
-                                        <div class="dropdown d-inline">
-                                            <button class="btn btn-options-large btn-purple" type="button" 
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-three-dots"></i>
+                                    <div class="playlist-actions-header d-flex gap-2">
+                                        <button class="btn btn-outline-light btn-sm" onclick="toggleSpotifySearch()">
+                                            <i class="bi bi-plus me-1"></i>
+                                            <span class="d-none d-md-inline">Agregar</span>
+                                        </button>
+                                        <a href="{{ route('playlists.edit', $playlist) }}" class="btn btn-outline-light btn-sm">
+                                            <i class="bi bi-pencil me-1"></i>
+                                            <span class="d-none d-md-inline">Editar</span>
+                                        </a>
+                                        <form action="{{ route('playlists.destroy', $playlist) }}" 
+                                              method="POST" 
+                                              style="display: inline-block;"
+                                              onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-glass-action btn-glass-danger btn-sm">
+                                                <i class="bi bi-trash me-1"></i>
+                                                <span class="d-none d-md-inline">Eliminar</span>
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li>
-                                                    <button class="dropdown-item" onclick="toggleSpotifySearch()">
-                                                        <i class="bi bi-plus me-2"></i>Agregar canciones
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('playlists.edit', $playlist) }}">
-                                                        <i class="bi bi-pencil me-2"></i>Editar playlist
-                                                    </a>
-                                                </li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li>
-                                                    <form action="{{ route('playlists.destroy', $playlist) }}" 
-                                                          method="POST" 
-                                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="dropdown-item text-danger">
-                                                            <i class="bi bi-trash me-2"></i>Eliminar playlist
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        </form>
                                     </div>
                                 @endif
                             </div>
@@ -228,22 +217,23 @@
                                 <i class="bi bi-search me-2"></i>
                                 Buscar canciones en Spotify
                             </h5>
-                            <div class="row">
+                            <div class="row align-items-center g-2">
                                 <div class="col-md-8">
                                     <input type="text" 
-                                           class="form-control search-input" 
+                                           class="form-control glassmorphism-input" 
                                            id="searchInput" 
-                                           placeholder="Buscar canciones, artistas o álbumes...">
+                                           placeholder="Buscar canciones, artistas o álbumes..."
+                                           style="height: 38px;">
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-purple w-100" onclick="searchSpotify()">
-                                        <i class="bi bi-search me-2"></i>
-                                        Buscar
+                                    <button class="btn btn-outline-light w-100" onclick="searchSpotify()" style="height: 38px;">
+                                        <i class="bi bi-search me-1"></i>
+                                        <span class="d-none d-lg-inline">Buscar</span>
                                     </button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-purple w-100" id="saveChangesBtn" onclick="saveChanges()">
-                                        <i class="bi bi-check-circle me-2"></i>
+                                    <button class="btn btn-outline-light w-100" id="saveChangesBtn" onclick="saveChanges()" style="height: 38px;">
+                                        <i class="bi bi-check-circle me-1"></i>
                                         <span class="d-none d-lg-inline">Guardar</span>
                                     </button>
                                 </div>

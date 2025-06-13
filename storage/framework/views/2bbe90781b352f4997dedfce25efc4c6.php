@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Mis Publicaciones | StayTuned</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/playlists.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/offcanvas-fix.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/icon-alignment-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/playlists.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/posts.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/offcanvas-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/icon-alignment-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
 </head>
 
 <body class="dashboard-body">
@@ -28,17 +28,17 @@
                     aria-controls="offcanvasMenu">
                 <i class="bi bi-list text-white fs-3"></i>
             </button>
-            <a class="navbar-brand text-white fw-bold" href="{{ url('dashboard') }}">
+            <a class="navbar-brand text-white fw-bold" href="<?php echo e(url('dashboard')); ?>">
                 StayTuned
             </a>
         </div>
 
         <div class="d-none d-lg-flex ms-auto align-items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="nav-link-inline">Dashboard</a>
-            <a href="{{ route('explore.users.index') }}" class="nav-link-inline">Explorar Usuarios</a>
-            <a href="{{ route('playlists.index') }}" class="nav-link-inline">Mis Playlists</a>
-            <a href="{{ route('posts.index') }}" class="nav-link-inline active">Mis Publicaciones</a>
-            <a href="{{ route('communities.index') }}" class="nav-link-inline">Mis Comunidades</a>
+            <a href="<?php echo e(route('dashboard')); ?>" class="nav-link-inline">Dashboard</a>
+            <a href="<?php echo e(route('explore.users.index')); ?>" class="nav-link-inline">Explorar Usuarios</a>
+            <a href="<?php echo e(route('playlists.index')); ?>" class="nav-link-inline">Mis Playlists</a>
+            <a href="<?php echo e(route('posts.index')); ?>" class="nav-link-inline active">Mis Publicaciones</a>
+            <a href="<?php echo e(route('communities.index')); ?>" class="nav-link-inline">Mis Comunidades</a>
 
             <div class="dropdown">
                 <a class="d-flex align-items-center text-white dropdown-toggle nav-link-inline"
@@ -47,23 +47,24 @@
                    role="button"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img src="{{ Auth::user()->profile_photo_url }}"
+                    <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
+                        <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
                              class="rounded-circle me-2 user-photo"
-                             alt="{{ Auth::user()->name }}" />
-                    @endif
-                    {{ Auth::user()->username }}
+                             alt="<?php echo e(Auth::user()->name); ?>" />
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->username); ?>
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                             <i class="bi bi-person me-2"></i> Perfil
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit"
                                     class="dropdown-item d-flex align-items-center text-danger">
                                 <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -83,29 +84,29 @@
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">
                     <i class="fas fa-home me-2"></i> Dashboard
                 </a>
-                <a class="nav-link" href="{{ route('explore.users.index') }}">
+                <a class="nav-link" href="<?php echo e(route('explore.users.index')); ?>">
                     <i class="fas fa-users me-2"></i> Explorar Usuarios
                 </a>
-                <a class="nav-link" href="{{ route('playlists.index') }}">
+                <a class="nav-link" href="<?php echo e(route('playlists.index')); ?>">
                     <i class="fas fa-music me-2"></i> Mis playlists
                 </a>
-                <a class="nav-link active" href="{{ route('posts.index') }}">
+                <a class="nav-link active" href="<?php echo e(route('posts.index')); ?>">
                     <i class="fas fa-newspaper me-2"></i> Mis Publicaciones
                 </a>
-                <a class="nav-link" href="{{ route('communities.index') }}">
+                <a class="nav-link" href="<?php echo e(route('communities.index')); ?>">
                     <i class="fas fa-users me-2"></i> Mis comunidades
                 </a>
             </nav>
             <hr class="my-0">
             <nav class="nav flex-column">
-                <a class="nav-link d-flex align-items-center" href="{{ route('profile.settings') }}">
+                <a class="nav-link d-flex align-items-center" href="<?php echo e(route('profile.settings')); ?>">
                     <i class="bi bi-person me-2"></i> Perfil
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
                     <button type="submit"
                             class="nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
                         <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -126,119 +127,122 @@
                         </h1>
                         <p class="text-white mb-0">Crea y administra tus publicaciones musicales para compartir con la comunidad</p>
                     </div>
-                    <a href="{{ route('posts.create') }}" class="btn btn-new-playlist">
+                    <a href="<?php echo e(route('posts.create')); ?>" class="btn btn-new-playlist">
                         <i class="bi bi-plus-circle me-2"></i>
                         Nueva Publicación
                     </a>
                 </div>
 
                 <!-- Mensaje de éxito -->
-                @if(session('success'))
+                <?php if(session('success')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
+                        <?php echo e(session('success')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session('error'))
+                <?php if(session('error')): ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
+                        <?php echo e(session('error')); ?>
+
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if($posts->count() > 0)
+                <?php if($posts->count() > 0): ?>
                     <!-- Lista de publicaciones -->
                     <div class="posts-list">
-                        @foreach($posts as $post)
+                        <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="post-card-full-width">
                                 <div class="post-card-body">
                                     <!-- Contenido principal -->
                                     <div class="post-content-wrapper">
                                         <!-- Imagen/Cover de la publicación -->
                                         <div class="post-cover-container">
-                                            @if($post->cover || $post->spotify_image)
-                                                <img src="{{ $post->cover ?: $post->spotify_image }}" 
-                                                     alt="{{ $post->title }}"
+                                            <?php if($post->cover || $post->spotify_image): ?>
+                                                <img src="<?php echo e($post->cover ?: $post->spotify_image); ?>" 
+                                                     alt="<?php echo e($post->title); ?>"
                                                      class="post-cover-image"
                                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                 <div class="post-cover-placeholder" style="display: none;">
                                                     <i class="bi bi-newspaper"></i>
                                                 </div>
-                                            @else
+                                            <?php else: ?>
                                                 <div class="post-cover-placeholder">
                                                     <i class="bi bi-newspaper"></i>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                         
                                         <!-- Información del post -->
                                         <div class="post-info-container">
                                             <div class="post-header-section">
-                                                <a href="{{ route('posts.show', $post) }}" class="post-title-link">
-                                                    <h3 class="post-title">{{ $post->title }}</h3>
+                                                <a href="<?php echo e(route('posts.show', $post)); ?>" class="post-title-link">
+                                                    <h3 class="post-title"><?php echo e($post->title); ?></h3>
                                                 </a>
-                                                <span class="post-category-badge">{{ ucfirst($post->category->type) }}</span>
+                                                <span class="post-category-badge"><?php echo e(ucfirst($post->category->type)); ?></span>
                                             </div>
                                             
-                                            @if($post->content || $post->description)
-                                                <p class="post-description">{{ Str::limit($post->content ?: $post->description, 150) }}</p>
-                                            @endif
+                                            <?php if($post->content || $post->description): ?>
+                                                <p class="post-description"><?php echo e(Str::limit($post->content ?: $post->description, 150)); ?></p>
+                                            <?php endif; ?>
                                             
-                                            @if($post->spotify_data)
+                                            <?php if($post->spotify_data): ?>
                                                 <div class="spotify-info-card">
                                                     <i class="bi bi-spotify spotify-icon"></i>
                                                     <div class="spotify-text">
-                                                        <div class="spotify-track-name">{{ $post->spotify_name }}</div>
-                                                        @if($post->spotify_artist)
-                                                            <div class="spotify-artist-name">{{ $post->spotify_artist }}</div>
-                                                        @endif
+                                                        <div class="spotify-track-name"><?php echo e($post->spotify_name); ?></div>
+                                                        <?php if($post->spotify_artist): ?>
+                                                            <div class="spotify-artist-name"><?php echo e($post->spotify_artist); ?></div>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                             
                                             <!-- Meta información y acciones -->
                                             <div class="post-footer-section">
                                                 <div class="post-meta-info">
-                                                    <a href="{{ route('explore.users.show', $post->user) }}" class="post-author d-flex align-items-center text-decoration-none">
-                                                        <img src="{{ $post->user->profile_photo_url }}" 
+                                                    <a href="<?php echo e(route('explore.users.show', $post->user)); ?>" class="post-author d-flex align-items-center text-decoration-none">
+                                                        <img src="<?php echo e($post->user->profile_photo_url); ?>" 
                                                              class="rounded-circle me-2" 
                                                              style="width: 24px; height: 24px; object-fit: cover;"
-                                                             alt="{{ $post->user->name }}">
-                                                        <span class="text-white">{{ $post->user->username }}</span>
+                                                             alt="<?php echo e($post->user->name); ?>">
+                                                        <span class="text-white"><?php echo e($post->user->username); ?></span>
                                                     </a>
                                                     <span class="post-date">
                                                         <i class="bi bi-calendar me-1"></i>
-                                                        {{ $post->created_at->diffForHumans() }}
+                                                        <?php echo e($post->created_at->diffForHumans()); ?>
+
                                                     </span>
                                                 </div>
                                                 
                                                 <div class="post-actions-section">
-                                                    <button onclick="toggleLike({{ $post->id }})" 
-                                                            class="like-btn {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}"
-                                                            data-post-id="{{ $post->id }}"
-                                                            data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
-                                                        <i class="bi {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'bi-heart-fill text-danger' : 'bi-heart text-white' }}"></i>
-                                                        <span class="likes-count">{{ $post->likes_count }}</span>
+                                                    <button onclick="toggleLike(<?php echo e($post->id); ?>)" 
+                                                            class="like-btn <?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : ''); ?>"
+                                                            data-post-id="<?php echo e($post->id); ?>"
+                                                            data-liked="<?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false'); ?>">
+                                                        <i class="bi <?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'bi-heart-fill text-danger' : 'bi-heart text-white'); ?>"></i>
+                                                        <span class="likes-count"><?php echo e($post->likes_count); ?></span>
                                                     </button>
                                                     
-                                                    @if($post->user_id === Auth::id())
+                                                    <?php if($post->user_id === Auth::id()): ?>
                                                         <div class="post-actions-buttons">
-                                                            <a href="{{ route('posts.show', $post) }}" 
+                                                            <a href="<?php echo e(route('posts.show', $post)); ?>" 
                                                                class="btn btn-glass-action" 
                                                                title="Ver publicación">
                                                                 <i class="bi bi-eye me-1"></i>Ver
                                                             </a>
-                                                            <a href="{{ route('posts.edit', $post) }}" 
+                                                            <a href="<?php echo e(route('posts.edit', $post)); ?>" 
                                                                class="btn btn-glass-action" 
                                                                title="Editar publicación">
                                                                 <i class="bi bi-pencil me-1"></i>Editar
                                                             </a>
-                                                            <form action="{{ route('posts.destroy', $post) }}" 
+                                                            <form action="<?php echo e(route('posts.destroy', $post)); ?>" 
                                                                   method="POST" 
                                                                   style="display: inline;">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
                                                                 <button type="submit" 
                                                                         class="btn btn-glass-action btn-glass-danger" 
                                                                         title="Eliminar publicación">
@@ -246,77 +250,77 @@
                                                                 </button>
                                                             </form>
                                                         </div>
-                                                    @endif
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 
                     <!-- Paginación con estilo glassmorphism -->
-                    @if($posts->hasPages())
+                    <?php if($posts->hasPages()): ?>
                         <div class="text-center mt-5">
                             <nav aria-label="Navegación de publicaciones" class="d-flex justify-content-center">
                                 <ul class="pagination pagination-custom">
-                                    {{-- Enlace anterior --}}
-                                    @if ($posts->onFirstPage())
+                                    
+                                    <?php if($posts->onFirstPage()): ?>
                                         <li class="page-item disabled">
                                             <span class="page-link">
                                                 ‹
                                             </span>
                                         </li>
-                                    @else
+                                    <?php else: ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $posts->previousPageUrl() }}" rel="prev">
+                                            <a class="page-link" href="<?php echo e($posts->previousPageUrl()); ?>" rel="prev">
                                                 ‹
                                             </a>
                                         </li>
-                                    @endif
+                                    <?php endif; ?>
 
-                                    {{-- Enlaces de páginas --}}
-                                    @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-                                        @if ($page == $posts->currentPage())
+                                    
+                                    <?php $__currentLoopData = $posts->getUrlRange(1, $posts->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($page == $posts->currentPage()): ?>
                                             <li class="page-item active">
-                                                <span class="page-link">{{ $page }}</span>
+                                                <span class="page-link"><?php echo e($page); ?></span>
                                             </li>
-                                        @else
+                                        <?php else: ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                <a class="page-link" href="<?php echo e($url); ?>"><?php echo e($page); ?></a>
                                             </li>
-                                        @endif
-                                    @endforeach
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                    {{-- Enlace siguiente --}}
-                                    @if ($posts->hasMorePages())
+                                    
+                                    <?php if($posts->hasMorePages()): ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $posts->nextPageUrl() }}" rel="next">
+                                            <a class="page-link" href="<?php echo e($posts->nextPageUrl()); ?>" rel="next">
                                                 ›
                                             </a>
                                         </li>
-                                    @else
+                                    <?php else: ?>
                                         <li class="page-item disabled">
                                             <span class="page-link">
                                                 ›
                                             </span>
                                         </li>
-                                    @endif
+                                    <?php endif; ?>
                                 </ul>
                             </nav>
                             
-                            {{-- Información de paginación --}}
+                            
                             <div class="pagination-info mt-3">
                                 <small class="text-light">
-                                    Mostrando {{ $posts->firstItem() ?? 0 }} - {{ $posts->lastItem() ?? 0 }} 
-                                    de {{ $posts->total() }} publicaciones
+                                    Mostrando <?php echo e($posts->firstItem() ?? 0); ?> - <?php echo e($posts->lastItem() ?? 0); ?> 
+                                    de <?php echo e($posts->total()); ?> publicaciones
                                 </small>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
 
-                @else
+                <?php else: ?>
                     <!-- Estado vacío -->
                     <div class="card dashboard-card text-center py-5">
                         <div class="card-body">
@@ -325,13 +329,13 @@
                             <p class="text-muted mb-4">
                                 Crea tu primera publicación y comienza a compartir tu música favorita
                             </p>
-                            <a href="{{ route('posts.create') }}" class="btn btn-new-playlist">
+                            <a href="<?php echo e(route('posts.create')); ?>" class="btn btn-new-playlist">
                                 <i class="bi bi-plus-circle me-2"></i>
                                 Crear mi primera publicación
                             </a>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
             </div>
         </div>
@@ -377,3 +381,4 @@
 
 
 
+<?php /**PATH C:\laragon\www\staytuned\resources\views/posts/index.blade.php ENDPATH**/ ?>

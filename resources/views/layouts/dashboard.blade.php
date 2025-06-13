@@ -20,6 +20,7 @@
     <link href="{{ asset('css/profile.css') }}?v={{ now()->timestamp }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/offcanvas-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/icon-alignment-fix.css') }}?v={{ time() }}" rel="stylesheet">
     @stack('styles')
 </head>
 

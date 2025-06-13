@@ -186,9 +186,9 @@
 
             <p class = "text-light mb-3">No hay publicaciones recientes en tus comunidades en las últimas 24 horas.</p>
 
-            <a href="{{ route('communities.index') }}" class="btn btn-outline-light d-inline-flex align-items-center">
-                <i class="fas fa-users me-2"></i> Explorar comunidades
-            </a>
+            <div class="d-flex justify-content-center">
+                <a href="{{ route('communities.index') }}" class="btn btn-outline-light d-inline-flex align-items-center">Explorar comunidades</a>
+            </div>
 
         </div>
 

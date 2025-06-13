@@ -20,6 +20,7 @@
     <link href="<?php echo e(asset('css/profile.css')); ?>?v=<?php echo e(now()->timestamp); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/offcanvas-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/icon-alignment-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 

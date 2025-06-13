@@ -9,12 +9,12 @@
         <link href = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel = "stylesheet">
         <link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel = "stylesheet">
 
-        <link href = "{{ asset('css/dashboard.css') }}" rel = "stylesheet">
-        <link href = "{{ asset('css/posts.css') }}" rel = "stylesheet">
-        <link href = "{{ asset('css/community-fixed.css') }}" rel = "stylesheet">
-        <link href = "{{ asset('css/navbar-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
-        <link href = "{{ asset('css/offcanvas-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
-        <link href = "{{ asset('css/icon-alignment-fix.css') }}?v = {{ time() }}" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/dashboard.css')); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/posts.css')); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/community-fixed.css')); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/navbar-fix.css')); ?>?v = <?php echo e(time()); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/offcanvas-fix.css')); ?>?v = <?php echo e(time()); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/icon-alignment-fix.css')); ?>?v = <?php echo e(time()); ?>" rel = "stylesheet">
 
     </head>
 
@@ -30,29 +30,30 @@
 
                 </button>
 
-                <a class = "navbar-brand text-white fw-bold" href = "{{ url('dashboard') }}">StayTuned</a>
+                <a class = "navbar-brand text-white fw-bold" href = "<?php echo e(url('dashboard')); ?>">StayTuned</a>
 
             </div>
 
             <div class = "d-none d-lg-flex ms-auto align-items-center gap-3">
 
-                <a href = "{{ route('dashboard') }}"  class = "nav-link-inline {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
-                <a href = "{{ route('explore.users.index') }}" class = "nav-link-inline {{ request()->routeIs('explore.users.*') ? 'active' : '' }}">Explorar Usuarios</a>
-                <a href = "{{ route('playlists.index') }}" class = "nav-link-inline {{ request()->routeIs('playlists.*') ? 'active' : '' }}">Mis Playlists</a>
-                <a href = "{{ route('posts.index') }}" class = "nav-link-inline {{ request()->routeIs('posts.*') ? 'active' : '' }}">Mis Publicaciones</a>
-                <a href = "{{ route('communities.index') }}" class = "nav-link-inline {{ request()->routeIs('communities.*') ? 'active' : '' }}">Mis Comunidades</a>
+                <a href = "<?php echo e(route('dashboard')); ?>"  class = "nav-link-inline <?php echo e(request()->routeIs('dashboard') ? 'active' : ''); ?>">Dashboard</a>
+                <a href = "<?php echo e(route('explore.users.index')); ?>" class = "nav-link-inline <?php echo e(request()->routeIs('explore.users.*') ? 'active' : ''); ?>">Explorar Usuarios</a>
+                <a href = "<?php echo e(route('playlists.index')); ?>" class = "nav-link-inline <?php echo e(request()->routeIs('playlists.*') ? 'active' : ''); ?>">Mis Playlists</a>
+                <a href = "<?php echo e(route('posts.index')); ?>" class = "nav-link-inline <?php echo e(request()->routeIs('posts.*') ? 'active' : ''); ?>">Mis Publicaciones</a>
+                <a href = "<?php echo e(route('communities.index')); ?>" class = "nav-link-inline <?php echo e(request()->routeIs('communities.*') ? 'active' : ''); ?>">Mis Comunidades</a>
 
                 <div class = "dropdown">
 
                     <a class = "d-flex align-items-center text-white dropdown-toggle nav-link-inline" href = "#" id = "userDropdown" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">
 
-                        @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
 
-                            <img src = "{{ Auth::user()->profile_photo_url }}" class = "rounded-circle me-2 user-photo" alt = "{{ Auth::user()->name }}"/>
+                            <img src = "<?php echo e(Auth::user()->profile_photo_url); ?>" class = "rounded-circle me-2 user-photo" alt = "<?php echo e(Auth::user()->name); ?>"/>
 
-                        @endif
+                        <?php endif; ?>
 
-                        {{ Auth::user()->username }}
+                        <?php echo e(Auth::user()->username); ?>
+
 
                     </a>
 
@@ -60,7 +61,7 @@
 
                         <li>
 
-                            <a class = "dropdown-item d-flex align-items-center" href = "{{ route('profile.settings') }}">
+                            <a class = "dropdown-item d-flex align-items-center" href = "<?php echo e(route('profile.settings')); ?>">
 
                                 <i class = "bi bi-person me-2"></i> Perfil
 
@@ -76,9 +77,9 @@
 
                         <li>
 
-                            <form method = "POST" action = "{{ route('logout') }}">
+                            <form method = "POST" action = "<?php echo e(route('logout')); ?>">
 
-                                @csrf
+                                <?php echo csrf_field(); ?>
                                 <button type = "submit" class = "dropdown-item d-flex align-items-center text-danger">
 
                                     <i class = "bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -110,31 +111,31 @@
 
                 <nav class = "nav flex-column">
 
-                    <a class = "nav-link active" href = "{{ route('dashboard') }}">
+                    <a class = "nav-link active" href = "<?php echo e(route('dashboard')); ?>">
 
                         <i class = "fas fa-home me-2"></i> Dashboard
 
                     </a>
 
-                    <a class = "nav-link" href = "{{ route('explore.users.index') }}">
+                    <a class = "nav-link" href = "<?php echo e(route('explore.users.index')); ?>">
 
                         <i class = "fas fa-users me-2"></i> Explorar Usuarios
 
                     </a>
 
-                    <a class = "nav-link" href = "{{ route('playlists.index') }}">
+                    <a class = "nav-link" href = "<?php echo e(route('playlists.index')); ?>">
 
                         <i class = "fas fa-music me-2"></i> Mis Playlists
 
                     </a>
 
-                    <a class = "nav-link" href = "{{ route('posts.index') }}">
+                    <a class = "nav-link" href = "<?php echo e(route('posts.index')); ?>">
 
                         <i class = "fas fa-newspaper me-2"></i> Mis Publicaciones
 
                     </a>
 
-                    <a class = "nav-link" href = "{{ route('communities.index') }}">
+                    <a class = "nav-link" href = "<?php echo e(route('communities.index')); ?>">
 
                         <i class = "fas fa-users me-2"></i> Mis Comunidades
 
@@ -146,15 +147,15 @@
 
                 <nav class = "nav flex-column">
 
-                    <a class = "nav-link d-flex align-items-center" href = "{{ route('profile.settings') }}">
+                    <a class = "nav-link d-flex align-items-center" href = "<?php echo e(route('profile.settings')); ?>">
 
                         <i class = "bi bi-person me-2"></i> Perfil
 
                     </a>
 
-                    <form method = "POST" action = "{{ route('logout') }}">
+                    <form method = "POST" action = "<?php echo e(route('logout')); ?>">
 
-                        @csrf
+                        <?php echo csrf_field(); ?>
 
                         <button type = "submit" class = "btn-link d-flex align-items-center">
 
@@ -199,7 +200,7 @@
 
                                     <h5 class = "card-title text-white">Siguiendo</h5>
                                     
-                                    <p class = "card-text fs-4 fw-bold text-white">{{ $stats['following_count'] ?? 0 }}</p>
+                                    <p class = "card-text fs-4 fw-bold text-white"><?php echo e($stats['following_count'] ?? 0); ?></p>
 
                                 </div>
 
@@ -217,7 +218,7 @@
 
                                     <h5 class = "card-title text-white">Mis Comunidades</h5>
 
-                                    <p class = "card-text fs-4 fw-bold text-white">{{ $stats['communities_count'] ?? 0 }}</p>
+                                    <p class = "card-text fs-4 fw-bold text-white"><?php echo e($stats['communities_count'] ?? 0); ?></p>
 
                                 </div>
 
@@ -235,7 +236,7 @@
 
                                     <h5 class = "card-title text-white">Mis Publicaciones</h5>
 
-                                    <p class = "card-text fs-4 fw-bold text-white">{{ $stats['user_posts'] ?? 0 }}</p>
+                                    <p class = "card-text fs-4 fw-bold text-white"><?php echo e($stats['user_posts'] ?? 0); ?></p>
 
                                 </div>
 
@@ -257,13 +258,13 @@
 
                             </div>
 
-                            <a href = "{{ route('explore.users.index') }}" class = "btn btn-outline-light btn-sm w-100 dashboard-action-btn">Explorar Más Usuarios</a>
+                            <a href = "<?php echo e(route('explore.users.index')); ?>" class = "btn btn-outline-light btn-sm w-100 dashboard-action-btn">Explorar Más Usuarios</a>
 
                         </div>
 
                         <div id = "following-posts-content">
 
-                            @include('dashboard.partials.following-posts')
+                            <?php echo $__env->make('dashboard.partials.following-posts', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
                         </div>
 
@@ -281,13 +282,13 @@
 
                             </div>
 
-                            <a href = "{{ route('communities.index') }}" class = "btn btn-outline-light btn-sm w-100 dashboard-action-btn">Ver Mis Comunidades</a>
+                            <a href = "<?php echo e(route('communities.index')); ?>" class = "btn btn-outline-light btn-sm w-100 dashboard-action-btn">Ver Mis Comunidades</a>
 
                         </div>
 
                         <div id = "community-posts-content">
 
-                            @include('dashboard.partials.community-posts')
+                            <?php echo $__env->make('dashboard.partials.community-posts', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
                         </div>
 
@@ -340,11 +341,11 @@
 
         </style>
 
-        <div id = "dashboard-config" data-following-route = "{{ route('dashboard.following-posts') }}" data-community-route = "{{ route('dashboard.community-posts') }}" style = "display: none;"></div>
+        <div id = "dashboard-config" data-following-route = "<?php echo e(route('dashboard.following-posts')); ?>" data-community-route = "<?php echo e(route('dashboard.community-posts')); ?>" style = "display: none;"></div>
 
         <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script src = "{{ asset('js/dashboard.js') }}?v = {{ time() }}"></script>
+        <script src = "<?php echo e(asset('js/dashboard.js')); ?>?v = <?php echo e(time()); ?>"></script>
 
         <script>
             
@@ -362,4 +363,4 @@
 
     </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\staytuned\resources\views/dashboard.blade.php ENDPATH**/ ?>
