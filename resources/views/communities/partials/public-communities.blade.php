@@ -113,8 +113,7 @@
             <h5 class="text-white mb-3">No hay comunidades públicas disponibles</h5>
             <p class="text-white-50 mb-4">
                 Sé el primero en crear una comunidad pública para que otros usuarios puedan unirse.
-            </p>
-            <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+            </p>            <a href="{{ route('communities.create') }}" class="btn-new-playlist d-inline-flex align-items-center justify-content-center">
                 <i class="fas fa-plus me-2"></i>
                 Crear Comunidad Pública
             </a>

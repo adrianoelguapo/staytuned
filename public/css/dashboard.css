@@ -233,18 +233,38 @@ body.dashboard-body {
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   color: #fff;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .dashboard-card .card-body {
   padding: 2rem;
   flex: 1;
+}
+
+/* Estados vacíos específicos con altura controlada */
+.dashboard-card.text-center {
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card.text-center .card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Sección de búsqueda - NO aplicar estilos de estado vacío */
+.dashboard-card.mb-4:not(.text-center) {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.dashboard-card.mb-4:not(.text-center) .card-body {
+  display: block !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  text-align: left !important;
 }
 
 .dashboard-card .card-body .fas {
@@ -1036,149 +1056,140 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
     font-size: 0.875em !important;
 }
 
-.dropdown-menu.show {
-  z-index: 999999 !important;
+/* ====================================================
+   CORRECCIÓN DE ALINEACIÓN DE ICONOS EN BOTONES
+   ==================================================== */
+
+/* Alineación global para botones con iconos */
+.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    line-height: 1.2 !important;
 }
 
-@media (max-width: 768px) {
-  .dropdown-menu {
-    min-width: 160px !important;
-    max-width: 180px !important;
-  }
+.btn i {
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
 }
 
-.btn.d-inline-flex.align-items-center {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center;
-  gap: 0.5rem;
-  line-height: 1;
+/* Específico para botones con clase me-2 */
+.btn i.me-2 {
+    margin-right: 0.5rem !important;
+    margin-left: 0 !important;
 }
 
-.btn.d-inline-flex.align-items-center i {
-  margin: 0 !important;
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-flex;
-  align-items: center;
+/* Botones de búsqueda */
+.btn.btn-purple {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
 }
 
-.btn.d-inline-flex.align-items-center .me-2 {
-  margin-right: 0.5rem !important;
-  margin-left: 0 !important;
+/* Botón new-playlist */
+.btn-new-playlist {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    line-height: 1.2 !important;
 }
 
-.card-body .btn.d-inline-flex.align-items-center {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+.btn-new-playlist i {
+    line-height: 1 !important;
+    margin: 0 !important;
 }
 
-.card-body .btn.d-inline-flex.align-items-center:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+/* ====================================================
+   CORRECCIÓN DE ALTURA PARA ESTADOS VACÍOS
+   ==================================================== */
+
+/* Estado vacío general - reducir altura excesiva */
+.dashboard-card.text-center.py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
 }
 
-
-.dashboard-card.mb-4 .card-body {
-  padding: 1.25rem !important;
-}
-
-.dashboard-card.mb-4 .card-body h5 {
-  margin-bottom: 0.75rem !important;
-  font-size: 1.1rem !important;
-}
-
-.dashboard-card.mb-4 .card-body p.text-light.small {
-  margin-bottom: 1rem !important;
-  font-size: 0.9rem !important;
-  line-height: 1.4 !important;
-}
-
-.dashboard-card.mb-4 .card-body form.row.g-3 {
-  margin-bottom: 0 !important;
-}
-
-.dashboard-card.mb-4 .card-body #searchResults {
-  margin-top: 1rem !important;
-}
-
-.dashboard-card.mb-4 .card-body #searchLoading {
-  margin-top: 1rem !important;
-}
-
-.dashboard-card.mb-4 {
-    max-height: none !important;
+.dashboard-card.text-center.py-5 .card-body {
+    padding: 1.5rem !important;
+    min-height: auto !important;
     height: auto !important;
 }
 
-.dashboard-card.mb-4 .card-body {
+/* Estados vacíos específicos */
+.dashboard-card.text-center.py-4 .card-body {
+    padding: 1.25rem !important;
+    min-height: auto !important;
+    height: auto !important;
+}
+
+/* Iconos de estado vacío */
+.dashboard-card .display-1,
+.dashboard-card .display-4 {
+    margin-bottom: 1rem !important;
+}
+
+/* Títulos de estado vacío */
+.dashboard-card h4,
+.dashboard-card h5 {
+    margin-bottom: 0.75rem !important;
+}
+
+/* Párrafos de estado vacío */
+.dashboard-card p {
+    margin-bottom: 1.25rem !important;
+}
+
+/* ====================================================
+   CORRECCIÓN ESPECÍFICA PARA BÚSQUEDA DE COMUNIDADES
+   ==================================================== */
+
+/* Excluir la sección de búsqueda de los estilos de estado vacío */
+.dashboard-card.mb-4:not(.text-center) .card-body {
+    padding: 1.25rem !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
     justify-content: flex-start !important;
-    align-items: stretch !important;
     text-align: left !important;
 }
 
-.container-fluid .row .col-12 .dashboard-card.mb-4 {
+/* Asegurar que la sección de búsqueda no tome altura completa */
+.dashboard-card.mb-4:not(.text-center) {
     height: auto !important;
     min-height: auto !important;
     flex: none !important;
 }
 
-.dashboard-card.mb-4 + .community-section {
-    margin-top: 1.5rem !important;
+/* Resetear cualquier estilo de flexbox que afecte la búsqueda */
+.dashboard-card.mb-4:not(.text-center) .card-body h5,
+.dashboard-card.mb-4:not(.text-center) .card-body p,
+.dashboard-card.mb-4:not(.text-center) .card-body form {
+    flex: none !important;
+    width: auto !important;
 }
 
-.dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
+/* Solo aplicar estilos de estado vacío a cards con clase text-center */
+.dashboard-card.text-center .card-body {
+    padding: 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: auto !important;
 }
 
-@media (min-width: 768px) {
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
-        flex-direction: row !important;
-        gap: 1rem !important;
-    }
-    
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
-        flex: 0 0 auto !important;
-        min-width: 180px !important;
-    }
+.dashboard-card.text-center.py-4 .card-body {
+    padding: 1.25rem !important;
 }
 
-@media (max-width: 767.98px) {
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
-        flex-direction: column !important;
-        gap: 0.75rem !important;
-    }
-    
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
-        width: 100% !important;
-        max-width: 280px !important;
-    }
-}
-
-.dashboard-card .card-body .d-flex.gap-2 {
-    margin-top: 0 !important;
-}
-
-.dashboard-card .card-body .d-flex.gap-2 .btn {
-    font-weight: 500 !important;
-    transition: all 0.3s ease !important;
-    border-radius: 8px !important;
-}
-
-.dashboard-card .card-body .d-flex.gap-2 .btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 {
-        gap: 1rem !important;
-    }
-    
-    .dashboard-card .d-flex.flex-column.flex-md-row.gap-2 .btn {
-        min-width: 160px !important;
-        font-size: 0.9rem !important;
-    }
+.dashboard-card.text-center.py-5 .card-body {
+    padding: 1.5rem !important;
 }

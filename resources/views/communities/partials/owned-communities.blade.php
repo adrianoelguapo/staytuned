@@ -91,8 +91,7 @@
             <h5 class="text-white mb-3">No has creado ninguna comunidad</h5>
             <p class="text-white-50 mb-4">
                 Crea tu primera comunidad y conecta con otros amantes de la música que comparten tus gustos.
-            </p>
-            <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+            </p>            <a href="{{ route('communities.create') }}" class="btn-new-playlist d-inline-flex align-items-center justify-content-center">
                 <i class="fas fa-plus me-2"></i>
                 Crear Mi Primera Comunidad
             </a>

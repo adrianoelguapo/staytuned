@@ -36,7 +36,7 @@
             </div>
 
             <!-- Buscar Comunidades Privadas -->
-            <div class="card dashboard-card mb-4">
+            <div class="card dashboard-card search-section mb-4">
                 <div class="card-body">
                     <h5 class="text-white mb-3">
                         <i class="fas fa-search me-2"></i>
@@ -55,7 +55,7 @@
                                    autocomplete="off">
                         </div>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-purple w-100">
+                            <button type="submit" class="btn btn-purple w-100 d-inline-flex align-items-center justify-content-center">
                                 <i class="fas fa-search me-2"></i>
                                 Buscar
                             </button>
@@ -123,23 +123,6 @@
             @include('communities.partials.public-communities')
         </div>
     </div>
-
-    <!-- Estado vacío -->
-    @if($ownedCommunities->count() == 0 && $userCommunities->count() == 0 && $publicCommunities->count() == 0)
-        <div class="card dashboard-card text-center py-5">
-            <div class="card-body">
-                <i class="bi bi-people display-1 text-light mb-3"></i>
-                <h4 class="text-light mb-3">No hay comunidades disponibles</h4>
-                <p class="text-light mb-4">
-                    Crea la primera comunidad y conecta con otros amantes de la música
-                </p>
-                <a href="{{ route('communities.create') }}" class="btn-new-playlist">
-                    <i class="bi bi-plus-circle me-2"></i>
-                    Crear Primera Comunidad
-                </a>
-            </div>
-        </div>
-    @endif
         </div>
     </div>
 </div>
