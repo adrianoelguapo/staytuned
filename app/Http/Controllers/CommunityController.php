@@ -34,14 +34,15 @@ class CommunityController extends Controller
             ->latest('community_user.created_at')
             ->paginate(2, ['*'], 'user_page', $userCommunitiesPage);
 
+        // Paginación de comunidades públicas (2 por página)
+        $publicCommunitiesPage = $request->get('public_page', 1);
         $publicCommunities = Community::where('is_private', false)
             ->where('user_id', '!=', Auth::id())
             ->whereNotIn('id', $userCommunities->pluck('id'))
             ->whereNotIn('id', $ownedCommunityIds)
             ->with('owner')
             ->latest()
-            ->take(10)
-            ->get();
+            ->paginate(2, ['*'], 'public_page', $publicCommunitiesPage);
 
         // Obtener el conteo de solicitudes pendientes
         $pendingCommunityRequests = Auth::user()->totalPendingCommunityRequests();
@@ -389,6 +390,33 @@ class CommunityController extends Controller
 
         if ($request->ajax()) {
             return view('communities.partials.user-communities', compact('userCommunities'))->render();
+        }
+
+        return redirect()->route('communities.index');
+    }
+
+    /**
+     * Obtener comunidades públicas paginadas via AJAX
+     */
+    public function getPublicCommunities(Request $request)
+    {
+        // Obtener IDs de comunidades propias para excluir
+        $ownedCommunityIds = Auth::user()->ownedCommunities()->pluck('id');
+        
+        // Obtener IDs de comunidades unidas para excluir
+        $userCommunityIds = Auth::user()->communities()->pluck('communities.id');
+
+        $publicCommunitiesPage = $request->get('public_page', 1);
+        $publicCommunities = Community::where('is_private', false)
+            ->where('user_id', '!=', Auth::id())
+            ->whereNotIn('id', $userCommunityIds)
+            ->whereNotIn('id', $ownedCommunityIds)
+            ->with('owner')
+            ->latest()
+            ->paginate(2, ['*'], 'public_page', $publicCommunitiesPage);
+
+        if ($request->ajax()) {
+            return view('communities.partials.public-communities', compact('publicCommunities'))->render();
         }
 
         return redirect()->route('communities.index');

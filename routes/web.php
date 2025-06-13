@@ -43,6 +43,7 @@ Route::middleware([
     // Rutas AJAX para paginación de comunidades
     Route::get('/communities-owned', [CommunityController::class, 'getOwnedCommunities'])->name('communities.owned');
     Route::get('/communities-user', [CommunityController::class, 'getUserCommunities'])->name('communities.user');
+    Route::get('/communities-public', [CommunityController::class, 'getPublicCommunities'])->name('communities.public');
     
     // Rutas para solicitudes de membresía a comunidades privadas
     Route::post('/communities/{community}/request', [CommunityRequestController::class, 'store'])->name('communities.request');

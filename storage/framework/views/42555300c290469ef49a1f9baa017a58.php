@@ -1,5 +1,5 @@
-<?php if($userCommunities->count() > 0): ?>
-    <?php $__currentLoopData = $userCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php if($publicCommunities->count() > 0): ?>
+    <?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="community-card-full-width">
         <div class="community-card-body">
             <!-- Contenido principal -->
@@ -46,7 +46,8 @@
                             <span class="community-stat">
                                 <i class="fas fa-users me-1"></i>
                                 <?php echo e($community->members_count); ?> miembros
-                            </span>                            <span class="community-stat">
+                            </span>
+                            <span class="community-stat">
                                 <i class="fas fa-newspaper me-1"></i>
                                 <?php echo e($community->posts_count); ?> posts
                             </span>                            <!-- Información del dueño con foto de perfil como enlace -->
@@ -74,13 +75,30 @@
                                 <i class="fas fa-eye me-1"></i>
                                 Ver
                             </a>
-                            <form action="<?php echo e(route('communities.leave', $community)); ?>" method="POST" class="d-inline">
-                                <?php echo csrf_field(); ?>
-                                <button type="submit" class="btn-community btn-community-danger btn-sm">
-                                    <i class="fas fa-sign-out-alt me-1"></i>
-                                    Salir
-                                </button>
-                            </form>
+                            <?php if($community->is_private): ?>
+                                <?php if($community->hasPendingRequest(Auth::user())): ?>
+                                    <button class="btn-community btn-community-secondary btn-sm" disabled>
+                                        <i class="fas fa-clock me-1"></i>
+                                        Solicitud Enviada
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button" 
+                                            class="btn-community btn-community-primary btn-sm" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#requestModal<?php echo e($community->id); ?>">
+                                        <i class="fas fa-paper-plane me-1"></i>
+                                        Solicitar Unirse
+                                    </button>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <form action="<?php echo e(route('communities.join', $community)); ?>" method="POST" class="d-inline">
+                                    <?php echo csrf_field(); ?>
+                                    <button type="submit" class="btn-community btn-community-primary btn-sm">
+                                        <i class="fas fa-plus me-1"></i>
+                                        Unirse
+                                    </button>
+                                </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -89,36 +107,30 @@
     </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php else: ?>
-    <!-- Mensaje cuando no hay comunidades unidas -->
+    <!-- Mensaje cuando no hay comunidades públicas -->
     <div class="card dashboard-card text-center py-4">
         <div class="card-body">
-            <i class="fas fa-user-friends display-4 text-white-50 mb-3"></i>
-            <h5 class="text-white mb-3">No te has unido a ninguna comunidad</h5>
+            <i class="fas fa-compass display-4 text-white-50 mb-3"></i>
+            <h5 class="text-white mb-3">No hay comunidades públicas disponibles</h5>
             <p class="text-white-50 mb-4">
-                Explora las comunidades públicas disponibles y únete para conectar con otros melómanos.
+                Sé el primero en crear una comunidad pública para que otros usuarios puedan unirse.
             </p>
-            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                <a href="#descubrir-comunidades" class="btn btn-outline-primary">
-                    <i class="fas fa-compass me-2"></i>
-                    Explorar Comunidades
-                </a>
-                <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('searchCommunityInput').focus()">
-                    <i class="fas fa-search me-2"></i>
-                    Buscar Comunidad Privada
-                </button>
-            </div>
+            <a href="<?php echo e(route('communities.create')); ?>" class="btn-new-playlist">
+                <i class="fas fa-plus me-2"></i>
+                Crear Comunidad Pública
+            </a>
         </div>
     </div>
 <?php endif; ?>
 
-<!-- Paginación para comunidades unidas -->
-<?php if($userCommunities->hasPages()): ?>
+<!-- Paginación para comunidades públicas -->
+<?php if($publicCommunities->hasPages()): ?>
 <div class="pagination-container mt-4">
     <div class="d-flex justify-content-center align-items-center">
-        <nav aria-label="Paginación de comunidades unidas">
+        <nav aria-label="Paginación de comunidades públicas">
             <ul class="pagination pagination-dark mb-0">
                 
-                <?php if($userCommunities->onFirstPage()): ?>
+                <?php if($publicCommunities->onFirstPage()): ?>
                     <li class="page-item disabled">
                         <span class="page-link">
                             <i class="fas fa-chevron-left"></i>
@@ -126,29 +138,29 @@
                     </li>
                 <?php else: ?>
                     <li class="page-item">
-                        <a class="page-link" href="#" data-page="<?php echo e($userCommunities->currentPage() - 1); ?>" data-type="user">
+                        <a class="page-link" href="#" data-page="<?php echo e($publicCommunities->currentPage() - 1); ?>" data-type="public">
                             <i class="fas fa-chevron-left"></i>
                         </a>
                     </li>
                 <?php endif; ?>
 
                 
-                <?php for($i = 1; $i <= $userCommunities->lastPage(); $i++): ?>
-                    <?php if($i == $userCommunities->currentPage()): ?>
+                <?php for($i = 1; $i <= $publicCommunities->lastPage(); $i++): ?>
+                    <?php if($i == $publicCommunities->currentPage()): ?>
                         <li class="page-item active">
                             <span class="page-link"><?php echo e($i); ?></span>
                         </li>
                     <?php else: ?>
                         <li class="page-item">
-                            <a class="page-link" href="#" data-page="<?php echo e($i); ?>" data-type="user"><?php echo e($i); ?></a>
+                            <a class="page-link" href="#" data-page="<?php echo e($i); ?>" data-type="public"><?php echo e($i); ?></a>
                         </li>
                     <?php endif; ?>
                 <?php endfor; ?>
 
                 
-                <?php if($userCommunities->hasMorePages()): ?>
+                <?php if($publicCommunities->hasMorePages()): ?>
                     <li class="page-item">
-                        <a class="page-link" href="#" data-page="<?php echo e($userCommunities->currentPage() + 1); ?>" data-type="user">
+                        <a class="page-link" href="#" data-page="<?php echo e($publicCommunities->currentPage() + 1); ?>" data-type="public">
                             <i class="fas fa-chevron-right"></i>
                         </a>
                     </li>
@@ -166,10 +178,10 @@
     
     <div class="pagination-info text-center mt-2">
         <small class="text-white-50">
-            Mostrando <?php echo e($userCommunities->firstItem() ?? 0); ?> a <?php echo e($userCommunities->lastItem() ?? 0); ?> 
-            de <?php echo e($userCommunities->total()); ?> comunidades
+            Mostrando <?php echo e($publicCommunities->firstItem() ?? 0); ?> a <?php echo e($publicCommunities->lastItem() ?? 0); ?> 
+            de <?php echo e($publicCommunities->total()); ?> comunidades
         </small>
     </div>
 </div>
 <?php endif; ?>
-<?php /**PATH C:\laragon\www\staytuned\resources\views/communities/partials/user-communities.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\staytuned\resources\views/communities/partials/public-communities.blade.php ENDPATH**/ ?>

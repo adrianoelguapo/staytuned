@@ -2,6 +2,12 @@
 
 <?php $__env->startPush('styles'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/community-fixed.css')); ?>">
+<style>
+.hover-text-white:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+</style>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -87,7 +93,7 @@
             </div>
         </div>
     </div>    <!-- Comunidades Unidas (Comunidades donde soy miembro) -->
-    <div class="community-section mt-3" id="comunidades-unidas">
+    <div class="community-section mt-lg-3" id="comunidades-unidas">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="text-white mb-2 d-flex align-items-center">
@@ -109,115 +115,29 @@
             </div>
         </div>
     </div>    <!-- Descubrir Comunidades -->
-    <?php if($publicCommunities->count() > 0): ?>
-    <div class="community-section mt-3" id="descubrir-comunidades">
+    <div class="community-section mt-lg-3" id="descubrir-comunidades">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="text-white mb-2 d-flex align-items-center">
+                    <i class="fas fa-compass me-3"></i>
                     Descubrir Comunidades
                 </h2>
                 <p class="text-white-50 mb-0">Explora nuevas comunidades públicas para unirte</p>
             </div>
         </div>
-        <div class="communities-list">
-            <?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="community-card-full-width">
-                <div class="community-card-body">
-                    <!-- Contenido principal -->
-                    <div class="community-content-wrapper">
-                        <!-- Imagen/Cover de la comunidad -->
-                        <div class="community-cover-container">
-                            <?php if($community->cover_image): ?>
-                                <img src="<?php echo e(asset('storage/' . $community->cover_image)); ?>" 
-                                     alt="<?php echo e($community->name); ?>"
-                                     class="community-cover-image">
-                            <?php else: ?>
-                                <div class="community-cover-placeholder">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        
-                        <!-- Información de la comunidad -->
-                        <div class="community-info-container">
-                            <div class="community-header-section">
-                                <a href="<?php echo e(route('communities.show', $community)); ?>" class="community-title-link">
-                                    <h3 class="community-title"><?php echo e($community->name); ?></h3>
-                                </a>
-                                <?php if($community->is_private): ?>
-                                    <span class="community-badge community-badge-private">
-                                        <i class="fas fa-lock"></i>
-                                        Privada
-                                    </span>
-                                <?php else: ?>
-                                    <span class="community-badge community-badge-public">
-                                        <i class="fas fa-globe"></i>
-                                        Pública
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <?php if($community->description): ?>
-                                <p class="community-description"><?php echo e(Str::limit($community->description, 150)); ?></p>
-                            <?php endif; ?>
-                            
-                            <!-- Meta información y acciones -->
-                            <div class="community-footer-section">
-                                <div class="community-meta-info">
-                                    <span class="community-stat">
-                                        <i class="fas fa-users me-1"></i>
-                                        <?php echo e($community->members_count); ?> miembros
-                                    </span>
-                                    <span class="community-stat">
-                                        <i class="fas fa-newspaper me-1"></i>
-                                        <?php echo e($community->posts_count); ?> posts
-                                    </span>
-                                    <span class="community-author">
-                                        <i class="fas fa-user me-1"></i>
-                                        <?php echo e($community->owner->name); ?>
-
-                                    </span>
-                                </div>
-                                
-                                <div class="community-actions-section">
-                                    <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn-community btn-community-primary btn-sm">
-                                        <i class="fas fa-eye me-1"></i>
-                                        Ver
-                                    </a>
-                                    <?php if($community->is_private): ?>
-                                        <?php if($community->hasPendingRequest(Auth::user())): ?>
-                                            <button class="btn-community btn-community-secondary btn-sm" disabled>
-                                                <i class="fas fa-clock me-1"></i>
-                                                Solicitud Enviada
-                                            </button>
-                                        <?php else: ?>
-                                            <button type="button" 
-                                                    class="btn-community btn-community-primary btn-sm" 
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#requestModal<?php echo e($community->id); ?>">
-                                                <i class="fas fa-paper-plane me-1"></i>
-                                                Solicitar Unirse
-                                            </button>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <form action="<?php echo e(route('communities.join', $community)); ?>" method="POST" class="d-inline">
-                                            <?php echo csrf_field(); ?>
-                                            <button type="submit" class="btn-community btn-community-primary btn-sm">
-                                                <i class="fas fa-plus me-1"></i>
-                                                Unirse
-                                            </button>
-                                        </form>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
+        <!-- Contenedor AJAX para comunidades públicas -->
+        <div id="public-communities-container" class="communities-list">
+            <?php echo $__env->make('communities.partials.public-communities', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+        </div>
+        
+        <!-- Loading spinner para comunidades públicas -->
+        <div id="public-loading" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
             </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-    <?php endif; ?>
 
     <!-- Estado vacío -->
     <?php if($ownedCommunities->count() == 0 && $userCommunities->count() == 0 && $publicCommunities->count() == 0): ?>
@@ -240,51 +160,53 @@
 </div>
 
 <!-- Modales para solicitar membresía -->
-<?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <?php if($community->is_private): ?>
-        <!-- Modal para solicitar membresía -->
-        <div class="modal fade" id="requestModal<?php echo e($community->id); ?>" tabindex="-1" aria-labelledby="requestModalLabel<?php echo e($community->id); ?>" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content bg-dark">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="requestModalLabel<?php echo e($community->id); ?>">
-                            <i class="fas fa-paper-plane me-2"></i>
-                            Solicitar unirse a <?php echo e($community->name); ?>
+<?php if($publicCommunities->count() > 0): ?>
+    <?php $__currentLoopData = $publicCommunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $community): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($community->is_private): ?>
+            <!-- Modal para solicitar membresía -->
+            <div class="modal fade" id="requestModal<?php echo e($community->id); ?>" tabindex="-1" aria-labelledby="requestModalLabel<?php echo e($community->id); ?>" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="requestModalLabel<?php echo e($community->id); ?>">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Solicitar unirse a <?php echo e($community->name); ?>
 
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <form action="<?php echo e(route('communities.request', $community)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="message<?php echo e($community->id); ?>" class="form-label">Mensaje (opcional)</label>
+                                    <textarea 
+                                        class="form-control" 
+                                        id="message<?php echo e($community->id); ?>" 
+                                        name="message" 
+                                        rows="3" 
+                                        placeholder="Escribe un mensaje para el administrador de la comunidad..."
+                                    ></textarea>
+                                </div>
+                                <div class="alert alert-info mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Tu solicitud será enviada al administrador de la comunidad para su revisión.
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-1"></i>
+                                    Enviar Solicitud
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <form action="<?php echo e(route('communities.request', $community)); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="message<?php echo e($community->id); ?>" class="form-label">Mensaje (opcional)</label>
-                                <textarea 
-                                    class="form-control" 
-                                    id="message<?php echo e($community->id); ?>" 
-                                    name="message" 
-                                    rows="3" 
-                                    placeholder="Escribe un mensaje para el administrador de la comunidad..."
-                                ></textarea>
-                            </div>
-                            <div class="alert alert-info mb-0">
-                                <i class="fas fa-info-circle me-2"></i>
-                                Tu solicitud será enviada al administrador de la comunidad para su revisión.
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane me-1"></i>
-                                Enviar Solicitud
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
-        </div>
-    <?php endif; ?>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
 
 <?php $__env->stopSection(); ?>
 
@@ -433,11 +355,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para cargar páginas de comunidades via AJAX
     function loadCommunityPage(page, type) {
-        const isOwned = type === 'owned';
-        const container = isOwned ? 'owned-communities-container' : 'user-communities-container';
-        const loading = isOwned ? 'owned-loading' : 'user-loading';
-        const endpoint = isOwned ? '/communities-owned' : '/communities-user';
-        const pageParam = isOwned ? 'owned_page' : 'user_page';
+        let container, loading, endpoint, pageParam;
+        
+        if (type === 'owned') {
+            container = 'owned-communities-container';
+            loading = 'owned-loading';
+            endpoint = '/communities-owned';
+            pageParam = 'owned_page';
+        } else if (type === 'user') {
+            container = 'user-communities-container';
+            loading = 'user-loading';
+            endpoint = '/communities-user';
+            pageParam = 'user_page';
+        } else if (type === 'public') {
+            container = 'public-communities-container';
+            loading = 'public-loading';
+            endpoint = '/communities-public';
+            pageParam = 'public_page';
+        }
         
         // Mostrar loading spinner
         document.getElementById(loading).style.display = 'block';

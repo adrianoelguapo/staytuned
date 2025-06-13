@@ -1,5 +1,5 @@
-@if($userCommunities->count() > 0)
-    @foreach($userCommunities as $community)
+@if($publicCommunities->count() > 0)
+    @foreach($publicCommunities as $community)
     <div class="community-card-full-width">
         <div class="community-card-body">
             <!-- Contenido principal -->
@@ -46,7 +46,8 @@
                             <span class="community-stat">
                                 <i class="fas fa-users me-1"></i>
                                 {{ $community->members_count }} miembros
-                            </span>                            <span class="community-stat">
+                            </span>
+                            <span class="community-stat">
                                 <i class="fas fa-newspaper me-1"></i>
                                 {{ $community->posts_count }} posts
                             </span>                            <!-- Información del dueño con foto de perfil como enlace -->
@@ -73,13 +74,30 @@
                                 <i class="fas fa-eye me-1"></i>
                                 Ver
                             </a>
-                            <form action="{{ route('communities.leave', $community) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn-community btn-community-danger btn-sm">
-                                    <i class="fas fa-sign-out-alt me-1"></i>
-                                    Salir
-                                </button>
-                            </form>
+                            @if($community->is_private)
+                                @if($community->hasPendingRequest(Auth::user()))
+                                    <button class="btn-community btn-community-secondary btn-sm" disabled>
+                                        <i class="fas fa-clock me-1"></i>
+                                        Solicitud Enviada
+                                    </button>
+                                @else
+                                    <button type="button" 
+                                            class="btn-community btn-community-primary btn-sm" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#requestModal{{ $community->id }}">
+                                        <i class="fas fa-paper-plane me-1"></i>
+                                        Solicitar Unirse
+                                    </button>
+                                @endif
+                            @else
+                                <form action="{{ route('communities.join', $community) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn-community btn-community-primary btn-sm">
+                                        <i class="fas fa-plus me-1"></i>
+                                        Unirse
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -88,36 +106,30 @@
     </div>
     @endforeach
 @else
-    <!-- Mensaje cuando no hay comunidades unidas -->
+    <!-- Mensaje cuando no hay comunidades públicas -->
     <div class="card dashboard-card text-center py-4">
         <div class="card-body">
-            <i class="fas fa-user-friends display-4 text-white-50 mb-3"></i>
-            <h5 class="text-white mb-3">No te has unido a ninguna comunidad</h5>
+            <i class="fas fa-compass display-4 text-white-50 mb-3"></i>
+            <h5 class="text-white mb-3">No hay comunidades públicas disponibles</h5>
             <p class="text-white-50 mb-4">
-                Explora las comunidades públicas disponibles y únete para conectar con otros melómanos.
+                Sé el primero en crear una comunidad pública para que otros usuarios puedan unirse.
             </p>
-            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                <a href="#descubrir-comunidades" class="btn btn-outline-primary">
-                    <i class="fas fa-compass me-2"></i>
-                    Explorar Comunidades
-                </a>
-                <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('searchCommunityInput').focus()">
-                    <i class="fas fa-search me-2"></i>
-                    Buscar Comunidad Privada
-                </button>
-            </div>
+            <a href="{{ route('communities.create') }}" class="btn-new-playlist">
+                <i class="fas fa-plus me-2"></i>
+                Crear Comunidad Pública
+            </a>
         </div>
     </div>
 @endif
 
-<!-- Paginación para comunidades unidas -->
-@if($userCommunities->hasPages())
+<!-- Paginación para comunidades públicas -->
+@if($publicCommunities->hasPages())
 <div class="pagination-container mt-4">
     <div class="d-flex justify-content-center align-items-center">
-        <nav aria-label="Paginación de comunidades unidas">
+        <nav aria-label="Paginación de comunidades públicas">
             <ul class="pagination pagination-dark mb-0">
                 {{-- Botón anterior --}}
-                @if ($userCommunities->onFirstPage())
+                @if ($publicCommunities->onFirstPage())
                     <li class="page-item disabled">
                         <span class="page-link">
                             <i class="fas fa-chevron-left"></i>
@@ -125,29 +137,29 @@
                     </li>
                 @else
                     <li class="page-item">
-                        <a class="page-link" href="#" data-page="{{ $userCommunities->currentPage() - 1 }}" data-type="user">
+                        <a class="page-link" href="#" data-page="{{ $publicCommunities->currentPage() - 1 }}" data-type="public">
                             <i class="fas fa-chevron-left"></i>
                         </a>
                     </li>
                 @endif
 
                 {{-- Números de página --}}
-                @for ($i = 1; $i <= $userCommunities->lastPage(); $i++)
-                    @if ($i == $userCommunities->currentPage())
+                @for ($i = 1; $i <= $publicCommunities->lastPage(); $i++)
+                    @if ($i == $publicCommunities->currentPage())
                         <li class="page-item active">
                             <span class="page-link">{{ $i }}</span>
                         </li>
                     @else
                         <li class="page-item">
-                            <a class="page-link" href="#" data-page="{{ $i }}" data-type="user">{{ $i }}</a>
+                            <a class="page-link" href="#" data-page="{{ $i }}" data-type="public">{{ $i }}</a>
                         </li>
                     @endif
                 @endfor
 
                 {{-- Botón siguiente --}}
-                @if ($userCommunities->hasMorePages())
+                @if ($publicCommunities->hasMorePages())
                     <li class="page-item">
-                        <a class="page-link" href="#" data-page="{{ $userCommunities->currentPage() + 1 }}" data-type="user">
+                        <a class="page-link" href="#" data-page="{{ $publicCommunities->currentPage() + 1 }}" data-type="public">
                             <i class="fas fa-chevron-right"></i>
                         </a>
                     </li>
@@ -165,8 +177,8 @@
     {{-- Información de la paginación --}}
     <div class="pagination-info text-center mt-2">
         <small class="text-white-50">
-            Mostrando {{ $userCommunities->firstItem() ?? 0 }} a {{ $userCommunities->lastItem() ?? 0 }} 
-            de {{ $userCommunities->total() }} comunidades
+            Mostrando {{ $publicCommunities->firstItem() ?? 0 }} a {{ $publicCommunities->lastItem() ?? 0 }} 
+            de {{ $publicCommunities->total() }} comunidades
         </small>
     </div>
 </div>
