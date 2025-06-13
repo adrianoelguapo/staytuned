@@ -30,34 +30,11 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="sort_by" class="form-label text-white">Ordenar por</label>
-                            <select class="form-select custom-sort-select" 
-                                    id="sort_by" 
-                                    name="sort_by" 
-                                    onchange="this.form.submit()">
-                                <option value="followers" <?php echo e(request('sort_by') == 'followers' ? 'selected' : ''); ?>>
-                                    Más seguidos
-                                </option>
-                                <option value="name" <?php echo e(request('sort_by') == 'name' ? 'selected' : ''); ?>>
-                                    Nombre A-Z
-                                </option>
-                                <option value="newest" <?php echo e(request('sort_by') == 'newest' ? 'selected' : ''); ?>>
-                                    Más recientes
-                                </option>
-                                <option value="playlists" <?php echo e(request('sort_by') == 'playlists' ? 'selected' : ''); ?>>
-                                    Más playlists
-                                </option>
-                                <option value="posts" <?php echo e(request('sort_by') == 'posts' ? 'selected' : ''); ?>>
-                                    Más publicaciones
-                                </option>
-                            </select>
-                        </div>
                         <div class="col-md-2">
                             <label class="form-label d-block">&nbsp;</label>
                             <?php if(request()->hasAny(['search', 'sort_by'])): ?>
                                 <a href="<?php echo e(route('explore.users.index')); ?>" class="btn btn-clear-filter w-100">
-                                    <i class="fas fa-times"></i> Limpiar
+                                    Limpiar
                                 </a>
                             <?php endif; ?>
                         </div>
@@ -70,7 +47,7 @@
                 <div class="row">
                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card dashboard-card h-100">
+                            <div class="card dashboard-card user-card h-100">
                                 <div class="card-body text-center">
                                     <!-- Foto de perfil -->
                                     <div class="position-relative mb-3">
@@ -92,16 +69,16 @@
                                     <?php endif; ?>
 
                                     <!-- Estadísticas -->
-                                    <div class="row text-center mb-3">
-                                        <div class="col-4">
+                                    <div class="row text-center mb-3 w-100">
+                                        <div class="col-4 mb-4">
                                             <div class="text-white fw-bold"><?php echo e($user->followers_count); ?></div>
                                             <div class="text-light small">Seguidores</div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 mb-4">
                                             <div class="text-white fw-bold"><?php echo e($user->playlists_count); ?></div>
                                             <div class="text-light small">Playlists</div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 mb-4">
                                             <div class="text-white fw-bold"><?php echo e($user->posts_count); ?></div>
                                             <div class="text-light small">Posts</div>
                                         </div>

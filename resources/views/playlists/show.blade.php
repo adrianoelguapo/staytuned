@@ -193,8 +193,7 @@
                                         </a>
                                         <form action="{{ route('playlists.destroy', $playlist) }}" 
                                               method="POST" 
-                                              style="display: inline-block;"
-                                              onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta playlist?')">
+                                              style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-glass-action btn-glass-danger btn-sm">

@@ -171,36 +171,27 @@
                                 </div>
                                 
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="badge bg-primary bg-opacity-25 text-white border border-primary border-opacity-50 px-3 py-2">
-                                        {{ ucfirst($post->category->type) }}
-                                    </span>
-                                    
                                     @can('update', $post)
-                                        <div class="dropdown">
-                                            <button class="btn btn-link text-white p-2" type="button" data-bs-toggle="dropdown">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">
-                                                        <i class="fas fa-edit me-2"></i> Editar
-                                                    </a>
-                                                </li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li>
-                                                    <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" 
-                                                                onclick="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')"
-                                                                class="dropdown-item text-danger">
-                                                            <i class="fas fa-trash me-2"></i> Eliminar
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                            </ul>
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ route('posts.edit', $post) }}" class="btn btn-glass-action btn-sm">
+                                                <i class="fas fa-edit me-1"></i>
+                                                Editar
+                                            </a>
+                                            <form method="POST" action="{{ route('posts.destroy', $post) }}" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="btn btn-glass-action btn-glass-danger btn-sm">
+                                                    <i class="fas fa-trash me-1"></i>
+                                                    Eliminar
+                                                </button>
+                                            </form>
                                         </div>
                                     @endcan
+                                    
+                                    <span class="badge post-category-badge">
+                                        {{ ucfirst($post->category->type) }}
+                                    </span>
                                 </div>
                             </div>
 
