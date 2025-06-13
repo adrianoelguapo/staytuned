@@ -537,12 +537,47 @@ body {
 @media (max-width: 768px) {
     .community-posts-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 1rem;
+        text-align: center;
     }
     
     .community-posts-title {
         font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Botón de nueva publicación ocupa todo el ancho */
+    .community-posts-header .btn-community {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.8rem 2rem !important;
+        font-size: 1rem !important;
+        justify-content: center !important;
+        border-radius: 12px !important;
+    }
+}
+
+/* Ajustes adicionales para móviles pequeños */
+@media (max-width: 576px) {
+    .community-posts-header {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .community-posts-title {
+        font-size: 1.3rem !important;
+        line-height: 1.3;
+    }
+    
+    /* Botón aún más prominente en móviles pequeños */
+    .community-posts-header .btn-community {
+        padding: 1rem 2rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        border-radius: 14px !important;
+        min-height: 48px !important;
     }
 }
 

@@ -1148,6 +1148,16 @@ html {
         white-space: nowrap !important;
     }
     
+    /* Asegurar que el botón de eliminar tenga el mismo tamaño */
+    .community-actions-header .btn-community-danger {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+        max-width: 150px !important;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+    }
+    
     .community-actions-header form {
         flex: 1 1 auto !important;
         min-width: 120px !important;
@@ -1211,6 +1221,14 @@ html {
         font-size: 0.8rem !important;
     }
     
+    /* Asegurar que el botón de eliminar tenga el mismo tamaño en móvil pequeño */
+    .community-actions-header .btn-community-danger {
+        min-width: 100px !important;
+        max-width: 130px !important;
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+    
     /* Ajustar espaciado del badge */
     .community-badge {
         font-size: 0.7rem !important;
@@ -1238,5 +1256,45 @@ html {
     .community-actions-header .btn-community {
         padding: 0.6rem 1rem !important;
         font-size: 0.85rem !important;
+    }
+    
+    /* Asegurar que el botón de eliminar tenga el mismo tamaño en pantallas muy pequeñas */
+    .community-actions-header .btn-community-danger {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Sección de publicaciones de comunidad en móvil */
+@media (max-width: 768px) {
+    /* Centrar el header de publicaciones de comunidad */
+    .community-posts-header {
+        text-align: center !important;
+        align-items: center !important;
+    }
+    
+    .community-posts-title {
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Botón de nueva publicación de ancho completo */
+    .community-posts-header .btn-community-primary {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .community-posts-header .btn-community-primary {
+        padding: 1rem 2rem !important;
+        font-size: 1.1rem !important;
+        min-height: 48px !important;
+        border-radius: 14px !important;
     }
 }
