@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div class="col">
                                     <h6 class="text-white mb-1">${community.name}</h6>
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-secondary">
+                                        <span class="community-badge community-badge-private">
                                             <i class="fas fa-lock me-1"></i>Privada
                                         </span>
                                         ${statusBadge}

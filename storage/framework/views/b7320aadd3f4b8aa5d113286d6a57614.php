@@ -35,14 +35,14 @@
                     <!-- Info de la comunidad -->
                     <div class="community-header-info">
                         <?php if($community->is_private): ?>
-                            <span class="badge bg-secondary mb-2">
+                            <span class="community-badge community-badge-private mb-2">
                                 <i class="fas fa-lock me-1"></i>
-                                COMUNIDAD PRIVADA
+                                PRIVADA
                             </span>
                         <?php else: ?>
-                            <span class="badge bg-secondary mb-2">
+                            <span class="community-badge community-badge-public mb-2">
                                 <i class="fas fa-globe me-1"></i>
-                                COMUNIDAD PÚBLICA
+                                PÚBLICA
                             </span>
                         <?php endif; ?>
                         <h1 class="community-title-large"><?php echo e($community->name); ?></h1>

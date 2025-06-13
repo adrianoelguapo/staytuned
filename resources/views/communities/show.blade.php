@@ -37,14 +37,14 @@
                     <!-- Info de la comunidad -->
                     <div class="community-header-info">
                         @if($community->is_private)
-                            <span class="badge bg-secondary mb-2">
+                            <span class="community-badge community-badge-private mb-2">
                                 <i class="fas fa-lock me-1"></i>
-                                COMUNIDAD PRIVADA
+                                PRIVADA
                             </span>
                         @else
-                            <span class="badge bg-secondary mb-2">
+                            <span class="community-badge community-badge-public mb-2">
                                 <i class="fas fa-globe me-1"></i>
-                                COMUNIDAD PÚBLICA
+                                PÚBLICA
                             </span>
                         @endif
                         <h1 class="community-title-large">{{ $community->name }}</h1>
