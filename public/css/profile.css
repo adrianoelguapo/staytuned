@@ -923,7 +923,7 @@ main.container > .profile-wform-section {
     -webkit-backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
-    border-radius: 0.75rem !important;
+    border-radius: 12px !important; /* Border radius de 12px */
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
@@ -933,6 +933,8 @@ main.container > .profile-wform-section {
     padding: 0.5rem 1rem !important;
     font-size: 0.875rem !important;
     box-shadow: none !important;
+    min-height: auto !important; /* Asegurar altura consistente */
+    line-height: normal !important; /* Línea consistente */
 }
 
 .btn-playlist:hover,
@@ -1304,7 +1306,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         max-width: 120px !important;
         padding: 0.6rem 0.8rem !important;
         font-size: 0.85rem !important;
-        border-radius: 0.75rem !important;
+        border-radius: 12px !important; /* Border radius de 12px para móviles */
         text-align: center !important;
         display: flex !important;
         align-items: center !important;
@@ -1332,6 +1334,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-bod
         max-width: 100px !important;
         font-size: 0.75rem !important;
         padding: 0.5rem 0.6rem !important;
+        border-radius: 12px !important; /* Border radius de 12px para móviles pequeños */
     }
 }
 

@@ -1557,23 +1557,25 @@ body.dashboard-body {
    BOTÓN DE ELIMINAR CON GLASSMORPHISM
    ================================================ */
 
-/* Botón de eliminar con glassmorphism */
+/* Botón de eliminar con glassmorphism - TAMAÑO UNIFICADO */
 .btn-playlist-danger {
     background: rgba(239, 68, 68, 0.15) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(239, 68, 68, 0.3) !important;
     color: rgba(255, 255, 255, 0.9) !important;
-    padding: 0.375rem 0.75rem !important;
-    border-radius: 6px !important;
-    font-size: 0.875rem !important;
-    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important; /* Mismo padding que btn-playlist */
+    border-radius: 12px !important; /* Border radius de 12px */
+    font-size: 0.875rem !important; /* Mismo font-size que btn-playlist */
+    font-weight: 600 !important; /* Mismo font-weight que btn-playlist */
     text-decoration: none !important;
     transition: all 0.3s ease !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    min-height: auto !important; /* Asegurar altura consistente */
+    line-height: normal !important; /* Línea consistente */
 }
 
 .btn-playlist-danger:hover {
