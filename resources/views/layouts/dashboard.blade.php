@@ -14,8 +14,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <!-- CSS personalizados -->
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}?v={{ now()->timestamp }}" rel="stylesheet">
+    <link href="{{ asset('css/playlists.css') }}?v={{ now()->timestamp }}" rel="stylesheet">
+    <link href="{{ asset('css/mobile-responsive.css') }}?v={{ now()->timestamp }}" rel="stylesheet">
+    <link href="{{ asset('css/profile.css') }}?v={{ now()->timestamp }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
     @stack('styles')
 </head>

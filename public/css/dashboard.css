@@ -1046,16 +1046,7 @@ main {
     flex-shrink: 0 !important;
 }
 
-.playlist-content-wrapper {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-}
-
-.playlist-info-container {
-    min-width: 0 !important;
-    overflow: hidden !important;
-}
+/* NOTA: Estilos de playlist-content-wrapper consolidados en profile.css */
 
 /* Responsive adjustments para playlists */
 @media (max-width: 768px) {
@@ -1063,11 +1054,7 @@ main {
         gap: 1.5rem !important;
     }
     
-    .playlist-content-wrapper {
-        flex-direction: column !important;
-        gap: 1rem !important;
-        padding: 1.5rem !important;
-    }
+    /* NOTA: Estilos de playlist-content-wrapper consolidados en profile.css */
     
     .playlist-cover-container {
         width: 100px !important;
@@ -1102,22 +1089,7 @@ body.dashboard-body .playlists-list .playlist-card-full-width {
     flex-basis: auto !important;
 }
 
-body.dashboard-body .playlist-content-wrapper {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: row !important;
-}
-
-body.dashboard-body .playlist-info-container {
-    min-width: 0 !important;
-    overflow: hidden !important;
-    flex-grow: 1 !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-}
+/* NOTA: Estilos de playlist consolidados en profile.css para evitar conflictos */
 
 /* Reset cualquier transform o position que pueda estar afectando */
 body.dashboard-body .playlists-list * {

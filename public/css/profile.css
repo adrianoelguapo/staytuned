@@ -793,6 +793,8 @@ main.container > .profile-wform-section {
     align-items: flex-start !important;
     gap: 2rem !important;
     flex-direction: row !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .playlist-cover-container {
@@ -1126,4 +1128,245 @@ main.container > .profile-wform-section {
         width: 100% !important;
         text-align: center !important;
     }
+}
+
+/* ================================================
+   DISEÑO CONSOLIDADO DE PLAYLISTS - MÁXIMA ESPECIFICIDAD
+   ================================================ */
+
+/* REGLAS BASE PARA ESCRITORIO - DISEÑO HORIZONTAL */
+html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
+body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
+.playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2rem !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* DISEÑO MÓVIL - LAYOUT VERTICAL CON MÁXIMA ESPECIFICIDAD */
+@media screen and (max-width: 768px) {
+    /* WRAPPER PRINCIPAL - FORZAR DISEÑO VERTICAL */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
+    .playlists-list .playlist-card-full-width .playlist-card-body .playlist-content-wrapper,
+    .playlist-content-wrapper {
+        flex-direction: column !important;
+        display: flex !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        margin: 0 !important;
+    }
+    
+    /* COVER - IMAGEN ARRIBA Y CENTRADA */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
+    .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
+    .playlist-cover-container {
+        width: 160px !important;
+        height: 160px !important;
+        margin: 0 auto 1.5rem auto !important;
+        order: 1 !important;
+        flex-shrink: 0 !important;
+        display: block !important;
+        align-self: center !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+    
+    /* INFO CONTAINER - CONTENIDO ABAJO Y CENTRADO */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
+    .playlists-list .playlist-card-full-width .playlist-card-body .playlist-info-container,
+    .playlist-info-container {
+        order: 2 !important;
+        text-align: center !important;
+        width: 100% !important;
+        flex-grow: 1 !important;
+        min-height: auto !important;
+        gap: 1rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        min-width: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* HEADER SECTION - CENTRADO */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-header-section,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-header-section,
+    .playlists-list .playlist-card-full-width .playlist-header-section {
+        text-align: center !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        display: flex !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* TITLE WRAPPER - CENTRADO */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title-wrapper,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title-wrapper,
+    .playlists-list .playlist-card-full-width .playlist-title-wrapper {
+        text-align: center !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* TÍTULO - CENTRADO Y TAMAÑO OPTIMIZADO */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-title,
+    .playlists-list .playlist-card-full-width .playlist-title {
+        text-align: center !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.2 !important;
+        width: 100% !important;
+    }
+    
+    /* BADGES - CENTRADOS */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-badges,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-badges,
+    .playlists-list .playlist-card-full-width .playlist-badges {
+        justify-content: center !important;
+        display: flex !important;
+        margin: 0.5rem 0 1rem 0 !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    /* DESCRIPCIÓN - CENTRADA */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-description,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-description,
+    .playlists-list .playlist-card-full-width .playlist-description {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+        line-height: 1.5 !important;
+        width: 100% !important;
+    }
+    
+    /* FOOTER SECTION - CENTRADO EN COLUMNA */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-footer-section,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-footer-section,
+    .playlists-list .playlist-card-full-width .playlist-footer-section {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1.5rem !important;
+        width: 100% !important;
+        display: flex !important;
+    }
+    
+    /* META INFO - CENTRADA EN FILA */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-meta-info,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-meta-info,
+    .playlists-list .playlist-card-full-width .playlist-meta-info {
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        flex-wrap: wrap !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+    }
+    
+    /* ACCIONES - CENTRADAS EN FILA */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section,
+    .playlists-list .playlist-card-full-width .playlist-actions-section {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+        flex-wrap: wrap !important;
+    }
+    
+    /* BOTONES - OPTIMIZADOS PARA MÓVIL */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
+    .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist {
+        flex: 1 !important;
+        min-width: 100px !important;
+        max-width: 120px !important;
+        padding: 0.6rem 0.8rem !important;
+        font-size: 0.85rem !important;
+        border-radius: 0.75rem !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.3rem !important;
+    }
+}
+
+/* MÓVILES MUY PEQUEÑOS */
+@media screen and (max-width: 576px) {
+    /* COVER MÁS PEQUEÑO */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container,
+    .playlists-list .playlist-card-full-width .playlist-card-body .playlist-cover-container {
+        width: 140px !important;
+        height: 140px !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* BOTONES MÁS PEQUEÑOS */
+    html body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
+    body.dashboard-body .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist,
+    .playlists-list .playlist-card-full-width .playlist-actions-section .btn-playlist {
+        min-width: 85px !important;
+        max-width: 100px !important;
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.6rem !important;
+    }
+}
+
+/* Estilos para badges de categoría de publicaciones (glassmorphism como playlists) */
+.card .post-category-badge,
+.card .badge.post-category-badge,
+.card span.badge.post-category-badge,
+div.card .post-category-badge,
+div.card .badge.post-category-badge,
+div.card span.badge.post-category-badge {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 1rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    min-width: 60px !important;
+    text-align: center !important;
+    display: inline-block !important;
+}
+
+/* Sobrescribir estilos de posts.css con máxima especificidad */
+body .card .badge.post-category-badge,
+body div.card .badge.post-category-badge,
+body .dashboard-card .badge.post-category-badge {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }

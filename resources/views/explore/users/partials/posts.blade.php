@@ -15,7 +15,7 @@
                                 <small class="text-white-50">{{ $post->created_at->diffForHumans() }}</small>
                             </div>
                         </div>
-                        <span class="badge bg-primary bg-opacity-25 text-white border border-primary border-opacity-50 px-3 py-2">
+                        <span class="badge post-category-badge">
                             {{ ucfirst($post->category->type) }}
                         </span>
                     </div>

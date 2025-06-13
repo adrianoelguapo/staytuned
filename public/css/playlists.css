@@ -1554,386 +1554,69 @@ body.dashboard-body {
 }
 
 /* ================================================
-   REDISEÑO COMPLETO DE TARJETAS PLAYLIST - INSPIRADO EN COMUNIDADES
+   BOTÓN DE ELIMINAR CON GLASSMORPHISM
    ================================================ */
 
-/* Reset de estilos previos que puedan interferir */
-.playlists-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-/* Tarjeta de playlist rediseñada */
-.playlist-card-full-width {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 1rem !important;
-    transition: all 0.3s ease !important;
-    overflow: hidden !important;
-    width: 100% !important;
-    margin-bottom: 0 !important;
-}
-
-.playlist-card-full-width:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Cuerpo de la tarjeta */
-.playlist-card-body {
-    padding: 2rem !important;
-}
-
-/* Contenedor principal del contenido */
-.playlist-content-wrapper {
-    display: flex !important;
-    gap: 2rem !important;
-    align-items: flex-start !important;
-}
-
-/* Contenedor de imagen */
-.playlist-cover-container {
-    flex-shrink: 0 !important;
-    width: 120px !important;
-    height: 120px !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    position: relative !important;
-}
-
-.playlist-cover-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    transition: transform 0.3s ease !important;
-}
-
-.playlist-card-full-width:hover .playlist-cover-image {
-    transform: scale(1.05) !important;
-}
-
-.playlist-cover-placeholder {
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 2rem !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Contenedor de información */
-.playlist-info-container {
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-/* Sección de cabecera */
-.playlist-header-section {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: space-between !important;
-    margin-bottom: 1rem !important;
-    gap: 1rem !important;
-}
-
-.playlist-title-wrapper {
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-.playlist-title-link {
-    text-decoration: none !important;
-    display: block !important;
-}
-
-.playlist-title {
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    color: #fff !important;
-    margin: 0 !important;
-    line-height: 1.3 !important;
-    transition: color 0.3s ease !important;
-}
-
-.playlist-title-link:hover .playlist-title {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Badges */
-.playlist-badges {
-    display: flex !important;
-    gap: 0.5rem !important;
-    margin-top: 0.5rem !important;
-}
-
-.playlist-privacy-badge {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.3rem !important;
-    padding: 0.3rem 0.9rem !important;
-    border-radius: 1rem !important;
-    font-size: 0.82rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    background: rgba(99, 102, 241, 0.13) !important;
-    color: #a5b4fc !important;
-    border: 1px solid rgba(99, 102, 241, 0.18) !important;
-}
-
-/* Descripción */
-.playlist-description {
-    color: rgba(255, 255, 255, 0.85) !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    margin: 0 0 1.5rem 0 !important;
-}
-
-/* Sección de footer */
-.playlist-footer-section {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding-top: 1rem !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    gap: 1rem !important;
-}
-
-/* Meta información */
-.playlist-meta-info {
-    display: flex !important;
-    align-items: center !important;
-    gap: 1.5rem !important;
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-.playlist-stat,
-.playlist-author,
-.playlist-date {
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-size: 0.9rem !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.25rem !important;
-    white-space: nowrap !important;
-}
-
-/* Sección de acciones */
-.playlist-actions-section {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    flex-shrink: 0 !important;
-}
-
-/* Botones de playlist */
-.btn-playlist {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: #fff !important;
-    padding: 0.5rem 1rem !important;
+/* Botón de eliminar con glassmorphism */
+.btn-playlist-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 6px !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
-    border-radius: 0.5rem !important;
     text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
     transition: all 0.3s ease !important;
     cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-.btn-playlist:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    color: #fff !important;
+.btn-playlist-danger:hover {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    color: rgba(255, 255, 255, 1) !important;
     transform: translateY(-1px) !important;
-    text-decoration: none !important;
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3) !important;
 }
 
-.btn-playlist-primary {
-    background: rgba(139, 92, 246, 0.2) !important;
-    border-color: rgba(139, 92, 246, 0.3) !important;
+.btn-playlist-danger:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2) !important;
 }
 
-.btn-playlist-primary:hover {
-    background: rgba(139, 92, 246, 0.3) !important;
-    border-color: rgba(139, 92, 246, 0.4) !important;
+.btn-playlist-danger:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
 }
 
-.btn-playlist-secondary {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
+/* Ajustar sección de acciones para tres botones */
+.playlist-actions-section {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
 }
 
-.btn-playlist-secondary:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-}
-
-/* Dropdown específico para playlists */
-.playlist-actions-section .dropdown-menu {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    padding: 0.5rem 0 !important;
-    min-width: 180px !important;
-    z-index: 1050 !important;
-}
-
-.playlist-actions-section .dropdown-item {
-    color: #374151 !important;
-    padding: 0.75rem 1rem !important;
-    font-size: 0.875rem !important;
-    font-weight: 500 !important;
-    transition: all 0.2s ease !important;
-    background: transparent !important;
-    border: none !important;
-}
-
-.playlist-actions-section .dropdown-item:hover {
-    background: rgba(124, 58, 237, 0.1) !important;
-    color: #7c3aed !important;
-}
-
-.playlist-actions-section .dropdown-item.text-danger {
-    color: #dc2626 !important;
-}
-
-.playlist-actions-section .dropdown-item.text-danger:hover {
-    background: rgba(220, 38, 38, 0.1) !important;
-    color: #dc2626 !important;
-}
-
-.playlist-actions-section .dropdown-divider {
-    border-color: rgba(0, 0, 0, 0.1) !important;
-    margin: 0.25rem 0 !important;
-}
-
-/* ================================================
-   RESPONSIVE DESIGN PARA TARJETAS REDISEÑADAS
-   ================================================ */
-
-/* Tablets */
-@media (max-width: 768px) {
-    .playlist-content-wrapper {
-        flex-direction: column !important;
-        gap: 1.5rem !important;
-    }
-    
-    .playlist-cover-container {
-        width: 100% !important;
-        height: 200px !important;
-        align-self: center !important;
-        max-width: 300px !important;
-    }
-    
-    .playlist-footer-section {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 1rem !important;
-    }
-    
-    .playlist-meta-info {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.5rem !important;
+/* Botones más pequeños en móvil para acomodar los tres */
+@media screen and (max-width: 576px) {
+    .playlist-actions-section .btn-playlist {
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        min-width: 80px !important;
     }
     
     .playlist-actions-section {
-        align-self: stretch !important;
-        justify-content: flex-start !important;
-    }
-}
-
-/* Móviles */
-@media (max-width: 576px) {
-    .playlist-card-body {
-        padding: 1.5rem !important;
-    }
-    
-    .playlist-title {
-        font-size: 1.3rem !important;
-    }
-    
-    .playlist-header-section {
-        flex-direction: column !important;
-        gap: 0.75rem !important;
-    }
-    
-    .playlist-cover-container {
-        height: 160px !important;
-        max-width: 250px !important;
-    }
-    
-    .playlist-meta-info {
+        justify-content: center !important;
         gap: 0.4rem !important;
-    }
-    
-    .playlist-stat,
-    .playlist-author,
-    .playlist-date {
-        font-size: 0.8rem !important;
-    }
-    
-    .btn-playlist {
-        padding: 0.4rem 0.8rem !important;
-        font-size: 0.8rem !important;
-    }
-}
-
-/* Móviles muy pequeños */
-@media (max-width: 320px) {
-    .playlist-card-body {
-        padding: 1rem !important;
-    }
-    
-    .playlist-content-wrapper {
-        gap: 1rem !important;
-    }
-    
-    .playlist-title {
-        font-size: 1.2rem !important;
-    }
-    
-    .playlist-cover-container {
-        height: 140px !important;
-        max-width: 200px !important;
     }
 }
 
 /* ================================================
-   OVERRIDE DE ESTILOS ANTERIORES QUE PUEDEN INTERFERIR
+   FORZAR DISEÑO MÓVIL CORRECTO - MÁXIMA ESPECIFICIDAD
+   Sobrescribir todos los estilos conflictivos de otros archivos
    ================================================ */
 
-/* Ocultar estilos obsoletos que puedan interferir */
-.playlist-card-full-width .btn-glass {
-    display: none !important;
-}
-
-/* Evitar duplicados de secciones de acciones */
-.playlist-actions-section + .playlist-actions-section {
-    display: none !important;
-}
-
-/* Ocultar dropdowns duplicados */
-.playlist-header-section .dropdown {
-    display: none !important;
-}
-
-/* Solo mostrar el dropdown en la sección de acciones del footer */
-.playlist-footer-section .playlist-actions-section .dropdown {
-    display: block !important;
-}
+/* Estilos consolidados movidos a profile.css para evitar conflictos */
