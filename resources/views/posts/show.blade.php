@@ -266,11 +266,7 @@
                                             class="btn like-btn p-2 d-flex align-items-center gap-2"
                                             data-post-id="{{ $post->id }}"
                                             data-liked="{{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}">
-                                        <svg class="like-icon {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : '' }}" 
-                                             width="20" height="20" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                        </svg>
+                                        <i class="bi {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'bi-heart-fill text-danger' : 'bi-heart text-white' }}"></i>
                                         <span class="likes-count">{{ $post->likes_count }}</span> likes
                                     </button>
                                     
@@ -410,7 +406,7 @@
                 }
                 
                 const likesCountElement = button.querySelector('.likes-count');
-                const heartIcon = button.querySelector('svg');
+                const heartIcon = button.querySelector('i');
                 const isLiked = button.dataset.liked === 'true';
                 
                 console.log('Elements found:', { likesCountElement, heartIcon, isLiked });
@@ -443,9 +439,9 @@
                         
                         // Actualizar el estilo del corazón
                         if (data.liked) {
-                            heartIcon.classList.add('liked');
+                            heartIcon.className = 'bi bi-heart-fill text-danger';
                         } else {
-                            heartIcon.classList.remove('liked');
+                            heartIcon.className = 'bi bi-heart text-white';
                         }
                     } else {
                         console.error('Error in response:', data);
@@ -784,7 +780,7 @@
                 }
                 
                 const likesCountElement = button.querySelector('.likes-count');
-                const heartIcon = button.querySelector('svg');
+                const heartIcon = button.querySelector('i');
                 const isLiked = button.dataset.liked === 'true';
                 
                 console.log('Elements found:', { likesCountElement, heartIcon, isLiked });
@@ -817,9 +813,9 @@
                         
                         // Actualizar el estilo del corazón
                         if (data.liked) {
-                            heartIcon.classList.add('liked');
+                            heartIcon.className = 'bi bi-heart-fill text-danger';
                         } else {
-                            heartIcon.classList.remove('liked');
+                            heartIcon.className = 'bi bi-heart text-white';
                         }
                     } else {
                         console.error('Error in response:', data);

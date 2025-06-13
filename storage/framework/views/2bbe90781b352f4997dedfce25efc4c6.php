@@ -220,11 +220,7 @@
                                                             class="like-btn <?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'liked' : ''); ?>"
                                                             data-post-id="<?php echo e($post->id); ?>"
                                                             data-liked="<?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'true' : 'false'); ?>">
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" 
-                                                             class="<?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'fill-current' : 'stroke-current fill-none'); ?>">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                                        </svg>
+                                                        <i class="bi <?php echo e(Auth::check() && $post->isLikedBy(Auth::user()) ? 'bi-heart-fill text-danger' : 'bi-heart text-white'); ?>"></i>
                                                         <span class="likes-count"><?php echo e($post->likes_count); ?></span>
                                                     </button>
                                                     
@@ -350,7 +346,7 @@
         function toggleLike(postId) {
             const btn = document.querySelector(`[data-post-id="${postId}"]`);
             const likesCountElement = btn.querySelector('.likes-count');
-            const heartIcon = btn.querySelector('svg');
+            const heartIcon = btn.querySelector('i');
             
             fetch(`/posts/${postId}/like`, {
                 method: 'POST',
@@ -365,12 +361,10 @@
                 
                 if (data.liked) {
                     btn.classList.add('liked');
-                    heartIcon.classList.add('fill-current');
-                    heartIcon.classList.remove('stroke-current', 'fill-none');
+                    heartIcon.className = 'bi bi-heart-fill text-danger';
                 } else {
                     btn.classList.remove('liked');
-                    heartIcon.classList.remove('fill-current');
-                    heartIcon.classList.add('stroke-current', 'fill-none');
+                    heartIcon.className = 'bi bi-heart text-white';
                 }
             })
             .catch(error => {

@@ -236,12 +236,18 @@ body.dashboard-body {
 }
 
 .post-category-badge {
-  background: rgba(124, 58, 237, 0.3);
-  color: rgba(255, 255, 255, 0.95);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
   flex-shrink: 0;
   position: relative;
@@ -343,6 +349,7 @@ body.dashboard-body {
 }
 
 /* Botón de like mejorado */
+/* Estilos para el botón de like con Bootstrap icons */
 .like-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -368,17 +375,6 @@ body.dashboard-body {
   background: rgba(255, 107, 107, 0.2);
   border-color: rgba(255, 107, 107, 0.4);
   color: #ff6b6b;
-}
-
-.like-btn svg {
-  width: 16px;
-  height: 16px;
-  transition: all 0.3s ease;
-}
-
-.like-btn.liked svg {
-  fill: #ff6b6b;
-  stroke: #ff6b6b;
 }
 
 /* Dropdown de acciones */
@@ -505,7 +501,7 @@ a[href*="/explore/users/"] {
 
 .like-icon {
   fill: none;
-  stroke: currentColor;
+  stroke: #ffffff; /* Cambiar de currentColor a blanco */
   transition: all 0.2s ease;
 }
 
@@ -1998,11 +1994,6 @@ body.modal-open {
   
   /* Ajustes en botones de acción */
   .btn-glass-action {
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.9rem !important;
-  }
-  
-  .btn-glass-danger {
     padding: 0.5rem 0.75rem !important;
     font-size: 0.9rem !important;
   }
