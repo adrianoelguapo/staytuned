@@ -7,6 +7,11 @@
     color: white !important;
     text-decoration: none !important;
 }
+
+/* Estilos para spinners dinámicos */
+.loading-spinner-dynamic {
+    transition: opacity 0.3s ease;
+}
 </style>
 <?php $__env->stopPush(); ?>
 
@@ -85,13 +90,6 @@
         <div id="owned-communities-container" class="communities-list">
             <?php echo $__env->make('communities.partials.owned-communities', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </div>
-        
-        <!-- Loading spinner para comunidades propias -->
-        <div id="owned-loading" class="text-center mt-3" style="display: none;">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-        </div>
     </div>    <!-- Comunidades Unidas (Comunidades donde soy miembro) -->
     <div class="community-section mt-lg-3" id="comunidades-unidas">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -107,19 +105,11 @@
         <div id="user-communities-container" class="communities-list">
             <?php echo $__env->make('communities.partials.user-communities', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </div>
-        
-        <!-- Loading spinner para comunidades unidas -->
-        <div id="user-loading" class="text-center mt-3" style="display: none;">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-        </div>
     </div>    <!-- Descubrir Comunidades -->
     <div class="community-section mt-lg-3" id="descubrir-comunidades">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="text-white mb-2 d-flex align-items-center">
-                    <i class="fas fa-compass me-3"></i>
                     Descubrir Comunidades
                 </h2>
                 <p class="text-white-50 mb-0">Explora nuevas comunidades públicas para unirte</p>
@@ -129,13 +119,6 @@
         <!-- Contenedor AJAX para comunidades públicas -->
         <div id="public-communities-container" class="communities-list">
             <?php echo $__env->make('communities.partials.public-communities', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-        </div>
-        
-        <!-- Loading spinner para comunidades públicas -->
-        <div id="public-loading" class="text-center mt-3" style="display: none;">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
         </div>
     </div>
 
@@ -355,27 +338,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para cargar páginas de comunidades via AJAX
     function loadCommunityPage(page, type) {
-        let container, loading, endpoint, pageParam;
+        let container, endpoint, pageParam;
         
         if (type === 'owned') {
             container = 'owned-communities-container';
-            loading = 'owned-loading';
             endpoint = '/communities-owned';
             pageParam = 'owned_page';
         } else if (type === 'user') {
             container = 'user-communities-container';
-            loading = 'user-loading';
             endpoint = '/communities-user';
             pageParam = 'user_page';
         } else if (type === 'public') {
             container = 'public-communities-container';
-            loading = 'public-loading';
             endpoint = '/communities-public';
             pageParam = 'public_page';
         }
         
-        // Mostrar loading spinner
-        document.getElementById(loading).style.display = 'block';
+        const containerElement = document.getElementById(container);
+        
+        // Crear y mostrar loading spinner dinámicamente
+        const loadingHTML = `
+            <div class="text-center mt-3 loading-spinner-dynamic">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        `;
+        
+        // Agregar spinner al final del contenedor
+        containerElement.insertAdjacentHTML('afterend', loadingHTML);
         
         // Hacer petición AJAX
         fetch(`${endpoint}?${pageParam}=${page}`, {
@@ -393,13 +384,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             // Actualizar el contenedor con el nuevo contenido
-            document.getElementById(container).innerHTML = html;
+            containerElement.innerHTML = html;
             
-            // Ocultar loading spinner
-            document.getElementById(loading).style.display = 'none';
+            // Remover loading spinner
+            const spinner = document.querySelector('.loading-spinner-dynamic');
+            if (spinner) {
+                spinner.remove();
+            }
             
             // Scroll suave al contenedor
-            document.getElementById(container).scrollIntoView({ 
+            containerElement.scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start' 
             });
@@ -407,8 +401,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error:', error);
             
-            // Ocultar loading spinner
-            document.getElementById(loading).style.display = 'none';
+            // Remover loading spinner
+            const spinner = document.querySelector('.loading-spinner-dynamic');
+            if (spinner) {
+                spinner.remove();
+            }
             
             // Mostrar mensaje de error
             const errorMsg = `
@@ -417,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     Error al cargar las comunidades. Por favor, intenta de nuevo.
                 </div>
             `;
-            document.getElementById(container).innerHTML = errorMsg;
+            containerElement.innerHTML = errorMsg;
         });
     }
 });
