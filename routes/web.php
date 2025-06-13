@@ -40,6 +40,10 @@ Route::middleware([
     Route::post('/communities/{community}/leave', [CommunityController::class, 'leave'])->name('communities.leave');
     Route::get('/communities/{community}/create-post', [CommunityController::class, 'createPost'])->name('communities.create-post');
     
+    // Rutas AJAX para paginación de comunidades
+    Route::get('/communities-owned', [CommunityController::class, 'getOwnedCommunities'])->name('communities.owned');
+    Route::get('/communities-user', [CommunityController::class, 'getUserCommunities'])->name('communities.user');
+    
     // Rutas para solicitudes de membresía a comunidades privadas
     Route::post('/communities/{community}/request', [CommunityRequestController::class, 'store'])->name('communities.request');
     Route::get('/communities/{community}/requests', [CommunityRequestController::class, 'index'])->name('communities.requests');

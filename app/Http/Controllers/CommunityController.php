@@ -15,17 +15,29 @@ class CommunityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ownedCommunities = Auth::user()->ownedCommunities()->get();
+        // Paginación de comunidades propias (2 por página)
+        $ownedCommunitiesPage = $request->get('owned_page', 1);
+        $ownedCommunities = Auth::user()->ownedCommunities()
+            ->latest()
+            ->paginate(2, ['*'], 'owned_page', $ownedCommunitiesPage);
+
+        // Obtener IDs de comunidades propias para excluir de comunidades unidas
+        $ownedCommunityIds = Auth::user()->ownedCommunities()->pluck('id');
+
+        // Paginación de comunidades unidas (2 por página)
+        $userCommunitiesPage = $request->get('user_page', 1);
         $userCommunities = Auth::user()->communities()
-            ->whereNotIn('communities.id', $ownedCommunities->pluck('id'))
+            ->whereNotIn('communities.id', $ownedCommunityIds)
             ->with('owner')
-            ->get();
+            ->latest('community_user.created_at')
+            ->paginate(2, ['*'], 'user_page', $userCommunitiesPage);
+
         $publicCommunities = Community::where('is_private', false)
             ->where('user_id', '!=', Auth::id())
             ->whereNotIn('id', $userCommunities->pluck('id'))
-            ->whereNotIn('id', $ownedCommunities->pluck('id'))
+            ->whereNotIn('id', $ownedCommunityIds)
             ->with('owner')
             ->latest()
             ->take(10)
@@ -341,5 +353,44 @@ class CommunityController extends Controller
         }
 
         return redirect()->back()->with('success', 'Miembro removido exitosamente.');
+    }
+
+    /**
+     * Obtener comunidades propias paginadas via AJAX
+     */
+    public function getOwnedCommunities(Request $request)
+    {
+        $ownedCommunitiesPage = $request->get('owned_page', 1);
+        $ownedCommunities = Auth::user()->ownedCommunities()
+            ->latest()
+            ->paginate(2, ['*'], 'owned_page', $ownedCommunitiesPage);
+
+        if ($request->ajax()) {
+            return view('communities.partials.owned-communities', compact('ownedCommunities'))->render();
+        }
+
+        return redirect()->route('communities.index');
+    }
+
+    /**
+     * Obtener comunidades unidas paginadas via AJAX
+     */
+    public function getUserCommunities(Request $request)
+    {
+        // Obtener IDs de comunidades propias para excluir
+        $ownedCommunityIds = Auth::user()->ownedCommunities()->pluck('id');
+
+        $userCommunitiesPage = $request->get('user_page', 1);
+        $userCommunities = Auth::user()->communities()
+            ->whereNotIn('communities.id', $ownedCommunityIds)
+            ->with('owner')
+            ->latest('community_user.created_at')
+            ->paginate(2, ['*'], 'user_page', $userCommunitiesPage);
+
+        if ($request->ajax()) {
+            return view('communities.partials.user-communities', compact('userCommunities'))->render();
+        }
+
+        return redirect()->route('communities.index');
     }
 }

@@ -67,7 +67,6 @@
             </div>
 
             <!-- Mis Comunidades (Comunidades que soy dueño) -->
-    @if($ownedCommunities->count() > 0)
     <div class="community-section" id="mis-comunidades">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
@@ -77,96 +76,20 @@
                 <p class="text-white-50 mb-0">Comunidades que has creado y administras</p>
             </div>
         </div>
-        <div class="communities-list">
-            @foreach($ownedCommunities as $community)
-            <div class="community-card-full-width">
-                <div class="community-card-body">
-                    <!-- Contenido principal -->
-                    <div class="community-content-wrapper">
-                        <!-- Imagen/Cover de la comunidad -->
-                        <div class="community-cover-container">
-                            @if($community->cover_image)
-                                <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                     alt="{{ $community->name }}"
-                                     class="community-cover-image">
-                            @else
-                                <div class="community-cover-placeholder">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            @endif
-                        </div>
-                        
-                        <!-- Información de la comunidad -->
-                        <div class="community-info-container">
-                            <div class="community-header-section">
-                                <a href="{{ route('communities.show', $community) }}" class="community-title-link">
-                                    <h3 class="community-title">{{ $community->name }}</h3>
-                                </a>
-                                @if($community->is_private)
-                                    <span class="community-badge community-badge-private">
-                                        <i class="fas fa-lock"></i>
-                                        Privada
-                                    </span>
-                                @else
-                                    <span class="community-badge community-badge-public">
-                                        <i class="fas fa-globe"></i>
-                                        Pública
-                                    </span>
-                                @endif
-                            </div>
-                            
-                            @if($community->description)
-                                <p class="community-description">{{ Str::limit($community->description, 150) }}</p>
-                            @endif
-                            
-                            <!-- Meta información y acciones -->
-                            <div class="community-footer-section">
-                                <div class="community-meta-info">
-                                    <span class="community-stat">
-                                        <i class="fas fa-users me-1"></i>
-                                        {{ $community->members_count }} miembros
-                                    </span>
-                                    <span class="community-stat">
-                                        <i class="fas fa-newspaper me-1"></i>
-                                        {{ $community->posts_count }} posts
-                                    </span>
-                                    <span class="community-date">
-                                        <i class="fas fa-calendar me-1"></i>
-                                        {{ $community->created_at->diffForHumans() }}
-                                    </span>
-                                </div>
-                                
-                                <div class="community-actions-section">
-                                    <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-primary btn-sm">
-                                        <i class="fas fa-eye me-1"></i>
-                                        Ver
-                                    </a>
-                                    <a href="{{ route('communities.edit', $community) }}" class="btn-community btn-community-secondary btn-sm">
-                                        <i class="fas fa-edit me-1"></i>
-                                        Editar
-                                    </a>
-                                    <form action="{{ route('communities.destroy', $community) }}" 
-                                          method="POST" 
-                                          class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-community btn-community-danger btn-sm">
-                                            <i class="fas fa-trash me-1"></i>
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+        
+        <!-- Contenedor AJAX para comunidades propias -->
+        <div id="owned-communities-container" class="communities-list">
+            @include('communities.partials.owned-communities')
         </div>
-    </div>
-    @endif    <!-- Comunidades Unidas (Comunidades donde soy miembro) -->
-    @if($userCommunities->count() > 0)
-    <div class="community-section">
+        
+        <!-- Loading spinner para comunidades propias -->
+        <div id="owned-loading" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+    </div>    <!-- Comunidades Unidas (Comunidades donde soy miembro) -->
+    <div class="community-section mt-3" id="comunidades-unidas">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="text-white mb-2 d-flex align-items-center">
@@ -175,93 +98,24 @@
                 <p class="text-white-50 mb-0">Comunidades a las que te has unido como miembro</p>
             </div>
         </div>
-        <div class="communities-list">
-            @foreach($userCommunities as $community)
-            <div class="community-card-full-width">
-                <div class="community-card-body">
-                    <!-- Contenido principal -->
-                    <div class="community-content-wrapper">
-                        <!-- Imagen/Cover de la comunidad -->
-                        <div class="community-cover-container">
-                            @if($community->cover_image)
-                                <img src="{{ asset('storage/' . $community->cover_image) }}" 
-                                     alt="{{ $community->name }}"
-                                     class="community-cover-image">
-                            @else
-                                <div class="community-cover-placeholder">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            @endif
-                        </div>
-                        
-                        <!-- Información de la comunidad -->
-                        <div class="community-info-container">
-                            <div class="community-header-section">
-                                <a href="{{ route('communities.show', $community) }}" class="community-title-link">
-                                    <h3 class="community-title">{{ $community->name }}</h3>
-                                </a>
-                                @if($community->is_private)
-                                    <span class="community-badge community-badge-private">
-                                        <i class="fas fa-lock"></i>
-                                        Privada
-                                    </span>
-                                @else
-                                    <span class="community-badge community-badge-public">
-                                        <i class="fas fa-globe"></i>
-                                        Pública
-                                    </span>
-                                @endif
-                            </div>
-                            
-                            @if($community->description)
-                                <p class="community-description">{{ Str::limit($community->description, 150) }}</p>
-                            @endif
-                            
-                            <!-- Meta información y acciones -->
-                            <div class="community-footer-section">
-                                <div class="community-meta-info">
-                                    <span class="community-stat">
-                                        <i class="fas fa-users me-1"></i>
-                                        {{ $community->members_count }} miembros
-                                    </span>
-                                    <span class="community-stat">
-                                        <i class="fas fa-newspaper me-1"></i>
-                                        {{ $community->posts_count }} posts
-                                    </span>
-                                    <span class="community-author">
-                                        <i class="fas fa-user me-1"></i>
-                                        {{ $community->owner->name }}
-                                    </span>
-                                </div>
-                                
-                                <div class="community-actions-section">
-                                    <a href="{{ route('communities.show', $community) }}" class="btn-community btn-community-primary btn-sm">
-                                        <i class="fas fa-eye me-1"></i>
-                                        Ver
-                                    </a>
-                                    <form action="{{ route('communities.leave', $community) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn-community btn-community-danger btn-sm">
-                                            <i class="fas fa-sign-out-alt me-1"></i>
-                                            Salir
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+        
+        <!-- Contenedor AJAX para comunidades unidas -->
+        <div id="user-communities-container" class="communities-list">
+            @include('communities.partials.user-communities')
         </div>
-    </div>
-    @endif    <!-- Descubrir Comunidades -->
+        
+        <!-- Loading spinner para comunidades unidas -->
+        <div id="user-loading" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+    </div>    <!-- Descubrir Comunidades -->
     @if($publicCommunities->count() > 0)
-    <div class="community-section">
+    <div class="community-section mt-3" id="descubrir-comunidades">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="text-white mb-2 d-flex align-items-center">
-                    <i class="fas fa-compass me-3"></i>
                     Descubrir Comunidades
                 </h2>
                 <p class="text-white-50 mb-0">Explora nuevas comunidades públicas para unirte</p>
@@ -542,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listeners
+    // Event listeners para búsqueda
     searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
         searchCommunities(searchInput.value.trim());
@@ -556,6 +410,81 @@ document.addEventListener('DOMContentLoaded', function() {
             searchCommunities(this.value.trim());
         }, 300);
     });
+
+    // ===== PAGINACIÓN AJAX PARA COMUNIDADES =====
+    
+    // Event delegation para manejar clicks en la paginación
+    document.addEventListener('click', function(e) {
+        // Verificar si el click fue en un enlace de paginación
+        if (e.target.matches('.page-link[data-page][data-type]') || 
+            e.target.closest('.page-link[data-page][data-type]')) {
+            
+            e.preventDefault();
+            
+            const link = e.target.matches('.page-link[data-page][data-type]') ? 
+                        e.target : e.target.closest('.page-link[data-page][data-type]');
+            
+            const page = link.getAttribute('data-page');
+            const type = link.getAttribute('data-type');
+            
+            loadCommunityPage(page, type);
+        }
+    });
+
+    // Función para cargar páginas de comunidades via AJAX
+    function loadCommunityPage(page, type) {
+        const isOwned = type === 'owned';
+        const container = isOwned ? 'owned-communities-container' : 'user-communities-container';
+        const loading = isOwned ? 'owned-loading' : 'user-loading';
+        const endpoint = isOwned ? '/communities-owned' : '/communities-user';
+        const pageParam = isOwned ? 'owned_page' : 'user_page';
+        
+        // Mostrar loading spinner
+        document.getElementById(loading).style.display = 'block';
+        
+        // Hacer petición AJAX
+        fetch(`${endpoint}?${pageParam}=${page}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Actualizar el contenedor con el nuevo contenido
+            document.getElementById(container).innerHTML = html;
+            
+            // Ocultar loading spinner
+            document.getElementById(loading).style.display = 'none';
+            
+            // Scroll suave al contenedor
+            document.getElementById(container).scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            
+            // Ocultar loading spinner
+            document.getElementById(loading).style.display = 'none';
+            
+            // Mostrar mensaje de error
+            const errorMsg = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Error al cargar las comunidades. Por favor, intenta de nuevo.
+                </div>
+            `;
+            document.getElementById(container).innerHTML = errorMsg;
+        });
+    }
 });
 
 // Función global para solicitar membresía desde los resultados de búsqueda
