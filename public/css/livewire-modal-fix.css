@@ -1,0 +1,1533 @@
+/* ============================================
+   CORRECCIÓN PARA MODALES DE LIVEWIRE
+   ============================================ */
+
+/* Corregir z-index para modales de Livewire y Jetstream - MÁXIMA PRIORIDAD */
+.livewire-modal,
+.jetstream-modal,
+div[class*="jetstream-modal"],
+div[x-data*="show"] {
+    z-index: 1055 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Backdrop del modal debe estar DETRÁS del contenido - MÁXIMA PRIORIDAD */
+.jetstream-modal .fixed.inset-0:first-child,
+.livewire-modal .fixed.inset-0:first-child,
+div[class*="jetstream-modal"] .fixed.inset-0:first-child,
+div[x-data*="show"] .fixed.inset-0:first-child {
+    z-index: 1050 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Contenido del modal debe estar ENCIMA del backdrop - MÁXIMA PRIORIDAD */
+.jetstream-modal > div:last-child,
+.livewire-modal > div:last-child,
+div[class*="jetstream-modal"] > div:last-child,
+div[x-data*="show"] > div:last-child {
+    z-index: 1055 !important;
+    position: relative !important;
+}
+
+/* Específico para el backdrop gris que está causando problemas */
+.jetstream-modal .bg-gray-500,
+.livewire-modal .bg-gray-500,
+div[class*="jetstream-modal"] .bg-gray-500,
+div[x-data*="show"] .bg-gray-500 {
+    z-index: 1050 !important;
+    position: fixed !important;
+}
+
+/* Contenido del modal (div blanco) debe estar encima */
+.jetstream-modal .bg-white,
+.livewire-modal .bg-white,
+div[class*="jetstream-modal"] .bg-white,
+div[x-data*="show"] .bg-white {
+    z-index: 1055 !important;
+    position: relative !important;
+    
+    /* Gradiente elegante inspirado en el diseño de la página */
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 40, 0.95) 0%, 
+        rgba(25, 25, 35, 0.98) 35%,
+        rgba(35, 30, 50, 0.96) 65%,
+        rgba(25, 20, 45, 0.98) 100%) !important;
+    
+    /* Glassmorphism elegante */
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    
+    /* Borde elegante con gradiente */
+    border: 1px solid transparent !important;
+    background-clip: padding-box !important;
+    border-radius: 20px !important;
+    
+    /* Border gradient overlay */
+    position: relative !important;
+    
+    /* Sombra sofisticada */
+    box-shadow: 
+        0 32px 64px rgba(0, 0, 0, 0.25),
+        0 16px 32px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 40px rgba(255, 255, 255, 0.03) !important;
+    
+    /* Text color for dark background */
+    color: #ffffff !important;
+    
+    /* Smooth animation */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: scale(0.95);
+    animation: modalElegantAppear 0.4s ease-out forwards;
+    
+    /* Fondo uniforme - eliminar padding por defecto */
+    padding: 0 !important;
+}
+
+/* Border gradient effect */
+.jetstream-modal .bg-white::before,
+.livewire-modal .bg-white::before,
+div[class*="jetstream-modal"] .bg-white::before,
+div[x-data*="show"] .bg-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(139, 92, 246, 0.3) 25%,
+        rgba(236, 72, 153, 0.2) 50%,
+        rgba(59, 130, 246, 0.25) 75%,
+        rgba(255, 255, 255, 0.1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Contenido interno del modal con padding uniforme */
+.jetstream-modal .bg-white > *,
+.livewire-modal .bg-white > *,
+div[class*="jetstream-modal"] .bg-white > *,
+div[x-data*="show"] .bg-white > * {
+    padding: 1.5rem !important;
+    background: transparent !important;
+}
+
+/* Títulos del modal - SIN FONDO */
+.jetstream-modal .text-lg,
+.jetstream-modal h2,
+.jetstream-modal h3,
+.jetstream-modal .font-semibold,
+.livewire-modal .text-lg,
+.livewire-modal h2,
+.livewire-modal h3,
+.livewire-modal .font-semibold,
+div[class*="jetstream-modal"] .text-lg,
+div[class*="jetstream-modal"] h2,
+div[class*="jetstream-modal"] h3,
+div[class*="jetstream-modal"] .font-semibold,
+div[x-data*="show"] .text-lg,
+div[x-data*="show"] h2,
+div[x-data*="show"] h3,
+div[x-data*="show"] .font-semibold {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    font-size: 1.5rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+}
+
+/* Texto descriptivo del modal - Glassmorphism style */
+.jetstream-modal .text-sm,
+.jetstream-modal p,
+.jetstream-modal .text-gray-600,
+.jetstream-modal .text-gray-500,
+.livewire-modal .text-sm,
+.livewire-modal p,
+.livewire-modal .text-gray-600,
+.livewire-modal .text-gray-500,
+div[class*="jetstream-modal"] .text-sm,
+div[class*="jetstream-modal"] p,
+div[class*="jetstream-modal"] .text-gray-600,
+div[class*="jetstream-modal"] .text-gray-500,
+div[x-data*="show"] .text-sm,
+div[x-data*="show"] p,
+div[x-data*="show"] .text-gray-600,
+div[x-data*="show"] .text-gray-500 {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 400 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    line-height: 1.6 !important;
+}
+
+/* Labels para formularios */
+.jetstream-modal label,
+.livewire-modal label,
+div[class*="jetstream-modal"] label,
+div[x-data*="show"] label {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+/* Inputs en el modal - Para fondo oscuro elegante */
+.jetstream-modal input[type="password"],
+.jetstream-modal input[type="text"],
+.jetstream-modal input[type="email"],
+.jetstream-modal textarea,
+.jetstream-modal select,
+.livewire-modal input[type="password"],
+.livewire-modal input[type="text"],
+.livewire-modal input[type="email"],
+.livewire-modal textarea,
+.livewire-modal select,
+div[class*="jetstream-modal"] input[type="password"],
+div[class*="jetstream-modal"] input[type="text"],
+div[class*="jetstream-modal"] input[type="email"],
+div[class*="jetstream-modal"] textarea,
+div[class*="jetstream-modal"] select,
+div[x-data*="show"] input[type="password"],
+div[x-data*="show"] input[type="text"],
+div[x-data*="show"] input[type="email"],
+div[x-data*="show"] textarea,
+div[x-data*="show"] select {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(15px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(120%) !important;
+    padding: 14px 18px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.02) !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.jetstream-modal input::placeholder,
+.livewire-modal input::placeholder,
+div[class*="jetstream-modal"] input::placeholder,
+div[x-data*="show"] input::placeholder,
+.jetstream-modal textarea::placeholder,
+.livewire-modal textarea::placeholder,
+div[class*="jetstream-modal"] textarea::placeholder,
+div[x-data*="show"] textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+}
+
+/* FOCUS STATE - Input elegante sobre fondo oscuro */
+.jetstream-modal input[type="password"]:focus,
+.jetstream-modal input[type="text"]:focus,
+.jetstream-modal input[type="email"]:focus,
+.jetstream-modal textarea:focus,
+.jetstream-modal select:focus,
+.livewire-modal input[type="password"]:focus,
+.livewire-modal input[type="text"]:focus,
+.livewire-modal input[type="email"]:focus,
+.livewire-modal textarea:focus,
+.livewire-modal select:focus,
+div[class*="jetstream-modal"] input:focus,
+div[class*="jetstream-modal"] textarea:focus,
+div[class*="jetstream-modal"] select:focus,
+div[x-data*="show"] input:focus,
+div[x-data*="show"] textarea:focus,
+div[x-data*="show"] select:focus {
+    border-color: rgba(139, 92, 246, 0.6) !important;
+    box-shadow: 
+        0 0 0 3px rgba(139, 92, 246, 0.3),
+        0 6px 20px rgba(139, 92, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    outline: none !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Footer del modal - Fondo uniforme glassmorphism */
+.jetstream-modal .bg-gray-100,
+.jetstream-modal .bg-gray-50,
+.jetstream-modal .px-6,
+.jetstream-modal .py-4,
+.livewire-modal .bg-gray-100,
+.livewire-modal .bg-gray-50,
+.livewire-modal .px-6,
+.livewire-modal .py-4,
+div[class*="jetstream-modal"] .bg-gray-100,
+div[class*="jetstream-modal"] .bg-gray-50,
+div[class*="jetstream-modal"] .px-6,
+div[class*="jetstream-modal"] .py-4,
+div[x-data*="show"] .bg-gray-100,
+div[x-data*="show"] .bg-gray-50,
+div[x-data*="show"] .px-6,
+div[x-data*="show"] .py-4 {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-top: none !important;
+    border-bottom-left-radius: 1.5rem !important;
+    border-bottom-right-radius: 1.5rem !important;
+    padding: 1.5rem !important;
+    margin: 0 !important;
+}
+
+/* Botones del modal - UNIFICADOS con glassmorphism */
+.jetstream-modal button,
+.livewire-modal button,
+div[class*="jetstream-modal"] button,
+div[x-data*="show"] button {
+    border-radius: 12px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    min-width: 80px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(15px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-family: inherit !important;
+    letter-spacing: 0.025em !important;
+}
+
+.jetstream-modal button::before,
+.livewire-modal button::before,
+div[class*="jetstream-modal"] button::before,
+div[x-data*="show"] button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s;
+}
+
+.jetstream-modal button:hover::before,
+.livewire-modal button:hover::before,
+div[class*="jetstream-modal"] button:hover::before,
+div[x-data*="show"] button:hover::before {
+    left: 100%;
+}
+
+/* Botón secundario (Cancel, etc.) - Para fondo oscuro elegante */
+.jetstream-modal .text-gray-600,
+.jetstream-modal .border-gray-300,
+.jetstream-modal button[type="button"]:not([class*="bg-"]),
+.livewire-modal .text-gray-600,
+.livewire-modal .border-gray-300,
+.livewire-modal button[type="button"]:not([class*="bg-"]),
+div[class*="jetstream-modal"] .text-gray-600,
+div[class*="jetstream-modal"] .border-gray-300,
+div[class*="jetstream-modal"] button[type="button"]:not([class*="bg-"]),
+div[x-data*="show"] .text-gray-600,
+div[x-data*="show"] .border-gray-300,
+div[x-data*="show"] button[type="button"]:not([class*="bg-"]) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(15px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(120%) !important;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.02) !important;
+    /* Tamaños unificados */
+    padding: 10px 20px !important;
+    font-size: 0.875rem !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    min-width: 80px !important;
+    border-radius: 12px !important;
+}
+
+.jetstream-modal .text-gray-600:hover,
+.jetstream-modal .border-gray-300:hover,
+.jetstream-modal button[type="button"]:not([class*="bg-"]):hover,
+.livewire-modal .text-gray-600:hover,
+.livewire-modal .border-gray-300:hover,
+.livewire-modal button[type="button"]:not([class*="bg-"]):hover,
+div[class*="jetstream-modal"] .text-gray-600:hover,
+div[class*="jetstream-modal"] .border-gray-300:hover,
+div[class*="jetstream-modal"] button[type="button"]:not([class*="bg-"]):hover,
+div[x-data*="show"] .text-gray-600:hover,
+div[x-data*="show"] .border-gray-300:hover,
+div[x-data*="show"] button[type="button"]:not([class*="bg-"]):hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-1px) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Botón principal - Gradiente elegante para fondo oscuro */
+.jetstream-modal .bg-red-600,
+.jetstream-modal .bg-blue-600,
+.jetstream-modal .bg-indigo-600,
+.jetstream-modal .bg-purple-600,
+.jetstream-modal button[type="submit"],
+.jetstream-modal .btn-primary,
+.livewire-modal .bg-red-600,
+.livewire-modal .bg-blue-600,
+.livewire-modal .bg-indigo-600,
+.livewire-modal .bg-purple-600,
+.livewire-modal button[type="submit"],
+.livewire-modal .btn-primary,
+div[class*="jetstream-modal"] .bg-red-600,
+div[class*="jetstream-modal"] .bg-blue-600,
+div[class*="jetstream-modal"] .bg-indigo-600,
+div[class*="jetstream-modal"] .bg-purple-600,
+div[class*="jetstream-modal"] button[type="submit"],
+div[class*="jetstream-modal"] .btn-primary,
+div[x-data*="show"] .bg-red-600,
+div[x-data*="show"] .bg-blue-600,
+div[x-data*="show"] .bg-indigo-600,
+div[x-data*="show"] .bg-purple-600,
+div[x-data*="show"] button[type="submit"],
+div[x-data*="show"] .btn-primary {
+    background: linear-gradient(135deg, 
+        #a855f7 0%, 
+        #8b5cf6 25%,
+        #7c3aed 50%,
+        #6d28d9 75%,
+        #5b21b6 100%) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(15px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(120%) !important;
+    box-shadow: 
+        0 6px 20px rgba(139, 92, 246, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+    /* Tamaños unificados */
+    padding: 10px 20px !important;
+    font-size: 0.875rem !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    min-width: 80px !important;
+    border-radius: 12px !important;
+}
+
+.jetstream-modal .bg-red-600:hover,
+.jetstream-modal .bg-blue-600:hover,
+.jetstream-modal .bg-indigo-600:hover,
+.jetstream-modal .bg-purple-600:hover,
+.jetstream-modal button[type="submit"]:hover,
+.jetstream-modal .btn-primary:hover,
+.livewire-modal .bg-red-600:hover,
+.livewire-modal .bg-blue-600:hover,
+.livewire-modal .bg-indigo-600:hover,
+.livewire-modal .bg-purple-600:hover,
+.livewire-modal button[type="submit"]:hover,
+.livewire-modal .btn-primary:hover,
+div[class*="jetstream-modal"] .bg-red-600:hover,
+div[class*="jetstream-modal"] .bg-blue-600:hover,
+div[class*="jetstream-modal"] .bg-indigo-600:hover,
+div[class*="jetstream-modal"] .bg-purple-600:hover,
+div[class*="jetstream-modal"] button[type="submit"]:hover,
+div[class*="jetstream-modal"] .btn-primary:hover,
+div[x-data*="show"] .bg-red-600:hover,
+div[x-data*="show"] .bg-blue-600:hover,
+div[x-data*="show"] .bg-indigo-600:hover,
+div[x-data*="show"] .bg-purple-600:hover,
+div[x-data*="show"] button[type="submit"]:hover,
+div[x-data*="show"] .btn-primary:hover {
+    background: linear-gradient(135deg, 
+        #8b5cf6 0%, 
+        #7c3aed 25%,
+        #6d28d9 50%,
+        #5b21b6 75%,
+        #4c1d95 100%) !important;
+    transform: translateY(-1px) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    box-shadow: 
+        0 8px 25px rgba(139, 92, 246, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.08) !important;
+}
+
+.jetstream-modal .bg-red-600:active,
+.jetstream-modal .bg-blue-600:active,
+.jetstream-modal .bg-indigo-600:active,
+.jetstream-modal .bg-purple-600:active,
+.jetstream-modal button[type="submit"]:active,
+.livewire-modal .bg-red-600:active,
+.livewire-modal .bg-blue-600:active,
+.livewire-modal .bg-indigo-600:active,
+.livewire-modal .bg-purple-600:active,
+.livewire-modal button[type="submit"]:active,
+div[class*="jetstream-modal"] .bg-red-600:active,
+div[class*="jetstream-modal"] .bg-blue-600:active,
+div[class*="jetstream-modal"] .bg-indigo-600:active,
+div[class*="jetstream-modal"] .bg-purple-600:active,
+div[class*="jetstream-modal"] button[type="submit"]:active,
+div[x-data*="show"] .bg-red-600:active,
+div[x-data*="show"] .bg-blue-600:active,
+div[x-data*="show"] .bg-indigo-600:active,
+div[x-data*="show"] .bg-purple-600:active,
+div[x-data*="show"] button[type="submit"]:active {
+    transform: translateY(0px) !important;
+    background: linear-gradient(135deg, 
+        #7c3aed 0%, 
+        #6d28d9 25%,
+        #5b21b6 50%,
+        #4c1d95 75%,
+        #3730a3 100%) !important;
+    box-shadow: 
+        0 4px 15px rgba(139, 92, 246, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Botones peligrosos - Tema elegante oscuro */
+.jetstream-modal .bg-red-600,
+.jetstream-modal button[class*="bg-red"],
+.jetstream-modal .btn-danger,
+.livewire-modal .bg-red-600,
+.livewire-modal button[class*="bg-red"],
+.livewire-modal .btn-danger,
+div[class*="jetstream-modal"] .bg-red-600,
+div[class*="jetstream-modal"] button[class*="bg-red"],
+div[class*="jetstream-modal"] .btn-danger,
+div[x-data*="show"] .bg-red-600,
+div[x-data*="show"] button[class*="bg-red"],
+div[x-data*="show"] .btn-danger {
+    background: linear-gradient(135deg, 
+        #ef4444 0%, 
+        #dc2626 25%,
+        #b91c1c 50%,
+        #991b1b 75%,
+        #7f1d1d 100%) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(15px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(120%) !important;
+    box-shadow: 
+        0 6px 20px rgba(239, 68, 68, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+}
+
+.jetstream-modal .bg-red-600:hover,
+.jetstream-modal button[class*="bg-red"]:hover,
+.jetstream-modal .btn-danger:hover,
+.livewire-modal .bg-red-600:hover,
+.livewire-modal button[class*="bg-red"]:hover,
+.livewire-modal .btn-danger:hover,
+div[class*="jetstream-modal"] .bg-red-600:hover,
+div[class*="jetstream-modal"] button[class*="bg-red"]:hover,
+div[class*="jetstream-modal"] .btn-danger:hover,
+div[x-data*="show"] .bg-red-600:hover,
+div[x-data*="show"] button[class*="bg-red"]:hover,
+div[x-data*="show"] .btn-danger:hover {
+    background: linear-gradient(135deg, 
+        #dc2626 0%, 
+        #b91c1c 25%,
+        #991b1b 50%,
+        #7f1d1d 75%,
+        #450a0a 100%) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    box-shadow: 
+        0 8px 25px rgba(239, 68, 68, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Asegurar que el modal aparece completamente */
+.jetstream-modal[style*="display: none"],
+.livewire-modal[style*="display: none"],
+div[class*="jetstream-modal"][style*="display: none"],
+div[x-data*="show"][style*="display: none"] {
+    display: none !important;
+}
+
+/* Cuando el modal está visible */
+.jetstream-modal:not([style*="display: none"]),
+.livewire-modal:not([style*="display: none"]),
+div[class*="jetstream-modal"]:not([style*="display: none"]),
+div[x-data*="show"]:not([style*="display: none"]) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Prevenir scroll en el body cuando el modal está abierto */
+body.modal-open {
+    overflow: hidden !important;
+}
+
+/* Específico para Alpine.js modales */
+[x-data*="modal"],
+[x-data*="show"] {
+    z-index: 1055 !important;
+}
+
+/* Corregir problemas con Alpine.js y Livewire */
+div[x-show] .fixed.inset-0:first-child,
+[x-show] .fixed.inset-0:first-child {
+    z-index: 1050 !important;
+}
+
+div[x-show] > div:not(.fixed),
+[x-show] > div:not(.fixed) {
+    z-index: 1055 !important;
+    position: relative !important;
+}
+
+/* Animaciones mejoradas para el modal elegante */
+@keyframes modalElegantAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        box-shadow: 
+            0 0 0 rgba(0, 0, 0, 0),
+            0 0 0 rgba(0, 0, 0, 0);
+    }
+    30% {
+        opacity: 0.6;
+        transform: scale(0.9) translateY(20px);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    70% {
+        opacity: 0.9;
+        transform: scale(0.98) translateY(5px);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.25),
+            0 16px 32px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            inset 0 0 40px rgba(255, 255, 255, 0.03);
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 
+            0 8px 25px rgba(139, 92, 246, 0.4),
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 12px 35px rgba(139, 92, 246, 0.6),
+            0 0 0 1px rgba(255, 255, 255, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Animación de entrada suave para elementos del modal */
+.jetstream-modal .bg-white > *,
+.livewire-modal .bg-white > *,
+div[class*="jetstream-modal"] .bg-white > *,
+div[x-data*="show"] .bg-white > * {
+    animation: slideInUp 0.4s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de hover para el modal completo - CORREGIDO */
+.jetstream-modal .bg-white:hover,
+.livewire-modal .bg-white:hover,
+div[class*="jetstream-modal"] .bg-white:hover,
+div[x-data*="show"] .bg-white:hover {
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.15) !important;
+    /* REMOVIDO: transform scale que causaba el blur */
+}
+
+/* Corregir específicamente el modal de confirmación de contraseña */
+div[x-data*="show"].jetstream-modal,
+div[x-data*="show"][class*="jetstream-modal"] {
+    z-index: 1055 !important;
+}
+
+div[x-data*="show"].jetstream-modal .fixed.inset-0,
+div[x-data*="show"][class*="jetstream-modal"] .fixed.inset-0 {
+    z-index: 1050 !important;
+}
+
+/* Corregir modales que usan wire:model */
+[wire\:model] ~ .jetstream-modal,
+[wire\:model] ~ .livewire-modal,
+[wire\:model] ~ div[class*="jetstream-modal"],
+[wire\:model] ~ div[x-data*="show"] {
+    z-index: 1055 !important;
+}
+
+/* REGLAS ESPECÍFICAS PARA ALPINE.JS Y JETSTREAM */
+/* Aplicar z-index a todos los elementos con x-show que contienen modales */
+[x-show="show"] {
+    z-index: 1055 !important;
+}
+
+[x-show="show"] .fixed.inset-0 {
+    z-index: 1050 !important;
+}
+
+[x-show="show"] .bg-white {
+    z-index: 1055 !important;
+    position: relative !important;
+}
+
+/* Forzar z-index en todos los modales visibles */
+.fixed.inset-0.overflow-y-auto[style*="display: block"],
+.fixed.inset-0.overflow-y-auto:not([style*="display: none"]) {
+    z-index: 1055 !important;
+}
+
+/* Backdrop específico */
+.fixed.inset-0.transform.transition-all {
+    z-index: 1050 !important;
+}
+
+/* Contenido específico */
+.bg-white.rounded-lg.overflow-hidden.shadow-xl {
+    z-index: 1055 !important;
+    position: relative !important;
+}
+
+/* ============================================
+   REGLAS ADICIONALES DE EMERGENCIA
+   ============================================ */
+
+/* Aplicar z-index usando !important en todos los niveles posibles */
+div[style*="display: block"].jetstream-modal,
+div[style*="display: flex"].jetstream-modal,
+div:not([style*="display: none"]).jetstream-modal {
+    z-index: 1055 !important;
+    position: fixed !important;
+}
+
+/* Forzar backdrop específicamente */
+.jetstream-modal > div:first-child.fixed.inset-0,
+.livewire-modal > div:first-child.fixed.inset-0 {
+    z-index: 1050 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Forzar contenido específicamente */
+.jetstream-modal > div:last-child,
+.livewire-modal > div:last-child {
+    z-index: 1055 !important;
+}
+
+/* Reglas super específicas para Alpine.js */
+[x-show="show"][x-data*="show"] {
+    z-index: 1055 !important;
+}
+
+[x-show="show"][x-data*="show"] > div:first-child {
+    z-index: 1050 !important;
+}
+
+[x-show="show"][x-data*="show"] > div:last-child {
+    z-index: 1055 !important;
+}
+
+/* Reglas para backdrop gris problemático */
+.absolute.inset-0.bg-gray-500.opacity-75 {
+    z-index: 1050 !important;
+    position: fixed !important;
+}
+
+/* Reglas para contenido blanco */
+.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform {
+    z-index: 1055 !important;
+    position: relative !important;
+}
+
+/* Fallback para cualquier modal visible */
+.fixed.inset-0.overflow-y-auto:not([style*="display: none"]) {
+    z-index: 1055 !important;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.jetstream-modal .rounded-lg {
+    border-radius: 1rem !important;
+}
+
+.jetstream-modal .shadow-xl {
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Animaciones suaves */
+.jetstream-modal[x-show="show"] {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media queries mejoradas para responsive glassmorphism */
+@media (max-width: 768px) {
+    .jetstream-modal .bg-white,
+    .livewire-modal .bg-white,
+    div[class*="jetstream-modal"] .bg-white,
+    div[x-data*="show"] .bg-white {
+        margin: 1rem !important;
+        max-width: calc(100vw - 2rem) !important;
+        border-radius: 1rem !important;
+        backdrop-filter: blur(20px) saturate(150%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+    }
+    
+    /* Ajustar padding en móviles */
+    .jetstream-modal .bg-white > div,
+    .livewire-modal .bg-white > div,
+    div[class*="jetstream-modal"] .bg-white > div,
+    div[x-data*="show"] .bg-white > div {
+        padding: 1.25rem !important;
+    }
+    
+    /* Botones en móviles - mantener tamaño compacto */
+    .jetstream-modal button,
+    .livewire-modal button,
+    div[class*="jetstream-modal"] button,
+    div[x-data*="show"] button {
+        padding: 10px 18px !important;
+        font-size: 0.875rem !important;
+        min-height: 38px !important;
+        max-height: 42px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Container de botones en móviles */
+    .jetstream-modal .bg-white .flex.justify-end,
+    .livewire-modal .bg-white .flex.justify-end,
+    div[class*="jetstream-modal"] .bg-white .flex.justify-end,
+    div[x-data*="show"] .bg-white .flex.justify-end {
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        justify-content: flex-end !important;
+    }
+    
+    /* Inputs en móviles */
+    .jetstream-modal input,
+    .jetstream-modal textarea,
+    .livewire-modal input,
+    .livewire-modal textarea,
+    div[class*="jetstream-modal"] input,
+    div[class*="jetstream-modal"] textarea,
+    div[x-data*="show"] input,
+    div[x-data*="show"] textarea {
+        padding: 12px 14px !important;
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .jetstream-modal .bg-white,
+    .livewire-modal .bg-white,
+    div[class*="jetstream-modal"] .bg-white,
+    div[x-data*="show"] .bg-white {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+        border-radius: 0.75rem !important;
+    }
+    
+    /* Botones aún más compactos en pantallas muy pequeñas */
+    .jetstream-modal button,
+    .livewire-modal button,
+    div[class*="jetstream-modal"] button,
+    div[x-data*="show"] button {
+        padding: 8px 14px !important;
+        font-size: 0.8rem !important;
+        min-height: 34px !important;
+        max-height: 38px !important;
+    }
+}
+
+/* Asegurar que los modales no interfieran con otros elementos */
+.jetstream-modal ~ * {
+    z-index: auto !important;
+}
+
+/* Prevenir que otros elementos interfieran */
+.navbar,
+.offcanvas,
+.dropdown-menu {
+    z-index: 1040 !important;
+}
+
+/* Asegurar que los toast/notifications estén por encima */
+.alert.position-fixed {
+    z-index: 9999 !important;
+}
+
+/* ============================================
+   ESTILOS GLASSMORPHISM ADICIONALES
+   ============================================ */
+
+/* Checkboxes y Radio buttons en modales */
+.jetstream-modal input[type="checkbox"],
+.jetstream-modal input[type="radio"],
+.livewire-modal input[type="checkbox"],
+.livewire-modal input[type="radio"],
+div[class*="jetstream-modal"] input[type="checkbox"],
+div[class*="jetstream-modal"] input[type="radio"],
+div[x-data*="show"] input[type="checkbox"],
+div[x-data*="show"] input[type="radio"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.1) 100%) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 6px !important;
+    width: 20px !important;
+    height: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.jetstream-modal input[type="radio"],
+.livewire-modal input[type="radio"],
+div[class*="jetstream-modal"] input[type="radio"],
+div[x-data*="show"] input[type="radio"] {
+    border-radius: 50% !important;
+}
+
+.jetstream-modal input[type="checkbox"]:checked,
+.jetstream-modal input[type="radio"]:checked,
+.livewire-modal input[type="checkbox"]:checked,
+.livewire-modal input[type="radio"]:checked,
+div[class*="jetstream-modal"] input[type="checkbox"]:checked,
+div[class*="jetstream-modal"] input[type="radio"]:checked,
+div[x-data*="show"] input[type="checkbox"]:checked,
+div[x-data*="show"] input[type="radio"]:checked {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+    border-color: rgba(139, 92, 246, 0.6) !important;
+}
+
+.jetstream-modal input[type="checkbox"]:checked::after,
+.livewire-modal input[type="checkbox"]:checked::after,
+div[class*="jetstream-modal"] input[type="checkbox"]:checked::after,
+div[x-data*="show"] input[type="checkbox"]:checked::after {
+    content: '✓' !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+}
+
+.jetstream-modal input[type="radio"]:checked::after,
+.livewire-modal input[type="radio"]:checked::after,
+div[class*="jetstream-modal"] input[type="radio"]:checked::after,
+div[x-data*="show"] input[type="radio"]:checked::after {
+    content: '' !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: white !important;
+    margin: 4px !important;
+    display: block !important;
+}
+
+/* Iconos en modales */
+.jetstream-modal .heroicon,
+.jetstream-modal svg,
+.jetstream-modal i[class*="fa"],
+.livewire-modal .heroicon,
+.livewire-modal svg,
+.livewire-modal i[class*="fa"],
+div[class*="jetstream-modal"] .heroicon,
+div[class*="jetstream-modal"] svg,
+div[class*="jetstream-modal"] i[class*="fa"],
+div[x-data*="show"] .heroicon,
+div[x-data*="show"] svg,
+div[x-data*="show"] i[class*="fa"] {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Mensajes de error en modales */
+.jetstream-modal .text-red-600,
+.jetstream-modal .text-red-500,
+.jetstream-modal .error,
+.livewire-modal .text-red-600,
+.livewire-modal .text-red-500,
+.livewire-modal .error,
+div[class*="jetstream-modal"] .text-red-600,
+div[class*="jetstream-modal"] .text-red-500,
+div[class*="jetstream-modal"] .error,
+div[x-data*="show"] .text-red-600,
+div[x-data*="show"] .text-red-500,
+div[x-data*="show"] .error {
+    color: #fca5a5 !important;
+    background: linear-gradient(135deg, 
+        rgba(248, 113, 113, 0.1) 0%, 
+        rgba(239, 68, 68, 0.05) 100%) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(248, 113, 113, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    font-weight: 500 !important;
+}
+
+/* Mensajes de éxito en modales */
+.jetstream-modal .text-green-600,
+.jetstream-modal .text-green-500,
+.jetstream-modal .success,
+.livewire-modal .text-green-600,
+.livewire-modal .text-green-500,
+.livewire-modal .success,
+div[class*="jetstream-modal"] .text-green-600,
+div[class*="jetstream-modal"] .text-green-500,
+div[class*="jetstream-modal"] .success,
+div[x-data*="show"] .text-green-600,
+div[x-data*="show"] .text-green-500,
+div[x-data*="show"] .success {
+    color: #86efac !important;
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.1) 0%, 
+        rgba(22, 163, 74, 0.05) 100%) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(34, 197, 94, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    font-weight: 500 !important;
+}
+
+/* Enlaces en modales */
+.jetstream-modal a,
+.livewire-modal a,
+div[class*="jetstream-modal"] a,
+div[x-data*="show"] a {
+    color: #c4b5fd !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.jetstream-modal a:hover,
+.livewire-modal a:hover,
+div[class*="jetstream-modal"] a:hover,
+div[x-data*="show"] a:hover {
+    color: #ddd6fe !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Dividers en modales */
+.jetstream-modal hr,
+.jetstream-modal .border-t,
+.jetstream-modal .border-b,
+.livewire-modal hr,
+.livewire-modal .border-t,
+.livewire-modal .border-b,
+div[class*="jetstream-modal"] hr,
+div[class*="jetstream-modal"] .border-t,
+div[class*="jetstream-modal"] .border-b,
+div[x-data*="show"] hr,
+div[x-data*="show"] .border-t,
+div[x-data*="show"] .border-b {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    opacity: 0.6 !important;
+}
+
+/* Elementos disabled en modales */
+.jetstream-modal *:disabled,
+.livewire-modal *:disabled,
+div[class*="jetstream-modal"] *:disabled,
+div[x-data*="show"] *:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.02) 100%) !important;
+}
+
+/* Scrollbar personalizado para modales */
+.jetstream-modal *::-webkit-scrollbar,
+.livewire-modal *::-webkit-scrollbar,
+div[class*="jetstream-modal"] *::-webkit-scrollbar,
+div[x-data*="show"] *::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.jetstream-modal *::-webkit-scrollbar-track,
+.livewire-modal *::-webkit-scrollbar-track,
+div[class*="jetstream-modal"] *::-webkit-scrollbar-track,
+div[x-data*="show"] *::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+.jetstream-modal *::-webkit-scrollbar-thumb,
+.livewire-modal *::-webkit-scrollbar-thumb,
+div[class*="jetstream-modal"] *::-webkit-scrollbar-thumb,
+div[x-data*="show"] *::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 4px !important;
+}
+
+.jetstream-modal *::-webkit-scrollbar-thumb:hover,
+.livewire-modal *::-webkit-scrollbar-thumb:hover,
+div[class*="jetstream-modal"] *::-webkit-scrollbar-thumb:hover,
+div[x-data*="show"] *::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ============================================
+   FIN DE ESTILOS GLASSMORPHISM ADICIONALES
+   ============================================ */
+
+/* ============================================
+   FONDO UNIFORME PARA MODALES
+   ============================================ */
+
+/* Eliminar todos los fondos de secciones internas */
+.jetstream-modal .bg-white > div,
+.jetstream-modal .bg-white > section,
+.jetstream-modal .bg-white .px-6,
+.jetstream-modal .bg-white .py-4,
+.jetstream-modal .bg-white .border-t,
+.jetstream-modal .bg-white .border-gray-200,
+.livewire-modal .bg-white > div,
+.livewire-modal .bg-white > section,
+.livewire-modal .bg-white .px-6,
+.livewire-modal .bg-white .py-4,
+.livewire-modal .bg-white .border-t,
+.livewire-modal .bg-white .border-gray-200,
+div[class*="jetstream-modal"] .bg-white > div,
+div[class*="jetstream-modal"] .bg-white > section,
+div[class*="jetstream-modal"] .bg-white .px-6,
+div[class*="jetstream-modal"] .bg-white .py-4,
+div[class*="jetstream-modal"] .bg-white .border-t,
+div[class*="jetstream-modal"] .bg-white .border-gray-200,
+div[x-data*="show"] .bg-white > div,
+div[x-data*="show"] .bg-white > section,
+div[x-data*="show"] .bg-white .px-6,
+div[x-data*="show"] .bg-white .py-4,
+div[x-data*="show"] .bg-white .border-t,
+div[x-data*="show"] .bg-white .border-gray-200 {
+    background: transparent !important;
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* Espaciado interno consistente */
+.jetstream-modal .bg-white > div:first-child,
+.livewire-modal .bg-white > div:first-child,
+div[class*="jetstream-modal"] .bg-white > div:first-child,
+div[x-data*="show"] .bg-white > div:first-child {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1rem !important;
+    border-top-left-radius: 1.5rem !important;
+    border-top-right-radius: 1.5rem !important;
+}
+
+.jetstream-modal .bg-white > div:last-child,
+.livewire-modal .bg-white > div:last-child,
+div[class*="jetstream-modal"] .bg-white > div:last-child,
+div[x-data*="show"] .bg-white > div:last-child {
+    padding-bottom: 1.5rem !important;
+    padding-top: 1rem !important;
+    border-bottom-left-radius: 1.5rem !important;
+    border-bottom-right-radius: 1.5rem !important;
+}
+
+/* Contenedor de botones con espaciado uniforme */
+.jetstream-modal .bg-white .flex.justify-end,
+.jetstream-modal .bg-white .flex.items-center.justify-end,
+.jetstream-modal .bg-white .space-x-2,
+.jetstream-modal .bg-white .space-x-3,
+.livewire-modal .bg-white .flex.justify-end,
+.livewire-modal .bg-white .flex.items-center.justify-end,
+.livewire-modal .bg-white .space-x-2,
+.livewire-modal .bg-white .space-x-3,
+div[class*="jetstream-modal"] .bg-white .flex.justify-end,
+div[class*="jetstream-modal"] .bg-white .flex.items-center.justify-end,
+div[class*="jetstream-modal"] .bg-white .space-x-2,
+div[class*="jetstream-modal"] .bg-white .space-x-3,
+div[x-data*="show"] .bg-white .flex.justify-end,
+div[x-data*="show"] .bg-white .flex.items-center.justify-end,
+div[x-data*="show"] .bg-white .space-x-2,
+div[x-data*="show"] .bg-white .space-x-3 {
+    gap: 0.75rem !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    margin-top: 1rem !important;
+}
+
+/* Inputs más compactos en modales */
+.jetstream-modal input[type="password"],
+.jetstream-modal input[type="text"],
+.jetstream-modal input[type="email"],
+.jetstream-modal textarea,
+.jetstream-modal select,
+.livewire-modal input[type="password"],
+.livewire-modal input[type="text"],
+.livewire-modal input[type="email"],
+.livewire-modal textarea,
+.livewire-modal select,
+div[class*="jetstream-modal"] input[type="password"],
+div[class*="jetstream-modal"] input[type="text"],
+div[class*="jetstream-modal"] input[type="email"],
+div[class*="jetstream-modal"] textarea,
+div[class*="jetstream-modal"] select,
+div[x-data*="show"] input[type="password"],
+div[x-data*="show"] input[type="text"],
+div[x-data*="show"] input[type="email"],
+div[x-data*="show"] textarea,
+div[x-data*="show"] select {
+    padding: 10px 14px !important;
+    font-size: 0.875rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* Títulos más compactos */
+.jetstream-modal .text-lg,
+.jetstream-modal h2,
+.jetstream-modal h3,
+.jetstream-modal .font-semibold,
+.livewire-modal .text-lg,
+.livewire-modal h2,
+.livewire-modal h3,
+.livewire-modal .font-semibold,
+div[class*="jetstream-modal"] .text-lg,
+div[class*="jetstream-modal"] h2,
+div[class*="jetstream-modal"] h3,
+div[class*="jetstream-modal"] .font-semibold,
+div[x-data*="show"] .text-lg,
+div[x-data*="show"] h2,
+div[x-data*="show"] h3,
+div[x-data*="show"] .font-semibold {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.3 !important;
+}
+
+/* Texto descriptivo más compacto */
+.jetstream-modal .text-sm,
+.jetstream-modal p,
+.livewire-modal .text-sm,
+.livewire-modal p,
+div[class*="jetstream-modal"] .text-sm,
+div[class*="jetstream-modal"] p,
+div[x-data*="show"] .text-sm,
+div[x-data*="show"] p {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* ============================================
+   FIN DE FONDO UNIFORME
+   ============================================ */
+
+/* ============================================
+   CORRECCIONES ESPECÍFICAS PARA MODAL
+   ============================================ */
+
+/* Eliminar fondo de la frase descriptiva */
+.jetstream-modal .text-sm.text-gray-600,
+.jetstream-modal .text-gray-600.text-sm,
+.jetstream-modal p.text-sm,
+.jetstream-modal p.text-gray-600,
+.livewire-modal .text-sm.text-gray-600,
+.livewire-modal .text-gray-600.text.sm,
+.livewire-modal p.text-sm,
+.livewire-modal p.text-gray-600,
+div[class*="jetstream-modal"] .text-sm.text-gray-600,
+div[class*="jetstream-modal"] .text-gray-600.text-sm,
+div[class*="jetstream-modal"] p.text-sm,
+div[class*="jetstream-modal"] p.text-gray-600,
+div[x-data*="show"] .text-sm.text-gray-600,
+div[x-data*="show"] .text-gray-600.text-sm,
+div[x-data*="show"] p.text-sm,
+div[x-data*="show"] p.text-gray-600 {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Prevenir blur en elementos internos del modal */
+.jetstream-modal .bg-white *,
+.livewire-modal .bg-white *,
+div[class*="jetstream-modal"] .bg-white *,
+div[x-data*="show"] .bg-white * {
+    backdrop-filter: inherit !important;
+    -webkit-backdrop-filter: inherit !important;
+}
+
+/* Asegurar que los inputs mantengan su estilo glassmorphism pero NO se pongan blancos */
+.jetstream-modal input:not(:focus),
+.livewire-modal input:not(:focus),
+div[class*="jetstream-modal"] input:not(:focus),
+div[x-data*="show"] input:not(:focus) {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 100%) !important;
+}
+
+/* Eliminar cualquier efecto de hover no deseado en el contenido del modal */
+.jetstream-modal .bg-white > div:hover,
+.jetstream-modal .bg-white > section:hover,
+.livewire-modal .bg-white > div:hover,
+.livewire-modal .bg-white > section:hover,
+div[class*="jetstream-modal"] .bg-white > div:hover,
+div[class*="jetstream-modal"] .bg-white > section:hover,
+div[x-data*="show"] .bg-white > div:hover,
+div[x-data*="show"] .bg-white > section:hover {
+    filter: none !important;
+    backdrop-filter: inherit !important;
+    -webkit-backdrop-filter: inherit !important;
+}
+
+/* Botones con tonalidad uniforme */
+.jetstream-modal button,
+.livewire-modal button,
+div[class*="jetstream-modal"] button,
+div[x-data*="show"] button {
+    font-family: inherit !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.025em !important;
+    text-transform: none !important;
+}
+
+/* ============================================
+   FIN DE CORRECCIONES ESPECÍFICAS
+   ============================================ */
+
+/* ============================================
+   FORZAR ESTILOS UNIFICADOS - MÁXIMA PRIORIDAD
+   ============================================ */
+
+/* Forzar glassmorphism en el modal - sobrescribir cualquier clase de Tailwind */
+div[x-show].fixed.inset-0.overflow-y-auto .bg-white,
+.fixed.inset-0.overflow-y-auto div[class*="bg-white"],
+[data-modal] .bg-white,
+.modal .bg-white {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.06) 100%) !important;
+    backdrop-filter: blur(20px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 16px !important;
+}
+
+/* Forzar estilos de input - sobrescribir bg-white de Tailwind */
+div[x-show] input,
+.modal input,
+[data-modal] input {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.08) 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+}
+
+/* Forzar estilos de input en focus */
+div[x-show] input:focus,
+.modal input:focus,
+[data-modal] input:focus {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.10) 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Forzar botones unificados */
+div[x-show] button,
+.modal button,
+[data-modal] button {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    min-width: 80px !important;
+    padding: 10px 20px !important;
+    border-radius: 12px !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+}
+
+/* Forzar botón primario */
+div[x-show] button[type="submit"],
+div[x-show] .bg-indigo-600,
+div[x-show] .bg-purple-600,
+.modal button[type="submit"],
+.modal .bg-indigo-600,
+.modal .bg-purple-600 {
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.6) 0%, 
+        rgba(124, 58, 237, 0.5) 50%,
+        rgba(109, 40, 217, 0.6) 100%) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4) !important;
+    color: #ffffff !important;
+}
+
+/* Forzar botón secundario */
+div[x-show] button[type="button"],
+.modal button[type="button"] {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.10) 0%, 
+        rgba(255, 255, 255, 0.05) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Prevenir que Tailwind sobrescriba nuestros estilos */
+.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.06) 100%) !important;
+    backdrop-filter: blur(20px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 16px !important;
+    overflow: visible !important;
+}
+
+/* Especificidad alta para inputs de contraseña */
+input[type="password"].form-input,
+input[type="password"].mt-1,
+input[type="password"].block,
+input[type="password"].w-full {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.08) 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+}
+
+input[type="password"].form-input:focus,
+input[type="password"].mt-1:focus,
+input[type="password"].block:focus,
+input[type="password"].w-full:focus {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.10) 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(139, 92, 246, 0.4) !important;
+    box-shadow: 
+        0 0 0 3px rgba(139, 92, 246, 0.12),
+        0 4px 12px rgba(139, 92, 246, 0.08) !important;
+}
+
+/* ============================================
+   FIN DE FORZAR ESTILOS UNIFICADOS
+   ============================================ */

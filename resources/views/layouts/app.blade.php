@@ -17,6 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     <link href="{{ asset('css/navbar-fix.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/livewire-modal-fix.css') }}?v={{ time() }}" rel="stylesheet">
 
     </head>
     <body class="font-sans antialiased">
@@ -43,6 +44,9 @@
         @stack('modals')
 
         @livewireScripts
+        
+        <!-- Modal Fix System -->
+        <script src="{{ asset('js/modal-fix.js') }}?v={{ time() }}"></script>
         
         @stack('scripts')
     </body>

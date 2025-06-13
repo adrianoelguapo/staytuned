@@ -260,9 +260,59 @@ body.dashboard-body {
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   color: #fff;
+  height: 100%; /* Asegurar que todas las tarjetas tengan la misma altura */
+  display: flex;
+  flex-direction: column;
 }
+
 .dashboard-card .card-body {
   padding: 2rem;
+  flex: 1; /* Permitir que el contenido se expanda */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente el contenido */
+  align-items: center; /* Centrar horizontalmente el contenido */
+}
+
+/* Asegurar alineación consistente de las estadísticas */
+.dashboard-card .card-body .fas {
+  margin-bottom: 1rem !important;
+}
+
+.dashboard-card .card-title {
+  margin-bottom: 0.75rem !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+.dashboard-card .card-text {
+  margin-bottom: 0 !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+}
+
+/* Fila de estadísticas del dashboard */
+.dashboard-container .row.mb-5 {
+  align-items: stretch; /* Asegurar que todas las columnas tengan la misma altura */
+}
+
+.dashboard-container .row.mb-5 .col-md-4 {
+  display: flex; /* Hacer que las columnas sean flex containers */
+}
+
+.dashboard-container .row.mb-5 .col-md-4 .dashboard-card {
+  width: 100%; /* Asegurar que las tarjetas ocupen todo el ancho disponible */
+}
+
+/* Responsive adjustments para las estadísticas */
+@media (max-width: 767.98px) {
+  .dashboard-card .card-body {
+    padding: 1.5rem; /* Reducir padding en móviles */
+  }
+  
+  .dashboard-card .card-text {
+    font-size: 1.5rem !important; /* Reducir tamaño de número en móviles */
+  }
 }
 
 /* === LIKE BUTTON === */
@@ -907,30 +957,6 @@ body.dashboard-body {
   background: rgba(124, 58, 237, 0.1) !important;
   color: #7c3aed !important;
 }
-
-.post-card-full-width .dropdown-item.text-danger {
-  color: #dc2626 !important;
-}
-
-.post-card-full-width .dropdown-item.text-danger:hover {
-  background: rgba(220, 38, 38, 0.1) !important;
-  color: #dc2626 !important;
-}
-
-.post-card-full-width .dropdown-divider {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  margin: 0.25rem 0 !important;
-}
-
-/* ====================================================
-   FIN DE ESTILOS PARA DROPDOWNS DE POSTS
-   ==================================================== */
-
-/* ====================================================
-   Z-INDEX FORZADO PARA DROPDOWNS - MÁXIMA PRIORIDAD
-   ==================================================== */
-
-/* Asegurar que los dropdowns aparezcan por encima de TODO */
 .dropdown-menu.show {
   z-index: 999999 !important;
   position: fixed !important;
