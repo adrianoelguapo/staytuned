@@ -885,18 +885,22 @@ html {
     .community-actions-section {
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.5rem !important;
+        gap: 0.75rem !important;
         width: 100% !important;
+        padding: 0 1rem !important;
     }
     
-    /* Botones de comunidad más pequeños en móvil */
+    /* Botones de comunidad más anchos en móvil */
     .btn-community-primary.btn-sm,
     .btn-community-secondary.btn-sm,
     .btn-community-danger.btn-sm {
-        padding: 0.5rem 1rem !important;
-        font-size: 0.875rem !important;
+        padding: 0.8rem 2.5rem !important;
+        font-size: 1rem !important;
         width: 100% !important;
         justify-content: center !important;
+        min-height: 42px !important;
+        border-radius: 12px !important;
+        font-weight: 600 !important;
     }
     
     /* Header de acciones en móvil */
@@ -917,21 +921,150 @@ html {
 }
 
 @media (max-width: 576px) {
-    /* Botones aún más compactos en móviles pequeños */
+    /* Botones aún más prominentes en móviles pequeños */
     .btn-community-primary.btn-sm,
     .btn-community-secondary.btn-sm,
     .btn-community-danger.btn-sm {
-        padding: 0.4rem 0.8rem !important;
-        font-size: 0.8rem !important;
-        border-radius: 8px !important;
+        padding: 0.9rem 3rem !important;
+        font-size: 1.1rem !important;
+        border-radius: 16px !important;
+        min-height: 48px !important;
+        font-weight: 700 !important;
     }
     
-    /* Espaciado reducido entre botones */
+    /* Espaciado mayor entre botones */
     .community-actions-section {
-        gap: 0.4rem !important;
+        gap: 1rem !important;
+        padding: 0 1.5rem !important;
     }
     
     .community-actions-header {
+        gap: 1rem !important;
+    }
+    
+    /* Header de acciones con botones más grandes */
+    .community-actions-header .btn {
+        padding: 0.8rem 2.5rem !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+        border-radius: 14px !important;
+    }
+}
+
+/* Títulos de secciones de comunidades centrados en móvil */
+@media (max-width: 768px) {
+    .community-section .d-flex.justify-content-between.align-items-center.mb-4 {
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    .community-section .d-flex.justify-content-between.align-items-center.mb-4 > div {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .community-section h2 {
+        text-align: center !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+
+    .community-section p.text-white-50 {
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* ================================================
+   CONTENIDO DE COMUNIDADES CENTRADO EN MÓVIL
+   ================================================ */
+
+@media (max-width: 576px) {
+    /* Centrar todo el contenido de la tarjeta de comunidad */
+    .community-card-body {
+        text-align: center !important;
+    }
+    
+    /* Contenedor de información centrado */
+    .community-info-container {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    /* Header de la comunidad centrado */
+    .community-header-section {
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
         gap: 0.5rem !important;
+        text-align: center !important;
+    }
+    
+    /* Título centrado */
+    .community-title {
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Link del título centrado */
+    .community-title-link {
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    /* Badge centrado */
+    .community-badge {
+        margin: 0 auto !important;
+        display: inline-flex !important;
+    }
+    
+    /* Descripción centrada */
+    .community-description {
+        text-align: center !important;
+        margin: 1rem auto !important;
+        padding: 0 1rem !important;
+    }
+    
+    /* Footer section centrado */
+    .community-footer-section {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1rem !important;
+    }
+    
+    /* Meta información centrada */
+    .community-meta-info {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        text-align: center !important;
+        gap: 0.5rem 1rem !important;
+    }
+    
+    /* Estadísticas centradas */
+    .community-stat,
+    .community-date {
+        text-align: center !important;
+        justify-content: center !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Contenedor de imagen centrado */
+    .community-cover-container {
+        margin: 0 auto 1.5rem auto !important;
+        display: block !important;
+    }
+    
+    /* Wrapper de contenido centrado */
+    .community-content-wrapper {
+        text-align: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
     }
 }

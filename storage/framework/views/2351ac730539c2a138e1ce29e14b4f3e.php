@@ -171,6 +171,17 @@
                                         <i class="fas fa-edit me-1"></i>
                                         Editar
                                     </a>
+                                    <form action="<?php echo e(route('communities.destroy', $community)); ?>" 
+                                          method="POST" 
+                                          class="d-inline"
+                                          onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta comunidad? Esta acción no se puede deshacer.')">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
+                                        <button type="submit" class="btn-community btn-community-danger btn-sm">
+                                            <i class="fas fa-trash me-1"></i>
+                                            Eliminar
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
