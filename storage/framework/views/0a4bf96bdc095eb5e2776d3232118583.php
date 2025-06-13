@@ -62,14 +62,14 @@
                     <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light border-opacity-25">
                         <div class="d-flex gap-4">
                             <span class="text-light small d-flex align-items-center">
-                                <i class="fas fa-heart me-1 text-danger"></i><?php echo e($post->likes_count ?? 0); ?> likes
+                                <?php echo e($post->likes_count ?? 0); ?> likes
                             </span>
                             <span class="text-light small d-flex align-items-center">
-                                <i class="fas fa-comment me-1 text-info"></i><?php echo e($post->comments_count ?? 0); ?> comentarios
+                                <?php echo e($post->comments_count ?? 0); ?> comentarios
                             </span>
                         </div>
                         <div class="text-light small">
-                            <i class="fas fa-eye me-1"></i>Ver completo
+                            Ver completo
                         </div>
                     </div>
                 </div>

@@ -70,18 +70,24 @@
                                     @endif
 
                                     <!-- Estadísticas -->
-                                    <div class="row text-center mb-3 w-100">
-                                        <div class="col-4 mb-4">
-                                            <div class="text-white fw-bold">{{ $user->followers_count }}</div>
-                                            <div class="text-light small">Seguidores</div>
+                                    <div class="row text-center w-100 mb-3">
+                                        <div class="col-4 mb-3">
+                                            <div class="d-flex flex-column">
+                                                <span class="text-white fw-bold fs-5">{{ $user->followers_count }}</span>
+                                                <span class="text-light small">Seguidores</span>
+                                            </div>
                                         </div>
-                                        <div class="col-4 mb-4">
-                                            <div class="text-white fw-bold">{{ $user->playlists_count }}</div>
-                                            <div class="text-light small">Playlists</div>
+                                        <div class="col-4 mb-3">
+                                            <div class="d-flex flex-column">
+                                                <span class="text-white fw-bold fs-5">{{ $user->following_count }}</span>
+                                                <span class="text-light small">Siguiendo</span>
+                                            </div>
                                         </div>
-                                        <div class="col-4 mb-4">
-                                            <div class="text-white fw-bold">{{ $user->posts_count }}</div>
-                                            <div class="text-light small">Posts</div>
+                                        <div class="col-4 mb-3">
+                                            <div class="d-flex flex-column">
+                                                <span class="text-white fw-bold fs-5">{{ $user->playlists_count }}</span>
+                                                <span class="text-light small">Playlists</span>
+                                            </div>
                                         </div>
                                     </div>                                    <!-- Botones de acción -->
                                     <div class="d-flex gap-2 justify-content-center">

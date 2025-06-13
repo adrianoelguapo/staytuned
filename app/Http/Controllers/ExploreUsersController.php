@@ -16,7 +16,10 @@ class ExploreUsersController extends Controller
     {
         $query = User::query()
             ->where('id', '!=', Auth::id()) // Excluir al usuario actual
-            ->withCount(['followers', 'playlists', 'posts']);
+            ->withCount(['followers', 'playlists', 'posts'])
+            ->withCount(['following' => function($query) {
+                $query->where('followable_type', User::class);
+            }]);
 
         // Filtrar por búsqueda si hay término de búsqueda
         if ($request->filled('search')) {

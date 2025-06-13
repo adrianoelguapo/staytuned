@@ -29,21 +29,23 @@
                     <div class="row text-center mb-4">
                         <div class="col-4">
                             <a href="<?php echo e(route('explore.users.followers', $user)); ?>" 
-                               class="text-decoration-none text-white">
-                                <div class="fw-bold fs-5"><?php echo e($stats['followers_count']); ?></div>
-                                <div class="text-light small">Seguidores</div>
+                               class="text-decoration-none text-white d-flex flex-column">
+                                <span class="fw-bold fs-5"><?php echo e($stats['followers_count']); ?></span>
+                                <span class="text-light small">Seguidores</span>
                             </a>
                         </div>
                         <div class="col-4">
                             <a href="<?php echo e(route('explore.users.following', $user)); ?>" 
-                               class="text-decoration-none text-white">
-                                <div class="fw-bold fs-5"><?php echo e($stats['following_count']); ?></div>
-                                <div class="text-light small">Siguiendo</div>
+                               class="text-decoration-none text-white d-flex flex-column">
+                                <span class="fw-bold fs-5"><?php echo e($stats['following_count']); ?></span>
+                                <span class="text-light small">Siguiendo</span>
                             </a>
                         </div>
                         <div class="col-4">
-                            <div class="fw-bold fs-5"><?php echo e($stats['playlists_count']); ?></div>
-                            <div class="text-light small">Playlists</div>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold fs-5 text-white"><?php echo e($stats['playlists_count']); ?></span>
+                                <span class="text-light small">Playlists</span>
+                            </div>
                         </div>
                     </div>
 
@@ -63,7 +65,6 @@
                     <!-- Información adicional -->
                     <div class="mt-4 pt-3 border-top border-secondary">
                         <div class="text-light small">
-                            <i class="fas fa-calendar-alt me-1" style="font-size: 0.875rem;"></i>
                             Se unió en <?php echo e($user->created_at->format('F Y')); ?>
 
                         </div>
@@ -83,7 +84,7 @@
                             data-bs-target="#playlists" 
                             type="button" 
                             role="tab">
-                        <i class="fas fa-music me-2"></i>Playlists (<?php echo e($stats['playlists_count']); ?>)
+                        Playlists (<?php echo e($stats['playlists_count']); ?>)
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -93,7 +94,7 @@
                             data-bs-target="#posts" 
                             type="button" 
                             role="tab">
-                        <i class="fas fa-newspaper me-2"></i>Publicaciones (<?php echo e($stats['posts_count']); ?>)
+                        </i>Publicaciones (<?php echo e($stats['posts_count']); ?>)
                     </button>
                 </li>
             </ul>
