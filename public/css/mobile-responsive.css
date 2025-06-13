@@ -875,3 +875,63 @@ html {
         height: 2rem !important;
     }
 }
+
+/* ================================================
+   BOTONES DE COMUNIDADES RESPONSIVOS
+   ================================================ */
+
+@media (max-width: 768px) {
+    /* Contenedor de acciones de comunidad en móvil */
+    .community-actions-section {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+    }
+    
+    /* Botones de comunidad más pequeños en móvil */
+    .btn-community-primary.btn-sm,
+    .btn-community-secondary.btn-sm,
+    .btn-community-danger.btn-sm {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    /* Header de acciones en móvil */
+    .community-actions-header {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+    }
+    
+    /* Botones del header más pequeños */
+    .community-actions-header .btn {
+        padding: 0.6rem 1.2rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Botones aún más compactos en móviles pequeños */
+    .btn-community-primary.btn-sm,
+    .btn-community-secondary.btn-sm,
+    .btn-community-danger.btn-sm {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.8rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Espaciado reducido entre botones */
+    .community-actions-section {
+        gap: 0.4rem !important;
+    }
+    
+    .community-actions-header {
+        gap: 0.5rem !important;
+    }
+}

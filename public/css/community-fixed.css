@@ -285,9 +285,33 @@ body {
     opacity: 0.9 !important;
 }
 .btn-community-danger {
-    background: rgba(239,68,68,0.13);
-    color: #ef4444;
-    border: none;
+    background: rgba(239, 68, 68, 0.15) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(239, 68, 68, 0.3) !important;
+    color: #ef4444 !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    font-size: 0.95rem !important;
+}
+
+.btn-community-danger:hover {
+    background: rgba(239, 68, 68, 0.25) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
+    text-decoration: none !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+.btn-community-danger i {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
 }
 .btn-community-glass {
     background: rgba(255, 255, 255, 0.1);
