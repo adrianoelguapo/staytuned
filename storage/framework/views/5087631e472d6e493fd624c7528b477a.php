@@ -15,6 +15,7 @@
     
     <!-- CSS personalizados -->
     <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/profile.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/navbar-fix.css')); ?>?v=<?php echo e(time()); ?>" rel="stylesheet">
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
