@@ -397,20 +397,243 @@ document.addEventListener('DOMContentLoaded', function() {
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive mejoras */
+/* Estilos específicos para las playlists en perfil de usuario */
+.playlists-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.playlist-card-full-width {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 1rem !important;
+    transition: all 0.3s ease !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.playlist-card-full-width:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.playlist-card-body {
+    padding: 2rem !important;
+}
+
+.playlist-content-wrapper {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 2rem !important;
+}
+
+.playlist-cover-container {
+    flex-shrink: 0 !important;
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 0.75rem !important;
+    overflow: hidden !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.playlist-cover-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.3s ease !important;
+}
+
+.playlist-cover-placeholder {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(37, 99, 235, 0.2)) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.playlist-cover-placeholder i {
+    font-size: 2.5rem !important;
+}
+
+.playlist-info-container {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    min-height: 120px !important;
+}
+
+.playlist-header-section {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    margin-bottom: 1rem !important;
+}
+
+.playlist-title-wrapper {
+    flex-grow: 1 !important;
+}
+
+.playlist-title-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: color 0.3s ease !important;
+}
+
+.playlist-title-link:hover {
+    color: rgba(139, 92, 246, 0.9) !important;
+}
+
+.playlist-title {
+    color: #fff !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.playlist-privacy-badge {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 1rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.playlist-description {
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.5 !important;
+    font-size: 0.9rem !important;
+}
+
+.playlist-footer-section {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+}
+
+.playlist-meta-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    flex-wrap: wrap !important;
+}
+
+.playlist-stat,
+.playlist-author,
+.playlist-date {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.85rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+}
+
+.playlist-actions-section {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.btn-playlist {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+}
+
+.btn-playlist:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-playlist-primary {
+    background: rgba(139, 92, 246, 0.8) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+}
+
+.btn-playlist-primary:hover {
+    background: rgba(139, 92, 246, 0.9) !important;
+    border-color: rgba(139, 92, 246, 0.9) !important;
+}
+
+/* Responsive para las playlists en perfil de usuario */
 @media (max-width: 768px) {
-    .nav-pills-custom .nav-link {
-        margin-right: 0.5rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
+    .playlist-content-wrapper {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
     }
     
-    .post-card-hover {
-        margin-bottom: 1rem;
+    .playlist-cover-container {
+        width: 100% !important;
+        height: 200px !important;
+        align-self: center !important;
+        max-width: 300px !important;
     }
     
-    .spotify-preview-card {
-        padding: 0.75rem;
+    .playlist-footer-section {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+    
+    .playlist-meta-info {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+    
+    .playlist-actions-section {
+        align-self: stretch !important;
+        justify-content: flex-start !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .playlist-card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .playlist-cover-container {
+        height: 160px !important;
+    }
+    
+    .playlist-title {
+        font-size: 1.25rem !important;
+    }
+    
+    .playlist-cover-placeholder i {
+        font-size: 2rem !important;
     }
 }
 </style>

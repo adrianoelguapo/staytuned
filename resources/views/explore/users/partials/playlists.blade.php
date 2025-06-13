@@ -1,46 +1,68 @@
 @if($playlists->count() > 0)
-    <div class="row">
+    <div class="playlists-list">
         @foreach($playlists as $playlist)
-            <div class="col-md-6 mb-4">
-                <div class="card dashboard-card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start">
-                            <!-- Imagen de la playlist -->
-                            <div class="playlist-image me-3">
-                                @if($playlist->cover)
-                                    <img src="{{ asset('storage/' . $playlist->cover) }}" 
-                                         alt="{{ $playlist->name }}"
-                                         class="rounded"
-                                         style="width: 60px; height: 60px; object-fit: cover;">
-                                @else
-                                    <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-music text-light"></i>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <!-- Información de la playlist -->
-                            <div class="flex-grow-1">
-                                <h6 class="text-white mb-1">{{ $playlist->name }}</h6>
-                                @if($playlist->description)
-                                    <p class="text-light small mb-2">
-                                        {{ Str::limit($playlist->description, 80) }}
-                                    </p>
-                                @endif
-                                <div class="text-light small">
-                                    <i class="fas fa-music me-1"></i>
-                                    {{ $playlist->songs_count ?? 0 }} canciones
+            <div class="playlist-card-full-width">
+                <div class="playlist-card-body">
+                    <!-- Contenido principal -->
+                    <div class="playlist-content-wrapper">
+                        <!-- Imagen de la playlist -->
+                        <div class="playlist-cover-container">
+                            @if($playlist->cover)
+                                <img src="{{ asset('storage/' . $playlist->cover) }}"
+                                     alt="{{ $playlist->name }}"
+                                     class="playlist-cover-image">
+                            @else
+                                <div class="playlist-cover-placeholder">
+                                    <i class="bi bi-music-note-beamed"></i>
                                 </div>
-                            </div>
+                            @endif
                         </div>
 
-                        <!-- Botón de ver playlist -->
-                        <div class="mt-3">
-                            <a href="{{ route('playlists.show', $playlist) }}" 
-               class="btn btn-outline-light btn-sm w-100">
-                                <i class="fas fa-play me-1"></i>Ver Playlist
-                            </a>
+                        <!-- Información de la playlist -->
+                        <div class="playlist-info-container">
+                            <div class="playlist-header-section">
+                                <div class="playlist-title-wrapper flex-grow-1">
+                                    <a href="{{ route('playlists.show', $playlist) }}" class="playlist-title-link">
+                                        <h3 class="playlist-title">{{ $playlist->name }}</h3>
+                                    </a>
+                                    <div class="playlist-badges mt-2">
+                                        <span class="playlist-privacy-badge">
+                                            <i class="bi bi-{{ $playlist->is_public ? 'globe' : 'lock' }} me-1"></i>
+                                            {{ $playlist->is_public ? 'Pública' : 'Privada' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if($playlist->description)
+                                <p class="playlist-description">{{ Str::limit($playlist->description, 150) }}</p>
+                            @endif
+
+                            <!-- Meta información y acciones -->
+                            <div class="playlist-footer-section">
+                                <div class="playlist-meta-info">
+                                    <span class="playlist-stat">
+                                        <i class="bi bi-music-note me-1"></i>
+                                        {{ $playlist->songs_count ?? 0 }} canciones
+                                    </span>
+                                    <span class="playlist-author">
+                                        <i class="bi bi-person me-1"></i>
+                                        {{ $playlist->user->username ?? $user->username }}
+                                    </span>
+                                    <span class="playlist-date">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        <span class="d-none d-sm-inline">{{ $playlist->created_at->diffForHumans() }}</span>
+                                        <span class="d-sm-none">{{ $playlist->created_at->format('d/m/Y') }}</span>
+                                    </span>
+                                </div>
+
+                                <div class="playlist-actions-section">
+                                    <a href="{{ route('playlists.show', $playlist) }}" class="btn-playlist btn-playlist-primary btn-sm">
+                                        <i class="bi bi-play-fill me-1"></i>
+                                        Ver
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
