@@ -166,11 +166,9 @@ unset($__errorArgs, $__bag); ?>
                         <!-- Botones de acción -->
                         <div class="d-flex gap-3 justify-content-end">
                             <a href="<?php echo e(route('communities.index')); ?>" class="btn btn-secondary">
-                                <i class="fas fa-times me-2"></i>
                                 Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary-playlist">
-                                <i class="fas fa-plus me-2"></i>
                                 Crear Comunidad
                             </button>
                         </div>

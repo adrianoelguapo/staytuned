@@ -195,7 +195,9 @@
 
                 <?php else: ?>
 
-                    <div class = "profile-header-img-original mb-3 bg-secondary"></div>
+                    <div class = "profile-header-img-original mb-3 bg-secondary d-flex align-items-center justify-content-center" style = "width: 120px; height: 120px; border-radius: 50%;">
+                        <i class = "fas fa-user text-white fs-1"></i>
+                    </div>
 
                 <?php endif; ?>
 

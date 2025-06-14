@@ -278,45 +278,74 @@
                             Esta comunidad está esperando sus primeros miembros.
 
                         </p>
-                        
+
                         <a href="<?php echo e(route('communities.show', $community)); ?>" class="btn btn-new-playlist">
-                            <i class="fas fa-arrow-left me-2"></i>
+
                             Volver a la Comunidad
+
                         </a>
+
                     </div>
+
                 </div>
+
             <?php endif; ?>
+
         </div>
+
     </div>
+
 </div>
 
-<!-- Modal de confirmación para remover miembro -->
 <div class="modal fade" id="removeMemberModal" tabindex="-1" aria-labelledby="removeMemberModalLabel" aria-hidden="true">
+
     <div class="modal-dialog">
+
         <div class="modal-content bg-dark">
+
             <div class="modal-header">
+
                 <h5 class="modal-title" id="removeMemberModalLabel">
+
                     <i class="fas fa-user-times me-2"></i>
                     Remover Miembro
+
                 </h5>
+
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+
             </div>
+
             <div class="modal-body">
+
                 <p class="text-white mb-3">¿Estás seguro de que quieres remover a <strong id="memberNameToRemove"></strong> de la comunidad?</p>
+
                 <div class="alert alert-warning">
+
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     Esta acción no se puede deshacer. El usuario tendrá que solicitar membresía nuevamente.
+
                 </div>
+
             </div>
+
             <div class="modal-footer">
+
                 <button type="button" class="btn glassmorphism-white" data-bs-dismiss="modal">Cancelar</button>
+
                 <button type="button" class="btn glassmorphism-danger" id="confirmRemoveMember">
+
                     <i class="fas fa-user-times me-1"></i>
                     Remover Miembro
+
                 </button>
+
             </div>
+
         </div>
+
     </div>
+    
 </div>
 
 <?php $__env->stopSection(); ?>

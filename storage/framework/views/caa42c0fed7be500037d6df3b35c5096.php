@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang = "es">
-
     <head>
+
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
         <meta name = "csrf-token" content = "<?php echo e(csrf_token()); ?>">
-        <title>Nueva Publicación en <?php echo e($community->name); ?> | StayTuned</title>
+        <title>Nueva Publicación | StayTuned</title>
 
         <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel = "stylesheet">
         <link href = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel = "stylesheet">
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
         <link href = "<?php echo e(asset('css/dashboard.css')); ?>" rel = "stylesheet">
         <link href = "<?php echo e(asset('css/playlists.css')); ?>" rel = "stylesheet">
-        <link href = "<?php echo e(asset('css/navbar-fix.css')); ?>?v = <?php echo e(time()); ?>" rel = "stylesheet">
-        <link href = "<?php echo e(asset('css/posts.css')); ?>" rel = "stylesheet">
-        <link href = "<?php echo e(asset('css/community-fixed.css')); ?>" rel = "stylesheet">
+        <link href = "<?php echo e(asset('css/navbar-fix.css')); ?>?v = <?php echo e(time()); ?>" rel = "stylesheet"><link href = "<?php echo e(asset('css/posts.css')); ?>" rel = "stylesheet">
 
     </head>
 
@@ -40,16 +37,15 @@
                 <a href = "<?php echo e(route('dashboard')); ?>" class = "nav-link-inline">Dashboard</a>
                 <a href = "<?php echo e(route('explore.users.index')); ?>" class = "nav-link-inline">Explorar Usuarios</a>
                 <a href = "<?php echo e(route('playlists.index')); ?>" class = "nav-link-inline">Mis Playlists</a>
-                <a href = "<?php echo e(route('posts.index')); ?>" class = "nav-link-inline">Mis Publicaciones</a>
-                <a href = "<?php echo e(route('communities.index')); ?>" class = "nav-link-inline active">Mis Comunidades</a>
+                <a href = "<?php echo e(route('posts.index')); ?>" class = "nav-link-inline active">Mis Publicaciones</a>
+                <a href = "<?php echo e(route('communities.index')); ?>" class = "nav-link-inline">Mis Comunidades</a>
 
                 <div class = "dropdown">
-
                     <a class = "d-flex align-items-center text-white dropdown-toggle nav-link-inline" href = "#" id = "userDropdown" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">
-                        
+
                         <?php if(Laravel\Jetstream\Jetstream::managesProfilePhotos()): ?>
 
-                            <img src = "<?php echo e(Auth::user()->profile_photo_url); ?>" class = "rounded-circle me-2 user-photo" alt = "<?php echo e(Auth::user()->name); ?>"/>
+                            <img src = "<?php echo e(Auth::user()->profile_photo_url); ?>" class = "rounded-circle me-2 user-photo" alt = "<?php echo e(Auth::user()->name); ?>" />
 
                         <?php endif; ?>
 
@@ -82,7 +78,7 @@
 
                                 <?php echo csrf_field(); ?>
 
-                                <button type = "submit"class = "dropdown-item d-flex align-items-center text-danger">
+                                <button type = "submit" class = "dropdown-item d-flex align-items-center text-danger">
 
                                     <i class = "bi bi-box-arrow-right me-2"></i> Cerrar sesión
 
@@ -97,6 +93,7 @@
                 </div>
 
             </div>
+
         </nav>
 
         <div class = "offcanvas offcanvas-start" tabindex = "-1" id = "offcanvasMenu">
@@ -112,35 +109,11 @@
 
                 <nav class = "nav flex-column">
 
-                    <a class = "nav-link" href = "<?php echo e(route('dashboard')); ?>">
-
-                        <i class = "fas fa-home me-2"></i> Dashboard
-
-                    </a>
-
-                    <a class = "nav-link" href = "<?php echo e(route('explore.users.index')); ?>">
-
-                        <i class = "fas fa-users me-2"></i> Explorar Usuarios
-
-                    </a>
-
-                    <a class = "nav-link" href = "<?php echo e(route('playlists.index')); ?>">
-
-                        <i class = "fas fa-music me-2"></i> Mis Playlists
-
-                    </a>
-
-                    <a class = "nav-link" href = "<?php echo e(route('posts.index')); ?>">
-
-                        <i class = "fas fa-newspaper me-2"></i> Mis Publicaciones
-
-                    </a>
-
-                    <a class = "nav-link active" href = "<?php echo e(route('communities.index')); ?>">
-
-                        <i class = "fas fa-users me-2"></i> Mis Comunidades
-
-                    </a>
+                    <a class = "nav-link" href = "<?php echo e(route('dashboard')); ?>">Dashboard</a>
+                    <a class = "nav-link" href = "<?php echo e(route('explore.users.index')); ?>">Explorar Usuarios</a>
+                    <a class = "nav-link" href = "<?php echo e(route('playlists.index')); ?>">Mis Playlists</a>
+                    <a class = "nav-link active" href = "<?php echo e(route('posts.index')); ?>">Mis Publicaciones</a>
+                    <a class = "nav-link" href = "<?php echo e(route('communities.index')); ?>">Mis Comunidades</a>
 
                 </nav>
 
@@ -157,7 +130,7 @@
                     <form method = "POST" action = "<?php echo e(route('logout')); ?>">
 
                         <?php echo csrf_field(); ?>
-                        
+
                         <button type = "submit" class = "nav-link btn btn-link d-flex align-items-center text-danger rounded-0">
 
                             <i class = "bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -177,18 +150,17 @@
             <div class = "row justify-content-center">
 
                 <div class = "col-12 col-lg-8">
-
+                
                     <nav aria-label = "breadcrumb" class = "mb-4">
 
                         <ol class = "breadcrumb">
 
                             <li class = "breadcrumb-item">
 
-                                <a href = "<?php echo e(route('communities.show', $community)); ?>" class = "text-white-50">
+                                <a href = "<?php echo e(route('posts.index')); ?>" class = "text-white-50">
 
-                                    <i class = "bi bi-people me-1"></i>
-                                    <?php echo e($community->name); ?>
-
+                                    <i class = "bi bi-chat-dots me-1"></i>
+                                    Mis Publicaciones
 
                                 </a>
 
@@ -200,42 +172,6 @@
 
                     </nav>
 
-                    <div class = "mb-4 community-card">
-
-                        <div class = "d-flex align-items-center">
-
-                            <?php if($community->cover_image): ?>
-
-                                <img src = "<?php echo e(asset('storage/' . $community->cover_image)); ?>" alt = "<?php echo e($community->name); ?>" class = "rounded me-3" style = "width: 60px; height: 60px; object-fit: cover;">
-
-                            <?php else: ?>
-
-                                <div class = "rounded me-3 d-flex align-items-center justify-content-center" style = "width: 60px; height: 60px; background: rgba(255,255,255,0.10);">
-                                    
-                                    <i class = "fas fa-users" style = "color: #fff;"></i>
-                                    
-                                </div>
-
-                            <?php endif; ?>
-                            
-                            <div>
-
-                                <h5 class = "mb-1" style = "color: #fff;">Publicando en <?php echo e($community->name); ?></h5>
-
-                                <small style = "color: #e0e0e0;">
-
-                                    <?php echo e($community->members_count); ?> miembros • 
-                                    <?php echo e($community->is_private ? 'Privada' : 'Pública'); ?>
-
-
-                                </small>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
                     <div class = "card create-playlist-card">
 
                         <div class = "card-body">
@@ -246,8 +182,6 @@
                                 <h1 class = "h3 mb-0 create-playlist-title">Crear Nueva Publicación</h1>
 
                             </div>
-
-                            <?php echo $__env->make('components.content-moderation-alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
                             <?php if($errors->any()): ?>
 
@@ -263,15 +197,13 @@
 
                                     </ul>
 
-                                </div>
+                                </div>  
 
                             <?php endif; ?>
 
                             <form action = "<?php echo e(route('posts.store')); ?>" method = "POST" class = "playlist-form">
 
                                 <?php echo csrf_field(); ?>
-
-                                <input type = "hidden" name = "community_id" value = "<?php echo e($community->id); ?>">
                                 
                                 <div class = "row">
 
@@ -281,14 +213,15 @@
 
                                             <label for = "title" class = "form-label">Título de la publicación</label>
 
-                                            <input type = "text" class = "form-control <?php $__errorArgs = ['title'];
+                                            <input type = "text"  class = "form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id = "title" name = "title" value = "<?php echo e(old('title')); ?>" placeholder = "¿Qué quieres compartir con la comunidad?" required>
+unset($__errorArgs, $__bag); ?>" id = "title" name = "title" value = "<?php echo e(old('title')); ?>" placeholder = "¿Qué quieres compartir?" required>
+
                                             <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -315,7 +248,6 @@ unset($__errorArgs, $__bag); ?>
 
                                             </button>
                                             
-                                            <!-- Input oculto para enviar el valor -->
                                             <input type = "hidden" id = "category_id" name = "category_id" value = "<?php echo e(old('category_id')); ?>" required>
                                             
                                             <?php $__errorArgs = ['category_id'];
@@ -330,8 +262,8 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                        </div>
 
+                                        </div>
 
                                         <div class = "mb-4">
 
@@ -342,13 +274,12 @@ unset($__errorArgs, $__bag); ?>
                                                 <em class = "text-muted">Selecciona un tipo de publicación para ver el contenido...</em>
                                             
                                             </div>
-
-                                            
                                             
                                             <small class = "text-muted">Este contenido se generará automáticamente según el tipo de publicación seleccionado.</small>
+                                        
                                         </div>
 
-                                    </div>
+                                    </div>  
 
                                     <div class = "col-md-4 mb-4">
 
@@ -367,7 +298,6 @@ unset($__errorArgs, $__bag); ?>
                                                     <div class = "spotify-placeholder">
 
                                                         <i class = "bi bi-spotify fs-1"></i>
-
                                                         <p class = "mt-2 mb-0" id = "spotify-search-text">Buscar en Spotify</p>
 
                                                     </div>
@@ -393,7 +323,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
 
                                         </div>
-
+                                        
                                         <div id = "no-spotify-section" class = "text-center p-4">
 
                                             <i class = "bi bi-info-circle fs-1 text-muted"></i>
@@ -403,10 +333,10 @@ unset($__errorArgs, $__bag); ?>
 
                                     </div>
 
-                                </div>
+                                </div> 
 
-                                <div id = "spotifyResults" class = "spotify-results mt-3" style = "display: none;"></div>  
-
+                                <div id = "spotifyResults" class = "spotify-results mt-3" style = "display: none;"></div>
+                                
                                 <div id = "selectedSpotify" style = "display: none;" class = "mt-3">
 
                                     <div id = "selectedSpotifyContent" class = "spotify-item selected"></div>
@@ -426,15 +356,17 @@ unset($__errorArgs, $__bag); ?>
 
                                 <div class = "d-flex gap-3 mt-4">
 
-                                    <a href = "<?php echo e(route('communities.show', $community)); ?>" class = "btn btn-secondary flex-fill">
+                                    <a href = "<?php echo e(route('posts.index')); ?>" class = "btn btn-secondary flex-fill">
 
-                                        <i class = "bi bi-arrow-left me-2"></i> Cancelar
+                                        <i class = "bi bi-arrow-left me-2"></i>
+                                        Cancelar
 
                                     </a>
 
-                                    <button type = "submit" class = "btn btn-primary-playlist flex-fill" id = "submitBtn">
+                                    <button type = "submit" class = "btn btn-primary-playlist flex-fill text-align-center" id = "submitBtn">
 
-                                        <i class = "bi bi-plus-lg me-2"></i> Publicar en Comunidad
+                                        <i class = "bi bi-plus-lg me-2"></i>
+                                        Crear Publicación
 
                                     </button>
 
@@ -505,8 +437,8 @@ unset($__errorArgs, $__bag); ?>
         </div>
 
         <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src = "<?php echo e(asset('js/create-post.js')); ?>"></script>
+        <script src = "<?php echo e(asset('js/posts-create.js')); ?>"></script>
 
     </body>
-    
-</html><?php /**PATH C:\laragon\www\staytuned\resources\views/communities/create-post.blade.php ENDPATH**/ ?>
+
+</html><?php /**PATH C:\laragon\www\staytuned\resources\views/posts/create.blade.php ENDPATH**/ ?>

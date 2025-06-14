@@ -194,7 +194,9 @@
 
                 @else
 
-                    <div class = "profile-header-img-original mb-3 bg-secondary"></div>
+                    <div class = "profile-header-img-original mb-3 bg-secondary d-flex align-items-center justify-content-center" style = "width: 120px; height: 120px; border-radius: 50%;">
+                        <i class = "fas fa-user text-white fs-1"></i>
+                    </div>
 
                 @endif
 
@@ -269,8 +271,7 @@
         <script>
 
             const csrfToken  =  '{{ csrf_token() }}';
-            
-            // Crear meta tag para CSRF token si no existe
+
             if (!document.querySelector('meta[name = "csrf-token"]')) {
                 const meta  =  document.createElement('meta');
                 meta.name  =  'csrf-token';
@@ -281,11 +282,7 @@
         </script>
 
         <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        
-        <!-- Modal Fix System -->
         <script src = "{{ asset('js/modal-fix.js') }}?v = {{ time() }}"></script>
-        
-        <!-- Profile Settings System -->
         <script src = "{{ asset('js/profile-settings.js') }}?v = {{ time() }}"></script>
 
     </body>
