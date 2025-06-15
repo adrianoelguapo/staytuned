@@ -57,11 +57,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function replies()
-    {
-        return $this->hasMany(Reply::class);
-    }
-
     /**
      * Usuarios que este usuario está siguiendo
      */

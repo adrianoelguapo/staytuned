@@ -108,7 +108,7 @@ class CommunityController extends Controller
         $posts = collect();
         if (!$community->is_private || $isMember || $isOwner) {
             $posts = $community->posts()
-                ->with(['user', 'category', 'comments.user', 'comments.replies.user'])
+                ->with(['user', 'category', 'comments.user'])
                 ->withCount('likes')
                 ->latest()
                 ->paginate(10);
