@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Miembros - ' . $community->name); ?>
 
 <?php $__env->startPush('styles'); ?>
