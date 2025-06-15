@@ -80,7 +80,7 @@
                                         
                                         @auth
 
-                                            @if(Auth::id() ! =  =  $followedUser->id)
+                                            @if(Auth::id() !==  $followedUser->id)
 
                                                 @php
 
